@@ -1,2 +1,2 @@
-# client
+# Client
 Late Night Restaurant Client Repository
