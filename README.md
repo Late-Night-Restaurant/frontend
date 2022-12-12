@@ -1,2 +1,2 @@
-# Client
-Late Night Restaurant Client Repository
+# frontend
+Late Night Restaurant Frontend Repository
