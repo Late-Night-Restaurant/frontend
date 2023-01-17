@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="328dp"
+        android:layout_height="264dp"
+        android:background="@drawable/dialog_radius_gray04"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:id="@+id/tv_dialog_my_review_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="이야기 집 제목"
+            android:textColor="@color/Gray_09"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <RatingBar
+            android:id="@+id/rab_dialog_my_review_rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="4"
+            android:progressTint="@color/Gray_08"
+            android:rating="2"
+            android:stepSize="0.5"
+            app:layout_constraintStart_toStartOf="@+id/tv_dialog_my_review_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dialog_my_review_title" />
+        <TextView
+            android:id="@+id/tv_dialog_my_review_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="2023년 01월 1일"
+            app:layout_constraintBottom_toBottomOf="@+id/rab_dialog_my_review_rating"
+            app:layout_constraintStart_toEndOf="@+id/rab_dialog_my_review_rating"
+            app:layout_constraintTop_toTopOf="@+id/rab_dialog_my_review_rating" />
+        <TextView
+            android:id="@+id/tv_dialog_my_review_content"
+            android:layout_width="280dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/rab_dialog_my_review_rating"
+            app:layout_constraintStart_toStartOf="@id/rab_dialog_my_review_rating"
+            android:text="이것은 통닭인가 갈비인가 어서에요 심야식당입니다."/>
+        <ImageButton
+            android:id="@+id/imgbtn_dialog_my_review_delete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_trash"
+            android:background="#00ff0000"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
