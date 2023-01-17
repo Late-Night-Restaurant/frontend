@@ -9,13 +9,28 @@
     <Button
         android:id="@+id/btn_test"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="다이얼로그 테스트"
+        android:layout_height="wrap_content"
         android:textColor="@color/Gray_03"
         android:textSize="15dp"
         android:paddingRight="15dp"
         android:paddingLeft="15dp"
-        android:background="@drawable/high_radius_button_on"/>
+        android:background="@drawable/kakao_login_btn"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Gray_03"
+        android:textSize="15dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:background="@drawable/naver_login_btn"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Gray_03"
+        android:textSize="15dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:background="@drawable/email_login_btn"/>
 
 
 </LinearLayout>
