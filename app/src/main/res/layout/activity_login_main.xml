@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/default_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/tv_login_main_headline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비슷한 사람들과"
+        android:textColor="@color/Primary_01"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/default_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="16dp"/>
+    <TextView
+        android:id="@+id/tv_login_main_headline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="솔직한이야기"
+        android:textColor="@color/Gray_06"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tv_login_main_headline1"
+        app:layout_constraintStart_toStartOf="@id/tv_login_main_headline1" />
+    <ImageButton
+        android:id="@+id/ib_login_main_kakao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/kakao_login_btn"
+        android:background="#00ff0000"
+        app:layout_constraintBottom_toTopOf="@id/ib_login_main_email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"
+        />
+    <ImageButton
+        android:id="@+id/ib_login_main_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/email_login_btn"
+        android:background="#00ff0000"
+        app:layout_constraintBottom_toTopOf="@id/v_login_main_question"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"/>
+    <TextView
+        android:id="@+id/v_login_main_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인 오류시... 문의"
+        android:textColor="@color/Gray_07"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="56dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
