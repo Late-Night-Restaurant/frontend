@@ -28,6 +28,7 @@
                 android:value="" />
         </activity>
         <activity android:name=".EmailLoginActivity"/>
+        <activity android:name=".SignupActivity"/>
     </application>
 
 </manifest>
