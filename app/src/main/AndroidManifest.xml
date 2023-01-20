@@ -15,7 +15,12 @@
         android:theme="@style/Theme.Simya"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.HomeMainActivity"
+            android:exported="true">
+
+        </activity>
+        <activity android:name=".activity.EmailLoginActivity"/>
+        <activity android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,8 +32,10 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".EmailLoginActivity"/>
-        <activity android:name=".SignupActivity"/>
+        <activity
+            android:name=".activity.SignupActivity"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

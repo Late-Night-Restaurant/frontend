@@ -1,4 +1,4 @@
-package com.example.simya
+package com.example.simya.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
 
         // 이메일 로그인
         binding.ibLoginMainEmail.setOnClickListener{
-            val intent = Intent(this,EmailLoginActivity::class.java)
+            val intent = Intent(this, EmailLoginActivity::class.java)
             startActivity(intent)
         }
     }

@@ -1,10 +1,12 @@
-package com.example.simya
+package com.example.simya.activity
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.simya.databinding.ActivityMainBinding
+import com.example.simya.databinding.DefaultChatBinding
+import com.example.simya.databinding.DefaultLayoutBinding
 import com.example.simya.databinding.DialogProfileBinding
 import com.example.simya.databinding.DialogProfileMasterBinding
 
@@ -14,5 +16,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
     }
 }
