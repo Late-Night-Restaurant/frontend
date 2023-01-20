@@ -3,15 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Grid"/>
-    <GridView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gv_home_main_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

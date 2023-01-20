@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.R
 import com.example.simya.databinding.ActivityHomeBinding
-import com.example.simya.homefragment.LocationFragment
-import com.example.simya.homefragment.MainFragment
-import com.example.simya.homefragment.MyStoryFragment
-import com.example.simya.homefragment.ProfileFragment
+import com.example.simya.homeFragment.LocationFragment
+import com.example.simya.homeFragment.MainFragment
+import com.example.simya.homeFragment.MyStoryFragment
+import com.example.simya.homeFragment.ProfileFragment
 
 class HomeMainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
