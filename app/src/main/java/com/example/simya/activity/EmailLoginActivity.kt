@@ -1,10 +1,10 @@
 package com.example.simya.activity
-
+import com.example.simya.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import com.example.simya.R
+
 import com.example.simya.databinding.ActivitySigninEmailBinding
 import java.util.regex.Pattern
 
