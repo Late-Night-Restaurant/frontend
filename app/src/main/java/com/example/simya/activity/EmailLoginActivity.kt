@@ -1,5 +1,6 @@
 package com.example.simya.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -45,6 +46,11 @@ class EmailLoginActivity : AppCompatActivity() {
         binding.btnEmailSigninLogin.setOnClickListener {
             checkEmail()
             checkPassword()
+        }
+
+        binding.btnSigninEmailSignup.setOnClickListener{
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
         }
 
     }
