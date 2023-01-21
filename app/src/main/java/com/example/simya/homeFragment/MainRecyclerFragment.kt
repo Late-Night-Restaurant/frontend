@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.simya.activity.testData.TestData
+import com.example.simya.testData.TestDataBorder
 import com.example.simya.databinding.FragmentHomeMainRecyclerBinding
 import com.example.simya.homeAdapter.MainRVAdapter
 
 class MainRecyclerFragment: Fragment() {
     private lateinit var binding: FragmentHomeMainRecyclerBinding
-    private lateinit var dataList: ArrayList<TestData>
+    private lateinit var dataList: ArrayList<TestDataBorder>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,10 +28,10 @@ class MainRecyclerFragment: Fragment() {
     private fun init(){
         dataList = arrayListOf()
         dataList.apply{
-            add(TestData(3,"코딩","안드로이드","코딩은 재밌어"))
-            add(TestData(1,"코딩","서버","코딩은 재밌어"))
-            add(TestData(2,"코딩","안드로이드","코딩은 힘들어"))
-            add(TestData(4,"코딩","서버","코딩은 힘들어"))
+            add(TestDataBorder(3,"코딩","안드로이드","코딩은 재밌어"))
+            add(TestDataBorder(1,"코딩","서버","코딩은 재밌어"))
+            add(TestDataBorder(2,"코딩","안드로이드","코딩은 힘들어"))
+            add(TestDataBorder(4,"코딩","서버","코딩은 힘들어"))
         }
         val dataRVAdapter = MainRVAdapter(dataList)
         binding.rvHomeMainRecycler.adapter = dataRVAdapter
