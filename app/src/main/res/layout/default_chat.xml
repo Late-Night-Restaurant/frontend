@@ -3,38 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_default_chat_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/ib_default_chat_drawer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_drawer"
-            android:background="#00ff0000"/>
+            android:background="#00ff0000"
+            android:src="@drawable/ic_drawer" />
 
         <TextView
             android:id="@+id/tv_default_chat_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="이야기 집 제목"
-            android:textSize="20dp"
             android:textColor="@color/Gray_03"
-            android:layout_gravity="center"/>
+            android:textSize="20dp" />
+
         <ImageButton
             android:id="@+id/ib_default_chat_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_search"
-            android:background="#00ff0000"
             android:layout_gravity="end"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp"
+            android:background="#00ff0000"
+            android:src="@drawable/ic_search" />
 
     </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>

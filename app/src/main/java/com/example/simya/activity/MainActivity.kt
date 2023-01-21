@@ -1,4 +1,4 @@
-package com.example.simya
+package com.example.simya.activity
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
