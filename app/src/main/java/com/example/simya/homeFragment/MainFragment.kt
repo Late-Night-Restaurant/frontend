@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.simya.R
 import com.example.simya.databinding.FragmentHomeMainBinding
+import com.example.simya.dialog.SortDialog
 
 class MainFragment: Fragment() {
     private lateinit var binding: FragmentHomeMainBinding
@@ -33,6 +35,13 @@ class MainFragment: Fragment() {
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
 
+
+
+        // Sort type 바꾸기
+        binding.ibHomeMainSortType.setOnClickListener {
+            val dialog = SortDialog(this.context as AppCompatActivity)
+            dialog!!.showDia()
+        }
 
         // View type 바꾸기
         binding.ibHomeMainViewType.run{
