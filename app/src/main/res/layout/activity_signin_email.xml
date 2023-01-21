@@ -41,7 +41,7 @@
         app:layout_constraintBottom_toTopOf="@id/btn_email_signin_login"
         android:layout_marginBottom="56dp"
         android:orientation="vertical">
-<!--        이메일 입력창-->
+        <!--        이메일 입력창-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_email_signin_input_email"
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 android:inputType="textEmailAddress"
                 android:backgroundTint="@color/Gray_06"/>
         </com.google.android.material.textfield.TextInputLayout>
-<!--        비밀번호 입력창-->
+        <!--        비밀번호 입력창-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_email_signin_input_password"
             android:layout_width="match_parent"
@@ -79,7 +79,7 @@
                 android:backgroundTint="@color/Gray_06"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
-<!--    회원가입 버튼-->
+    <!--    회원가입 버튼-->
     <Button
         android:id="@+id/btn_email_signin_login"
         android:layout_width="match_parent"
@@ -90,7 +90,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"/>
-<!--    계정찾기 레이아웃-->
+    <!--    계정찾기 레이아웃-->
     <LinearLayout
         android:id="@+id/ll_signup_email_find"
         android:layout_width="match_parent"
@@ -102,11 +102,11 @@
         android:gravity="center"
         android:layout_marginBottom="16dp">
         <TextView
-        android:id="@+id/tv_signup_email_find"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="계정을 잊으셨나요?"
-        android:textColor="@color/Gray_07" />
+            android:id="@+id/tv_signup_email_find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="계정을 잊으셨나요?"
+            android:textColor="@color/Gray_07" />
         <Button
             android:minHeight="0dp"
             android:minWidth="0dp"
@@ -135,7 +135,7 @@
             android:textColor="@color/Primary_02"
             android:background="#00ff0000"/>
     </LinearLayout>
-<!--    회원가입 버튼 레이아웃-->
+    <!--    회원가입 버튼 레이아웃-->
     <LinearLayout
         android:id="@+id/ll_signup_email_signup"
         android:layout_width="match_parent"
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:text="심야식당이 처음이신가요?"
             android:textColor="@color/Gray_07"
-         />
+            />
         <Button
             android:minHeight="0dp"
             android:minWidth="0dp"
