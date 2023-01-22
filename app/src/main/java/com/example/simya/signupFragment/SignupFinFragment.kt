@@ -1,4 +1,4 @@
-package signupFragment
+package com.example.simya.signupFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

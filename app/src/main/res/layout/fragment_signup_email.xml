@@ -58,8 +58,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/Gray_06"
                 android:hint="이메일을 입력하세요"
-                android:inputType="textEmailAddress"
-                android:textSize="15dp" />
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
