@@ -77,8 +77,8 @@
                 android:backgroundTint="@color/Gray_06"
                 android:hint="비밀번호 재입력"
                 android:inputType="textPassword"
-                android:textSize="15dp">
-
+                android:textSize="15dp"
+                android:drawableEnd="@drawable/ic_eye_on">
             </EditText>
 
         </com.google.android.material.textfield.TextInputLayout>
