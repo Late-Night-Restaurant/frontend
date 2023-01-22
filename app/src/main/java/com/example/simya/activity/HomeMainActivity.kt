@@ -6,7 +6,7 @@ import com.example.simya.R
 import com.example.simya.databinding.ActivityHomeBinding
 import com.example.simya.homeFragment.LocationFragment
 import com.example.simya.homeFragment.MainFragment
-import com.example.simya.homeFragment.MyStoryFragment
+import com.example.simya.mystoryFragment.MyStoryFragment
 import com.example.simya.homeFragment.ProfileFragment
 
 class HomeMainActivity: AppCompatActivity() {
