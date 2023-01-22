@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.databinding.FragmentHomeMainRecyclerBinding
 import com.example.simya.homeAdapter.MainRVAdapter
+import com.example.simya.mystoryAdapter.MyStoryRVAdpater
 import com.example.simya.testData.TestDataBorder
 
 class MyStoryRecyclerFragment: Fragment() {
@@ -33,7 +34,7 @@ class MyStoryRecyclerFragment: Fragment() {
             add(TestDataBorder(2,"코딩","안드로이드","코딩은 힘들어"))
             add(TestDataBorder(4,"코딩","서버","코딩은 힘들어"))
         }
-        val dataRVAdapter = MainRVAdapter(dataList)
+        val dataRVAdapter = MyStoryRVAdpater(dataList)
         binding.rvHomeMainRecycler.adapter = dataRVAdapter
         binding.rvHomeMainRecycler.layoutManager = LinearLayoutManager(this.context)
     }
