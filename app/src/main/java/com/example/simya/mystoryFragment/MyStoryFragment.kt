@@ -27,7 +27,13 @@ class MyStoryFragment: Fragment() {
     }
 
     private fun init(){
+        //초기 프래그먼트 설정
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fl_my_story_main,MyStoryGridFragment())
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
 
+        // View Type 설정
         binding.ibHomeMyStoryMainViewType.run{
             setOnClickListener{
                 viewTypeChange()
@@ -51,6 +57,7 @@ class MyStoryFragment: Fragment() {
 
         }
     }
+    // View Type icon switch
     private fun viewTypeChange(){
         if (defaultViewType == R.drawable.ic_box_4){
             defaultViewType = R.drawable.ic_box_2
