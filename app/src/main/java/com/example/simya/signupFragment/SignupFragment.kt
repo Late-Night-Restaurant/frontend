@@ -1,21 +1,21 @@
-package signupFragment
+package com.example.simya.signupFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.simya.databinding.FragmentSignupPwBinding
+import com.example.simya.databinding.FragmentSignupAgreeBinding
 
-class SignupPwFragment: Fragment() {
-    private lateinit var binding: FragmentSignupPwBinding
+class SignupFragment: Fragment() {
+    private lateinit var binding: FragmentSignupAgreeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSignupPwBinding.inflate(layoutInflater)
+        binding = FragmentSignupAgreeBinding.inflate(layoutInflater)
         return binding.root
     }
 }

@@ -1,4 +1,4 @@
-package signupFragment
+package com.example.simya.signupFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,5 +17,10 @@ class SignupEmailFragment: Fragment() {
     ): View? {
         binding = FragmentSignupEmailBinding.inflate(layoutInflater)
         return binding.root
+    }
+
+    // 다시 상속받는
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }
