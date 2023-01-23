@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.databinding.FragmentHomeMainRecyclerBinding
-import com.example.simya.homeAdapter.MainRVAdapter
-import com.example.simya.mystoryAdapter.MyStoryRVAdpater
+import com.example.simya.adpter.homeAdapter.MainRVAdapter
+import com.example.simya.adpter.mystoryAdapter.MyStoryRVAdpater
 import com.example.simya.testData.TestDataBorder
 
 class MyStoryRecyclerFragment: Fragment() {

@@ -1,4 +1,4 @@
-package com.example.simya.mystoryAdapter
+package com.example.simya.adpter.mystoryAdapter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.databinding.FragmentHomeMainGridBinding
 import com.example.simya.databinding.ItemBorderRv328156Binding
-import com.example.simya.homeAdapter.MainGVAdapter
-import com.example.simya.homeAdapter.MainRVAdapter
+import com.example.simya.adpter.homeAdapter.MainGVAdapter
+import com.example.simya.adpter.homeAdapter.MainRVAdapter
 import com.example.simya.testData.TestDataBorder
 
 class MyStoryRVAdpater (private val dataList:ArrayList<TestDataBorder>): RecyclerView.Adapter<MyStoryRVAdpater.DataViewHolder>() {
