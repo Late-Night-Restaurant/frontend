@@ -52,11 +52,11 @@
             app:hintEnabled="false"
             tools:ignore="MissingConstraints">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:layout_gravity="center"
-                android:src="@drawable/high_radius_button_off"/>
+                app:civ_circle_background_color="@color/Gray_04"/>
 
         </com.google.android.material.textfield.TextInputLayout>
         <!--        닉네임 입력창-->
