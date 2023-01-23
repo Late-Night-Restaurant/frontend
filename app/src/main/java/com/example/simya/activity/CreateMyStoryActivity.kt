@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.simya.R
-import com.example.simya.createMyStoryAdapter.CreateMyStoryRVAdapter
+import com.example.simya.adpter.createMyStoryAdapter.CreateMyStoryRVAdapter
 import com.example.simya.databinding.ActivityMyStoryCreateBinding
 import com.example.simya.testData.TestDataMultiProfile
 

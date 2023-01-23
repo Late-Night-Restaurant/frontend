@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.R
 import com.example.simya.databinding.ActivityStoryReviewListBinding
-import com.example.simya.homeAdapter.MainRVAdapter
-import com.example.simya.homeAdapter.StoryReviewRVAapter
+import com.example.simya.adpter.homeAdapter.MainRVAdapter
+import com.example.simya.adpter.homeAdapter.StoryReviewRVAapter
 import com.example.simya.testData.TestDataBorder
 import com.example.simya.testData.TestDataReview
 import com.taufiqrahman.reviewratings.BarLabels
@@ -24,6 +24,7 @@ class StoryReviewActivity: AppCompatActivity() {
         init()
     }
     private fun init(){
+        binding.included.tvDefaultLayoutTitle.text = "내 이야기 집의 평점과 리뷰"
         val ratingReviews = binding.ratingReviews
 
         val colors = intArrayOf(
@@ -64,4 +65,5 @@ class StoryReviewActivity: AppCompatActivity() {
         binding.rvStroyReviewRecycler.adapter = dataRVAdapter
         binding.rvStroyReviewRecycler.layoutManager = LinearLayoutManager(this)
     }
+
 }

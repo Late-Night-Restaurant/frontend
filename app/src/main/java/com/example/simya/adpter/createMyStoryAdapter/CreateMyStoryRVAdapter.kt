@@ -1,4 +1,4 @@
-package com.example.simya.createMyStoryAdapter
+package com.example.simya.adpter.createMyStoryAdapter
 
 import android.content.Context
 import android.util.Log

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.simya.testData.TestDataBorder
 import com.example.simya.databinding.FragmentHomeMainGridBinding
-import com.example.simya.homeAdapter.MainGVAdapter
+import com.example.simya.adpter.homeAdapter.MainGVAdapter
 
 class MainGridFragment: Fragment() {
     private lateinit var binding: FragmentHomeMainGridBinding
