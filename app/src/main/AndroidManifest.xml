@@ -17,10 +17,25 @@
         <activity
             android:name=".activity.HomeMainActivity"
             android:exported="true">
+        </activity>
+
+        <activity android:name=".activity.EmailLoginActivity"
+            android:exported="true"> </activity>
+
+        <activity android:name=".activity.LoginActivity"
+            android:exported="true">
+        </activity>
+        <activity android:name=".activity.StoryIntroActivity"
+            android:exported="true">
 
         </activity>
-        <activity android:name=".activity.EmailLoginActivity"
+        <activity android:name=".activity.StoryReviewActivity"
             android:exported="true">
+        </activity>
+        <activity
+            android:name=".activity.SignupActivity"
+            android:exported="true">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,25 +48,24 @@
                 android:value="" />
 
         </activity>
-        <activity android:name=".activity.LoginActivity"
+        <activity android:name=".activity.CreateMyStoryActivity"
             android:exported="true">
 
         </activity>
-        <activity android:name=".activity.StoryIntroActivity"
+        <activity android:name=".activity.CreateMyStoryMainMenuActivity"
             android:exported="true">
 
         </activity>
-        <activity android:name=".activity.StoryReviewActivity"
+        <activity android:name=".activity.CreateMyStoryCreateBorderActivity"
             android:exported="true">
 
-
         </activity>
-        <activity
-            android:name=".activity.SignupActivity"
+        <activity android:name=".activity.OpenMyStoryActivity"
             android:exported="true">
 
 
         </activity>
+
 
 
     </application>
