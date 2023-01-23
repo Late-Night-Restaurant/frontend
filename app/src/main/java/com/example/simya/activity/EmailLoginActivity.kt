@@ -1,13 +1,12 @@
-package com.example.simya
+package com.example.simya.activity
 
-import android.graphics.Color
+import android.content.Intent
+import com.example.simya.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.widget.Toast
-import com.example.simya.databinding.ActivityLoginMainBinding
+
 import com.example.simya.databinding.ActivitySigninEmailBinding
 import java.util.regex.Pattern
 
@@ -48,6 +47,11 @@ class EmailLoginActivity : AppCompatActivity() {
         binding.btnEmailSigninLogin.setOnClickListener {
             checkEmail()
             checkPassword()
+        }
+
+        binding.btnSigninEmailSignup.setOnClickListener{
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
         }
 
     }

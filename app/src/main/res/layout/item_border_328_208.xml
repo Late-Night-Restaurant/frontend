@@ -2,20 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:layout_margin="16dp">
+    android:gravity="center">
     <RelativeLayout
-        android:layout_width="156dp"
-        android:layout_height="156dp"
+        android:layout_width="328dp"
+        android:layout_height="200dp"
         android:background="@drawable/low_radius_border">
         <ImageView
-            android:id="@+id/iv_gv_border"
+            android:id="@+id/iv_rv_border_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <TextView
-            android:id="@+id/tv_gv_today_menu"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:id="@+id/tv_rv_today_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="오늘의 메뉴"
             android:textColor="@color/Gray_02"
             android:textSize="15dp"
@@ -23,18 +22,18 @@
             android:layout_marginTop="8dp"
             android:layout_alignParentTop="true"/>
         <TextView
-            android:id="@+id/tv_gvmain_menu"
-            android:layout_width="100dp"
+            android:id="@+id/tv_rv_main_menu"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00전문점"
             android:textSize="10dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/Gray_05"
-            android:layout_above="@id/tv_gvtitle"/>
+            android:layout_above="@id/tv_rv_title"/>
         <TextView
-            android:id="@+id/tv_gvtitle"
-            android:layout_width="100dp"
+            android:id="@+id/tv_rv_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이야기집 제목"
             android:textColor="@color/Gray_03"

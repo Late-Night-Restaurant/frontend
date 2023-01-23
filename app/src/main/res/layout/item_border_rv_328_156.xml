@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:gravity="center">
     <RelativeLayout
         android:layout_width="328dp"
         android:layout_height="156dp"
         android:background="@drawable/low_radius_border">
         <ImageView
-            android:id="@+id/iv_border_image"
+            android:id="@+id/iv_rv_border_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <TextView
-            android:id="@+id/tv_today_menu"
+            android:id="@+id/tv_rv_today_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="오늘의 메뉴"
@@ -21,7 +23,7 @@
             android:layout_marginTop="8dp"
             android:layout_alignParentTop="true"/>
         <TextView
-            android:id="@+id/tv_main_menu"
+            android:id="@+id/tv_rv_main_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00전문점"
@@ -29,9 +31,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/Gray_05"
-            android:layout_above="@id/tv_title"/>
+            android:layout_above="@id/tv_rv_title"/>
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_rv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이야기집 제목"
