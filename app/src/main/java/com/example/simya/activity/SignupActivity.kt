@@ -1,15 +1,19 @@
 package com.example.simya.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.simya.databinding.ActivitySignupBinding
+import com.example.simya.databinding.FragmentSignupAgreeBinding
 import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.signupFragment.*
 
 class SignupActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding
+    private lateinit var bindingAgree: FragmentSignupAgreeBinding
+    lateinit var bindingEmail: SignupEmailFragment
     lateinit var bindingPwFragment: SignupPwFragment
 
 
@@ -20,7 +24,6 @@ class SignupActivity : AppCompatActivity() {
 
         init()
 
-
     }
 
 
@@ -28,14 +31,9 @@ class SignupActivity : AppCompatActivity() {
     private fun init() {
         supportFragmentManager
             .beginTransaction()
-            .replace(binding.fmSignup.id, SignupEmailFragment())
+            .replace(binding.fmSignup.id, SignupFragment())
             .commitAllowingStateLoss()
     }
-
-    private fun emailFrag() {
-
-    }
-
 
 
 }

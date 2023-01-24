@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="프로필 생성"
+        android:text="프로필 수정"
         android:textColor="@color/Gray_07"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
 
     <!--    프로필 설정-->
     <LinearLayout
-        android:id="@+id/ll_signup_input"
+        android:id="@+id/ll_profile_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -39,15 +39,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tb_profile_toolbar">
         <!--        프로필 사진-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_input_profile"
+            android:id="@+id/til_input_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             app:errorEnabled="true"
-            app:hintEnabled="false"
-            tools:ignore="MissingConstraints">
+            app:hintEnabled="false">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="160dp"
@@ -58,7 +57,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <!--        닉네임 입력창-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_nickname"
+            android:id="@+id/til_profile_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -72,7 +71,7 @@
                 android:textColor="@color/Gray_04"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_input_nickname"
+            android:id="@+id/til_profile_input_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -80,7 +79,7 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/tiet_signin_input_nickname"
+                android:id="@+id/tiet_profile_input_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="영문, 특수 문자 제외 8자 이내"
@@ -89,7 +88,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_comment"
+            android:id="@+id/til_profile_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -103,7 +102,7 @@
                 android:textColor="@color/Gray_04"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_input_comment"
+            android:id="@+id/til_profile_input_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -111,7 +110,7 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/tiet_signin_input_comment"
+                android:id="@+id/tiet_profile_input_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="24자 이내로 입력해주세요"
@@ -124,7 +123,7 @@
 
     <!--    다음 버튼-->
     <Button
-        android:id="@+id/btn_signup_next"
+        android:id="@+id/btn_profile_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

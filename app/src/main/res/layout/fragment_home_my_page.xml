@@ -56,14 +56,15 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_my_page_profile"
+            android:layout_width="18dp"
+            android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:background="@color/Gray_11"
             android:src="@drawable/ic_right"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/Gray_11"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -77,8 +78,8 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <!--    멀티프로필-->
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_my_page_multi_profile"
+    <FrameLayout
+        android:id="@+id/fm_my_page_multi_profile"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:orientation="horizontal"
@@ -86,14 +87,14 @@
         tools:layout_editor_absoluteX="-16dp">
 
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </FrameLayout>
 
     <View
         android:id="@+id/line_2"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/Gray_09"
-        app:layout_constraintTop_toBottomOf="@+id/ll_my_page_multi_profile"
+        app:layout_constraintTop_toBottomOf="@+id/fm_my_page_multi_profile"
         tools:layout_editor_absoluteX="0dp" />
 
     <!--    마이페이지 메뉴-->
