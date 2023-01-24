@@ -1,7 +1,6 @@
 package com.example.simya.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +8,7 @@ import androidx.core.view.isInvisible
 import com.example.simya.R
 import com.example.simya.databinding.ActivityStoryMainMenuBinding
 
-class CreateMyStoryMainMenuActivity: AppCompatActivity(), View.OnClickListener {
+class EditMyStoryMenuActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var binding: ActivityStoryMainMenuBinding
     var holdBtn: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,12 +19,20 @@ class CreateMyStoryMainMenuActivity: AppCompatActivity(), View.OnClickListener {
     }
 
     private fun init() {
-        binding.included.tvDefaultLayoutTitle.text = "이야기집 생성"
+        // 메인 메뉴 수정 초기화
+        binding.included.tvDefaultLayoutTitle.text = "내 이야기 집 전문 메뉴 수정하기"
+        binding.btnMainMenuNext.text = "수정하기"
+        binding.tvMyStoryCreateMainInfo.isInvisible = true
+        binding.ibMyStoryCreateMainMenuInfo.isInvisible = true
 
+        // 기존 전문 메뉴 가져와야함
+        // 기존 메뉴 Selection 하기
         binding.ibMyStoryCreateMainMenuInfo.setOnClickListener {
             binding.tvMyStoryCreateMainInfo.isInvisible = false
         }
-
+        binding.btnMainMenuNext.setOnClickListener{
+            mainMenuModify()
+        }
         buttonSingleSelected()
     }
 
@@ -37,7 +44,12 @@ class CreateMyStoryMainMenuActivity: AppCompatActivity(), View.OnClickListener {
         binding.btnMainMenuHobby.setOnClickListener(this)
         binding.btnMainMenuCulture.setOnClickListener(this)
     }
-    private fun btnHighlighted(selectBtn: Button,preBtn: Button?){
+    private fun mainMenuModify(){
+        binding.btnMainMenuNext.setBackgroundResource(R.drawable.low_radius_button_off)
+        binding.btnMainMenuNext.setTextColor(application.resources.getColor(R.color.Gray_10))
+        binding.btnMainMenuNext.text = "수정완료"
+    }
+    private fun btnHighlighted(selectBtn: Button, preBtn: Button?){
         selectBtn.isSelected = selectBtn?.isSelected != true
         preBtn?.isSelected = preBtn?.isSelected != true
         holdBtn = selectBtn
@@ -46,17 +58,18 @@ class CreateMyStoryMainMenuActivity: AppCompatActivity(), View.OnClickListener {
     private fun nextButtonEnabled(){
         binding.btnMainMenuNext.setBackgroundResource(R.drawable.low_radius_button_on)
         binding.btnMainMenuNext.setTextColor(application.resources.getColor(R.color.Gray_03))
+        binding.btnMainMenuNext.text = "수정하기"
         binding.btnMainMenuNext.isEnabled= true
     }
     override fun onClick(view: View?) {
         if(view !=null){
             when(view.id){
-               R.id.btn_main_menu_love -> btnHighlighted(binding.btnMainMenuLove,holdBtn)
-               R.id.btn_main_menu_family -> btnHighlighted(binding.btnMainMenuFamily,holdBtn)
-               R.id.btn_main_menu_culture -> btnHighlighted(binding.btnMainMenuCulture,holdBtn)
-               R.id.btn_main_menu_hobby-> btnHighlighted(binding.btnMainMenuHobby,holdBtn)
-               R.id.btn_main_menu_stress -> btnHighlighted(binding.btnMainMenuStress,holdBtn)
-               R.id.btn_main_menu_relationship -> btnHighlighted(binding.btnMainMenuRelationship,holdBtn)
+                R.id.btn_main_menu_love -> btnHighlighted(binding.btnMainMenuLove,holdBtn)
+                R.id.btn_main_menu_family -> btnHighlighted(binding.btnMainMenuFamily,holdBtn)
+                R.id.btn_main_menu_culture -> btnHighlighted(binding.btnMainMenuCulture,holdBtn)
+                R.id.btn_main_menu_hobby-> btnHighlighted(binding.btnMainMenuHobby,holdBtn)
+                R.id.btn_main_menu_stress -> btnHighlighted(binding.btnMainMenuStress,holdBtn)
+                R.id.btn_main_menu_relationship -> btnHighlighted(binding.btnMainMenuRelationship,holdBtn)
             }
         }
     }
