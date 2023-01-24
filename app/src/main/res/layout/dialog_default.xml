@@ -13,6 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
         <TextView
+            android:id="@+id/tv_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="테스트용 입니다"
@@ -30,6 +31,7 @@
             android:background="#00ff0000"
             android:text="확인"
             android:textSize="10dp"
+            android:textColor="@color/Gray_08"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_no" />
         <Button
@@ -38,6 +40,8 @@
             android:layout_height="wrap_content"
             android:text="취소"
             android:textSize="10dp"
+
+            android:textColor="@color/Gray_08"
             android:background="#00ff0000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

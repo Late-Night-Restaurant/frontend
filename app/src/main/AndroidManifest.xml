@@ -70,6 +70,7 @@
 
         </activity>
 
+
         <activity android:name=".activity.ProfileEditActivity"
             android:exported="true">
 
@@ -88,6 +89,14 @@
         </activity>
 
 
+
+        <activity android:name=".activity.StoryLikeActivity"
+            android:exported="true">
+
+        </activity>
+        <activity android:name=".activity.OpenMyStoryInputActivity">
+
+        </activity>
 
     </application>
 

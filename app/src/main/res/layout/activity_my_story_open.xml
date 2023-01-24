@@ -151,6 +151,7 @@
             android:background="#00ff0000"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <Button
+        android:id="@+id/btn_my_story_open_ready"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="오픈 준비하기"

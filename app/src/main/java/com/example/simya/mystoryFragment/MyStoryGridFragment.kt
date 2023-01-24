@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.simya.databinding.FragmentHomeMainGridBinding
-import com.example.simya.homeAdapter.MainGVAdapter
+import com.example.simya.adpter.homeAdapter.MainGVAdapter
 import com.example.simya.testData.TestDataBorder
 
 class MyStoryGridFragment: Fragment() {

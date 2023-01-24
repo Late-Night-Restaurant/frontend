@@ -11,10 +11,10 @@ import com.example.simya.databinding.DialogProfileBinding
 import com.example.simya.databinding.DialogProfileMasterBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var viewBinding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(viewBinding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }

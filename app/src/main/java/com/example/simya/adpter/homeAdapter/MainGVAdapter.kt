@@ -1,18 +1,12 @@
-package com.example.simya.mystoryAdapter
+package com.example.simya.adpter.homeAdapter
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.simya.databinding.FragmentHomeMainGridBinding
-import com.example.simya.databinding.ItemBorderGv156156Binding
-import com.example.simya.homeAdapter.MainGVAdapter
 import com.example.simya.testData.TestDataBorder
+import com.example.simya.databinding.ItemBorderGv156156Binding
 
-class MyStoryGVAdater(private val dataList:ArrayList<TestDataBorder>): RecyclerView.Adapter<MyStoryGVAdater.DataViewHolder>() {
+class MainGVAdapter (private val dataList:ArrayList<TestDataBorder>): RecyclerView.Adapter<MainGVAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val binding: ItemBorderGv156156Binding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: TestDataBorder) {
             binding.tvGvTodayMenu.text = data.todayMenu
