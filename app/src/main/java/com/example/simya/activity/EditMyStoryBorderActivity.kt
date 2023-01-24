@@ -1,0 +1,30 @@
+package com.example.simya.activity
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
+import com.example.simya.databinding.ActivityMainBinding
+import com.example.simya.databinding.ActivityStoryCreateBorderBinding
+
+class EditMyStoryBorderActivity : AppCompatActivity() {
+    lateinit var binding: ActivityStoryCreateBorderBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityStoryCreateBorderBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        init()
+    }
+    private fun init(){
+        //  초기화
+        binding.included.tvDefaultLayoutTitle.text ="내 이야기 집 간판"
+        binding.ibMyStoryCreateBorderInfo.isInvisible = true
+        binding.tvMyStoryCreateMainInfo.isInvisible = true
+
+        // 기존데이터 가져와서 edittext에 넣기
+
+        binding.btnMyStoryCreateBorderNext.setOnClickListener{
+            binding.btnMyStoryCreateBorderNext.isEnabled = false
+            binding.btnMyStoryCreateBorderNext.text = "수정완료"
+        }
+    }
+}

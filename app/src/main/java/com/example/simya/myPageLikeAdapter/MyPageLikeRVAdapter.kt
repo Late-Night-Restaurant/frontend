@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.databinding.ItemBorderRv328156Binding
-import com.example.simya.mystoryAdapter.MyStoryRVAdpater
 import com.example.simya.testData.TestDataBorder
 
 class MyPageLikeRVAdapter (private val dataList: ArrayList<TestDataBorder>): RecyclerView.Adapter<MyPageLikeRVAdapter.DataViewHolder>() {
