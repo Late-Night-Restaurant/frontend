@@ -1,56 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    안내 멘트-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_profile_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_wrapBehaviorInParent="vertical_only" />
+    <!--    진행바-->
 
     <TextView
-        android:id="@+id/tv_signup_profile_1"
+        android:id="@+id/tv_profile_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="다른 사람들이 볼"
-        android:textColor="@color/Gray_06"
-        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:text="프로필 수정"
+        android:textColor="@color/Gray_07"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+        app:layout_constraintTop_toBottomOf="@+id/tb_profile_toolbar" />
 
-    <TextView
-        android:id="@+id/tv_signup_profile_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:text="프로필과 닉네임을 설정해주세요"
-        android:textColor="@color/Gray_06"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_profile_1" />
     <!--    프로필 설정-->
     <LinearLayout
-        android:id="@+id/ll_signup_input"
+        android:id="@+id/ll_profile_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_profile_2">
+        app:layout_constraintTop_toBottomOf="@+id/tb_profile_toolbar">
         <!--        프로필 사진-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_input_profile"
+            android:id="@+id/til_input_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             app:errorEnabled="true"
-            app:hintEnabled="false"
-            tools:ignore="MissingConstraints">
+            app:hintEnabled="false">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="160dp"
@@ -61,7 +57,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <!--        닉네임 입력창-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_nickname"
+            android:id="@+id/til_profile_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -75,7 +71,7 @@
                 android:textColor="@color/Gray_04"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_input_nickname"
+            android:id="@+id/til_profile_input_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -83,7 +79,7 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/tiet_signin_input_nickname"
+                android:id="@+id/tiet_profile_input_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="영문, 특수 문자 제외 8자 이내"
@@ -92,7 +88,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_comment"
+            android:id="@+id/til_profile_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -106,7 +102,7 @@
                 android:textColor="@color/Gray_04"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_input_comment"
+            android:id="@+id/til_profile_input_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -114,7 +110,7 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/tiet_signin_input_comment"
+                android:id="@+id/tiet_profile_input_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="24자 이내로 입력해주세요"
@@ -127,7 +123,7 @@
 
     <!--    다음 버튼-->
     <Button
-        android:id="@+id/btn_signup_next"
+        android:id="@+id/btn_profile_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -136,13 +132,11 @@
         android:layout_marginRight="16dp"
         android:textColor="@color/Gray_03"
         android:textSize="15dp"
-        android:text="다음으로"
+        android:text="수정하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
     </Button>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

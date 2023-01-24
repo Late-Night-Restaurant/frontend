@@ -58,8 +58,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/Gray_06"
                 android:hint="숫자, 영문 조합 최소 8자"
-                android:inputType="textPassword"
-                android:textSize="15dp" />
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_email_signin_input_repw"
@@ -77,12 +76,30 @@
                 android:backgroundTint="@color/Gray_06"
                 android:hint="비밀번호 재입력"
                 android:inputType="textPassword"
-                android:textSize="15dp"
-                android:drawableEnd="@drawable/ic_eye_on">
+                android:drawableEnd="@drawable/ic_eye_off" >
             </EditText>
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
+
+    <!--    다음 버튼-->
+    <Button
+        android:id="@+id/btn_signup_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/low_radius_button_on"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/Gray_03"
+        android:textSize="15dp"
+        android:text="다음으로"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="DuplicateIds">
+
+    </Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
