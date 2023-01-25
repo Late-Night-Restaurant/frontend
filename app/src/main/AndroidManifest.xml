@@ -26,6 +26,7 @@
 
         <activity android:name=".activity.LoginActivity"
             android:exported="true">
+
         </activity>
         <activity android:name=".activity.StoryIntroActivity"
             android:exported="true">
@@ -33,6 +34,7 @@
         </activity>
         <activity android:name=".activity.StoryReviewActivity"
             android:exported="true">
+
         </activity>
         <activity
             android:name=".activity.SignupActivity"
@@ -76,7 +78,6 @@
         </activity>
 
 
-
         <activity android:name=".activity.StoryLikeActivity"
             android:exported="true">
 
@@ -86,15 +87,21 @@
         </activity>
         <activity android:name=".activity.EditMyStoryMenuActivity"
             android:exported="true">
+
+        </activity>
+        <activity android:name=".activity.ChatActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
+        <activity android:name=".activity.TodayMenuActivity"
+            android:exported="true">
+
         </activity>
     </application>
 

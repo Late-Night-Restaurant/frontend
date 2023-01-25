@@ -16,7 +16,6 @@ class MyPageReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMyPageReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         init()
     }
 
@@ -26,15 +25,10 @@ class MyPageReviewActivity : AppCompatActivity() {
             .replace(binding.fmMyPageReview.id, MyPageReviewFragment())
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
-
         // 정렬 타입 바꾸기
-
         binding.ibMyPageReviewType.setOnClickListener {
             val dialog = SortDialog(this as AppCompatActivity)
             dialog!!.showDia()
         }
-
-
-
     }
 }
