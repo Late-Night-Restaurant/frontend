@@ -1,6 +1,8 @@
 package com.example.simya.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,15 +46,44 @@ class ChatActivity : AppCompatActivity() {
             add(TestChatData(sendUser,"끝","오후 3시 22분"))
             add(TestChatData(sendUser,"중복 처리를 위한 확인용 텍스트","오후 3시 40분"))
             add(TestChatData(receiveUser2,"초이.. 성장에 이르렀는가..?", "오후 9시"))
+            add(TestChatData(sendUser,"오늘은 레이아웃 끝내는날","오후 2시 22분"))
+            add(TestChatData(receiveUser1,"내용이 굉장히 길면 어디까지 될까에 대한 궁금증 해결을 위한 예시용 텍스트, 최대 20까지 잡았으나 적용이 잘되나 확인이 필요하다","오후 2시 24분"))
+            add(TestChatData(sendUser,"앞으로 추가해야할 내용은","오후 2시 42분"))
+            add(TestChatData(receiveUser1,"리사이클러뷰에 싱글 셀렉션을 추가해서 각 아이템을 클릭했을때 효과를 부여해야함 간판 수정에서는 구현했지만 앞으로 멀티프로필이나 현재 구현한 내용도 확실한 구현이 아닌 임시방편용 느낌이 강하다 디자이너와 이야기를 해야한다.","오후 2시 42분"))
+            add(TestChatData(sendUser,"끝","오후 3시 22분"))
+            add(TestChatData(sendUser,"중복 처리를 위한 확인용 텍스트","오후 3시 40분"))
+            add(TestChatData(receiveUser2,"초이.. 성장에 이르렀는가..?", "오후 9시"))
         }
         val dataRVAdapter = ChatRVAdapter(this,dataList)
         binding.includedChat.rvChatList.adapter = dataRVAdapter
         binding.includedChat.rvChatList.layoutManager = LinearLayoutManager(this).apply{
             stackFromEnd = true
         }
+        binding.includedChat.ibChatEmoji.setOnClickListener {
+            if(binding.includedChat.etChatInput.text.isNotEmpty()){
+                Log.d("send message",binding.includedChat.etChatInput.text.toString())
+                sendMessage(sendUser,binding.includedChat.etChatInput.text.toString(),dataRVAdapter)
+            }
+
+        }
         testDrawerUserListed()
     }
+    private fun sendMessage(user: TestUserData,content: String,adapter: ChatRVAdapter){
+        dataList.add(TestChatData(user,content, "오후 9시"))
+        binding.includedChat.rvChatList.apply {
+            adapter.notifyDataSetChanged()
+            scrollToPosition(dataList.size - 1)
+        }
+        binding.includedChat.etChatInput.text = null
+    }
     private fun testDrawerUserListed(){
+        binding.btnDrawerIntro.setOnClickListener{
+            val intent = Intent(this,StoryIntroActivity::class.java)
+            startActivity(intent)
+        }
+
+        //오늘의 메뉴로 이동
+        binding.btnDrawerToday
         profileList = arrayListOf()
         profileList.apply{
             add(TestChatDrawerProfileData(sendUser.nick,sendUser.image))
@@ -68,6 +99,7 @@ class ChatActivity : AppCompatActivity() {
         sendUser = TestUserData("초이", R.drawable.test_choi,1)
         receiveUser1 = TestUserData("푸",R.drawable.test_poo,2)
         receiveUser2 = TestUserData("왁",R.drawable.test_wak,2)
+
 
     }
 }

@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="12dp"
     android:layout_marginEnd="4dp"
-    android:layout_marginStart="4dp">
+    android:layout_marginStart="4dp"
+    android:paddingBottom="8dp">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civ_chat_send_profile"
         android:layout_width="40dp"
@@ -19,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="보내는 사람 이름"
+        android:textSize="12sp"
         app:layout_constraintTop_toTopOf="@id/civ_chat_send_profile"
         app:layout_constraintEnd_toStartOf="@id/civ_chat_send_profile"
         android:layout_marginEnd="8dp"/>
@@ -26,12 +28,14 @@
         android:id="@+id/tv_chat_send_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxEms="20"
+        android:maxWidth="250dp"
         android:background="@drawable/low_radius_chat"
-        android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:padding="8dp"
         android:text="이것은 무슨 내용일까 겁나게 길게쓰면 과연 어떻게 나올지 정말 궁금하지만어쩔수없이 여기까지만 적어보도록하자"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/tv_chat_send_nick"
         app:layout_constraintEnd_toEndOf="@id/tv_chat_send_nick"
         />

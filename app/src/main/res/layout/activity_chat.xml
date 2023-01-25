@@ -14,65 +14,68 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cl_chat_input"
         android:layout_marginBottom="16dp"
+        android:clipToPadding="false"
         >
     </androidx.recyclerview.widget.RecyclerView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_chat_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp">
+        app:layout_constraintStart_toStartOf="parent">
+
         <ImageButton
             android:id="@+id/ib_chat_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_image"
             android:background="#00ff0000"
+            android:src="@drawable/ic_image"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/et_chat_input"
             android:layout_width="0dp"
             android:layout_height="28sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/high_radius_chat"
+            android:maxHeight="64sp"
             android:paddingStart="12sp"
             android:paddingEnd="12sp"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/ib_chat_image"
-            app:layout_constraintTop_toTopOf="parent"
+            android:maxEms="20"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ib_chat_emoji"
             app:layout_constraintEnd_toEndOf="@id/ib_chat_image"
-            android:background="@drawable/high_radius_chat"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:maxHeight="64sp"
-            />
+            app:layout_constraintEnd_toStartOf="@id/ib_chat_emoji"
+            app:layout_constraintStart_toEndOf="@id/ib_chat_image"
+            app:layout_constraintTop_toTopOf="parent" />
         <ImageButton
             android:id="@+id/ib_chat_emoji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_emoji"
             android:background="#00ff0000"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_emoji"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ib_chat_link"
-            app:layout_constraintStart_toEndOf="@id/et_chat_input"/>
+            app:layout_constraintStart_toEndOf="@id/et_chat_input"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageButton
             android:id="@+id/ib_chat_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_link"
             android:background="#00ff0000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_link"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ib_chat_emoji"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
