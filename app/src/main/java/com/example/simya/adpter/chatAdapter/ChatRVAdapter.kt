@@ -1,19 +1,13 @@
 package com.example.simya.adpter.chatAdapter
 
 import android.content.Context
-import android.text.Layout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.simya.adpter.createMyStoryAdapter.CreateMyStoryRVAdapter
 import com.example.simya.databinding.ItemChatReceiveBinding
 import com.example.simya.databinding.ItemChatSendBinding
-import com.example.simya.databinding.ItemMultiProfileBinding
-import com.example.simya.databinding.ItemReviewBinding
 import com.example.simya.testData.TestChatData
-import com.example.simya.testData.TestDataMultiProfile
 
 class ChatRVAdapter (private val context: Context, private val dataList:ArrayList<TestChatData>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

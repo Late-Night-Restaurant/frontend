@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_item_drawer_profile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@color/Gray_05"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#00ff0000" />
+    <TextView
+        android:id="@+id/tv_item_like_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:text="프로필 명"
+        android:ellipsize="end"
+        app:layout_constraintTop_toTopOf="@id/civ_item_drawer_profile"
+        app:layout_constraintStart_toEndOf="@+id/civ_item_drawer_profile"
+        app:layout_constraintBottom_toBottomOf="@id/civ_item_drawer_profile"
+        android:layout_marginStart="8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
