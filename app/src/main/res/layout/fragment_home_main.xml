@@ -3,12 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_home_main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_bell"
+            android:background="#00ff0000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="심야식당"
+            android:textStyle="bold"
+            android:textSize="28dp"
+            android:textColor="@color/Primary_01"
+            android:layout_gravity="center"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"
+            android:background="#00ff0000"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"/>
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:id="@+id/ll_home_main_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_home_main_toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="horizontal"

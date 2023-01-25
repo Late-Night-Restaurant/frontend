@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dl_my_story_open">
+
+    <include layout="@layout/activity_my_story_open"
+        android:id="@+id/included_my_story_open"/>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nv_my_story_open"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btn_my_story_open_border"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="간판"
+                android:layout_marginStart="8dp"
+                android:background="#00ff0000"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <View
+                android:id="@+id/line_border"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/Gray_08"
+                app:layout_constraintTop_toBottomOf="@id/btn_my_story_open_border"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <Button
+                android:id="@+id/btn_my_story_open_main_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전문 메뉴"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+                android:background="#00ff0000"
+                app:layout_constraintTop_toBottomOf="@id/line_border"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <View
+                android:id="@+id/line_main_menu"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+
+                android:background="@color/Gray_08"
+                app:layout_constraintTop_toBottomOf="@id/btn_my_story_open_main_menu"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <Button
+                android:id="@+id/btn_my_story_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="폐점하기"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="#00ff0000"
+                android:layout_marginBottom="16dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>

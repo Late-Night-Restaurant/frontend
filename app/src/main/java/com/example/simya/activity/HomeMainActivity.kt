@@ -6,8 +6,8 @@ import com.example.simya.R
 import com.example.simya.databinding.ActivityHomeBinding
 import com.example.simya.homeFragment.LocationFragment
 import com.example.simya.homeFragment.MainFragment
-import com.example.simya.homeFragment.MyStoryFragment
-import com.example.simya.homeFragment.ProfileFragment
+import com.example.simya.mypageFragment.MyPageProfileFragment
+import com.example.simya.mystoryFragment.MyStoryFragment
 
 class HomeMainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -16,7 +16,6 @@ class HomeMainActivity: AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
-
     }
     private fun init(){
 //        supportFragmentManager
@@ -50,7 +49,7 @@ class HomeMainActivity: AppCompatActivity() {
                     R.id.tab_home_main_my ->{
                         supportFragmentManager
                             .beginTransaction()
-                            .replace(binding.fmHome.id, ProfileFragment())
+                            .replace(binding.fmHome.id, MyPageProfileFragment())
                             .commitAllowingStateLoss()
                     }
                 }

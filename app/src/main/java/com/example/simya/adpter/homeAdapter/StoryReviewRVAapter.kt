@@ -1,4 +1,4 @@
-package com.example.simya.homeAdapter
+package com.example.simya.adpter.homeAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

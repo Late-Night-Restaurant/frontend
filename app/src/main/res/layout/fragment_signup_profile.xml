@@ -52,11 +52,11 @@
             app:hintEnabled="false"
             tools:ignore="MissingConstraints">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 android:layout_gravity="center"
-                android:src="@drawable/high_radius_button_off"/>
+                android:src="@color/Gray_04"/>
 
         </com.google.android.material.textfield.TextInputLayout>
         <!--        닉네임 입력창-->
@@ -123,6 +123,25 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+
+
+    <!--    다음 버튼-->
+    <Button
+        android:id="@+id/btn_signup_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/low_radius_button_on"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/Gray_03"
+        android:textSize="15dp"
+        android:text="다음으로"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </Button>
 
 
 
