@@ -3,6 +3,8 @@ package com.example.simya.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
@@ -51,6 +53,94 @@ class ChatActivity : AppCompatActivity() {
 
         //표시할 채팅 리스트
         dataList = arrayListOf()
+        setTestData()
+        val dataRVAdapter = ChatRVAdapter(this, dataList)
+        binding.includedChat.rvChatList.adapter = dataRVAdapter
+        binding.includedChat.rvChatList.layoutManager = LinearLayoutManager(this).apply {
+            stackFromEnd = true
+            moveLastItem(this)
+        }
+
+        // test용 메시지 보내기
+        binding.includedChat.ibChatSend.setOnClickListener {
+            if (binding.includedChat.etChatInput.text.isNotEmpty()) {
+                Log.d("send message", binding.includedChat.etChatInput.text.toString())
+                sendMessage(
+                    sendUser,
+                    binding.includedChat.etChatInput.text.toString(),
+                    dataRVAdapter
+                )
+            }
+        }
+        testDrawerUserListed()
+    }
+    private fun moveLastItem(layoutManager: LinearLayoutManager){
+        Handler(Looper.getMainLooper()).postDelayed(
+            Runnable {layoutManager.scrollToPositionWithOffset(dataList.size-1,0)},300
+        )
+    }
+    private fun testUserCheck(code: Int){
+        if (code == Constants.CHAT_MASTER_CODE) {
+            // 주인장 캐스팅
+        } else if (
+            code == Constants.CHAT_GUEST_CODE) {
+            setGuestType()
+        }
+    }
+    private fun userCheck(user: TestUserData) {
+        if (user.type == Constants.CHAT_MASTER_CODE) {
+            // 주인장 캐스팅
+        } else if (
+            user.type == Constants.CHAT_GUEST_CODE) {
+            setGuestType()
+        }
+    }
+    private fun setMasterType(){
+        // 딱히없음
+    }
+    private fun setGuestType(){
+        binding.btnChatPause.isInvisible = true
+        binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_heart)
+    }
+    private fun sendMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
+        dataList.add(TestChatData(user, content, "오후 9시"))
+        binding.includedChat.rvChatList.apply {
+            adapter.notifyDataSetChanged()
+            scrollToPosition(dataList.size - 1)
+        }
+        binding.includedChat.etChatInput.text = null
+    }
+
+    private fun testDrawerUserListed() {
+        binding.btnDrawerIntro.setOnClickListener {
+            val intent = Intent(this, StoryIntroActivity::class.java)
+            startActivity(intent)
+        }
+        //오늘의 메뉴로 이동
+        binding.btnDrawerToday
+        profileList = arrayListOf()
+        profileList.apply {
+            add(TestChatDrawerProfileData(sendUser.nick, sendUser.image))
+            add(TestChatDrawerProfileData(receiveUser1.nick, receiveUser1.image))
+            add(TestChatDrawerProfileData(receiveUser2.nick, receiveUser2.image))
+            add(TestChatDrawerProfileData(receiveUser3.nick, receiveUser3.image))
+            add(TestChatDrawerProfileData(receiveUser4.nick,receiveUser4.image))
+        }
+        val testDataRVAdapter = ChatDrawerRVAdapter(this, profileList)
+        binding.rvChatProfileList.adapter = testDataRVAdapter
+        binding.rvChatProfileList.layoutManager = LinearLayoutManager(this)
+    }
+
+    // 테스트 유저용 초기화
+    private fun testUserInit() {
+        sendUser = TestUserData("초이", R.drawable.test_choi, Constants.CHAT_MASTER_CODE)
+        receiveUser1 = TestUserData("푸", R.drawable.test_poo, Constants.CHAT_GUEST_CODE)
+        receiveUser2 = TestUserData("왁", R.drawable.test_wak, Constants.CHAT_GUEST_CODE)
+        receiveUser3 = TestUserData("쭈니",R.drawable.test_jooni,Constants.CHAT_GUEST_CODE)
+        receiveUser4 = TestUserData("채니",R.drawable.test_chani,Constants.CHAT_GUEST_CODE)
+    }
+    // 테스트용 채팅 데이터 입력
+    private fun setTestData(){
         dataList.apply {
             add(TestChatData(sendUser, "오늘은 레이아웃 끝내는날", "오후 2시 22분"))
             add(
@@ -91,90 +181,6 @@ class ChatActivity : AppCompatActivity() {
             add(TestChatData(sendUser, "중복 처리를 위한 확인용 텍스트", "오후 3시 40분"))
             add(TestChatData(receiveUser2, "초이.. 성장에 이르렀는가..?", "오후 9시"))
         }
-        val dataRVAdapter = ChatRVAdapter(this, dataList)
-        binding.includedChat.rvChatList.adapter = dataRVAdapter
-        binding.includedChat.rvChatList.layoutManager = LinearLayoutManager(this).apply {
-            stackFromEnd = true
-        }
-        // test용 메시지 보내기
-        binding.includedChat.ibChatSend.setOnClickListener {
-            if (binding.includedChat.etChatInput.text.isNotEmpty()) {
-                Log.d("send message", binding.includedChat.etChatInput.text.toString())
-                sendMessage(
-                    sendUser,
-                    binding.includedChat.etChatInput.text.toString(),
-                    dataRVAdapter
-                )
-            }
-        }
-        testDrawerUserListed()
-
-    }
-    private fun testUserCheck(code: Int){
-        if (code == Constants.CHAT_MASTER_CODE) {
-            // 주인장 캐스팅
-        } else if (
-            code == Constants.CHAT_GUEST_CODE) {
-            setGuestType()
-        }
-    }
-    private fun userCheck(user: TestUserData) {
-        if (user.type == Constants.CHAT_MASTER_CODE) {
-            // 주인장 캐스팅
-        } else if (
-            user.type == Constants.CHAT_GUEST_CODE) {
-            setGuestType()
-        }
-    }
-    private fun setMasterType(){
-        // 딱히없음
-    }
-    private fun setGuestType(){
-        binding.btnChatPause.isInvisible = true
-        binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_heart)
-    }
-
-
-    private fun lastMove() {
-        binding.includedChat.rvChatList.scrollToPosition(dataList.size - 1)
-    }
-
-    private fun sendMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
-        dataList.add(TestChatData(user, content, "오후 9시"))
-        binding.includedChat.rvChatList.apply {
-            adapter.notifyDataSetChanged()
-            scrollToPosition(dataList.size - 1)
-        }
-        binding.includedChat.etChatInput.text = null
-    }
-
-    private fun testDrawerUserListed() {
-        binding.btnDrawerIntro.setOnClickListener {
-            val intent = Intent(this, StoryIntroActivity::class.java)
-            startActivity(intent)
-        }
-        //오늘의 메뉴로 이동
-        binding.btnDrawerToday
-        profileList = arrayListOf()
-        profileList.apply {
-            add(TestChatDrawerProfileData(sendUser.nick, sendUser.image))
-            add(TestChatDrawerProfileData(receiveUser1.nick, receiveUser1.image))
-            add(TestChatDrawerProfileData(receiveUser2.nick, receiveUser2.image))
-            add(TestChatDrawerProfileData(receiveUser3.nick, receiveUser3.image))
-            add(TestChatDrawerProfileData(receiveUser4.nick,receiveUser4.image))
-        }
-        val testDataRVAdapter = ChatDrawerRVAdapter(this, profileList)
-        binding.rvChatProfileList.adapter = testDataRVAdapter
-        binding.rvChatProfileList.layoutManager = LinearLayoutManager(this)
-    }
-
-    // 테스트 유저용 초기화
-    private fun testUserInit() {
-        sendUser = TestUserData("초이", R.drawable.test_choi, Constants.CHAT_MASTER_CODE)
-        receiveUser1 = TestUserData("푸", R.drawable.test_poo, Constants.CHAT_GUEST_CODE)
-        receiveUser2 = TestUserData("왁", R.drawable.test_wak, Constants.CHAT_GUEST_CODE)
-        receiveUser3 = TestUserData("쭈니",R.drawable.test_jooni,Constants.CHAT_GUEST_CODE)
-        receiveUser4 = TestUserData("채니",R.drawable.test_chani,Constants.CHAT_GUEST_CODE)
     }
     //키보드 내려감
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -183,4 +189,5 @@ class ChatActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         return true
     }
+
 }
