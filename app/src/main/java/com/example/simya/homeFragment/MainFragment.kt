@@ -38,8 +38,6 @@ class MainFragment: Fragment() {
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
 
-
-
         // Sort type 바꾸기 -> 클린코드 필요
         binding.ibHomeMainSortType.setOnClickListener {
             val dialog = SortDialog(this.context as AppCompatActivity)
