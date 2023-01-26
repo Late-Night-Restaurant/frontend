@@ -7,16 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.simya.databinding.FragmentHomeMyPageBinding
 import com.example.simya.databinding.FragmentMyPageMultiProfileBinding
-import com.example.simya.databinding.ItemMultiProfileBinding
 import com.example.simya.homeAdapter.MultiProfileAdapter
-import com.example.simya.testData.TestDataMulitProfileMyPage
-import com.example.simya.testData.TestDataMultiProfile
+import com.example.simya.testData.TestDataMultiProfileMyPage
 
 class MultiProfileFragment: Fragment() {
     private lateinit var binding: FragmentMyPageMultiProfileBinding
-    private lateinit var dataList: ArrayList<TestDataMulitProfileMyPage>
+    private lateinit var dataList: ArrayList<TestDataMultiProfileMyPage>
 
 
     override fun onCreateView(
@@ -37,10 +34,10 @@ class MultiProfileFragment: Fragment() {
 
         dataList = arrayListOf()
         dataList.apply {
-            add(TestDataMulitProfileMyPage(1, "김아린"))
-            add(TestDataMulitProfileMyPage(2, "푸"))
-            add(TestDataMulitProfileMyPage(3, "초이"))
-            add(TestDataMulitProfileMyPage(4, "왁"))
+            add(TestDataMultiProfileMyPage(1, "김아린"))
+            add(TestDataMultiProfileMyPage(2, "푸"))
+            add(TestDataMultiProfileMyPage(3, "초이"))
+            add(TestDataMultiProfileMyPage(4, "왁"))
         }
         val dataRVAdpater = MultiProfileAdapter(dataList)
         binding.rvMultiProfileRecycler.adapter = dataRVAdpater

@@ -9,7 +9,7 @@ import com.example.simya.homeFragment.MainFragment
 import com.example.simya.mypageFragment.MyPageProfileFragment
 import com.example.simya.mystoryFragment.MyStoryFragment
 
-class HomeMainActivity: AppCompatActivity() {
+class HomeMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,36 +17,32 @@ class HomeMainActivity: AppCompatActivity() {
         setContentView(binding.root)
         init()
     }
-    private fun init(){
-//        supportFragmentManager
-//            .beginTransaction()
-//            .replace(binding.fmHome.id, MainFragment())
-//            .commitAllowingStateLoss()
 
+    private fun init() {
 
 //        fragment 전환
-        binding.bnvHomeNavi.run{
+        binding.bnvHomeNavi.run {
             setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.tab_home_main_home ->{
+                    R.id.tab_home_main_home -> {
                         supportFragmentManager
                             .beginTransaction()
                             .replace(binding.fmHome.id, MainFragment())
                             .commitAllowingStateLoss()
                     }
-                    R.id.tab_home_main_my_chat ->{
+                    R.id.tab_home_main_my_chat -> {
                         supportFragmentManager
                             .beginTransaction()
                             .replace(binding.fmHome.id, MyStoryFragment())
                             .commitAllowingStateLoss()
                     }
-                    R.id.tab_home_main_location ->{
+                    R.id.tab_home_main_location -> {
                         supportFragmentManager
                             .beginTransaction()
                             .replace(binding.fmHome.id, LocationFragment())
                             .commitAllowingStateLoss()
                     }
-                    R.id.tab_home_main_my ->{
+                    R.id.tab_home_main_my -> {
                         supportFragmentManager
                             .beginTransaction()
                             .replace(binding.fmHome.id, MyPageProfileFragment())

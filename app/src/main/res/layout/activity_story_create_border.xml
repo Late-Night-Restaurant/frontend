@@ -88,6 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="12자 이내로 입력해주세요"
+                android:textSize="14sp"
                 android:maxLength="12"
                 android:inputType="textEmailAddress"
                 android:backgroundTint="@color/Gray_06"/>
@@ -108,10 +109,11 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/et_my_story_create_intro_title"
+                android:id="@+id/et_my_story_create_border_intro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="24자 이내로 입력해주세요"
+                android:textSize="14sp"
                 android:maxLength="24"
                 android:inputType="textEmailAddress"
                 android:backgroundTint="@color/Gray_06"/>
@@ -128,5 +130,6 @@
         android:background="@drawable/low_radius_button_off"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="56dp"/>
+        android:layout_marginBottom="56dp"
+        android:enabled="false"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

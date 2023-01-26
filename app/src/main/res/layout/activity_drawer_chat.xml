@@ -136,6 +136,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp">
                 <ImageButton
+                    android:id="@+id/ib_chat_out"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#00ff0000"
@@ -144,6 +145,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" />
                 <ImageButton
+                    android:id="@+id/ib_chat_close_or_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_close"

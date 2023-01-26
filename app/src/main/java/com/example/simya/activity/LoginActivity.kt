@@ -14,16 +14,26 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         init()
     }
-    private fun init(){
+
+    private fun init() {
         // 카카오 로그인(현재 테스트용으로 홈화면으로 이동으로 바꿈)
         binding.ibLoginMainKakao.setOnClickListener {
-            val intent = Intent(this,HomeMainActivity::class.java)
-            startActivity(intent)
+            moveToKaKao()
         }
+
         // 이메일 로그인
-        binding.ibLoginMainEmail.setOnClickListener{
-            val intent = Intent(this, EmailLoginActivity::class.java)
-            startActivity(intent)
+        binding.ibLoginMainEmail.setOnClickListener {
+            moveToEmail()
         }
+    }
+
+    private fun moveToKaKao() {
+        val intent = Intent(this, HomeMainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun moveToEmail() {
+        val intent = Intent(this, EmailLoginActivity::class.java)
+        startActivity(intent)
     }
 }
