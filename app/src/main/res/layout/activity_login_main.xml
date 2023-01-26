@@ -17,11 +17,12 @@
         android:layout_height="wrap_content"
         android:text="비슷한 사람들과"
         android:textColor="@color/Primary_01"
-        android:textSize="40dp"
+        android:textSize="44dp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/default_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"/>
     <TextView
         android:id="@+id/tv_login_main_headline2"
         android:layout_width="wrap_content"
