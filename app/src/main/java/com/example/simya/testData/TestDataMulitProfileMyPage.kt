@@ -1,6 +1,6 @@
 package com.example.simya.testData
 
-data class TestDataMulitProfileMyPage(
+data class TestDataMultiProfileMyPage(
     var imageSource: Int,
-    var nickname: String,
+    var nick: String
 )

@@ -73,7 +73,7 @@
                 android:backgroundTint="@color/Gray_06"
                 android:hint="숫자로 입력해주세요"
                 android:textSize="16sp"
-                android:inputType="textEmailAddress"
+                android:inputType="number"
                 android:maxLength="1" />
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
