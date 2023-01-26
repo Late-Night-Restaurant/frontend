@@ -16,6 +16,7 @@ class CreateMyStoryRVAdapter(
     private val dataList: ArrayList<TestDataMultiProfile>
 ) : RecyclerView.Adapter<CreateMyStoryRVAdapter.DataViewHolder>() {
     private var listener: OnItemClickListener? = null
+
     inner class DataViewHolder(private val binding: ItemMultiProfileBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: TestDataMultiProfile) {

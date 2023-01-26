@@ -1,12 +1,15 @@
 package com.example.simya.homeFragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.simya.Constants
 import com.example.simya.R
 import com.example.simya.databinding.FragmentHomeMainBinding
 import com.example.simya.dialog.SortDialog
@@ -37,10 +40,27 @@ class MainFragment: Fragment() {
 
 
 
-        // Sort type 바꾸기
+        // Sort type 바꾸기 -> 클린코드 필요
         binding.ibHomeMainSortType.setOnClickListener {
             val dialog = SortDialog(this.context as AppCompatActivity)
             dialog!!.showDia()
+            dialog.setOnItemClickListener(object: SortDialog.SortDialogClickedListener{
+                override fun onClick(resultCode: Int) {
+                   when(resultCode){
+                       Constants.SORT_LIKE->{
+                           Toast.makeText(context,"최근 찜 순 정렬",Toast.LENGTH_SHORT).show()
+                       }
+                       Constants.SORT_LONG->{
+                           Toast.makeText(context,"오랫동안 들은 순 정렬",Toast.LENGTH_SHORT).show()
+                       }
+                       Constants.SORT_RECENT->{
+                           Toast.makeText(context,"즐겨 찾는 순 정렬",Toast.LENGTH_SHORT).show()
+                       }
+                   }
+                }
+
+
+            })
         }
 
         // View type 바꾸기

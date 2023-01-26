@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
         init()
     }
-    
+
 //    )
     /*  달이 밝게 비춤
     **  달이 이동
