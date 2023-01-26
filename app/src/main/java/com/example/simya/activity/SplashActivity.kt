@@ -22,8 +22,6 @@ class SplashActivity : AppCompatActivity() {
         init()
     }
 
-    //    Handler(Looper.getMainLooper()).postDelayed(
-//    Runnable {layoutManager.scrollToPositionWithOffset(dataList.size-1,0)},300
 //    )
     /*  달이 밝게 비춤
     **  달이 이동

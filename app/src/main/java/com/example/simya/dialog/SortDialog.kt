@@ -3,62 +3,88 @@ package com.example.simya.dialog
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.example.simya.Constants
 import com.example.simya.R
+import com.example.simya.adpter.createMyStoryAdapter.CreateMyStoryRVAdapter
 import com.example.simya.databinding.DialogOrderBinding
 
-class SortDialog(private val context: AppCompatActivity) {
+class SortDialog(private val context: AppCompatActivity) : View.OnClickListener {
     private val dialog = Dialog(context)
     private lateinit var binding: DialogOrderBinding
-    fun showDia(){
+    private var listener: SortDialogClickedListener? = null
+    fun showDia() {
         init()
-        orderRecent()
-        orderLong()
-        orderLike()
-        orderCancel()
         dialog.show()
     }
-
-    private fun init(){
+    private fun init() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding = DialogOrderBinding.inflate(context.layoutInflater)
-        dialog.window!!.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog.window!!.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
         dialog.setContentView(binding.root)
+        binding.btnDialogOrderLike.setOnClickListener(this)
+        binding.btnDialogOrderLong.setOnClickListener(this)
+        binding.btnDialogOrderRecent.setOnClickListener(this)
+        binding.btnDialogOrderCancle.setOnClickListener(this)
+
     }
-    private fun orderRecent(){
-        binding.btnDialogOrderRecent.setOnClickListener {
-            binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_on)
-            binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_off)
-            binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_off)
-        }
+
+    fun setOnItemClickListener(listener: SortDialogClickedListener) {
+        this.listener = listener
     }
-    private fun orderLike(){
-        binding.btnDialogOrderLike.setOnClickListener {
-            binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_off)
-            binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_on)
-            binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_off)
-        }
-    }
-    private fun orderLong(){
-        binding.btnDialogOrderLong.setOnClickListener {
-            binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_off)
-            binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_off)
-            binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_on)
-        }
-    }
-    private fun orderCancel(){
-        binding.btnDialogOrderCancle.setOnClickListener {
-            dialog.dismiss()
-        }
-    }
+
     interface SortDialogClickedListener {
-        fun onRecent(content : String)
-        fun onLike(context: String)
-        fun onLong(context: String)
+        fun onClick(resultCode: Int)
+    }
+
+    override fun onClick(p0: View?) {
+        when (p0?.id) {
+            binding.btnDialogOrderLike.id -> {
+                orderLike()
+                listener?.onClick(Constants.SORT_LIKE)
+            }
+            binding.btnDialogOrderLong.id -> {
+                orderLong()
+                listener?.onClick(Constants.SORT_LONG)
+            }
+            binding.btnDialogOrderRecent.id -> {
+                orderRecent()
+                listener?.onClick(Constants.SORT_RECENT)
+            }
+            binding.btnDialogOrderCancle.id -> {
+                orderCancel()
+            }
+        }
+    }
+    private fun orderRecent() {
+        binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_on)
+        binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_off)
+        binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_off)
+    }
+
+    private fun orderLike() {
+        binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_off)
+        binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_on)
+        binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_off)
+    }
+
+    private fun orderLong() {
+        binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_off)
+        binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_off)
+        binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_on)
+
+    }
+
+    private fun orderCancel() {
+        dialog.dismiss()
+
     }
 
 }
