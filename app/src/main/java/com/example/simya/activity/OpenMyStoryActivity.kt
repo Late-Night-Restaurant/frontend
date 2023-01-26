@@ -41,9 +41,7 @@ class OpenMyStoryActivity: AppCompatActivity() {
             moveToOpen()
         }
     }
-    private fun getIntentData(){
 
-    }
     private fun moveToReviewList(){
         val intent = Intent(this,StoryReviewActivity::class.java)
         startActivity(intent)
