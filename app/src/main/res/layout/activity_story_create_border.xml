@@ -130,5 +130,6 @@
         android:background="@drawable/low_radius_button_off"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="56dp"/>
+        android:layout_marginBottom="56dp"
+        android:enabled="false"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,18 +27,27 @@ class CreateMyStoryMainMenuActivity : AppCompatActivity(), View.OnClickListener 
         binding.ibMyStoryCreateMainMenuInfo.setOnClickListener {
             binding.tvMyStoryCreateMainInfo.isInvisible = false
         }
+
         binding.btnMainMenuNext.setOnClickListener {
             moveToSetBorder()
         }
+
+
         // Single Select
         buttonSingleSelected()
 
     }
-    private fun moveToSetBorder(){
-        val intent = Intent(this,CreateMyStoryBorderActivity::class.java)
-        intent.putExtra("menu",holdBtn!!.text.toString())
-        startActivity(intent)
+
+    private fun moveToSetBorder() {
+        Log.d("enabled", binding.btnMainMenuNext.isEnabled.toString())
+        if (binding.btnMainMenuNext.isEnabled) {
+            Log.d("enabled", binding.btnMainMenuNext.isEnabled.toString())
+            val intent = Intent(this, CreateMyStoryBorderActivity::class.java)
+            intent.putExtra("menu", holdBtn!!.text.toString())
+            startActivity(intent)
+        }
     }
+
     private fun buttonSingleSelected() {
         binding.btnMainMenuLove.setOnClickListener(this)
         binding.btnMainMenuFamily.setOnClickListener(this)
@@ -56,9 +65,11 @@ class CreateMyStoryMainMenuActivity : AppCompatActivity(), View.OnClickListener 
     }
 
     private fun nextButtonEnabled() {
+        Log.d("nextButtonEnabled", "호출")
         binding.btnMainMenuNext.setBackgroundResource(R.drawable.low_radius_button_on)
         binding.btnMainMenuNext.setTextColor(application.resources.getColor(R.color.Gray_03))
         binding.btnMainMenuNext.isEnabled = true
+        binding.btnMainMenuNext.isClickable = true
     }
 
     override fun onClick(view: View?) {
@@ -69,7 +80,10 @@ class CreateMyStoryMainMenuActivity : AppCompatActivity(), View.OnClickListener 
                 R.id.btn_main_menu_culture -> btnHighlighted(binding.btnMainMenuCulture, holdBtn)
                 R.id.btn_main_menu_hobby -> btnHighlighted(binding.btnMainMenuHobby, holdBtn)
                 R.id.btn_main_menu_stress -> btnHighlighted(binding.btnMainMenuStress, holdBtn)
-                R.id.btn_main_menu_relationship -> btnHighlighted(binding.btnMainMenuRelationship, holdBtn)
+                R.id.btn_main_menu_relationship -> btnHighlighted(
+                    binding.btnMainMenuRelationship,
+                    holdBtn
+                )
             }
         }
     }
