@@ -18,6 +18,7 @@ class BasicDialog (private val context: AppCompatActivity,private val title: Str
         init()
         dialog.show()
     }
+
     private fun init() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding = DialogDefaultBinding.inflate(context.layoutInflater)
@@ -33,7 +34,6 @@ class BasicDialog (private val context: AppCompatActivity,private val title: Str
         // 클릭리스너
         binding.btnYes.setOnClickListener(this)
         binding.btnNo.setOnClickListener(this)
-
     }
 
     fun setOnItemClickListener(listener: DefaultDialogClickedListener) {
@@ -57,7 +57,6 @@ class BasicDialog (private val context: AppCompatActivity,private val title: Str
 
     private fun orderCancel() {
         dialog.dismiss()
-
     }
 
 }
