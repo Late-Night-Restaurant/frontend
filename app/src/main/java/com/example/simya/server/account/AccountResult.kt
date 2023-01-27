@@ -1,6 +1,6 @@
-package com.example.simya.server.result
+package com.example.simya.server.account
 
-data class AccountReslut(
+data class AccountResult(
     var granType: String,
     var accessToken: String,
     var refreshToken: String,

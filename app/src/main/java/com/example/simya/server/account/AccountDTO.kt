@@ -1,4 +1,4 @@
-package com.example.simya.server.dto
+package com.example.simya.server.account
 
 data class AccountDTO(
     var email: String,
