@@ -1,7 +1,8 @@
 package com.example.simya.testData
 
-import android.graphics.drawable.Drawable
 
 data class TestDataMultiProfile(
-    var imageSource: Int
+    var imageSource: Int,
+    var nickname: String,
+    var intro: String
 )

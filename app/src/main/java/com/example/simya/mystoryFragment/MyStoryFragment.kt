@@ -1,13 +1,18 @@
 package com.example.simya.mystoryFragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.R
+import com.example.simya.activity.CreateMyStoryActivity
 import com.example.simya.databinding.FragmentHomeMyStoryMainBinding
+
 
 class MyStoryFragment: Fragment() {
     private lateinit var binding: FragmentHomeMyStoryMainBinding
@@ -27,6 +32,9 @@ class MyStoryFragment: Fragment() {
     }
 
     private fun init(){
+        binding.ibMyStoryAdd.setOnClickListener{
+            moveToCreateStroy()
+        }
         //초기 프래그먼트 설정
         childFragmentManager.beginTransaction()
             .replace(R.id.fl_my_story_main,MyStoryGridFragment())
@@ -56,6 +64,10 @@ class MyStoryFragment: Fragment() {
             }
 
         }
+    }
+    private fun moveToCreateStroy(){
+        val intent = Intent(this.context,CreateMyStoryActivity::class.java)
+        startActivity(intent)
     }
     // View Type icon switch
     private fun viewTypeChange(){

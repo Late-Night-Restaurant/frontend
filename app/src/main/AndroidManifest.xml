@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+<!--    인터넷 권한-->
     <uses-permission android:name="android.permission.INTERNET"/>
+
+<!--    갤러리 권한-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<!--    카메라 권한-->
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -14,28 +20,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Simya"
         tools:targetApi="31">
-        <activity
-            android:name=".activity.HomeMainActivity"
+
+
+        <activity android:name=".activity.SplashActivity"
             android:exported="true">
+
         </activity>
-
-        <activity android:name=".activity.EmailLoginActivity"
-            android:exported="true"> </activity>
-
         <activity android:name=".activity.LoginActivity"
             android:exported="true">
-        </activity>
-        <activity android:name=".activity.StoryIntroActivity"
-            android:exported="true">
+<!--           -->
 
         </activity>
-        <activity android:name=".activity.StoryReviewActivity"
+        <activity android:name=".activity.EmailLoginActivity"
             android:exported="true">
-        </activity>
-        <activity
-            android:name=".activity.SignupActivity"
-            android:exported="true">
-
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,28 +43,50 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.HomeMainActivity"
+            android:exported="true">
 
         </activity>
+        <activity android:name=".activity.StoryReviewActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.StoryIntroActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activity.SignupActivity"
+
+            android:exported="true">
+
+
+        </activity>
+
         <activity android:name=".activity.CreateMyStoryActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"/>
         <activity android:name=".activity.CreateMyStoryMainMenuActivity"
-            android:exported="true">
-
-        </activity>
-        <activity android:name=".activity.CreateMyStoryCreateBorderActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"/>
+        <activity android:name=".activity.CreateMyStoryBorderActivity"
+            android:exported="true"/>
         <activity android:name=".activity.OpenMyStoryActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.ProfileEditActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.MyPageLikeActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.MyPageReviewActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.StoryLikeActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.OpenMyStoryInputActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.EditMyStoryMenuActivity"
+            android:exported="true"/>
+        <activity android:name=".activity.ChatActivity"
             android:exported="true">
 
-
         </activity>
-
-
-
+        <activity android:name=".activity.TodayMenuActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

@@ -124,6 +124,7 @@
 
     </LinearLayout>
 
+
     <!--    다음 버튼-->
     <Button
         android:id="@+id/btn_signup_next"
