@@ -13,6 +13,7 @@ import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.server.account.AccountResponse
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
+import com.example.simya.server.account.AccountDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,7 +49,7 @@ class EmailLoginActivity : AppCompatActivity() {
             if(checkEmail()&&checkPassword()){
                 email = binding.tietEmailSigninInputEmail.text.toString()
                 password = binding.tietEmailSigninInputPassword.toString()
-                onLogin()
+                onLogin(AccountDTO(email, password))
             }
         }
 
@@ -59,10 +60,10 @@ class EmailLoginActivity : AppCompatActivity() {
 
     }
 
-    private fun onLogin(){
+    private fun onLogin(user: AccountDTO){
         val retrofit = RetrofitBuilder.getInstnace()
         val API = retrofit.create(RetrofitService::class.java)
-        API.onLoginSubmit(email,password).enqueue(object: Callback<AccountResponse>{
+        API.onLoginSubmit(user).enqueue(object: Callback<AccountResponse>{
             override fun onResponse(
                 call: Call<AccountResponse>,
                 response: Response<AccountResponse>

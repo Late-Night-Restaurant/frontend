@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.simya.R
 import com.example.simya.databinding.FragmentSignupPwBinding
+import com.example.simya.server.RetrofitBuilder
+import com.example.simya.server.RetrofitService
 
 class SignupPwFragment: Fragment() {
     private lateinit var binding: FragmentSignupPwBinding
@@ -33,6 +35,7 @@ class SignupPwFragment: Fragment() {
             }
         }
     }
+
 
     private fun pwCheck(): Boolean {
         var pw = binding.tietEmailSigninInputPw.text!!.length
