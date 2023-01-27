@@ -61,7 +61,6 @@ class OpenMyStoryInputActivity : AppCompatActivity() {
                     binding.btnMyStoryOpen.setTextColor(application.resources.getColor(R.color.Gray_10))
                 }
             }
-
             override fun afterTextChanged(s: Editable) {}
         }
     }

@@ -113,9 +113,6 @@ class SplashActivity : AppCompatActivity() {
         fadeIn(binding.ivSplash7)
     }
 
-//    private fun sequenceSeven() {
-//
-//    }
 
     private fun sequenceLast() {
         fadeOut(binding.ivSplash4Moon)
