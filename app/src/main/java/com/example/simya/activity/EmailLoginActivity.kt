@@ -17,6 +17,7 @@ import com.example.simya.server.account.AccountResponse
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
 import com.example.simya.server.account.AccountDTO
+import com.example.simya.sharedpreferences.Shared
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -74,13 +75,16 @@ class EmailLoginActivity : AppCompatActivity() {
                 response: Response<AccountResponse>
             ) {
                 if(response.code()==Constants.OK){
+                    Log.d("Reponse check",response.toString())
+                    Log.d("Reponse check",response.message().toString())
+                    Log.d("Reponse check",response.code().toString())
+                    Log.d("Reponse check",response.body().toString())
+                    Shared.prefs.setString("accessToken",response.body()!!.getAccessToken())
+                    Shared.prefs.setString("refreshToken",response.body()!!.getRefreshToken())
                     moveToHome()
                 }
                 Toast.makeText(this@EmailLoginActivity,response.message(),Toast.LENGTH_SHORT).show()
-                Log.d("Reponse check",response.toString())
-                Log.d("Reponse check",response.message().toString())
-                Log.d("Reponse check",response.code().toString())
-                Log.d("Reponse check",response.body().toString())
+
             }
 
             override fun onFailure(call: Call<AccountResponse>, t: Throwable) {
