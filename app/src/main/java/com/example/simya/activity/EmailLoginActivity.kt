@@ -10,6 +10,12 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.R
 import com.example.simya.databinding.ActivitySigninEmailBinding
+import com.example.simya.server.account.AccountResponse
+import com.example.simya.server.RetrofitBuilder
+import com.example.simya.server.RetrofitService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 
@@ -18,7 +24,8 @@ class EmailLoginActivity : AppCompatActivity() {
     private val emailValidation =
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     private lateinit var textWatcher: TextWatcher
-
+    private lateinit var email: String
+    private lateinit var password: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +45,11 @@ class EmailLoginActivity : AppCompatActivity() {
 
         //로그인 이벤트
         binding.btnEmailSigninLogin.setOnClickListener {
-            checkEmail()
-            checkPassword()
+            if(checkEmail()&&checkPassword()){
+                email = binding.tietEmailSigninInputEmail.text.toString()
+                password = binding.tietEmailSigninInputPassword.toString()
+                onLogin()
+            }
         }
 
         binding.btnSigninEmailSignup.setOnClickListener {
@@ -49,6 +59,22 @@ class EmailLoginActivity : AppCompatActivity() {
 
     }
 
+    private fun onLogin(){
+        val retrofit = RetrofitBuilder.getInstnace()
+        val API = retrofit.create(RetrofitService::class.java)
+        API.onLoginSubmit(email,password).enqueue(object: Callback<AccountResponse>{
+            override fun onResponse(
+                call: Call<AccountResponse>,
+                response: Response<AccountResponse>
+            ) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFailure(call: Call<AccountResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
     private fun checkEmail(): Boolean {
         var email = binding.tietEmailSigninInputEmail.text.toString().trim() // 공백제거
         val pattern = Pattern.matches(emailValidation, email) // 패턴확인
