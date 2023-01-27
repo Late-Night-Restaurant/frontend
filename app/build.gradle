@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String","SIMYA_SERVER_URL",properties['simya_server_url']
+//        buildConfigField "String","SIMYA_SERVER_URL",properties['simya_server_url']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

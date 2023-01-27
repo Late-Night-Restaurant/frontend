@@ -4,5 +4,5 @@ data class AccountResponse(
     var isSuccess: Boolean,
     var code: Int,
     var message: String,
-    var result: List<AccountResult>?,
+    var result: AccountResult?,
     )
