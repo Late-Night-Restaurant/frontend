@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include layout="@layout/default_layout"
+        android:id="@+id/included"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_today_menu"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/included"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_today_menu_add"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"/>
+    <Button
+        android:id="@+id/btn_today_menu_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="새로운 메뉴 추가"
+        android:background="@drawable/low_radius_button_on"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"
+        android:enabled="false"
+        android:clickable="false"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

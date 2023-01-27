@@ -6,17 +6,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.example.simya.databinding.ActivityDrawerMyStroyOpenBinding
 import com.example.simya.dialog.CloseDialog
+import com.example.simya.testData.BorderData
 
 class OpenMyStoryActivity: AppCompatActivity() {
     lateinit var binding: ActivityDrawerMyStroyOpenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDrawerMyStroyOpenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        init()
+        val borderData = intent.getSerializableExtra("borderData") as BorderData?
+
+        init(borderData)
     }
-    private fun init(){
+    private fun init(borderData: BorderData?){
         val drawerLayout = binding.dlMyStoryOpen
+        binding.includedMyStoryOpen.tvRvMainMenu.text = borderData!!.mainMenu
+        binding.includedMyStoryOpen.tvRvTitle.text = borderData!!.title
         // 드로어 오픈
         binding.includedMyStoryOpen.ibMyStoryOpenDrawer.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
@@ -35,6 +41,7 @@ class OpenMyStoryActivity: AppCompatActivity() {
             moveToOpen()
         }
     }
+
     private fun moveToReviewList(){
         val intent = Intent(this,StoryReviewActivity::class.java)
         startActivity(intent)

@@ -16,8 +16,8 @@ class MyStoryGVAdater(private val dataList:ArrayList<TestDataBorder>): RecyclerV
     inner class DataViewHolder(private val binding: ItemBorderGv156156Binding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: TestDataBorder) {
             binding.tvGvTodayMenu.text = data.todayMenu
-            binding.tvGvmainMenu.text = data.mainMenu
-            binding.tvGvtitle.text = data.title
+            binding.tvGvMainMenu.text = data.mainMenu
+            binding.tvGvTitle.text = data.title
         }
     }
     //ViewHolder 만들어 질때 실행할 동작

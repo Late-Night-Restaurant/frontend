@@ -1,5 +1,6 @@
 package com.example.simya.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,9 +10,10 @@ import androidx.core.view.isInvisible
 import com.example.simya.R
 import com.example.simya.databinding.ActivityStoryMainMenuBinding
 
-class CreateMyStoryMainMenuActivity: AppCompatActivity(), View.OnClickListener {
+class CreateMyStoryMainMenuActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var binding: ActivityStoryMainMenuBinding
     var holdBtn: Button? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStoryMainMenuBinding.inflate(layoutInflater)
@@ -26,7 +28,24 @@ class CreateMyStoryMainMenuActivity: AppCompatActivity(), View.OnClickListener {
             binding.tvMyStoryCreateMainInfo.isInvisible = false
         }
 
+        binding.btnMainMenuNext.setOnClickListener {
+            moveToSetBorder()
+        }
+
+
+        // Single Select
         buttonSingleSelected()
+
+    }
+
+    private fun moveToSetBorder() {
+        Log.d("enabled", binding.btnMainMenuNext.isEnabled.toString())
+        if (binding.btnMainMenuNext.isEnabled) {
+            Log.d("enabled", binding.btnMainMenuNext.isEnabled.toString())
+            val intent = Intent(this, CreateMyStoryBorderActivity::class.java)
+            intent.putExtra("menu", holdBtn!!.text.toString())
+            startActivity(intent)
+        }
     }
 
     private fun buttonSingleSelected() {
@@ -37,26 +56,34 @@ class CreateMyStoryMainMenuActivity: AppCompatActivity(), View.OnClickListener {
         binding.btnMainMenuHobby.setOnClickListener(this)
         binding.btnMainMenuCulture.setOnClickListener(this)
     }
-    private fun btnHighlighted(selectBtn: Button,preBtn: Button?){
+
+    private fun btnHighlighted(selectBtn: Button, preBtn: Button?) {
         selectBtn.isSelected = selectBtn?.isSelected != true
         preBtn?.isSelected = preBtn?.isSelected != true
         holdBtn = selectBtn
         nextButtonEnabled()
     }
-    private fun nextButtonEnabled(){
+
+    private fun nextButtonEnabled() {
+        Log.d("nextButtonEnabled", "호출")
         binding.btnMainMenuNext.setBackgroundResource(R.drawable.low_radius_button_on)
         binding.btnMainMenuNext.setTextColor(application.resources.getColor(R.color.Gray_03))
-        binding.btnMainMenuNext.isEnabled= true
+        binding.btnMainMenuNext.isEnabled = true
+        binding.btnMainMenuNext.isClickable = true
     }
+
     override fun onClick(view: View?) {
-        if(view !=null){
-            when(view.id){
-               R.id.btn_main_menu_love -> btnHighlighted(binding.btnMainMenuLove,holdBtn)
-               R.id.btn_main_menu_family -> btnHighlighted(binding.btnMainMenuFamily,holdBtn)
-               R.id.btn_main_menu_culture -> btnHighlighted(binding.btnMainMenuCulture,holdBtn)
-               R.id.btn_main_menu_hobby-> btnHighlighted(binding.btnMainMenuHobby,holdBtn)
-               R.id.btn_main_menu_stress -> btnHighlighted(binding.btnMainMenuStress,holdBtn)
-               R.id.btn_main_menu_relationship -> btnHighlighted(binding.btnMainMenuRelationship,holdBtn)
+        if (view != null) {
+            when (view.id) {
+                R.id.btn_main_menu_love -> btnHighlighted(binding.btnMainMenuLove, holdBtn)
+                R.id.btn_main_menu_family -> btnHighlighted(binding.btnMainMenuFamily, holdBtn)
+                R.id.btn_main_menu_culture -> btnHighlighted(binding.btnMainMenuCulture, holdBtn)
+                R.id.btn_main_menu_hobby -> btnHighlighted(binding.btnMainMenuHobby, holdBtn)
+                R.id.btn_main_menu_stress -> btnHighlighted(binding.btnMainMenuStress, holdBtn)
+                R.id.btn_main_menu_relationship -> btnHighlighted(
+                    binding.btnMainMenuRelationship,
+                    holdBtn
+                )
             }
         }
     }

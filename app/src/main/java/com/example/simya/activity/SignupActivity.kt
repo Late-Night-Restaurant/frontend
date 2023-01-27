@@ -12,7 +12,7 @@ import com.example.simya.databinding.FragmentSignupAgreeBinding
 import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.signupFragment.*
 
-class SignupActivity : AppCompatActivity() {
+class SignupActivity: AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
