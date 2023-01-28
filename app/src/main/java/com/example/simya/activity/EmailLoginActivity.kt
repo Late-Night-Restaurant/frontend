@@ -40,8 +40,6 @@ class EmailLoginActivity : AppCompatActivity() {
         retrofit.create(RetrofitService::class.java)
     }
 
-//    val retrofit = RetrofitBuilder.getInstnace()
-//    val API = retrofit.create(RetrofitService::class.java)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySigninEmailBinding.inflate(layoutInflater)
@@ -65,6 +63,7 @@ class EmailLoginActivity : AppCompatActivity() {
                 email = binding.tietEmailSigninInputEmail.text.toString()
                 password = binding.tietEmailSigninInputPassword.text.toString()
                 onSignIn(AccountDTO(email,password))
+
             }
         }
 
@@ -73,6 +72,7 @@ class EmailLoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     private fun moveToHome(){
         val intent = Intent(this,HomeMainActivity::class.java)
         startActivity(intent)

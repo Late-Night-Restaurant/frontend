@@ -38,7 +38,16 @@ android {
     }
 }
 
+
 dependencies {
+
+    // Java language implementation
+    implementation("androidx.fragment:fragment:1.5.5")
+    // Kotlin
+    implementation("androidx.fragment:fragment-ktx:1.5.5")
+    // Testing Fragments in Isolation
+    debugImplementation("androidx.fragment:fragment-testing:1.5.5")
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -62,4 +71,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.google.code.gson:gson:2.8.6'
 
+    // navigation component
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
 }
