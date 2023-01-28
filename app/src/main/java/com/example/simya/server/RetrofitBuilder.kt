@@ -11,12 +11,12 @@ object RetrofitBuilder {
     private val gson = GsonBuilder().setLenient().create()
 
     fun getInstnace(): Retrofit {
-        if (instance == null) {
-            instance = Retrofit.Builder()
+        if (com.example.simya.server.RetrofitBuilder.instance == null) {
+            com.example.simya.server.RetrofitBuilder.instance = Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
-        return instance!!
+        return com.example.simya.server.RetrofitBuilder.instance!!
     }
 }

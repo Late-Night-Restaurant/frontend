@@ -34,7 +34,7 @@ class EmailLoginActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
     private val retrofit by lazy {
-        RetrofitBuilder.getInstnace()
+       RetrofitBuilder.getInstnace()
     }
     private val simyaApi by lazy{
         retrofit.create(RetrofitService::class.java)
@@ -62,7 +62,12 @@ class EmailLoginActivity : AppCompatActivity() {
             if(checkEmail()&&checkPassword()){
                 email = binding.tietEmailSigninInputEmail.text.toString()
                 password = binding.tietEmailSigninInputPassword.text.toString()
-                onSignIn(AccountDTO(email,password))
+                onSignIn(
+                    AccountDTO(
+                        email,
+                        password
+                    )
+                )
             }
         }
         binding.btnSigninEmailSignup.setOnClickListener {

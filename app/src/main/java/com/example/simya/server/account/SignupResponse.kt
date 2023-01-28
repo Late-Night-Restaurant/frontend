@@ -4,12 +4,12 @@ data class SignupResponse(
     var isSuccess: Boolean?,
     var code: Int?,
     var message: String?,
-    var result: SignupResult?,
+    var result: com.example.simya.server.account.SignupResult?,
 ){
     fun getEmail(): String{
         return result!!.email
     }
-    fun getProfile(): ProfileDTO {
+    fun getProfile(): com.example.simya.server.account.ProfileDTO {
         return result!!.profile
     }
 }

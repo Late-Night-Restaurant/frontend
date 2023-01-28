@@ -10,19 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.databinding.FragmentHomeMainGridBinding
 import com.example.simya.databinding.ItemBorderGv156156Binding
 import com.example.simya.adpter.homeAdapter.MainGVAdapter
+import com.example.simya.databinding.ItemMyBorderGv156156Binding
 import com.example.simya.testData.TestDataBorder
 
 class MyStoryGVAdater(private val dataList:ArrayList<TestDataBorder>): RecyclerView.Adapter<MyStoryGVAdater.DataViewHolder>() {
-    inner class DataViewHolder(private val binding: ItemBorderGv156156Binding): RecyclerView.ViewHolder(binding.root){
+    inner class DataViewHolder(private val binding: ItemMyBorderGv156156Binding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: TestDataBorder) {
-            binding.tvGvTodayMenu.text = data.todayMenu
+            binding.tvGvTitle.text  = data.title
             binding.tvGvMainMenu.text = data.mainMenu
-            binding.tvGvTitle.text = data.title
         }
     }
     //ViewHolder 만들어 질때 실행할 동작
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
-        val binding = ItemBorderGv156156Binding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemMyBorderGv156156Binding.inflate(LayoutInflater.from(parent.context),parent,false)
         return DataViewHolder(binding)
     }
     // ViewHolder가 실제로 데이터를 표시해야 할 때 호출되는 함수 , 데이터를 표시할때마다 호출
