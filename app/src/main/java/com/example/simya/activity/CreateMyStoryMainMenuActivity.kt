@@ -7,6 +7,9 @@ import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
+import com.example.simya.Constants
+import com.example.simya.Constants.BORDER_MAIN_MENU
+import com.example.simya.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.databinding.ActivityStoryMainMenuBinding
 
@@ -35,11 +38,11 @@ class CreateMyStoryMainMenuActivity : AppCompatActivity(), View.OnClickListener 
     }
 
     private fun moveToSetBorder() {
-        Log.d("enabled", binding.btnMainMenuNext.isEnabled.toString())
+        val profileId = intent.getStringExtra(PROFILE_ID)
         if (binding.btnMainMenuNext.isEnabled) {
-            Log.d("enabled", binding.btnMainMenuNext.isEnabled.toString())
             val intent = Intent(this, CreateMyStoryBorderActivity::class.java)
-            intent.putExtra("menu", holdBtn!!.text.toString())
+            intent.putExtra(PROFILE_ID,profileId)
+            intent.putExtra(BORDER_MAIN_MENU, holdBtn!!.text.toString())
             startActivity(intent)
         }
     }

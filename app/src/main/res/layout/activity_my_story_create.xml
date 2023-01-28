@@ -73,7 +73,6 @@
             android:id="@+id/tv_my_story_create_nick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="심야식당"
             android:textColor="@color/Gray_03"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@id/tv_my_story_create_nick_headline"
@@ -99,7 +98,7 @@
             android:id="@+id/tv_my_story_create_intro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="심야식당 직원들"
+
             android:textColor="@color/Gray_03"
             app:layout_constraintTop_toBottomOf="@id/tv_my_story_create_intro_headline"
             app:layout_constraintStart_toStartOf="parent"

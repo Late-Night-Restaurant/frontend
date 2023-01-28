@@ -2,16 +2,24 @@ package com.example.simya.activity
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import com.example.simya.Constants
+import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.ActivityMainBinding
 import com.example.simya.databinding.ActivitySplashBinding
+import com.example.simya.sharedpreferences.Shared
 
 class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplashBinding
@@ -19,6 +27,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        onShared()
         init()
     }
 
@@ -31,6 +40,7 @@ class SplashActivity : AppCompatActivity() {
     **  인트로
     **  타이틀+ 인트로만 남김 */
     private fun init() {
+
         Handler(Looper.getMainLooper()).postDelayed(
             Runnable { sequenceOne() }, 1000
         )
@@ -56,13 +66,13 @@ class SplashActivity : AppCompatActivity() {
             Runnable { moveToHome() }, 16000
         )
     }
-
+    // 페이드인 애니메이션
     private fun fadeIn(imageView: ImageView) {
         val fadeIn = ObjectAnimator.ofFloat(imageView, "alpha", 0f, 1f)
         fadeIn.duration = 2000
         fadeIn.start()
     }
-
+    // 페이드 아웃 애니메이션
     private fun fadeOut(imageView: ImageView) {
         val fadeOut = ObjectAnimator.ofFloat(imageView, "alpha", 1f, 0f)
         fadeOut.duration = 1500
@@ -77,7 +87,7 @@ class SplashActivity : AppCompatActivity() {
 
         })
     }
-
+    // 스플래쉬 시퀀스
     private fun sequenceOne() {
         binding.ivSplash2.isInvisible = false
         fadeIn(binding.ivSplash2)
@@ -112,16 +122,27 @@ class SplashActivity : AppCompatActivity() {
         binding.ivSplash7.isInvisible = false
         fadeIn(binding.ivSplash7)
     }
-
-
     private fun sequenceLast() {
         fadeOut(binding.ivSplash4Moon)
         fadeOut(binding.ivSplash4Building)
         fadeOut(binding.ivSplash5)
     }
+    // 홈으로 이동
     private fun moveToHome(){
         val intent = Intent(this,LoginActivity::class.java)
         startActivity(intent)
         finish()
+    }
+    // SharedPreferences
+    private fun onShared(){
+        UserTokenData.init(Shared.prefs.getString("accessToken",Constants.DEFAULT),Shared.prefs.getString("refreshToken",Constants.DEFAULT))
+        Log.d("User AccessToken",UserTokenData.getUserAccessToken())
+        Log.d("User RefreshToken",UserTokenData.getUserRefreshToken())
+    }
+
+    // 테스트용 터치 이벤트
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        moveToHome()
+        return true
     }
 }
