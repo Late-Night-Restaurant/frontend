@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.Constants
 import com.example.simya.R
+import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.server.account.AccountResponse
 import com.example.simya.server.RetrofitBuilder
@@ -81,6 +82,7 @@ class EmailLoginActivity : AppCompatActivity() {
                     Log.d("Reponse check",response.body().toString())
                     Shared.prefs.setString("accessToken",response.body()!!.getAccessToken())
                     Shared.prefs.setString("refreshToken",response.body()!!.getRefreshToken())
+                    onShared()
                     moveToHome()
                 }
                 Toast.makeText(this@EmailLoginActivity,response.message(),Toast.LENGTH_SHORT).show()
@@ -149,6 +151,13 @@ class EmailLoginActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable) {
             }
         }
+    }
+    private fun onShared(){
+        UserTokenData.init(
+            Shared.prefs.getString("accessToken", Constants.DEFAULT),
+            Shared.prefs.getString("refreshToken", Constants.DEFAULT))
+        Log.d("User AccessToken", UserTokenData.getUserAccessToken())
+        Log.d("User RefreshToken", UserTokenData.getUserRefreshToken())
     }
 
 }
