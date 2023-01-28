@@ -5,19 +5,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
+import com.example.simya.Constants.BORDER_MAIN_MENU
+import com.example.simya.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.databinding.ActivityStoryCreateBorderBinding
+import com.example.simya.server.story.CreateStoryDTO
 import com.example.simya.testData.BorderData
 
 class CreateMyStoryBorderActivity : AppCompatActivity() {
     private val binding: ActivityStoryCreateBorderBinding by lazy {
         ActivityStoryCreateBorderBinding.inflate(layoutInflater)
     }
-    private lateinit var menu: String
     private lateinit var textWatcher: TextWatcher
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,10 +28,10 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
         setContentView(binding.root)
         initTextWatcher()
         init()
+
     }
 
     private fun init() {
-        getIntentData()
         binding.included.tvDefaultLayoutTitle.text = "이야기집 간판 생성"
         binding.ibMyStoryCreateBorderInfo.setOnClickListener {
             binding.tvMyStoryCreateMainInfo.isInvisible = false
@@ -37,32 +40,39 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
         binding.etMyStoryCreateBorderIntro.addTextChangedListener(textWatcher)
         binding.ibMyStoryCreateBorder.setOnClickListener {
             // 권한 , 카메라 , 갤러리 -> 사진가져오기
-
+            // test 코드로 임시 사진주기
+            binding.ibMyStoryCreateBorder.setImageResource(R.drawable.test_simya)
+            binding.ibMyStoryCreateBorder.setBackgroundResource(R.drawable.test_simya)
         }
         binding.btnMyStoryCreateBorderNext.setOnClickListener {
-            moveToStoryMain()
+//            moveToStoryMain()
+            // 서버에 전송 데이터 전송해서 이야기집 생성
         }
     }
+    private fun setBorderData(): CreateStoryDTO{
 
-    private fun getIntentData() {
-        menu = intent.getStringExtra("menu")!!
+        var profileId = intent.getStringExtra(PROFILE_ID)!!.toLong()
+        var mainMenu = intent.getStringExtra(BORDER_MAIN_MENU)
+        var imageUrl = "R.drawable.test_simya"
+        var houseName = binding.etMyStoryCreateBorderTitle.text.toString()
+        var comment = binding.etMyStoryCreateBorderIntro.text.toString()
+        Log.d("PROFILE_ID",profileId!!.toString())
+        Log.d("BORDER_MAIN_MENU",mainMenu!!)
+        Log.d("test background",imageUrl)
+
+        return CreateStoryDTO(profileId,mainMenu,imageUrl,houseName,comment)
     }
 
-    private fun moveToStoryMain() {
-        if(binding.btnMyStoryCreateBorderNext.isEnabled){
-            val borderData = createBorderData()
-            val intent = Intent(this, OpenMyStoryActivity::class.java)
-            intent.putExtra("borderData", borderData)
-            startActivity(intent)
-        }
-    }
 
-    private fun createBorderData(): BorderData {
-        val title = binding.etMyStoryCreateBorderTitle.text.toString()
-//        val intro = binding.etMyStoryCreateBorderIntro.text.toString()
+//    private fun moveToStoryMain() {
+//        if(binding.btnMyStoryCreateBorderNext.isEnabled){
+//            setBorderData()
+//            val intent = Intent(this, OpenMyStoryActivity::class.java)
+//            intent.putExtra("borderData", setBorderData())
+//            startActivity(intent)
+//        }
+//    }
 
-        return BorderData(title, menu)
-    }
 
     private fun initTextWatcher() {
         textWatcher = object : TextWatcher {

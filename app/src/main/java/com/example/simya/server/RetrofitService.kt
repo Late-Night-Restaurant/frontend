@@ -2,12 +2,9 @@ package com.example.simya.server
 
 import com.example.simya.server.account.AccountDTO
 import com.example.simya.server.account.AccountResponse
+import com.example.simya.server.profile.ProfileResponse
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RetrofitService {
 
@@ -18,6 +15,13 @@ interface RetrofitService {
         @Body login: AccountDTO
     ): Call<AccountResponse>
 
+    // 내 모든 프로필 조회
+    @Headers("Content-Type: application/json")
+    @GET("/simya/users/profile")
+    fun getUserProfile(
+        @Header("Access-Token") accessToken: String,
+        @Header("Refresh_Token") refreshToken: String
+    ): Call<ProfileResponse>
 
 
 

@@ -8,8 +8,8 @@ object UserTokenData {
     var refreshToken: String = Constants.DEFAULT
 
     fun init(accessToken: String, refreshToken: String){
-        this.accessToken = accessToken
-        this.refreshToken = refreshToken
+        this.accessToken = "Access $accessToken"
+        this.refreshToken = "Refresh $refreshToken"
     }
     fun setUserAccessToken(accessToken: String){
         this.accessToken = accessToken
@@ -23,4 +23,6 @@ object UserTokenData {
     fun getUserRefreshToken(): String{
         return refreshToken
     }
+
+
 }
