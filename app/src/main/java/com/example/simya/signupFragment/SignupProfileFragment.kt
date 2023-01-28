@@ -1,11 +1,17 @@
 package com.example.simya.signupFragment
 
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Nickname
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.simya.Constants
 import com.example.simya.R
 import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.server.RetrofitBuilder
@@ -14,6 +20,7 @@ import com.example.simya.server.account.AccountResponse
 import com.example.simya.server.account.ProfileDTO
 import com.example.simya.server.account.SignupDTO
 import com.example.simya.server.account.SignupResponse
+import com.example.simya.sharedpreferences.Shared
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +33,9 @@ class SignupProfileFragment: Fragment() {
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var profile: ProfileDTO
+    private lateinit var comment: String
+    private lateinit var nickname: String
+    private lateinit var textWatcher: TextWatcher
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,18 +44,33 @@ class SignupProfileFragment: Fragment() {
     ): View? {
         binding = FragmentSignupProfileBinding.inflate(layoutInflater)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initTW()
+        init()
+    }
+
+    private fun init() {
+        binding.btnSignupNext.isEnabled = false
+
+        binding.tietSigninInputNickname.addTextChangedListener(textWatcher)
+        binding.tietSigninInputComment.addTextChangedListener(textWatcher)
 
         binding.btnSignupNext.setOnClickListener {
             onSignUp(SignupDTO(email, password, profile))
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fm_signup, SignupFinFragment())
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .commit()
+            if (nicknameCheck() && commentCheck()){
+                nickname = binding.tietSigninInputNickname.text.toString()
+                comment = binding.tietSigninInputComment.text.toString()
+
+
+            } else {
+                Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
+
     }
 
     private fun nicknameCheck() : Boolean {
@@ -74,6 +99,14 @@ class SignupProfileFragment: Fragment() {
         }
     }
 
+    private fun moveToFin(){
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fm_signup, SignupFinFragment())
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
+    }
+
+
 
     private fun onSignUp(user: SignupDTO){
         val retrofit = RetrofitBuilder.getInstnace()
@@ -84,12 +117,45 @@ class SignupProfileFragment: Fragment() {
                 call: Call<SignupResponse>,
                 response: Response<SignupResponse>
             ) {
-                TODO("Not yet implemented")
+                if(response.code()==Constants.OK){
+                    Log.d("Response check", response.toString())
+                    Log.d("Response check", response.message().toString())
+                    Log.d("Response check", response.code().toString())
+                    Log.d("Response check", response.body().toString())
+                    moveToFin()
+                }
+                Toast.makeText(this@SignupProfileFragment.context, response.message(), Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Toast.makeText(this@SignupProfileFragment.context, t.toString(), Toast.LENGTH_SHORT).show()
+                Log.d("Response check", t.toString())
             }
         })
+    }
+
+
+    private fun initTW() {
+        textWatcher = object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                val nicknameInput = binding.tietSigninInputNickname!!.text.toString()
+                val commentInput = binding.tietSigninInputComment!!.text.toString()
+                if (nicknameInput.isNotEmpty() && commentInput.isNotEmpty()) {
+                    binding.btnSignupNext.isEnabled = true
+                    binding.btnSignupNext.isClickable = true
+                    binding.btnSignupNext.setBackgroundResource(R.drawable.low_radius_button_on)
+                } else {
+                    binding.btnSignupNext.isEnabled = false
+                    binding.btnSignupNext.isClickable = false
+                    binding.btnSignupNext.setBackgroundResource(R.drawable.low_radius_button_off)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {
+            }
+        }
     }
 }

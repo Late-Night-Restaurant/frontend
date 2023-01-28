@@ -35,15 +35,25 @@ class SignupFragment: Fragment() {
 
         binding.btnSignupNext.setOnClickListener {
             if (agreeCheck()) {
+                binding.btnSignupNext.isEnabled = true
+                binding.btnSignupNext.isClickable = true
+                binding.btnSignupNext.setBackgroundResource(R.drawable.low_radius_button_on)
+                binding.btnSignupNext.setTextColor(resources.getColor(R.color.Gray_03))
+
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fm_signup, SignupEmailFragment())
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
             } else {
+                binding.btnSignupNext.isEnabled = false
+                binding.btnSignupNext.isClickable = false
+                binding.btnSignupNext.setBackgroundResource(R.drawable.low_radius_button_off)
+                binding.btnSignupNext.setTextColor(resources.getColor(R.color.Gray_10))
                 Toast.makeText(this.activity, "동의하지 않았습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
+    
 
     private fun agreeCheck() : Boolean {
         val agreeAll = binding.cbSignupAgreeAll

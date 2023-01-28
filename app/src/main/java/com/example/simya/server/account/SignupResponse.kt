@@ -5,4 +5,11 @@ data class SignupResponse(
     var code: Int?,
     var message: String?,
     var result: SignupResult?,
-)
+){
+    fun getEmail(): String{
+        return result!!.email
+    }
+    fun getProfile(): ProfileDTO {
+        return result!!.profile
+    }
+}

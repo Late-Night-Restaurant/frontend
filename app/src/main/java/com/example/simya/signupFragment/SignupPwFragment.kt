@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.simya.R
 import com.example.simya.databinding.FragmentSignupPwBinding
@@ -21,6 +22,7 @@ class SignupPwFragment: Fragment() {
     ): View? {
         binding = FragmentSignupPwBinding.inflate(layoutInflater)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,4 +50,7 @@ class SignupPwFragment: Fragment() {
             false
         }
     }
+
+
 }
+
