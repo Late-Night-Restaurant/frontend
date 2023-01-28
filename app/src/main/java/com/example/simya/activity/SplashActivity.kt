@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.example.simya.databinding.ActivityMainBinding
 import com.example.simya.databinding.ActivitySplashBinding
+import com.example.simya.sharedpreferences.Shared
 
 class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplashBinding
@@ -31,6 +33,7 @@ class SplashActivity : AppCompatActivity() {
     **  인트로
     **  타이틀+ 인트로만 남김 */
     private fun init() {
+         onShared()
         Handler(Looper.getMainLooper()).postDelayed(
             Runnable { sequenceOne() }, 1000
         )
@@ -123,5 +126,9 @@ class SplashActivity : AppCompatActivity() {
         val intent = Intent(this,LoginActivity::class.java)
         startActivity(intent)
         finish()
+    }
+    private fun onShared(){
+        Toast.makeText(this,Shared.prefs.getString("accessToken",""),Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,Shared.prefs.getString("refreshToken",""),Toast.LENGTH_SHORT).show()
     }
 }

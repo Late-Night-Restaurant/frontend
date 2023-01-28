@@ -13,7 +13,7 @@ object RetrofitBuilder {
     fun getInstnace(): Retrofit {
         if (instance == null) {
             instance = Retrofit.Builder()
-                .baseUrl("${BuildConfig.SIMYA_SERVER_URL}")
+                .baseUrl("http://10.0.2.2:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }

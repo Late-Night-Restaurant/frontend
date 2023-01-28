@@ -5,15 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.simya.Constants
 import com.example.simya.R
 import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.server.account.AccountResponse
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
 import com.example.simya.server.account.AccountDTO
+import com.example.simya.sharedpreferences.Shared
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,8 +52,9 @@ class EmailLoginActivity : AppCompatActivity() {
         binding.btnEmailSigninLogin.setOnClickListener {
             if(checkEmail()&&checkPassword()){
                 email = binding.tietEmailSigninInputEmail.text.toString()
-                password = binding.tietEmailSigninInputPassword.toString()
-                onLogin(AccountDTO(email, password))
+                password = binding.tietEmailSigninInputPassword.text.toString()
+                onSignIn(AccountDTO(email,password))
+
             }
         }
 
@@ -57,10 +62,13 @@ class EmailLoginActivity : AppCompatActivity() {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
-
     }
 
-    private fun onLogin(user: AccountDTO){
+    private fun moveToHome(){
+        val intent = Intent(this,HomeMainActivity::class.java)
+        startActivity(intent)
+    }
+    private fun onSignIn(user: AccountDTO){
         val retrofit = RetrofitBuilder.getInstnace()
         val API = retrofit.create(RetrofitService::class.java)
         API.onLoginSubmit(user).enqueue(object: Callback<AccountResponse>{
@@ -68,11 +76,23 @@ class EmailLoginActivity : AppCompatActivity() {
                 call: Call<AccountResponse>,
                 response: Response<AccountResponse>
             ) {
-                TODO("Not yet implemented")
+                if(response.code()==Constants.OK){
+                    Log.d("Reponse check",response.toString())
+                    Log.d("Reponse check",response.message().toString())
+                    Log.d("Reponse check",response.code().toString())
+                    Log.d("Reponse check",response.body().toString())
+                    Shared.prefs.setString("accessToken",response.body()!!.getAccessToken())
+                    Shared.prefs.setString("refreshToken",response.body()!!.getRefreshToken())
+                    moveToHome()
+                }
+                Toast.makeText(this@EmailLoginActivity,response.message(),Toast.LENGTH_SHORT).show()
+
             }
 
             override fun onFailure(call: Call<AccountResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Toast.makeText(this@EmailLoginActivity,t.toString(),Toast.LENGTH_SHORT).show()
+
+                Log.d("Reponse check",t.toString())
             }
         })
     }
