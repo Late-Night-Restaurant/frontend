@@ -2,10 +2,13 @@ package com.example.simya.activity
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -130,5 +133,9 @@ class SplashActivity : AppCompatActivity() {
     private fun onShared(){
         Toast.makeText(this,Shared.prefs.getString("accessToken",""),Toast.LENGTH_SHORT).show()
         Toast.makeText(this,Shared.prefs.getString("refreshToken",""),Toast.LENGTH_SHORT).show()
+    }
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        moveToHome()
+        return true
     }
 }

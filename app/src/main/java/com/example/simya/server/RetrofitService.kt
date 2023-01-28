@@ -10,7 +10,8 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface RetrofitService {
-    // 로그인 요청
+
+    // 폼 로그인
     @Headers("Content-Type: application/json")
     @POST("/simya/form-login")
     fun onLoginSubmit(
