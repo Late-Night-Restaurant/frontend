@@ -109,7 +109,7 @@
                 android:layout_width="0dp"
                 android:layout_height="104dp"
                 android:layout_columnWeight="1"
-                android:text=" 취미"
+                android:text="취미"
                 android:gravity="bottom"
                 android:paddingLeft="8dp"
                 android:background="@drawable/low_radius_border_highlight"

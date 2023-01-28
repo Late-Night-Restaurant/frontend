@@ -26,8 +26,13 @@ object Constants {
     const val FAILED_JWT_IN_ACCESS = 500 // 토근을 헤더에 넣지 못한 경우
 
 
-
     // INTENT STRING CODE
-    const val BORDER_MAIN_MENU ="borderMainMenu"
+    const val BORDER_MAIN_MENU = "borderMainMenu"
     const val PROFILE_ID = "profileId"
+    const val MAIN_MENU_LOVE = "사랑"
+    const val MAIN_MENU_FAMILY = "가족"
+    const val MAIN_MENU_RELATIONSHIP = "인간관계"
+    const val MAIN_MENU_STRESS = "스트레스"
+    const val MAIN_MENU_HOBBY = "취미"
+    const val MAIN_MENU_CULTURE = "문화 생활"
 }

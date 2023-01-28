@@ -40,6 +40,7 @@ class CreateMyStoryMainMenuActivity : AppCompatActivity(), View.OnClickListener 
     private fun moveToSetBorder() {
         val profileId = intent.getStringExtra(PROFILE_ID)
         if (binding.btnMainMenuNext.isEnabled) {
+            Log.d("hold btn text",holdBtn!!.text.toString())
             val intent = Intent(this, CreateMyStoryBorderActivity::class.java)
             intent.putExtra(PROFILE_ID,profileId)
             intent.putExtra(BORDER_MAIN_MENU, holdBtn!!.text.toString())

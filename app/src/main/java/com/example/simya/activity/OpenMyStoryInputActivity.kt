@@ -24,13 +24,14 @@ class OpenMyStoryInputActivity : AppCompatActivity() {
     private fun init(){
         binding.included.tvDefaultLayoutTitle.text = "내 이야기 집 오픈 준비하기"
         binding.btnMyStoryOpen.setOnClickListener {
-            openMyStory()
+            moveMyStory()
         }
         binding.etMyStoryOpenInputMenuIntro.addTextChangedListener(textWatcher)
         binding.etMyStoryOpenInputPerson.addTextChangedListener(textWatcher)
         binding.etMyStoryOpenInputMenu.addTextChangedListener(textWatcher)
     }
-    private fun openMyStory(){
+
+    private fun moveMyStory(){
         if(binding.btnMyStoryOpen.isEnabled){
             val intent = Intent(this,ChatActivity::class.java)
             startActivity(intent)
