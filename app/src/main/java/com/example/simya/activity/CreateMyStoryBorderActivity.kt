@@ -31,7 +31,7 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
     }
     private lateinit var textWatcher: TextWatcher
     private val retrofit by lazy {
-        RetrofitBuilder.getInstnace()
+       RetrofitBuilder.getInstnace()
     }
     private val simyaApi by lazy{
         retrofit.create(RetrofitService::class.java)
@@ -62,7 +62,7 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
         }
     }
 
-    private fun setBorderData(): CreateStoryDTO{
+    private fun setBorderData(): CreateStoryDTO {
         var profileId = intent.getStringExtra(PROFILE_ID)!!.toLong()
         var mainMenu = intent.getStringExtra(BORDER_MAIN_MENU)
         var imageUrl = "R.drawable.test_simya"
@@ -71,11 +71,17 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
         Log.d("PROFILE_ID",profileId!!.toString())
         Log.d("BORDER_MAIN_MENU",mainMenu!!)
         Log.d("test background",imageUrl)
-        return CreateStoryDTO(profileId,mainMenu,imageUrl,houseName,comment)
+        return CreateStoryDTO(
+            profileId,
+            mainMenu,
+            imageUrl,
+            houseName,
+            comment
+        )
     }
 
     private fun onCreateStory(data: CreateStoryDTO) {
-        simyaApi.onCreateMyHouse(UserTokenData.getUserAccessToken(),UserTokenData.getUserRefreshToken(),data).enqueue(object : Callback<CreateStoryResponse> {
+        simyaApi.onCreateMyHouse(UserTokenData.getUserAccessToken(),UserTokenData.getUserRefreshToken(),data).enqueue(object : Callback<com.example.simya.server.story.CreateStoryResponse> {
             override fun onResponse(
                 call: Call<CreateStoryResponse>,
                 response: Response<CreateStoryResponse>

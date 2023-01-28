@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +12,30 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.simya.Constants.OK
 import com.example.simya.R
 import com.example.simya.activity.CreateMyStoryActivity
+import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.FragmentHomeMyStoryMainBinding
+import com.example.simya.server.RetrofitBuilder
+import com.example.simya.server.RetrofitService
+import com.example.simya.server.story.LoadMyStoryResponse
 import kotlinx.coroutines.android.HandlerDispatcher
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MyStoryFragment: Fragment() {
     private lateinit var binding: FragmentHomeMyStoryMainBinding
     private var defaultViewType = R.drawable.ic_box_4
     private lateinit var uiHandler: Handler
+    private val retrofit by lazy {
+        RetrofitBuilder.getInstnace()
+    }
+    private val simyaApi by lazy{
+        retrofit.create(RetrofitService::class.java)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
