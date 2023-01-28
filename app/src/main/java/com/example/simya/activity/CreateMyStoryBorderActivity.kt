@@ -11,24 +11,36 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.example.simya.Constants.BORDER_MAIN_MENU
+import com.example.simya.Constants.OK
 import com.example.simya.Constants.PROFILE_ID
 import com.example.simya.R
+import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.ActivityStoryCreateBorderBinding
+import com.example.simya.server.RetrofitBuilder
+import com.example.simya.server.RetrofitService
 import com.example.simya.server.story.CreateStoryDTO
+import com.example.simya.server.story.CreateStoryResponse
 import com.example.simya.testData.BorderData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CreateMyStoryBorderActivity : AppCompatActivity() {
     private val binding: ActivityStoryCreateBorderBinding by lazy {
         ActivityStoryCreateBorderBinding.inflate(layoutInflater)
     }
     private lateinit var textWatcher: TextWatcher
-
+    private val retrofit by lazy {
+        RetrofitBuilder.getInstnace()
+    }
+    private val simyaApi by lazy{
+        retrofit.create(RetrofitService::class.java)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initTextWatcher()
         init()
-
     }
 
     private fun init() {
@@ -45,12 +57,12 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
             binding.ibMyStoryCreateBorder.setBackgroundResource(R.drawable.test_simya)
         }
         binding.btnMyStoryCreateBorderNext.setOnClickListener {
-//            moveToStoryMain()
+            onCreateStory(setBorderData())
             // 서버에 전송 데이터 전송해서 이야기집 생성
         }
     }
-    private fun setBorderData(): CreateStoryDTO{
 
+    private fun setBorderData(): CreateStoryDTO{
         var profileId = intent.getStringExtra(PROFILE_ID)!!.toLong()
         var mainMenu = intent.getStringExtra(BORDER_MAIN_MENU)
         var imageUrl = "R.drawable.test_simya"
@@ -59,10 +71,24 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
         Log.d("PROFILE_ID",profileId!!.toString())
         Log.d("BORDER_MAIN_MENU",mainMenu!!)
         Log.d("test background",imageUrl)
-
         return CreateStoryDTO(profileId,mainMenu,imageUrl,houseName,comment)
     }
 
+    private fun onCreateStory(data: CreateStoryDTO) {
+        simyaApi.onCreateMyHouse(UserTokenData.getUserAccessToken(),UserTokenData.getUserRefreshToken(),data).enqueue(object : Callback<CreateStoryResponse> {
+            override fun onResponse(
+                call: Call<CreateStoryResponse>,
+                response: Response<CreateStoryResponse>
+            ) {
+                if(response.code() == OK){
+                    Log.d("Response",response.body().toString())
+                }
+            }
+            override fun onFailure(call: Call<CreateStoryResponse>, t: Throwable) {
+                Log.d("Response",t.toString())
+            }
+        })
+    }
 
 //    private fun moveToStoryMain() {
 //        if(binding.btnMyStoryCreateBorderNext.isEnabled){
@@ -72,7 +98,6 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
 //            startActivity(intent)
 //        }
 //    }
-
 
     private fun initTextWatcher() {
         textWatcher = object : TextWatcher {
@@ -95,7 +120,6 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
                     binding.btnMyStoryCreateBorderNext.setTextColor(application.resources.getColor(R.color.Gray_10))
                 }
             }
-
             override fun afterTextChanged(s: Editable) {}
         }
     }

@@ -23,6 +23,7 @@ import com.example.simya.sharedpreferences.Shared
 
 class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplashBinding
+    private val splashHandler = Handler(Looper.getMainLooper())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
@@ -41,28 +42,29 @@ class SplashActivity : AppCompatActivity() {
     **  타이틀+ 인트로만 남김 */
     private fun init() {
 
-        Handler(Looper.getMainLooper()).postDelayed(
+    splashHandler.postDelayed(
             Runnable { sequenceOne() }, 1000
         )
-        Handler(Looper.getMainLooper()).postDelayed(
+    splashHandler.postDelayed(
             Runnable { sequenceTwo() }, 3000
+
         )
-        Handler(Looper.getMainLooper()).postDelayed(
+    splashHandler.postDelayed(
             Runnable { sequenceThree() }, 5000
         )
-        Handler(Looper.getMainLooper()).postDelayed(
+    splashHandler.postDelayed(
             Runnable { sequenceFour() }, 7000
         )
-        Handler(Looper.getMainLooper()).postDelayed(
+    splashHandler.postDelayed(
             Runnable { sequenceFive() }, 9000
         )
-        Handler(Looper.getMainLooper()).postDelayed(
+    splashHandler.postDelayed(
             Runnable { sequenceSix() }, 11000
         )
-        Handler(Looper.getMainLooper()).postDelayed(
+    splashHandler.postDelayed(
             Runnable { sequenceLast() }, 13000
         )
-        Handler(Looper.getMainLooper()).postDelayed(
+    splashHandler.postDelayed(
             Runnable { moveToHome() }, 16000
         )
     }
@@ -142,6 +144,7 @@ class SplashActivity : AppCompatActivity() {
 
     // 테스트용 터치 이벤트
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        splashHandler.removeCallbacksAndMessages(null)
         moveToHome()
         return true
     }

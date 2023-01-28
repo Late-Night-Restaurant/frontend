@@ -63,16 +63,13 @@ class EmailLoginActivity : AppCompatActivity() {
                 email = binding.tietEmailSigninInputEmail.text.toString()
                 password = binding.tietEmailSigninInputPassword.text.toString()
                 onSignIn(AccountDTO(email,password))
-
             }
         }
-
         binding.btnSigninEmailSignup.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
     }
-
     private fun moveToHome(){
         val intent = Intent(this,HomeMainActivity::class.java)
         startActivity(intent)
@@ -83,21 +80,17 @@ class EmailLoginActivity : AppCompatActivity() {
                 call: Call<AccountResponse>,
                 response: Response<AccountResponse>
             ) {
-
                 if(response.code()==OK){
-
-                    Log.d("Reponse check",response.message().toString())
-                    Log.d("Reponse check",response.code().toString())
-                    Log.d("Reponse check",response.body().toString())
+                    Log.d("Response check",response.message().toString())
+                    Log.d("Response check",response.code().toString())
+                    Log.d("Response check",response.body().toString())
                     Shared.prefs.setString("accessToken",response.body()!!.getAccessToken())
                     Shared.prefs.setString("refreshToken",response.body()!!.getRefreshToken())
                     onShared()
                     moveToHome()
                 }
                 Toast.makeText(this@EmailLoginActivity,response.message(),Toast.LENGTH_SHORT).show()
-
             }
-
             override fun onFailure(call: Call<AccountResponse>, t: Throwable) {
                 Toast.makeText(this@EmailLoginActivity,t.toString(),Toast.LENGTH_SHORT).show()
 
@@ -156,7 +149,6 @@ class EmailLoginActivity : AppCompatActivity() {
                     binding.btnEmailSigninLogin.setTextColor(application.resources.getColor(R.color.Gray_10))
                 }
             }
-
             override fun afterTextChanged(s: Editable) {
             }
         }

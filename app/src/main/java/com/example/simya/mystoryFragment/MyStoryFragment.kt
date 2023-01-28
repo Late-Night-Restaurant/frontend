@@ -2,6 +2,8 @@ package com.example.simya.mystoryFragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.R
 import com.example.simya.activity.CreateMyStoryActivity
 import com.example.simya.databinding.FragmentHomeMyStoryMainBinding
+import kotlinx.coroutines.android.HandlerDispatcher
 
 
 class MyStoryFragment: Fragment() {
     private lateinit var binding: FragmentHomeMyStoryMainBinding
     private var defaultViewType = R.drawable.ic_box_4
+    private lateinit var uiHandler: Handler
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,6 +69,7 @@ class MyStoryFragment: Fragment() {
 
         }
     }
+
     private fun moveToCreateStroy(){
         val intent = Intent(this.context,CreateMyStoryActivity::class.java)
         startActivity(intent)
