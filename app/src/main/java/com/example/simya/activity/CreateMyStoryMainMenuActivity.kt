@@ -23,7 +23,6 @@ class CreateMyStoryMainMenuActivity : AppCompatActivity(), View.OnClickListener 
 
     private fun init() {
         binding.included.tvDefaultLayoutTitle.text = "이야기집 생성"
-
         binding.ibMyStoryCreateMainMenuInfo.setOnClickListener {
             binding.tvMyStoryCreateMainInfo.isInvisible = false
         }
@@ -31,11 +30,8 @@ class CreateMyStoryMainMenuActivity : AppCompatActivity(), View.OnClickListener 
         binding.btnMainMenuNext.setOnClickListener {
             moveToSetBorder()
         }
-
-
         // Single Select
         buttonSingleSelected()
-
     }
 
     private fun moveToSetBorder() {
