@@ -54,6 +54,7 @@ class EmailLoginActivity : AppCompatActivity() {
                 email = binding.tietEmailSigninInputEmail.text.toString()
                 password = binding.tietEmailSigninInputPassword.text.toString()
                 onSignIn(AccountDTO(email,password))
+
             }
         }
 
@@ -62,6 +63,7 @@ class EmailLoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     private fun moveToHome(){
         val intent = Intent(this,HomeMainActivity::class.java)
         startActivity(intent)
