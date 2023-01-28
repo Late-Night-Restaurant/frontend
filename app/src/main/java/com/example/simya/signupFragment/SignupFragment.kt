@@ -2,6 +2,8 @@ package com.example.simya.signupFragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +20,7 @@ import com.example.simya.databinding.FragmentSignupEmailBinding
 class SignupFragment: Fragment() {
     private lateinit var binding: FragmentSignupAgreeBinding
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,34 +29,27 @@ class SignupFragment: Fragment() {
         binding = FragmentSignupAgreeBinding.inflate(layoutInflater)
         return binding.root
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         agreeCheck()
 
         binding.btnSignupNext.setOnClickListener {
             if (agreeCheck()) {
-                binding.btnSignupNext.isEnabled = true
-                binding.btnSignupNext.isClickable = true
-                binding.btnSignupNext.setBackgroundResource(R.drawable.low_radius_button_on)
-                binding.btnSignupNext.setTextColor(resources.getColor(R.color.Gray_03))
 
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fm_signup, SignupEmailFragment())
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
             } else {
-                binding.btnSignupNext.isEnabled = false
-                binding.btnSignupNext.isClickable = false
-                binding.btnSignupNext.setBackgroundResource(R.drawable.low_radius_button_off)
-                binding.btnSignupNext.setTextColor(resources.getColor(R.color.Gray_10))
+
                 Toast.makeText(this.activity, "동의하지 않았습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
-    
 
     private fun agreeCheck() : Boolean {
         val agreeAll = binding.cbSignupAgreeAll
@@ -82,5 +78,6 @@ class SignupFragment: Fragment() {
 
 
         return agreeAll.isChecked
+
     }
 }

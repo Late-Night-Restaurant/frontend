@@ -9,8 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import com.example.simya.Constants
 import com.example.simya.R
 import com.example.simya.databinding.FragmentSignupProfileBinding
@@ -30,12 +33,28 @@ class SignupProfileFragment: Fragment() {
     private lateinit var binding: FragmentSignupProfileBinding
     private val nicknameValidation = "^[가-힣]{1,8}$"
     private val commentValidation = "^[가-힣a-zA-Z]{1,24}$"
-    private lateinit var email: String
-    private lateinit var password: String
+    private lateinit var emailData: String
+    private lateinit var pwData: String
     private lateinit var profile: ProfileDTO
-    private lateinit var comment: String
-    private lateinit var nickname: String
     private lateinit var textWatcher: TextWatcher
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // email프래그먼트에서 email 받아오기
+        setFragmentResultListener("email") { _, bundle ->
+            emailData = bundle.getString("bundleKeyEmail").toString()
+            Toast.makeText(this.context, emailData, Toast.LENGTH_SHORT).show()
+        }
+        // pw프래그먼트에서 pw 받아오기
+        setFragmentResultListener("pw") { _, bundle ->
+            pwData = bundle.getString("bundleKeyPw").toString()
+            Toast.makeText(this.context, pwData, Toast.LENGTH_SHORT).show()
+        }
+
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,11 +79,20 @@ class SignupProfileFragment: Fragment() {
         binding.tietSigninInputComment.addTextChangedListener(textWatcher)
 
         binding.btnSignupNext.setOnClickListener {
-            onSignUp(SignupDTO(email, password, profile))
+            // onSignUp(SignupDTO(emailData, pwData, profile))
             if (nicknameCheck() && commentCheck()){
-                nickname = binding.tietSigninInputNickname.text.toString()
-                comment = binding.tietSigninInputComment.text.toString()
+                val nicknameData = binding.tietSigninInputNickname.text.toString()
+                val commentData = binding.tietSigninInputComment.text.toString()
 
+                setFragmentResult("pw", bundleOf("bundleKeyPw" to pwData))
+                setFragmentResult("email", bundleOf("bundleKeyEmail" to emailData))
+                setFragmentResult("nickname", bundleOf("bundleKeyNickname" to nicknameData))
+                setFragmentResult("comment", bundleOf("bundleKeyComment" to commentData))
+
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fm_signup, SignupFinFragment())
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit()
 
             } else {
                 Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
@@ -89,8 +117,9 @@ class SignupProfileFragment: Fragment() {
     private fun commentCheck() : Boolean {
         var comment = binding.tietSigninInputComment.text.toString().trim()
         val pattern = Pattern.matches(commentValidation, comment)
+        var commentLength = binding.tietSigninInputComment.text!!.length
 
-        return if (pattern) {
+        return if (pattern && commentLength in 1..24) {
             binding.tilSigninInputComment.error = null
             true
         } else {
@@ -122,7 +151,7 @@ class SignupProfileFragment: Fragment() {
                     Log.d("Response check", response.message().toString())
                     Log.d("Response check", response.code().toString())
                     Log.d("Response check", response.body().toString())
-                    moveToFin()
+
                 }
                 Toast.makeText(this@SignupProfileFragment.context, response.message(), Toast.LENGTH_SHORT).show()
             }

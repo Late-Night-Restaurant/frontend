@@ -12,9 +12,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.*
 import com.example.simya.R
 import com.example.simya.activity.SignupActivity
 import com.example.simya.databinding.ActivitySignupBinding
@@ -32,7 +30,13 @@ class SignupEmailFragment: Fragment() {
     private lateinit var binding: FragmentSignupEmailBinding
     private val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     private lateinit var textWatcher: TextWatcher
+    private lateinit var bindingMain: ActivitySignupBinding
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,9 +45,6 @@ class SignupEmailFragment: Fragment() {
     ): View? {
         binding = FragmentSignupEmailBinding.inflate(layoutInflater)
         return binding.root
-
-
-
 
     }
 
@@ -56,6 +57,11 @@ class SignupEmailFragment: Fragment() {
 
         binding.btnSignupNext.setOnClickListener {
             if (emailCheck()) {
+                // pw프래그먼트로 데이터 전달
+                val email = binding.tietEmailSignupInputEmail.text.toString()
+                setFragmentResult("email", bundleOf("bundleKeyEmail" to email))
+
+                // 프래그먼트 전환
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fm_signup, SignupPwFragment())
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
