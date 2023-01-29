@@ -1,7 +1,6 @@
 package com.example.simya.signupFragment
 
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Nickname
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -9,21 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.ViewModelProvider
 import com.example.simya.Constants
 import com.example.simya.R
 import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
-import com.example.simya.server.account.AccountResponse
 import com.example.simya.server.account.ProfileDTO
 import com.example.simya.server.account.SignupDTO
 import com.example.simya.server.account.SignupResponse
-import com.example.simya.sharedpreferences.Shared
+import com.example.simya.signUpViewModel.SignUpViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +34,7 @@ class SignupProfileFragment: Fragment() {
     private lateinit var pwData: String
     private lateinit var profile: ProfileDTO
     private lateinit var textWatcher: TextWatcher
+    private lateinit var viewModel: SignUpViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,14 +60,35 @@ class SignupProfileFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignupProfileBinding.inflate(layoutInflater)
+
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())
+            .get(SignUpViewModel::class.java)
+
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initTW()
-        init()
+
+        binding.btnSignupNext.setOnClickListener {
+            // onSignUp(SignupDTO(emailData, pwData, profile))
+            if (nicknameCheck() && commentCheck()){
+                val nicknameData = binding.tietSigninInputNickname.text.toString()
+                val commentData = binding.tietSigninInputComment.text.toString()
+
+                Toast.makeText(this.context, nicknameData, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, commentData, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, pwData, Toast.LENGTH_SHORT).show()
+
+                viewModel.pbValue.value = 100
+
+                moveToFin()
+
+            } else {
+                Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun init() {
@@ -78,26 +97,6 @@ class SignupProfileFragment: Fragment() {
         binding.tietSigninInputNickname.addTextChangedListener(textWatcher)
         binding.tietSigninInputComment.addTextChangedListener(textWatcher)
 
-        binding.btnSignupNext.setOnClickListener {
-            // onSignUp(SignupDTO(emailData, pwData, profile))
-            if (nicknameCheck() && commentCheck()){
-                val nicknameData = binding.tietSigninInputNickname.text.toString()
-                val commentData = binding.tietSigninInputComment.text.toString()
-
-                setFragmentResult("pw", bundleOf("bundleKeyPw" to pwData))
-                setFragmentResult("email", bundleOf("bundleKeyEmail" to emailData))
-                setFragmentResult("nickname", bundleOf("bundleKeyNickname" to nicknameData))
-                setFragmentResult("comment", bundleOf("bundleKeyComment" to commentData))
-
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fm_signup, SignupFinFragment())
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
-
-            } else {
-                Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
-            }
-        }
 
     }
 

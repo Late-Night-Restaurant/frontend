@@ -1,25 +1,20 @@
 package com.example.simya.signupFragment
 
-import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
-import com.example.simya.activity.SignupActivity
-import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupAgreeBinding
-import com.example.simya.databinding.FragmentSignupEmailBinding
+import com.example.simya.signUpViewModel.SignUpViewModel
 
-class SignupFragment: Fragment() {
+class SignupAgreeFragment: Fragment() {
     private lateinit var binding: FragmentSignupAgreeBinding
-
+    private lateinit var viewModel: SignUpViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +22,11 @@ class SignupFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignupAgreeBinding.inflate(layoutInflater)
+
+        // ViewModel으로 Activiy와 통신
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())
+            .get(SignUpViewModel::class.java)
+
         return binding.root
 
     }
@@ -37,7 +37,10 @@ class SignupFragment: Fragment() {
         agreeCheck()
 
         binding.btnSignupNext.setOnClickListener {
+
             if (agreeCheck()) {
+                // progress bar 값 변경
+                viewModel.pbValue.value = 25
 
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fm_signup, SignupEmailFragment())
