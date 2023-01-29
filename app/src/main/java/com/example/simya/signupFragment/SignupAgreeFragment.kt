@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
+import com.example.simya.activity.SignupActivity
+import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupAgreeBinding
 import com.example.simya.signUpViewModel.SignUpViewModel
 

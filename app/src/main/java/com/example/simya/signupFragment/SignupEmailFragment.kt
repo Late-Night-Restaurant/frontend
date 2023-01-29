@@ -24,6 +24,8 @@ class SignupEmailFragment: Fragment() {
     private lateinit var viewModel: SignUpViewModel
 
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

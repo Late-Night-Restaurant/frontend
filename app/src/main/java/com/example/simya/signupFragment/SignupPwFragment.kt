@@ -1,6 +1,7 @@
 package com.example.simya.signupFragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
 import com.example.simya.databinding.FragmentSignupPwBinding
+import com.example.simya.server.RetrofitBuilder
+import com.example.simya.server.RetrofitService
 import com.example.simya.signUpViewModel.SignUpViewModel
 import java.util.regex.Pattern
 
