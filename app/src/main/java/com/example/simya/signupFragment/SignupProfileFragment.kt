@@ -68,8 +68,25 @@ class SignupProfileFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initTW()
-        init()
+
+
+
+        binding.btnSignupNext.setOnClickListener {
+            // onSignUp(SignupDTO(emailData, pwData, profile))
+            if (nicknameCheck() && commentCheck()){
+                val nicknameData = binding.tietSigninInputNickname.text.toString()
+                val commentData = binding.tietSigninInputComment.text.toString()
+
+                Toast.makeText(this.context, nicknameData, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, commentData, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, pwData, Toast.LENGTH_SHORT).show()
+
+                moveToFin()
+
+            } else {
+                Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun init() {
@@ -78,26 +95,6 @@ class SignupProfileFragment: Fragment() {
         binding.tietSigninInputNickname.addTextChangedListener(textWatcher)
         binding.tietSigninInputComment.addTextChangedListener(textWatcher)
 
-        binding.btnSignupNext.setOnClickListener {
-            // onSignUp(SignupDTO(emailData, pwData, profile))
-            if (nicknameCheck() && commentCheck()){
-                val nicknameData = binding.tietSigninInputNickname.text.toString()
-                val commentData = binding.tietSigninInputComment.text.toString()
-
-                setFragmentResult("pw", bundleOf("bundleKeyPw" to pwData))
-                setFragmentResult("email", bundleOf("bundleKeyEmail" to emailData))
-                setFragmentResult("nickname", bundleOf("bundleKeyNickname" to nicknameData))
-                setFragmentResult("comment", bundleOf("bundleKeyComment" to commentData))
-
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fm_signup, SignupFinFragment())
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
-
-            } else {
-                Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
-            }
-        }
 
     }
 

@@ -48,6 +48,7 @@ class SignupPwFragment: Fragment() {
             if (pwCheck() && rePwCheck()) {
                 // profile 프래그먼트 데이터 전달
                 val pwData = binding.tietEmailSigninInputPw.text.toString()
+                val emailData = emailData
                 setFragmentResult("pw", bundleOf("bundleKeyPw" to pwData))
                 setFragmentResult("email", bundleOf("bundleKeyEmail" to emailData))
 
