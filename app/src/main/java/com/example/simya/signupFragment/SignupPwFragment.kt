@@ -1,22 +1,22 @@
 package com.example.simya.signupFragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.*
+import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
 import com.example.simya.databinding.FragmentSignupPwBinding
-import com.example.simya.server.RetrofitBuilder
-import com.example.simya.server.RetrofitService
+import com.example.simya.signUpViewModel.SignUpViewModel
 import java.util.regex.Pattern
 
 class SignupPwFragment: Fragment() {
     private lateinit var binding: FragmentSignupPwBinding
     private val pwValidation = "^[a-zA-Z0-9]*\$"
+    private lateinit var viewModel: SignUpViewModel
 
     // 받아온 emailData 담아둘 변수
     private lateinit var emailData: String
@@ -37,6 +37,10 @@ class SignupPwFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignupPwBinding.inflate(layoutInflater)
+
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())
+            .get(SignUpViewModel::class.java)
+
         return binding.root
 
     }
@@ -51,6 +55,8 @@ class SignupPwFragment: Fragment() {
                 val emailData = emailData
                 setFragmentResult("pw", bundleOf("bundleKeyPw" to pwData))
                 setFragmentResult("email", bundleOf("bundleKeyEmail" to emailData))
+
+                viewModel.pbValue.value = 75
 
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fm_signup, SignupProfileFragment())

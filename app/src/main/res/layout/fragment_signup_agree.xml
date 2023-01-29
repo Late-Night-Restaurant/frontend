@@ -5,125 +5,138 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_signup_agree_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_signup_main_headline1"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="심야식당"
-        android:textColor="@color/Primary_01"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_signup_main_headline1"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="심야식당"
+            android:textColor="@color/Primary_01"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_signup_main_headline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:text="서비스 이용약관에"
-        android:textColor="@color/Gray_06"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_signup_main_headline1"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_signup_main_headline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:text="서비스 이용약관에"
+            android:textColor="@color/Gray_06"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_signup_main_headline1"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_signup_main_headline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:text="동의해주세요."
-        android:textColor="@color/Gray_06"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline1" />
+        <TextView
+            android:id="@+id/tv_signup_main_headline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="동의해주세요."
+            android:textColor="@color/Gray_06"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--    체크박스-->
 
-    <CheckBox
-        android:id="@+id/cb_signup_agree_all"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline3" />
+        app:layout_constraintTop_toBottomOf="@+id/cl_signup_agree_tv">
 
-    <TextView
-        android:id="@+id/cb_signup_tv_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="전체 약관에 동의합니다"
-        app:layout_constraintStart_toEndOf="@+id/cb_signup_agree_all"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline3" />
+        <CheckBox
+            android:id="@+id/cb_signup_agree_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/cb_signup_tv_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="112dp"
-        android:text="개인정보 처리방침"
-        app:layout_constraintStart_toEndOf="@+id/cb_signup_agree_info"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline3" />
+        <TextView
+            android:id="@+id/tv_signup_tv_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="전체 약관에 동의합니다"
+            app:layout_constraintStart_toEndOf="@+id/cb_signup_agree_all"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/cb_signup_tv_info2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="112dp"
-        android:text="(필수)"
-        android:textColor="@color/Primary_01"
-        app:layout_constraintStart_toEndOf="@+id/cb_signup_tv_info"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline3" />
+        <TextView
+            android:id="@+id/tv_signup_tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="개인정보 처리방침"
+            app:layout_constraintStart_toEndOf="@+id/cb_signup_agree_service"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_tv_all" />
 
-    <TextView
-        android:id="@+id/cb_signup_tv_service"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="72dp"
-        android:text="서비스 이용약관"
-        app:layout_constraintStart_toEndOf="@+id/cb_signup_agree_service"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline3" />
+        <TextView
+            android:id="@+id/tv_signup_tv_info2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="(필수)"
+            android:textColor="@color/Primary_01"
+            app:layout_constraintStart_toEndOf="@+id/tv_signup_tv_info"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_tv_all" />
 
-    <TextView
-        android:id="@+id/cb_signup_tv_service2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
-        android:text="(필수)"
-        android:textColor="@color/Primary_01"
-        app:layout_constraintStart_toEndOf="@+id/cb_signup_tv_service"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline3" />
+        <TextView
+            android:id="@+id/tv_signup_tv_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="서비스 이용약관"
+            app:layout_constraintStart_toEndOf="@+id/cb_signup_agree_info"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_tv_info" />
 
-    <CheckBox
-        android:id="@+id/cb_signup_agree_service"
-        android:layout_width="30dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline3" />
+        <TextView
+            android:id="@+id/tv_signup_tv_service2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="(필수)"
+            android:textColor="@color/Primary_01"
+            app:layout_constraintStart_toEndOf="@+id/tv_signup_tv_service"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_tv_info2" />
+
+        <CheckBox
+            android:id="@+id/cb_signup_agree_service"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_signup_agree_all"/>
 
 
-    <CheckBox
-        android:id="@+id/cb_signup_agree_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="104dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline3" />
+        <CheckBox
+            android:id="@+id/cb_signup_agree_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cb_signup_agree_service"/>
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--    다음 버튼-->
     <Button
