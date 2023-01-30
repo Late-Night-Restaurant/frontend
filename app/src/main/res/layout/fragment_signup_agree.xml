@@ -143,10 +143,9 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <!--    다음 버튼-->
     <Button
-        android:id="@+id/btn_signup_next"
+        android:id="@+id/btn_signup_next_agree"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

@@ -13,7 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
 import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupEmailBinding
+import com.example.simya.server.account.SignupDTO
 import com.example.simya.signUpViewModel.SignUpViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 class SignupEmailFragment: Fragment() {
@@ -22,8 +26,6 @@ class SignupEmailFragment: Fragment() {
     private lateinit var textWatcher: TextWatcher
     private lateinit var bindingMain: ActivitySignupBinding
     private lateinit var viewModel: SignUpViewModel
-
-
 
 
     override fun onCreateView(

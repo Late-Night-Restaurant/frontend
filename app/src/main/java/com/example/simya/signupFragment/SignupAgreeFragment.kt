@@ -19,6 +19,8 @@ class SignupAgreeFragment: Fragment() {
     private lateinit var binding: FragmentSignupAgreeBinding
     private lateinit var viewModel: SignUpViewModel
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,15 +38,18 @@ class SignupAgreeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btnSignupNextAgree.isEnabled = false
+        binding.btnSignupNextAgree.isClickable = false
+        binding.btnSignupNextAgree.setBackgroundResource(R.drawable.low_radius_button_off)
+        binding.btnSignupNextAgree.setTextColor(resources.getColor(R.color.Gray_10))
 
-        agreeCheck()
+        if (agreeCheck()){
 
-        binding.btnSignupNext.setOnClickListener {
+        }
+
+        binding.btnSignupNextAgree.setOnClickListener {
 
             if (agreeCheck()) {
-                // progress bar 값 변경
-                viewModel.pbValue.value = 25
-
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fm_signup, SignupEmailFragment())
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
@@ -57,6 +62,7 @@ class SignupAgreeFragment: Fragment() {
 
     }
 
+
     private fun agreeCheck() : Boolean {
         val agreeAll = binding.cbSignupAgreeAll
         val agreeService = binding.cbSignupAgreeService
@@ -67,23 +73,69 @@ class SignupAgreeFragment: Fragment() {
             if (agreeAll.isChecked) {
                 agreeService.isChecked = true
                 agreeInfo.isChecked = true
+                TrueButton()
             } else {
                 agreeService.isChecked = false
                 agreeInfo.isChecked = false
+                FalseButton()
             }
         }
 
         agreeInfo.setOnClickListener {
-            agreeAll.isChecked = agreeInfo.isChecked && agreeService.isChecked
+            if (agreeInfo.isChecked) {
+                if (agreeService.isChecked) {
+                    agreeAll.isChecked = true
+                    TrueButton()
+                } else {
+                    agreeAll.isChecked = false
+                    FalseButton()
+                }
+            }
+            if (!agreeInfo.isChecked) {
+                agreeAll.isChecked = false
+                FalseButton()
+            }
         }
 
         agreeService.setOnClickListener {
-            agreeAll.isChecked = agreeInfo.isChecked && agreeService.isChecked
+            if (agreeService.isChecked) {
+                if (agreeInfo.isChecked) {
+                    agreeAll.isChecked = true
+                    TrueButton()
+                } else {
+                    agreeAll.isChecked = false
+                    FalseButton()
+                }
+            }
+            if (!agreeService.isChecked) {
+                agreeAll.isChecked = false
+                FalseButton()
+            }
         }
 
 
 
         return agreeAll.isChecked
 
+    }
+
+    private fun TrueButton() {
+        binding.btnSignupNextAgree.isEnabled = true
+        binding.btnSignupNextAgree.isClickable = true
+        binding.btnSignupNextAgree.setBackgroundResource(R.drawable.low_radius_button_on)
+        binding.btnSignupNextAgree.setTextColor(resources.getColor(R.color.Gray_03))
+
+        // progress bar 값 변경
+        viewModel.pbValue.value = 25
+    }
+
+    private fun FalseButton() {
+        binding.btnSignupNextAgree.isEnabled = false
+        binding.btnSignupNextAgree.isClickable = false
+        binding.btnSignupNextAgree.setBackgroundResource(R.drawable.low_radius_button_off)
+        binding.btnSignupNextAgree.setTextColor(resources.getColor(R.color.Gray_10))
+
+        // progress bar 값 변경
+        viewModel.pbValue.value = 0
     }
 }

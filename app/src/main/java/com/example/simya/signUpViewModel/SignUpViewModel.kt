@@ -8,4 +8,6 @@ import com.example.simya.databinding.ActivitySignupBinding
 
 class SignUpViewModel: ViewModel() {
     var pbValue: MutableLiveData<Int> = MutableLiveData()
+
+
 }
