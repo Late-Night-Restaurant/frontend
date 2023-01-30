@@ -21,8 +21,8 @@ interface RetrofitService {
     @Headers("Content-Type: application/json")
     @POST("/simya/form-login")
     fun onLoginSubmit(
-        @Body login: com.example.simya.server.account.AccountDTO
-    ): Call<com.example.simya.server.account.AccountResponse>
+        @Body login: AccountDTO
+    ): Call<AccountResponse>
 
     // 내 모든 프로필 조회
     @Headers("Content-Type: application/json")
@@ -30,14 +30,14 @@ interface RetrofitService {
     fun getUserProfile(
         @Header("Access-Token") accessToken: String,
         @Header("Refresh-Token") refreshToken: String
-    ): Call<com.example.simya.server.profile.ProfileResponse>
+    ): Call<ProfileResponse>
 
     // 회원가입
     @Headers("Content-Type: application/json")
     @POST("/simya/form-signup")
     fun onSignUpSubmit(
-        @Body signup: com.example.simya.server.account.SignupDTO
-    ): Call<com.example.simya.server.account.SignupResponse>
+        @Body signup: SignupDTO
+    ): Call<SignupResponse>
 
     // 이야기 집 생성
     @Headers("Content-Type: application/json")
@@ -45,8 +45,8 @@ interface RetrofitService {
     fun onCreateMyHouse(
         @Header("Access-Token") accessToken: String,
         @Header("Refresh-Token") refreshToken: String,
-        @Body myStory: com.example.simya.server.story.CreateStoryDTO
-    ): Call<com.example.simya.server.story.CreateStoryResponse>
+        @Body myStory: CreateStoryDTO
+    ): Call<CreateStoryResponse>
 
     // 내 이야기 집 조회하기
     @Headers("Content-Type: application/json")
@@ -54,14 +54,14 @@ interface RetrofitService {
     fun getMyStory(
         @Header("Access-Token") accessToken: String,
         @Header("Refresh-Token") refreshToken: String
-    ): Call<com.example.simya.server.story.LoadMyStoryResponse>
+    ): Call<LoadMyStoryResponse>
 
     // 이야기 집 오픈
     @Headers("Content-Type: application/json")
     @PATCH("/simya/house/open")
     fun openStory(
-        @Body houseData: com.example.simya.server.story.OpenStoryDTO
-    ): Call<com.example.simya.server.story.OpenStoryResponse>
+        @Body houseData: OpenStoryDTO
+    ): Call<OpenStoryResponse>
 
 
 }

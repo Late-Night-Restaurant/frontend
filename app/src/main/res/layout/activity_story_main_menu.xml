@@ -81,7 +81,7 @@
                 android:gravity="bottom"
                 android:paddingLeft="8dp"
                 android:background="@drawable/low_radius_border_highlight"
-                android:layout_margin="4dp"/>
+                android:layout_margin="4dp" />
 
             <Button
                 android:id="@+id/btn_main_menu_relationship"

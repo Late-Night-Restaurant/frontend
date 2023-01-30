@@ -23,7 +23,7 @@ import retrofit2.Response
 
 class MyStoryGridFragment: Fragment() {
     private lateinit var binding: FragmentHomeMainGridBinding
-    private lateinit var dataList: ArrayList<TestDataBorder>
+    private lateinit var dataList: ArrayList<LoadMyStoryResult>
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
     }
@@ -43,13 +43,7 @@ class MyStoryGridFragment: Fragment() {
     }
     private fun init(){
         loadMyStory()
-        dataList = arrayListOf()
-        dataList.apply{
-        }
-        val dataGVAdapter = MyStoryGVAdater(dataList)
-        val gridLayoutManager = GridLayoutManager(this.context,2)
-        binding.gvHomeMainGrid.adapter = dataGVAdapter
-        binding.gvHomeMainGrid.layoutManager = gridLayoutManager
+
     }
     private fun loadMyStory(){
         simyaApi.getMyStory(UserTokenData.accessToken, UserTokenData.getUserRefreshToken()).enqueue(object:
@@ -60,11 +54,23 @@ class MyStoryGridFragment: Fragment() {
             ) {
                 if(response.code() == Constants.OK){
                     Log.d("Response",response.body().toString())
+                    activity!!.runOnUiThread{
+                        dataList = arrayListOf()
+                        dataList.apply{
+                            for(i:Int in 0 until response.body()!!.result.size){
+                                add(response.body()!!.result.get(i))
+                            }
+                        }
+                        val dataGVAdapter = MyStoryGVAdater(dataList)
+                        val gridLayoutManager = GridLayoutManager(activity,2)
+                        binding.gvHomeMainGrid.adapter = dataGVAdapter
+                        binding.gvHomeMainGrid.layoutManager = gridLayoutManager
+                    }
                 }
             }
 
             override fun onFailure(call: Call<LoadMyStoryResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d("ERROR",t.toString())
             }
 
         })
