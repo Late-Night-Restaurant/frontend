@@ -35,8 +35,7 @@ class SignupEmailFragment: Fragment() {
     ): View? {
         binding = FragmentSignupEmailBinding.inflate(layoutInflater)
 
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())
-            .get(SignUpViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[SignUpViewModel::class.java]
 
         return binding.root
 

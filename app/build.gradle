@@ -74,4 +74,6 @@ dependencies {
     // navigation component
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+    // stomp
+    implementation 'com.github.bishoybasily:stomp:2.0.5'
 }

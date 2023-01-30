@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.Constants
 import com.example.simya.R
 import com.example.simya.adpter.chatAdapter.ChatDrawerRVAdapter
@@ -21,6 +20,12 @@ import com.example.simya.databinding.ActivityDrawerChatBinding
 import com.example.simya.testData.TestChatData
 import com.example.simya.testData.TestChatDrawerProfileData
 import com.example.simya.testData.TestUserData
+import com.gmail.bishoybasily.stomp.lib.Event
+import com.gmail.bishoybasily.stomp.lib.StompClient
+import io.reactivex.disposables.Disposable
+import okhttp3.OkHttpClient
+import okhttp3.internal.http2.Header
+import org.json.JSONObject
 
 
 class ChatActivity : AppCompatActivity() {
@@ -32,17 +37,72 @@ class ChatActivity : AppCompatActivity() {
     lateinit var receiveUser2: TestUserData
     lateinit var receiveUser3: TestUserData
     lateinit var receiveUser4: TestUserData
+
+    //Stomp Test
+    val url = "ws://10.0.2.2:8080/ws-stomp"
+    lateinit var stompConnection: Disposable
+    lateinit var topic: Disposable
+    private val intervalMillis = 1000L
+    private val jsonObject = JSONObject()
+    private val responseObject = JSONObject()
+
+    //    private val client = OkHttpClient()
+    val client = OkHttpClient.Builder()
+        .addInterceptor {
+            it.proceed(
+                it.request().newBuilder().header(
+                    "Access-Token",
+                    "Access eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ"
+                )
+                    .header(
+                        "Refresh-Token",
+                        "Refresh eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzU2MjU5MDB9.HH-OuX4wmFaJrWdHiU9S8zTrEia3yrmeEFXkdLyt9yGdS32x5uclTrY4iSddcFZL6CfqomE4AiKgkieHNR_nLQ"
+                    ).build()
+            )
+        }
+        .build()
+
+    private val stomp = StompClient(client, intervalMillis)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDrawerChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        유저 체크
-//        userCheck()
+
         testUserCheck(Constants.CHAT_GUEST_CODE)
         init()
     }
 
     private fun init() {
+        stomp.url = "ws://10.0.2.2:8080/simya/ws-stomp/websocket"
+        stompConnection = stomp.connect().subscribe { it->
+            when (it.type) {
+                Event.Type.OPENED -> {
+                    Log.d("CONNECT", "OPENED")
+                    topic = stomp.join("/sub/simya/chat/room/1")
+                        .subscribe {
+                            Header(
+                                "Access-Token",
+                                "Access eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ"
+                            )
+                            Header(
+                                "Refresh-Token",
+                                "Refresh eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzU2Njk5OTR9.L2c57pF5h-wiRkUYHi9orVHhYltgOa7w-4m5a_jirckvsU6tNku-jbQtan1mVokgXqHD61JhYmQqyS7FvOX-yw"
+                            )
+                            Log.d("test ReceiveMessage",it)
+                        }
+                }
+                Event.Type.CLOSED -> {
+                    Log.d("CONNECT", "CLOSED")
+                }
+                Event.Type.ERROR -> {
+                    Log.d("CONNECT", "ERROR")
+                    Log.d("Client", client.toString())
+                }
+
+                else -> {}
+            }
+        }
+
         val drawerLayout = binding.dlChat
         binding.includedChat.includedDefault.tvDefaultChatTitle.text = "테스트용 이야기방"
         binding.includedChat.includedDefault.ibDefaultChatDrawer.setOnClickListener {
@@ -65,21 +125,46 @@ class ChatActivity : AppCompatActivity() {
         binding.includedChat.ibChatSend.setOnClickListener {
             if (binding.includedChat.etChatInput.text.isNotEmpty()) {
                 Log.d("send message", binding.includedChat.etChatInput.text.toString())
-                sendMessage(
-                    sendUser,
-                    binding.includedChat.etChatInput.text.toString(),
-                    dataRVAdapter
-                )
+
+                val msg = binding.includedChat.etChatInput.text.toString()
+                Log.d("msg",msg)
+                jsonObject.put("type", "TALK")
+                jsonObject.put("roomId", "1")
+                jsonObject.put("sender", "choi")
+                jsonObject.put("token", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ")
+                jsonObject.put("message",msg)
+                jsonObject.put("userCount", 1)
+                Log.d("JSON OBJECT MESSAGE",jsonObject.get("message").toString())
+                Log.d("Check JSON OBJECT",jsonObject.toString())
+                stomp.send(
+                    "/pub/simya/chat/androidMessage",
+                    jsonObject.toString()
+                ).subscribe {
+                    if(it) {
+                    }
+                }
+//                Handler(Looper.getMainLooper()).postDelayed(
+//                    Runnable {
+//
+//                    },1000
+//                )
+//                var messageMapping = HashMap<String,String>()
+//                messageMapping["token"] = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTA3NTAwfQ.kqePlFHP5Wj1tAmBBYtDnK0vdUGrTn5k-Xi38Zbyb8CT9-TmliL5-EaiZkP-fnmiBTnCuGNtLnG1FBf_j-p5Gg"
+
             }
+
+            testDrawerUserListed()
         }
-        testDrawerUserListed()
+
     }
-    private fun moveLastItem(layoutManager: LinearLayoutManager){
+
+    private fun moveLastItem(layoutManager: LinearLayoutManager) {
         Handler(Looper.getMainLooper()).postDelayed(
-            Runnable {layoutManager.scrollToPositionWithOffset(dataList.size-1,0)},300
+            Runnable { layoutManager.scrollToPositionWithOffset(dataList.size - 1, 0) }, 300
         )
     }
-    private fun testUserCheck(code: Int){
+
+    private fun testUserCheck(code: Int) {
         if (code == Constants.CHAT_MASTER_CODE) {
             // 주인장 캐스팅
         } else if (
@@ -87,6 +172,7 @@ class ChatActivity : AppCompatActivity() {
             setGuestType()
         }
     }
+
     private fun userCheck(user: TestUserData) {
         if (user.type == Constants.CHAT_MASTER_CODE) {
             // 주인장 캐스팅
@@ -95,22 +181,36 @@ class ChatActivity : AppCompatActivity() {
             setGuestType()
         }
     }
-    private fun setMasterType(){
+    private fun receiveMessage(name: String,){
+
+    }
+
+    private fun setMasterType() {
         // 딱히없음
     }
-    private fun setGuestType(){
+
+    private fun setGuestType() {
         binding.btnChatPause.isInvisible = true
         binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_heart)
     }
-    private fun sendMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
-        dataList.add(TestChatData(user, content, "오후 9시"))
-        binding.includedChat.rvChatList.apply {
-            adapter.notifyDataSetChanged()
-            scrollToPosition(dataList.size - 1)
-        }
-        binding.includedChat.etChatInput.text = null
-    }
 
+//    private fun sendMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
+//        dataList.add(TestChatData(user, content, "오후 9시"))
+//        binding.includedChat.rvChatList.apply {
+//            adapter.notifyDataSetChanged()
+//            scrollToPosition(dataList.size - 1)
+//        }
+//
+//        binding.includedChat.etChatInput.text = null
+//    }
+//    private fun receiveMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
+//        dataList.add(TestChatData(user, content, "오후 9시"))
+//        binding.includedChat.rvChatList.apply {
+//            adapter.notifyDataSetChanged()
+//            scrollToPosition(dataList.size - 1)
+//        }
+//
+//    }
     private fun testDrawerUserListed() {
         binding.btnDrawerIntro.setOnClickListener {
             val intent = Intent(this, StoryIntroActivity::class.java)
@@ -124,7 +224,7 @@ class ChatActivity : AppCompatActivity() {
             add(TestChatDrawerProfileData(receiveUser1.nick, receiveUser1.image))
             add(TestChatDrawerProfileData(receiveUser2.nick, receiveUser2.image))
             add(TestChatDrawerProfileData(receiveUser3.nick, receiveUser3.image))
-            add(TestChatDrawerProfileData(receiveUser4.nick,receiveUser4.image))
+            add(TestChatDrawerProfileData(receiveUser4.nick, receiveUser4.image))
         }
         val testDataRVAdapter = ChatDrawerRVAdapter(this, profileList)
         binding.rvChatProfileList.adapter = testDataRVAdapter
@@ -136,52 +236,54 @@ class ChatActivity : AppCompatActivity() {
         sendUser = TestUserData("초이", R.drawable.test_choi, Constants.CHAT_MASTER_CODE)
         receiveUser1 = TestUserData("푸", R.drawable.test_poo, Constants.CHAT_GUEST_CODE)
         receiveUser2 = TestUserData("왁", R.drawable.test_wak, Constants.CHAT_GUEST_CODE)
-        receiveUser3 = TestUserData("쭈니",R.drawable.test_jooni,Constants.CHAT_GUEST_CODE)
-        receiveUser4 = TestUserData("채니",R.drawable.test_chani,Constants.CHAT_GUEST_CODE)
+        receiveUser3 = TestUserData("쭈니", R.drawable.test_jooni, Constants.CHAT_GUEST_CODE)
+        receiveUser4 = TestUserData("채니", R.drawable.test_chani, Constants.CHAT_GUEST_CODE)
     }
+
     // 테스트용 채팅 데이터 입력
-    private fun setTestData(){
+    private fun setTestData() {
         dataList.apply {
-            add(TestChatData(sendUser, "오늘은 레이아웃 끝내는날", "오후 2시 22분"))
-            add(
-                TestChatData(
-                    receiveUser1,
-                    "내용이 굉장히 길면 어디까지 될까에 대한 궁금증 해결을 위한 예시용 텍스트, 최대 20까지 잡았으나 적용이 잘되나 확인이 필요하다",
-                    "오후 2시 24분"
-                )
-            )
-            add(TestChatData(sendUser, "앞으로 추가해야할 내용은", "오후 2시 42분"))
-            add(
-                TestChatData(
-                    receiveUser1,
-                    "리사이클러뷰에 싱글 셀렉션을 추가해서 각 아이템을 클릭했을때 효과를 부여해야함 간판 수정에서는 구현했지만 앞으로 멀티프로필이나 현재 구현한 내용도 확실한 구현이 아닌 임시방편용 느낌이 강하다 디자이너와 이야기를 해야한다.",
-                    "오후 2시 42분"
-                )
-            )
-            add(TestChatData(sendUser, "끝", "오후 3시 22분"))
-            add(TestChatData(sendUser, "중복 처리를 위한 확인용 텍스트", "오후 3시 40분"))
-            add(TestChatData(receiveUser2, "초이.. 성장에 이르렀는가..?", "오후 9시"))
-            add(TestChatData(sendUser, "오늘은 레이아웃 끝내는날", "오후 2시 22분"))
-            add(
-                TestChatData(
-                    receiveUser1,
-                    "내용이 굉장히 길면 어디까지 될까에 대한 궁금증 해결을 위한 예시용 텍스트, 최대 20까지 잡았으나 적용이 잘되나 확인이 필요하다",
-                    "오후 2시 24분"
-                )
-            )
-            add(TestChatData(sendUser, "앞으로 추가해야할 내용은", "오후 2시 42분"))
-            add(
-                TestChatData(
-                    receiveUser1,
-                    "리사이클러뷰에 싱글 셀렉션을 추가해서 각 아이템을 클릭했을때 효과를 부여해야함 간판 수정에서는 구현했지만 앞으로 멀티프로필이나 현재 구현한 내용도 확실한 구현이 아닌 임시방편용 느낌이 강하다 디자이너와 이야기를 해야한다.",
-                    "오후 2시 42분"
-                )
-            )
-            add(TestChatData(sendUser, "끝", "오후 3시 22분"))
-            add(TestChatData(sendUser, "중복 처리를 위한 확인용 텍스트", "오후 3시 40분"))
-            add(TestChatData(receiveUser2, "초이.. 성장에 이르렀는가..?", "오후 9시"))
+//            add(TestChatData(sendUser, "오늘은 레이아웃 끝내는날", "오후 2시 22분"))
+//            add(
+//                TestChatData(
+//                    receiveUser1,
+//                    "내용이 굉장히 길면 어디까지 될까에 대한 궁금증 해결을 위한 예시용 텍스트, 최대 20까지 잡았으나 적용이 잘되나 확인이 필요하다",
+//                    "오후 2시 24분"
+//                )
+//            )
+//            add(TestChatData(sendUser, "앞으로 추가해야할 내용은", "오후 2시 42분"))
+//            add(
+//                TestChatData(
+//                    receiveUser1,
+//                    "리사이클러뷰에 싱글 셀렉션을 추가해서 각 아이템을 클릭했을때 효과를 부여해야함 간판 수정에서는 구현했지만 앞으로 멀티프로필이나 현재 구현한 내용도 확실한 구현이 아닌 임시방편용 느낌이 강하다 디자이너와 이야기를 해야한다.",
+//                    "오후 2시 42분"
+//                )
+//            )
+//            add(TestChatData(sendUser, "끝", "오후 3시 22분"))
+//            add(TestChatData(sendUser, "중복 처리를 위한 확인용 텍스트", "오후 3시 40분"))
+//            add(TestChatData(receiveUser2, "초이.. 성장에 이르렀는가..?", "오후 9시"))
+//            add(TestChatData(sendUser, "오늘은 레이아웃 끝내는날", "오후 2시 22분"))
+//            add(
+//                TestChatData(
+//                    receiveUser1,
+//                    "내용이 굉장히 길면 어디까지 될까에 대한 궁금증 해결을 위한 예시용 텍스트, 최대 20까지 잡았으나 적용이 잘되나 확인이 필요하다",
+//                    "오후 2시 24분"
+//                )
+//            )
+//            add(TestChatData(sendUser, "앞으로 추가해야할 내용은", "오후 2시 42분"))
+//            add(
+//                TestChatData(
+//                    receiveUser1,
+//                    "리사이클러뷰에 싱글 셀렉션을 추가해서 각 아이템을 클릭했을때 효과를 부여해야함 간판 수정에서는 구현했지만 앞으로 멀티프로필이나 현재 구현한 내용도 확실한 구현이 아닌 임시방편용 느낌이 강하다 디자이너와 이야기를 해야한다.",
+//                    "오후 2시 42분"
+//                )
+//            )
+//            add(TestChatData(sendUser, "끝", "오후 3시 22분"))
+//            add(TestChatData(sendUser, "중복 처리를 위한 확인용 텍스트", "오후 3시 40분"))
+//            add(TestChatData(receiveUser2, "초이.. 성장에 이르렀는가..?", "오후 9시"))
         }
     }
+
     //키보드 내려감
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val imm: InputMethodManager =
