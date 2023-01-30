@@ -43,9 +43,7 @@ class SignupAgreeFragment: Fragment() {
         binding.btnSignupNextAgree.setBackgroundResource(R.drawable.low_radius_button_off)
         binding.btnSignupNextAgree.setTextColor(resources.getColor(R.color.Gray_10))
 
-        if (agreeCheck()){
-
-        }
+       if (agreeCheck()) { }
 
         binding.btnSignupNextAgree.setOnClickListener {
 

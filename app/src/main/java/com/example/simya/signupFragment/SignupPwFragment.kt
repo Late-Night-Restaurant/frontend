@@ -1,6 +1,8 @@
 package com.example.simya.signupFragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,7 @@ import java.util.regex.Pattern
 class SignupPwFragment: Fragment() {
     private lateinit var binding: FragmentSignupPwBinding
     private val pwValidation = "^[a-zA-Z0-9]*\$"
+    private lateinit var textWatcher: TextWatcher
     private lateinit var viewModel: SignUpViewModel
 
     // 받아온 emailData 담아둘 변수
@@ -50,8 +53,14 @@ class SignupPwFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        FalseButton()
+        initTW()
 
-        binding.btnSignupNext.setOnClickListener {
+        binding.tietEmailSigninInputPw.addTextChangedListener(textWatcher)
+        binding.tietEmailSigninInputRepw.addTextChangedListener(textWatcher)
+
+
+        binding.btnSignupNextPw.setOnClickListener {
             if (pwCheck() && rePwCheck()) {
                 // profile 프래그먼트 데이터 전달
                 val pwData = binding.tietEmailSigninInputPw.text.toString()
@@ -77,7 +86,7 @@ class SignupPwFragment: Fragment() {
         val pattern = Pattern.matches(pwValidation, pw)
 
         return if (pattern && pwLength in 8..12) {
-            binding.btnSignupNext.error = null
+            binding.btnSignupNextPw.error = null
             true
         } else {
             binding.tilEmailSigninInputPw.error = "영문과 숫자를 조합해서 입력해주세요.(8-12자)"
@@ -99,6 +108,43 @@ class SignupPwFragment: Fragment() {
 
     }
 
+    private fun initTW() {
+        textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                val pwInput = binding.tietEmailSigninInputPw!!.text.toString()
+                val rePwInput = binding.tietEmailSigninInputRepw!!.text.toString()
+
+                if (pwInput.isNotEmpty() && rePwInput.isNotEmpty()) {
+                    TrueButton()
+                }
+                if (pwInput.isEmpty() || rePwInput.isEmpty()) {
+                    FalseButton()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {
+            }
+        }
+    }
+
+
+    private fun TrueButton() {
+        binding.btnSignupNextPw.isEnabled = true
+        binding.btnSignupNextPw.isClickable = true
+        binding.btnSignupNextPw.setBackgroundResource(R.drawable.low_radius_button_on)
+        binding.btnSignupNextPw.setTextColor(resources.getColor(R.color.Gray_03))
+
+    }
+
+    private fun FalseButton() {
+        binding.btnSignupNextPw.isEnabled = false
+        binding.btnSignupNextPw.isClickable = false
+        binding.btnSignupNextPw.setBackgroundResource(R.drawable.low_radius_button_off)
+        binding.btnSignupNextPw.setTextColor(resources.getColor(R.color.Gray_10))
+
+    }
 
 }
 

@@ -70,8 +70,14 @@ class SignupProfileFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        FalseButton()
+        initTW()
 
-        binding.btnSignupNext.setOnClickListener {
+        binding.tietSignupInputNickname.addTextChangedListener(textWatcher)
+        binding.tietSignupInputComment.addTextChangedListener(textWatcher)
+
+
+        binding.btnSignupNextProfile.setOnClickListener {
             // onSignUp(SignupDTO(emailData, pwData, profile))
             if (nicknameCheck() && commentCheck()){
                 val nicknameData = binding.tietSignupInputNickname.text.toString()
@@ -89,15 +95,6 @@ class SignupProfileFragment: Fragment() {
                 Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private fun init() {
-        binding.btnSignupNext.isEnabled = false
-
-        binding.tietSignupInputNickname.addTextChangedListener(textWatcher)
-        binding.tietSignupInputComment.addTextChangedListener(textWatcher)
-
-
     }
 
     private fun nicknameCheck() : Boolean {
@@ -164,26 +161,40 @@ class SignupProfileFragment: Fragment() {
 
 
     private fun initTW() {
-        textWatcher = object : TextWatcher{
+        textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 val nicknameInput = binding.tietSignupInputNickname!!.text.toString()
                 val commentInput = binding.tietSignupInputComment!!.text.toString()
+
                 if (nicknameInput.isNotEmpty() && commentInput.isNotEmpty()) {
-                    binding.btnSignupNext.isEnabled = true
-                    binding.btnSignupNext.isClickable = true
-                    binding.btnSignupNext.setBackgroundResource(R.drawable.low_radius_button_on)
-                } else {
-                    binding.btnSignupNext.isEnabled = false
-                    binding.btnSignupNext.isClickable = false
-                    binding.btnSignupNext.setBackgroundResource(R.drawable.low_radius_button_off)
+                    TrueButton()
+                }
+                if (nicknameInput.isEmpty() || commentInput.isEmpty()) {
+                    FalseButton()
                 }
             }
 
             override fun afterTextChanged(s: Editable) {
             }
         }
+    }
+
+
+    private fun TrueButton() {
+        binding.btnSignupNextProfile.isEnabled = true
+        binding.btnSignupNextProfile.isClickable = true
+        binding.btnSignupNextProfile.setBackgroundResource(R.drawable.low_radius_button_on)
+        binding.btnSignupNextProfile.setTextColor(resources.getColor(R.color.Gray_03))
+
+    }
+
+    private fun FalseButton() {
+        binding.btnSignupNextProfile.isEnabled = false
+        binding.btnSignupNextProfile.isClickable = false
+        binding.btnSignupNextProfile.setBackgroundResource(R.drawable.low_radius_button_off)
+        binding.btnSignupNextProfile.setTextColor(resources.getColor(R.color.Gray_10))
+
     }
 }
