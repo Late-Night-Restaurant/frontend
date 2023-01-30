@@ -13,7 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
 import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupEmailBinding
+import com.example.simya.server.account.SignupDTO
 import com.example.simya.signUpViewModel.SignUpViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 class SignupEmailFragment: Fragment() {
@@ -42,10 +46,13 @@ class SignupEmailFragment: Fragment() {
     // 다시 상속받는
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initTW()
-        init()
+        FalseButton()
 
-        binding.btnSignupNext.setOnClickListener {
+        initTW()
+
+        binding.tietEmailSignupInputEmail.addTextChangedListener(textWatcher)
+
+        binding.btnSignupNextEmail.setOnClickListener {
             if (emailCheck()) {
                 // pw프래그먼트로 데이터 전달
                 val email = binding.tietEmailSignupInputEmail.text.toString()
@@ -64,13 +71,7 @@ class SignupEmailFragment: Fragment() {
     }
 
 
-    private fun init() {
-        binding.btnSignupNext.isEnabled = false
 
-        binding.tietEmailSignupInputEmail.addTextChangedListener(textWatcher)
-
-
-    }
 
     private fun emailCheck() : Boolean {
         var email = binding.tietEmailSignupInputEmail.text.toString().trim()
@@ -94,16 +95,10 @@ class SignupEmailFragment: Fragment() {
                 val emailInput = binding.tietEmailSignupInputEmail!!.text.toString()
 
                 if (emailInput.isNotEmpty()) {
-                    binding.btnSignupNext.isEnabled = true
-                    binding.btnSignupNext.isClickable = true
-                    binding.btnSignupNext.setBackgroundResource(R.drawable.low_radius_button_on)
-                    binding.btnSignupNext.setTextColor(resources.getColor(R.color.Gray_03))
+                    TrueButton()
                 }
                 if (emailInput.isEmpty()) {
-                    binding.btnSignupNext.isEnabled = false
-                    binding.btnSignupNext.isClickable = false
-                    binding.btnSignupNext.setBackgroundResource(R.drawable.low_radius_button_off)
-                    binding.btnSignupNext.setTextColor(resources.getColor(R.color.Gray_10))
+                    FalseButton()
                 }
             }
 
@@ -111,6 +106,23 @@ class SignupEmailFragment: Fragment() {
             }
         }
     }
+
+    private fun TrueButton() {
+        binding.btnSignupNextEmail.isEnabled = true
+        binding.btnSignupNextEmail.isClickable = true
+        binding.btnSignupNextEmail.setBackgroundResource(R.drawable.low_radius_button_on)
+        binding.btnSignupNextEmail.setTextColor(resources.getColor(R.color.Gray_03))
+
+    }
+
+    private fun FalseButton() {
+        binding.btnSignupNextEmail.isEnabled = false
+        binding.btnSignupNextEmail.isClickable = false
+        binding.btnSignupNextEmail.setBackgroundResource(R.drawable.low_radius_button_off)
+        binding.btnSignupNextEmail.setTextColor(resources.getColor(R.color.Gray_10))
+
+    }
+
 }
 
 
