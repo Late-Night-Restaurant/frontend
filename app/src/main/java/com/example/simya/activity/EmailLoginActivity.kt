@@ -11,7 +11,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.Constants
+import com.example.simya.Constants.OK
 import com.example.simya.R
+import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.server.account.AccountResponse
 import com.example.simya.server.RetrofitBuilder
@@ -31,6 +33,12 @@ class EmailLoginActivity : AppCompatActivity() {
     private lateinit var textWatcher: TextWatcher
     private lateinit var email: String
     private lateinit var password: String
+    private val retrofit by lazy {
+       RetrofitBuilder.getInstnace()
+    }
+    private val simyaApi by lazy{
+        retrofit.create(RetrofitService::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +51,8 @@ class EmailLoginActivity : AppCompatActivity() {
 
     private fun init() {
         binding.btnEmailSigninLogin.isEnabled = false
-
+        binding.tietEmailSigninInputEmail.setText("a8118199@gmail.com")
+        binding.tietEmailSigninInputPassword.setText("4637wlsdud!")
         //EditText 입력확인
         binding.tietEmailSigninInputEmail.addTextChangedListener(textWatcher)
         binding.tietEmailSigninInputPassword.addTextChangedListener(textWatcher)
@@ -53,42 +62,40 @@ class EmailLoginActivity : AppCompatActivity() {
             if(checkEmail()&&checkPassword()){
                 email = binding.tietEmailSigninInputEmail.text.toString()
                 password = binding.tietEmailSigninInputPassword.text.toString()
-                onSignIn(AccountDTO(email,password))
-
+                onSignIn(
+                    AccountDTO(
+                        email,
+                        password
+                    )
+                )
             }
         }
-
         binding.btnSigninEmailSignup.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
     }
-
     private fun moveToHome(){
         val intent = Intent(this,HomeMainActivity::class.java)
         startActivity(intent)
     }
     private fun onSignIn(user: AccountDTO){
-        val retrofit = RetrofitBuilder.getInstnace()
-        val API = retrofit.create(RetrofitService::class.java)
-        API.onLoginSubmit(user).enqueue(object: Callback<AccountResponse>{
+        simyaApi.onLoginSubmit(user).enqueue(object: Callback<AccountResponse>{
             override fun onResponse(
                 call: Call<AccountResponse>,
                 response: Response<AccountResponse>
             ) {
-                if(response.code()==Constants.OK){
-                    Log.d("Reponse check",response.toString())
-                    Log.d("Reponse check",response.message().toString())
-                    Log.d("Reponse check",response.code().toString())
-                    Log.d("Reponse check",response.body().toString())
+                if(response.code()==OK){
+                    Log.d("Response check",response.message().toString())
+                    Log.d("Response check",response.code().toString())
+                    Log.d("Response check",response.body().toString())
                     Shared.prefs.setString("accessToken",response.body()!!.getAccessToken())
                     Shared.prefs.setString("refreshToken",response.body()!!.getRefreshToken())
+                    onShared()
                     moveToHome()
                 }
                 Toast.makeText(this@EmailLoginActivity,response.message(),Toast.LENGTH_SHORT).show()
-
             }
-
             override fun onFailure(call: Call<AccountResponse>, t: Throwable) {
                 Toast.makeText(this@EmailLoginActivity,t.toString(),Toast.LENGTH_SHORT).show()
 
@@ -147,10 +154,16 @@ class EmailLoginActivity : AppCompatActivity() {
                     binding.btnEmailSigninLogin.setTextColor(application.resources.getColor(R.color.Gray_10))
                 }
             }
-
             override fun afterTextChanged(s: Editable) {
             }
         }
+    }
+    private fun onShared(){
+        UserTokenData.init(
+            Shared.prefs.getString("accessToken", Constants.DEFAULT),
+            Shared.prefs.getString("refreshToken", Constants.DEFAULT))
+        Log.d("User AccessToken", UserTokenData.getUserAccessToken())
+        Log.d("User RefreshToken", UserTokenData.getUserRefreshToken())
     }
 
 }

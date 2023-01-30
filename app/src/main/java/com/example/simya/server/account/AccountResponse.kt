@@ -4,7 +4,7 @@ data class AccountResponse(
     var isSuccess: Boolean,
     var code: Int,
     var message: String,
-    var result: AccountResult?,
+    var result: com.example.simya.server.account.AccountResult?,
     ){
     fun getGrantType(): String{
         return result!!.grantType

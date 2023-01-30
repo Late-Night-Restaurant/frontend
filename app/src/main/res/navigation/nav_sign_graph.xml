@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_sign_graph"
+    app:startDestination="@id/signupAgreeFragment">
+
+    <fragment
+        android:id="@+id/signupAgreeFragment"
+        android:name="com.example.simya.signupFragment.SignupAgreeFragment"
+        android:label="SignupAgreeFragment" >
+        <action
+            android:id="@+id/action_signupAgreeFragment_to_signupPwFragment"
+            app:destination="@id/signupPwFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupEmailFragment"
+        android:name="com.example.simya.signupFragment.SignupEmailFragment"
+        android:label="SignupEmailFragment" >
+        <action
+            android:id="@+id/action_signupEmailFragment_to_signupAgreeFragment"
+            app:destination="@id/signupAgreeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupPwFragment"
+        android:name="com.example.simya.signupFragment.SignupPwFragment"
+        android:label="SignupPwFragment" >
+        <action
+            android:id="@+id/action_signupPwFragment_to_signupProfileFragment"
+            app:destination="@id/signupProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupProfileFragment"
+        android:name="com.example.simya.signupFragment.SignupProfileFragment"
+        android:label="SignupProfileFragment" >
+        <action
+            android:id="@+id/action_signupProfileFragment_to_signupFinFragment"
+            app:destination="@id/signupFinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFinFragment"
+        android:name="com.example.simya.signupFragment.SignupFinFragment"
+        android:label="SignupFinFragment" />
+</navigation>

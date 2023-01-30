@@ -1,13 +1,17 @@
 package com.example.simya.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.simya.Constants
 import com.example.simya.R
+import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.ActivityHomeBinding
 import com.example.simya.homeFragment.LocationFragment
 import com.example.simya.homeFragment.MainFragment
 import com.example.simya.mypageFragment.MyPageProfileFragment
 import com.example.simya.mystoryFragment.MyStoryFragment
+import com.example.simya.sharedpreferences.Shared
 
 class HomeMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -16,10 +20,10 @@ class HomeMainActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+
     }
 
     private fun init() {
-
 //        fragment 전환
         binding.bnvHomeNavi.run {
             setOnItemSelectedListener {

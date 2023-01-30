@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_signup_profile_2">
         <!--        프로필 사진-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_input_profile"
+            android:id="@+id/til_signup_input_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -61,7 +61,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <!--        닉네임 입력창-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_nickname"
+            android:id="@+id/til_signup_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -75,7 +75,7 @@
                 android:textColor="@color/Gray_04"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_input_nickname"
+            android:id="@+id/til_signup_input_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -83,7 +83,7 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/tiet_signin_input_nickname"
+                android:id="@+id/tiet_signup_input_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="영문, 특수 문자 제외 8자 이내"
@@ -92,7 +92,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_comment"
+            android:id="@+id/til_signup_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -106,7 +106,7 @@
                 android:textColor="@color/Gray_04"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_signin_input_comment"
+            android:id="@+id/til_signup_input_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -114,7 +114,7 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/tiet_signin_input_comment"
+                android:id="@+id/tiet_signup_input_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="24자 이내로 입력해주세요"
@@ -127,7 +127,7 @@
 
     <!--    다음 버튼-->
     <Button
-        android:id="@+id/btn_signup_next"
+        android:id="@+id/btn_signup_next_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

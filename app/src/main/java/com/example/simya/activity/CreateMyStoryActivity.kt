@@ -2,14 +2,25 @@ package com.example.simya.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.simya.Constants
+import com.example.simya.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.adpter.createMyStoryAdapter.CreateMyStoryRVAdapter
+import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.ActivityMyStoryCreateBinding
+import com.example.simya.server.RetrofitBuilder
+import com.example.simya.server.RetrofitService
+import com.example.simya.server.profile.ProfileResponse
+import com.example.simya.sharedpreferences.Shared
 import com.example.simya.testData.TestDataMultiProfile
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CreateMyStoryActivity : AppCompatActivity() {
     private val binding: ActivityMyStoryCreateBinding by lazy{
@@ -18,13 +29,31 @@ class CreateMyStoryActivity : AppCompatActivity() {
     private var dataList: ArrayList<TestDataMultiProfile> = arrayListOf()
     private val dataRVAdapter = CreateMyStoryRVAdapter(this, dataList)
 
+    private val retrofit by lazy {
+        RetrofitBuilder.getInstnace()
+    }
+    private val simyaApi by lazy{
+        retrofit.create(RetrofitService::class.java)
+    }
+    private lateinit var profileId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+//        UserTokenData.init(
+//            Shared.prefs.getString("accessToken",Constants.DEFAULT),
+//            Shared.prefs.getString("refreshToken",Constants.DEFAULT))
+//
+        Log.d("User AccessToken",UserTokenData.getUserAccessToken())
+        Log.d("User RefreshToken",UserTokenData.getUserRefreshToken())
         init()
+        showMyAllProfile()
     }
 
     private fun init() {
+
+        Log.d("CreateMyStoryActivity","true")
         binding.includedTitle.tvDefaultLayoutTitle.text = "이야기집 생성"
 
         binding.btnMyStoryCreateNext.setOnClickListener {
@@ -33,15 +62,46 @@ class CreateMyStoryActivity : AppCompatActivity() {
         // test load
         Glide.with(this).load(R.drawable.test_simya)
             .into(binding.civMyStoryCreateSelectProfileImage)
+
         // test init
         initData()
         // Adapter init
         initAdapter()
         // recyclerview click listener
-        clickItem()
+        clickMultiProfile()
+    }
+    private fun showMyAllProfile(){
+        Log.d("showMyAllProfile check","true")
+        simyaApi.getUserProfile(UserTokenData.getUserAccessToken(),UserTokenData.getUserRefreshToken()).enqueue(object:
+            Callback<ProfileResponse>{
+            override fun onResponse(
+                call: Call<ProfileResponse>,
+                response: Response<ProfileResponse>
+            ) {
+                Log.d("Response check",response.isSuccessful.toString())
+                Log.d("Response check",response.code().toString())
+
+                if(response.code() == Constants.OK){
+                    binding.tvMyStoryCreateNick.text = response.body()!!.result?.get(0)!!.nickname
+                    binding.tvMyStoryCreateIntro.text = response.body()!!.result?.get(0)!!.comment
+                    Log.d("Response check","true")
+                    Log.d("Response check",response.message())
+                    Log.d("Response check",response.body().toString())
+                    profileId = response.body()!!.result?.get(0)!!.profileId.toString()
+                }else{
+                    Log.d("Response check","failure")
+                }
+            }
+
+            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                Log.d("Response check","failure")
+            }
+
+        })
     }
     private fun moveToSetMenu(){
         val intent = Intent(this,CreateMyStoryMainMenuActivity::class.java)
+        intent.putExtra(PROFILE_ID,profileId)
         startActivity(intent)
     }
     private fun initAdapter() {
@@ -50,7 +110,7 @@ class CreateMyStoryActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    private fun clickItem() {
+    private fun clickMultiProfile() {
         dataRVAdapter.setOnItemClickListener(object : CreateMyStoryRVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: TestDataMultiProfile, position: Int) {
                 Glide.with(this@CreateMyStoryActivity).load(data.imageSource).centerCrop()
@@ -65,18 +125,9 @@ class CreateMyStoryActivity : AppCompatActivity() {
             }
         })
     }
-    private fun singleSelected(){
-
-    }
     private fun initData() {
         dataList.apply {
-            R.drawable.testimg
-            add(TestDataMultiProfile(R.drawable.test_wak, "왁", "기획을 맡은 왁입니다."))
-            add(TestDataMultiProfile(R.drawable.test_chani, "채니", "백앤드 파트입니다."))
-            add(TestDataMultiProfile(R.drawable.test_choi, "초이", "프론트 파트입니다."))
-            add(TestDataMultiProfile(R.drawable.test_hatban, "햇반", "디자이너 입니다."))
-            add(TestDataMultiProfile(R.drawable.test_poo, "푸", "프론트 파트입니다."))
-            add(TestDataMultiProfile(R.drawable.test_jooni, "쭈니", "백앤드 파트입니다."))
+
         }
     }
 }
