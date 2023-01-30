@@ -53,7 +53,7 @@ class ChatActivity : AppCompatActivity() {
             it.proceed(
                 it.request().newBuilder().header(
                     "Access-Token",
-                    "Access eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTA3NTAwfQ.kqePlFHP5Wj1tAmBBYtDnK0vdUGrTn5k-Xi38Zbyb8CT9-TmliL5-EaiZkP-fnmiBTnCuGNtLnG1FBf_j-p5Gg"
+                    "Access eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ"
                 )
                     .header(
                         "Refresh-Token",
@@ -89,15 +89,15 @@ class ChatActivity : AppCompatActivity() {
             when (it.type) {
                 Event.Type.OPENED -> {
                     Log.d("CONNECT", "OPENED")
-                    topic = stomp.join("/sub/simya/chat/room/fc58cf89-2ee1-453a-8fd4-973fb233e045")
+                    topic = stomp.join("/sub/simya/chat/room/53e9a49e-99be-4efd-857f-90655f7689fb")
                         .subscribe {
                             Header(
                                 "Access-Token",
-                                "Access eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTA3NTAwfQ.kqePlFHP5Wj1tAmBBYtDnK0vdUGrTn5k-Xi38Zbyb8CT9-TmliL5-EaiZkP-fnmiBTnCuGNtLnG1FBf_j-p5Gg"
+                                "Access eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ"
                             )
                             Header(
                                 "Refresh-Token",
-                                "Refresh eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzU2MjU5MDB9.HH-OuX4wmFaJrWdHiU9S8zTrEia3yrmeEFXkdLyt9yGdS32x5uclTrY4iSddcFZL6CfqomE4AiKgkieHNR_nLQ"
+                                "Refresh eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzU2Njk5OTR9.L2c57pF5h-wiRkUYHi9orVHhYltgOa7w-4m5a_jirckvsU6tNku-jbQtan1mVokgXqHD61JhYmQqyS7FvOX-yw"
                             )
                         }
 
@@ -142,21 +142,20 @@ class ChatActivity : AppCompatActivity() {
                 )
                 jSONObject = JSONObject()
                 jSONObject.put("type", "TALK")
-                jSONObject.put("roomId", "fc58cf89-2ee1-453a-8fd4-973fb233e045")
-                jSONObject.put("message", "성공입니다.")
+                jSONObject.put("roomId", "53e9a49e-99be-4efd-857f-90655f7689fb")
                 jSONObject.put("sender", "choi")
+                jSONObject.put("token", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ")
+                jSONObject.put("message", "성공입니다.")
                 jSONObject.put("userCount", 1)
                 Log.d("Check JSON OBJECT",jSONObject.toString())
 //                var messageMapping = HashMap<String,String>()
 //                messageMapping["token"] = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTA3NTAwfQ.kqePlFHP5Wj1tAmBBYtDnK0vdUGrTn5k-Xi38Zbyb8CT9-TmliL5-EaiZkP-fnmiBTnCuGNtLnG1FBf_j-p5Gg"
                 stomp.send(
-                    "/pub/simya/chat/message",
+                    "/pub/simya/chat/androidMessage",
                     jSONObject.toString()
                 ).subscribe {
-                    Header(
-                        "token",
-                        "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTA3NTAwfQ.kqePlFHP5Wj1tAmBBYtDnK0vdUGrTn5k-Xi38Zbyb8CT9-TmliL5-EaiZkP-fnmiBTnCuGNtLnG1FBf_j-p5Gg"
-                    )
+                    if(it) {
+                    }
                 }
             }
 
