@@ -64,7 +64,7 @@ class MyStoryRecyclerFragment: Fragment() {
             }
 
             override fun onFailure(call: Call<LoadMyStoryResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d("ERROR",t.toString())
             }
 
         })

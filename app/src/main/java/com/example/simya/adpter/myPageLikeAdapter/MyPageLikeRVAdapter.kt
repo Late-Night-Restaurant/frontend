@@ -1,4 +1,4 @@
-package com.example.simya.myPageLikeAdapter
+package com.example.simya.adpter.myPageLikeAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,7 +23,7 @@ class MyPageLikeRVAdapter (private val dataList: ArrayList<TestDataBorder>): Rec
         return DataViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MyPageLikeRVAdapter.DataViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bind(dataList[position])
     }
 

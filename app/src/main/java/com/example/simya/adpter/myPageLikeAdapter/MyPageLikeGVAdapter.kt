@@ -1,4 +1,4 @@
-package com.example.simya.myPageLikeAdapter
+package com.example.simya.adpter.myPageLikeAdapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -61,7 +61,10 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
             // 서버에 전송 데이터 전송해서 이야기집 생성
         }
     }
-
+    private fun moveToHome(){
+        val intent = Intent(this,HomeMainActivity::class.java)
+        startActivity(intent)
+    }
     private fun setBorderData(): CreateStoryDTO {
         var profileId = intent.getStringExtra(PROFILE_ID)!!.toLong()
         var mainMenu = intent.getStringExtra(BORDER_MAIN_MENU)
@@ -86,8 +89,10 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
                 call: Call<CreateStoryResponse>,
                 response: Response<CreateStoryResponse>
             ) {
-                if(response.code() == OK){
+                if(response.body()!!.code == OK){
                     Log.d("Response",response.body().toString())
+                    moveToHome()
+
                 }
             }
             override fun onFailure(call: Call<CreateStoryResponse>, t: Throwable) {

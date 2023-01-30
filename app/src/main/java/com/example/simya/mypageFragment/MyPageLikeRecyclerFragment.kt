@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.databinding.FragmentMyPageLikeRecyclerBinding
-import com.example.simya.myPageLikeAdapter.MyPageLikeRVAdapter
+import com.example.simya.adpter.myPageLikeAdapter.MyPageLikeRVAdapter
 import com.example.simya.testData.TestDataBorder
 
 class MyPageLikeRecyclerFragment: Fragment() {

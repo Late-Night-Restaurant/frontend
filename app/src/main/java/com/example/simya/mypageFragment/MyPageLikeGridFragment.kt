@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.databinding.FragmentMyPageLikeGridBinding
-import com.example.simya.myPageLikeAdapter.MyPageLikeGVAdapter
+import com.example.simya.adpter.myPageLikeAdapter.MyPageLikeGVAdapter
 import com.example.simya.testData.TestDataBorder
 
 class MyPageLikeGridFragment: Fragment() {

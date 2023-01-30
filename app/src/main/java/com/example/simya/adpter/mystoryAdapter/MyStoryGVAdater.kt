@@ -11,13 +11,14 @@ import com.example.simya.databinding.FragmentHomeMainGridBinding
 import com.example.simya.databinding.ItemBorderGv156156Binding
 import com.example.simya.adpter.homeAdapter.MainGVAdapter
 import com.example.simya.databinding.ItemMyBorderGv156156Binding
+import com.example.simya.server.story.LoadMyStoryResult
 import com.example.simya.testData.TestDataBorder
 
-class MyStoryGVAdater(private val dataList:ArrayList<TestDataBorder>): RecyclerView.Adapter<MyStoryGVAdater.DataViewHolder>() {
+class MyStoryGVAdater(private val dataList:ArrayList<LoadMyStoryResult>): RecyclerView.Adapter<MyStoryGVAdater.DataViewHolder>() {
     inner class DataViewHolder(private val binding: ItemMyBorderGv156156Binding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: TestDataBorder) {
-            binding.tvGvTitle.text  = data.title
-            binding.tvGvMainMenu.text = data.mainMenu
+        fun bind(data: LoadMyStoryResult) {
+            binding.tvGvTitle.text  = data.houseName
+            binding.tvGvMainMenu.text = data.category
         }
     }
     //ViewHolder 만들어 질때 실행할 동작
