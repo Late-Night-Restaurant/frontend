@@ -4,10 +4,10 @@ data class AccountResponse(
     var isSuccess: Boolean,
     var code: Int,
     var message: String,
-    var result: com.example.simya.server.account.AccountResult?,
+    var result: AccountResult?,
     ){
-    fun getGrantType(): String{
-        return result!!.grantType
+    fun getProfileId(): Long{
+        return result!!.profileId
     }
     fun getAccessToken(): String{
         return result!!.accessToken
@@ -15,7 +15,5 @@ data class AccountResponse(
     fun getRefreshToken(): String{
         return result!!.refreshToken
     }
-    fun getAccessTokenExpiresIn(): Long{
-        return result!!.accessTokenExpiresIn
-    }
+
 }

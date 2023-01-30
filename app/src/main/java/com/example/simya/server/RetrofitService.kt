@@ -60,6 +60,8 @@ interface RetrofitService {
     @Headers("Content-Type: application/json")
     @PATCH("/simya/house/open")
     fun openStory(
+        @Header("Access-Token") accessToken: String,
+        @Header("Refresh-Token") refreshToken: String,
         @Body houseData: OpenStoryDTO
     ): Call<OpenStoryResponse>
 

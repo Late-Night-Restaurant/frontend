@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import com.example.simya.Constants.BORDER_MAIN_MENU
+import com.example.simya.Constants.BORDER_TITLE
+import com.example.simya.Constants.HOUSE_ID
 import com.example.simya.databinding.ActivityDrawerMyStroyOpenBinding
 import com.example.simya.dialog.CloseDialog
 import com.example.simya.testData.BorderData
@@ -15,14 +18,12 @@ class OpenMyStoryActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDrawerMyStroyOpenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val borderData = intent.getSerializableExtra("borderData") as BorderData?
-
-        init(borderData)
+        init()
     }
-    private fun init(borderData: BorderData?){
+    private fun init(){
         val drawerLayout = binding.dlMyStoryOpen
-        binding.includedMyStoryOpen.tvRvMainMenu.text = borderData!!.mainMenu
-        binding.includedMyStoryOpen.tvRvTitle.text = borderData!!.title
+        binding.includedMyStoryOpen.tvRvMainMenu.text = intent.getStringExtra(BORDER_MAIN_MENU)
+        binding.includedMyStoryOpen.tvRvTitle.text = intent.getStringExtra(BORDER_TITLE)
         // 드로어 오픈
         binding.includedMyStoryOpen.ibMyStoryOpenDrawer.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
@@ -36,9 +37,10 @@ class OpenMyStoryActivity: AppCompatActivity() {
         binding.includedMyStoryOpen.btnMyStoryOpenReview.setOnClickListener {
             moveToReviewList()
         }
-        // 오픈 준비하기기
+        // 오픈 준비하기기(test)
         binding.includedMyStoryOpen.btnMyStoryOpenReady.setOnClickListener {
-            moveToOpen()
+            var test = intent.getLongExtra(HOUSE_ID,0)
+            moveToOpen(test)
         }
     }
 
@@ -50,8 +52,11 @@ class OpenMyStoryActivity: AppCompatActivity() {
         val intent = Intent(this,StoryLikeActivity::class.java)
         startActivity(intent)
     }
-    private fun moveToOpen(){
+    private fun moveToOpen(houseId: Long){
         val intent = Intent(this,OpenMyStoryInputActivity::class.java)
+        intent.putExtra(BORDER_MAIN_MENU,binding.includedMyStoryOpen.tvRvMainMenu.text)
+        intent.putExtra(BORDER_TITLE, binding.includedMyStoryOpen.tvRvTitle.text)
+        intent.putExtra(HOUSE_ID,houseId)
         startActivity(intent)
     }
     private fun drawerInit(){

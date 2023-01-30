@@ -13,9 +13,11 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.Constants
+import com.example.simya.Constants.HOUSE_ID
 import com.example.simya.R
 import com.example.simya.adpter.chatAdapter.ChatDrawerRVAdapter
 import com.example.simya.adpter.chatAdapter.ChatRVAdapter
+import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.ActivityDrawerChatBinding
 import com.example.simya.testData.TestChatData
 import com.example.simya.testData.TestChatDrawerProfileData
@@ -82,12 +84,10 @@ class ChatActivity : AppCompatActivity() {
                         .subscribe {
                             Header(
                                 "Access-Token",
-                                "Access eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ"
-                            )
+                                UserTokenData.accessToken)
                             Header(
                                 "Refresh-Token",
-                                "Refresh eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzU2Njk5OTR9.L2c57pF5h-wiRkUYHi9orVHhYltgOa7w-4m5a_jirckvsU6tNku-jbQtan1mVokgXqHD61JhYmQqyS7FvOX-yw"
-                            )
+                                UserTokenData.refreshToken)
                             Log.d("test ReceiveMessage",it)
                         }
                 }
@@ -129,9 +129,9 @@ class ChatActivity : AppCompatActivity() {
                 val msg = binding.includedChat.etChatInput.text.toString()
                 Log.d("msg",msg)
                 jsonObject.put("type", "TALK")
-                jsonObject.put("roomId", "1")
+                jsonObject.put("roomId", intent.getStringExtra(HOUSE_ID))
                 jsonObject.put("sender", "choi")
-                jsonObject.put("token", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ")
+                jsonObject.put("token", convertToken(UserTokenData.accessToken))
                 jsonObject.put("message",msg)
                 jsonObject.put("userCount", 1)
                 Log.d("JSON OBJECT MESSAGE",jsonObject.get("message").toString())
@@ -157,7 +157,9 @@ class ChatActivity : AppCompatActivity() {
         }
 
     }
-
+    private fun convertToken(testAccessToken: String): String {
+        return testAccessToken.substring(7)
+    }
     private fun moveLastItem(layoutManager: LinearLayoutManager) {
         Handler(Looper.getMainLooper()).postDelayed(
             Runnable { layoutManager.scrollToPositionWithOffset(dataList.size - 1, 0) }, 300
