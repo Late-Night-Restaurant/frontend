@@ -1,6 +1,5 @@
 package com.example.simya.activity
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -23,7 +22,6 @@ import com.example.simya.testData.TestChatDrawerProfileData
 import com.example.simya.testData.TestUserData
 import com.gmail.bishoybasily.stomp.lib.Event
 import com.gmail.bishoybasily.stomp.lib.StompClient
-import com.gmail.bishoybasily.stomp.lib.constants.Headers
 import io.reactivex.disposables.Disposable
 import okhttp3.OkHttpClient
 import okhttp3.internal.http2.Header
@@ -45,7 +43,8 @@ class ChatActivity : AppCompatActivity() {
     lateinit var stompConnection: Disposable
     lateinit var topic: Disposable
     private val intervalMillis = 1000L
-    private lateinit var jSONObject: JSONObject
+    private val jsonObject = JSONObject()
+    private val responseObject = JSONObject()
 
     //    private val client = OkHttpClient()
     val client = OkHttpClient.Builder()
@@ -68,28 +67,18 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDrawerChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        유저 체크
-//        userCheck()
-//        Log.d("Stomp Client Conect",stompClient.connect().toString())
-//        stompClient.connect()
-//        stompClient.topic("/sub/simya/chat/room/32bc75f2-903e-4a26-bde7-fa7e266e750a").subscribe { topicMessage ->
-//            Log.d(
-//                TAG,
-//                topicMessage.getPayload()
-//            )
-//        }
-//        Log.d("Stomp Client", stompClient.isConnected.toString())
+
         testUserCheck(Constants.CHAT_GUEST_CODE)
         init()
     }
 
     private fun init() {
         stomp.url = "ws://10.0.2.2:8080/simya/ws-stomp/websocket"
-        stompConnection = stomp.connect().subscribe {
+        stompConnection = stomp.connect().subscribe { it->
             when (it.type) {
                 Event.Type.OPENED -> {
                     Log.d("CONNECT", "OPENED")
-                    topic = stomp.join("/sub/simya/chat/room/53e9a49e-99be-4efd-857f-90655f7689fb")
+                    topic = stomp.join("/sub/simya/chat/room/1")
                         .subscribe {
                             Header(
                                 "Access-Token",
@@ -99,8 +88,8 @@ class ChatActivity : AppCompatActivity() {
                                 "Refresh-Token",
                                 "Refresh eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzU2Njk5OTR9.L2c57pF5h-wiRkUYHi9orVHhYltgOa7w-4m5a_jirckvsU6tNku-jbQtan1mVokgXqHD61JhYmQqyS7FvOX-yw"
                             )
+                            Log.d("test ReceiveMessage",it)
                         }
-
                 }
                 Event.Type.CLOSED -> {
                     Log.d("CONNECT", "CLOSED")
@@ -109,6 +98,7 @@ class ChatActivity : AppCompatActivity() {
                     Log.d("CONNECT", "ERROR")
                     Log.d("Client", client.toString())
                 }
+
                 else -> {}
             }
         }
@@ -135,35 +125,38 @@ class ChatActivity : AppCompatActivity() {
         binding.includedChat.ibChatSend.setOnClickListener {
             if (binding.includedChat.etChatInput.text.isNotEmpty()) {
                 Log.d("send message", binding.includedChat.etChatInput.text.toString())
-                sendMessage(
-                    sendUser,
-                    binding.includedChat.etChatInput.text.toString(),
-                    dataRVAdapter
-                )
-                jSONObject = JSONObject()
-                jSONObject.put("type", "TALK")
-                jSONObject.put("roomId", "53e9a49e-99be-4efd-857f-90655f7689fb")
-                jSONObject.put("sender", "choi")
-                jSONObject.put("token", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ")
-                jSONObject.put("message", "성공입니다.")
-                jSONObject.put("userCount", 1)
-                Log.d("Check JSON OBJECT",jSONObject.toString())
-//                var messageMapping = HashMap<String,String>()
-//                messageMapping["token"] = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTA3NTAwfQ.kqePlFHP5Wj1tAmBBYtDnK0vdUGrTn5k-Xi38Zbyb8CT9-TmliL5-EaiZkP-fnmiBTnCuGNtLnG1FBf_j-p5Gg"
+
+                val msg = binding.includedChat.etChatInput.text.toString()
+                Log.d("msg",msg)
+                jsonObject.put("type", "TALK")
+                jsonObject.put("roomId", "1")
+                jsonObject.put("sender", "choi")
+                jsonObject.put("token", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ")
+                jsonObject.put("message",msg)
+                jsonObject.put("userCount", 1)
+                Log.d("JSON OBJECT MESSAGE",jsonObject.get("message").toString())
+                Log.d("Check JSON OBJECT",jsonObject.toString())
                 stomp.send(
                     "/pub/simya/chat/androidMessage",
-                    jSONObject.toString()
+                    jsonObject.toString()
                 ).subscribe {
                     if(it) {
                     }
                 }
+//                Handler(Looper.getMainLooper()).postDelayed(
+//                    Runnable {
+//
+//                    },1000
+//                )
+//                var messageMapping = HashMap<String,String>()
+//                messageMapping["token"] = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTA3NTAwfQ.kqePlFHP5Wj1tAmBBYtDnK0vdUGrTn5k-Xi38Zbyb8CT9-TmliL5-EaiZkP-fnmiBTnCuGNtLnG1FBf_j-p5Gg"
+
             }
 
             testDrawerUserListed()
         }
 
     }
-
 
     private fun moveLastItem(layoutManager: LinearLayoutManager) {
         Handler(Looper.getMainLooper()).postDelayed(
@@ -188,6 +181,9 @@ class ChatActivity : AppCompatActivity() {
             setGuestType()
         }
     }
+    private fun receiveMessage(name: String,){
+
+    }
 
     private fun setMasterType() {
         // 딱히없음
@@ -198,15 +194,23 @@ class ChatActivity : AppCompatActivity() {
         binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_heart)
     }
 
-    private fun sendMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
-        dataList.add(TestChatData(user, content, "오후 9시"))
-        binding.includedChat.rvChatList.apply {
-            adapter.notifyDataSetChanged()
-            scrollToPosition(dataList.size - 1)
-        }
-        binding.includedChat.etChatInput.text = null
-    }
-
+//    private fun sendMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
+//        dataList.add(TestChatData(user, content, "오후 9시"))
+//        binding.includedChat.rvChatList.apply {
+//            adapter.notifyDataSetChanged()
+//            scrollToPosition(dataList.size - 1)
+//        }
+//
+//        binding.includedChat.etChatInput.text = null
+//    }
+//    private fun receiveMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
+//        dataList.add(TestChatData(user, content, "오후 9시"))
+//        binding.includedChat.rvChatList.apply {
+//            adapter.notifyDataSetChanged()
+//            scrollToPosition(dataList.size - 1)
+//        }
+//
+//    }
     private fun testDrawerUserListed() {
         binding.btnDrawerIntro.setOnClickListener {
             val intent = Intent(this, StoryIntroActivity::class.java)

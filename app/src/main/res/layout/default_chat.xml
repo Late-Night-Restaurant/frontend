@@ -27,7 +27,8 @@
             android:layout_gravity="center"
             android:text="이야기 집 제목"
             android:textColor="@color/Gray_03"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:inputType="text"/>
 
         <ImageButton
             android:id="@+id/ib_default_chat_search"
