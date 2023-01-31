@@ -30,14 +30,6 @@ object UserTokenData {
         this.refreshToken = "Refresh $refreshToken"
     }
 
-    fun setUserAccessToken(accessToken: String) {
-        this.accessToken = accessToken
-    }
-
-    fun setUserRefreshToken(refreshToken: String) {
-        this.refreshToken = refreshToken
-    }
-
     fun getUserAccessToken(): String {
         return accessToken
     }

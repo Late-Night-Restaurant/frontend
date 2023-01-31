@@ -20,21 +20,16 @@ import java.util.regex.Pattern
 
 class SignupPwFragment: Fragment() {
     private lateinit var binding: FragmentSignupPwBinding
-    private val pwValidation = "^[a-zA-Z0-9]*\$"
+    private val pwValidation =  """^[0-9a-zA-Z!@#$%^+\-=]*$"""
     private lateinit var textWatcher: TextWatcher
     private lateinit var viewModel: SignUpViewModel
-
     // 받아온 emailData 담아둘 변수
     private lateinit var emailData: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // email프래그먼트에서 email 받아오기
-        setFragmentResultListener("email") { _, bundle ->
-            emailData = bundle.getString("bundleKeyEmail").toString()
-            Toast.makeText(this.context, emailData, Toast.LENGTH_SHORT).show()
-        }
+
     }
 
     override fun onCreateView(
@@ -64,9 +59,8 @@ class SignupPwFragment: Fragment() {
             if (pwCheck() && rePwCheck()) {
                 // profile 프래그먼트 데이터 전달
                 val pwData = binding.tietEmailSigninInputPw.text.toString()
-                val emailData = emailData
+
                 setFragmentResult("pw", bundleOf("bundleKeyPw" to pwData))
-                setFragmentResult("email", bundleOf("bundleKeyEmail" to emailData))
 
                 viewModel.pbValue.value = 75
 
