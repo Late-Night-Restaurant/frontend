@@ -56,6 +56,7 @@ interface RetrofitService {
         @Header("Refresh-Token") refreshToken: String
     ): Call<LoadMyStoryResponse>
 
+    // 이야기 집 전제 조회하기
     @Headers("Content-Type: application/json")
     @GET("/simya/house")
     fun getAllStory(
@@ -72,5 +73,12 @@ interface RetrofitService {
         @Body houseData: OpenStoryDTO
     ): Call<OpenStoryResponse>
 
+    // 특정 이야기 집 조회
+    @GET("/simya/house/{houseId}")
+    fun getStoryDetail(
+        @Header("Access-Token") accessToken: String,
+        @Header("Refresh-Token") refreshToken: String,
+        @Path("houseId") houseId: Long
+    ): Call<InquiryStoryDetailResponse>
 
 }

@@ -10,8 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.simya.Constants
+import com.example.simya.Constants.HOUSE_ID
 import com.example.simya.Constants.OK
 import com.example.simya.activity.OpenMyStoryActivity
+import com.example.simya.activity.StoryIntroActivity
 import com.example.simya.testData.TestDataBorder
 import com.example.simya.databinding.FragmentHomeMainGridBinding
 import com.example.simya.adpter.homeAdapter.MainGVAdapter
@@ -59,7 +61,7 @@ class MainGridFragment: Fragment() {
                     response: Response<LoadAllStoryResponse>
                 ) {
                     if(response.body()!!.code == OK){
-                        if (response.body()!!.message == "아직 오픈한 이야기 집이 없습니다.") {
+                        if (response.body()!!.message == "아직 오픈한 이야기 집이 없습니다." || response.body()!!.message == "이야기 집이 없습니다.") {
                             Log.d("이야기집", "아직 오픈한 이야기 집이 없습니다.")
                         }  else {
                             activity!!.runOnUiThread {
@@ -92,6 +94,10 @@ class MainGridFragment: Fragment() {
             override fun onItemClick(v: View, data: LoadAllStoryResult, position: Int) {
                 //뭐보낼까
                 Toast.makeText(this@MainGridFragment.context,"${data.houseId}",Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@MainGridFragment.context,StoryIntroActivity::class.java)
+                intent.putExtra(HOUSE_ID,data.houseId)
+                startActivity(intent)
+
             }
 
             override fun onLongClick(v: View, data: LoadAllStoryResult, position: Int) {
