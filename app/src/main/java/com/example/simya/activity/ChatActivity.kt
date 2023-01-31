@@ -14,6 +14,7 @@ import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.Constants
 import com.example.simya.Constants.HOUSE_ID
+import com.example.simya.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.adpter.chatAdapter.ChatDrawerRVAdapter
 import com.example.simya.adpter.chatAdapter.ChatRVAdapter
@@ -41,15 +42,15 @@ class ChatActivity : AppCompatActivity() {
     lateinit var receiveUser4: TestUserData
 
     //Stomp Test
-    val url = "ws://10.0.2.2:8080/ws-stomp"
-    lateinit var stompConnection: Disposable
-    lateinit var topic: Disposable
+    private val url = "ws://10.0.2.2:8080/ws-stomp"
+    private lateinit var stompConnection: Disposable
+    private lateinit var topic: Disposable
     private val intervalMillis = 1000L
     private val jsonObject = JSONObject()
     private val responseObject = JSONObject()
 
     //    private val client = OkHttpClient()
-    val client = OkHttpClient.Builder()
+    private val client = OkHttpClient.Builder()
         .addInterceptor {
             it.proceed(
                 it.request().newBuilder().header(
@@ -63,8 +64,9 @@ class ChatActivity : AppCompatActivity() {
             )
         }
         .build()
-
     private val stomp = StompClient(client, intervalMillis)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDrawerChatBinding.inflate(layoutInflater)
@@ -165,7 +167,13 @@ class ChatActivity : AppCompatActivity() {
             Runnable { layoutManager.scrollToPositionWithOffset(dataList.size - 1, 0) }, 300
         )
     }
-
+    private fun chatCasting(chatType: Long){
+        if(chatType==intent.getLongExtra(PROFILE_ID,0)){
+            //  왼쪽
+        }else{
+            //  오른쪽
+        }
+    }
     private fun testUserCheck(code: Int) {
         if (code == Constants.CHAT_MASTER_CODE) {
             // 주인장 캐스팅

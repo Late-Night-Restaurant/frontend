@@ -5,6 +5,8 @@ object Constants {
     const val DEFAULT = "Default"
     const val CHAT_MASTER_CODE = 1
     const val CHAT_GUEST_CODE = 2
+    const val CHAT_SELF = 3
+    const val CHAT_OTHERS = 4
 
     const val SORT_RECENT = 11
     const val SORT_LONG = 12
@@ -12,6 +14,7 @@ object Constants {
 
     const val YES = 20
     const val NO = 21
+
 
     const val OK = 200
 

@@ -59,7 +59,7 @@ class MainGridFragment: Fragment() {
                     response: Response<LoadAllStoryResponse>
                 ) {
                     if(response.body()!!.code == OK){
-                        if (response.body()!!.message == "아직 오픈한 이야기 집이 없습니다.") {
+                        if (response.body()!!.message == "아직 오픈한 이야기 집이 없습니다." || response.body()!!.message == "이야기 집이 없습니다.") {
                             Log.d("이야기집", "아직 오픈한 이야기 집이 없습니다.")
                         }  else {
                             activity!!.runOnUiThread {
