@@ -27,6 +27,7 @@ object Constants {
 
 
     // INTENT STRING CODE
+    const val BORDER_TITLE = "title"
     const val BORDER_MAIN_MENU = "borderMainMenu"
     const val PROFILE_ID = "profileId"
     const val MAIN_MENU_LOVE = "사랑"
@@ -35,4 +36,5 @@ object Constants {
     const val MAIN_MENU_STRESS = "스트레스"
     const val MAIN_MENU_HOBBY = "취미"
     const val MAIN_MENU_CULTURE = "문화 생활"
+    const val HOUSE_ID = "houseId"
 }

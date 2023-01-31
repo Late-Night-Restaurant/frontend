@@ -1,12 +1,12 @@
 package com.example.simya.data
 
 import com.example.simya.Constants
+import kotlin.properties.Delegates
 
 
 object UserTokenData {
     var accessToken : String = Constants.DEFAULT
     var refreshToken: String = Constants.DEFAULT
-
     fun init(accessToken: String, refreshToken: String){
         this.accessToken = "Access $accessToken"
         this.refreshToken = "Refresh $refreshToken"

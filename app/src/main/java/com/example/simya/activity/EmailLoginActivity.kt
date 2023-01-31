@@ -91,6 +91,7 @@ class EmailLoginActivity : AppCompatActivity() {
                     Log.d("Response check",response.body().toString())
                     Shared.prefs.setString("accessToken",response.body()!!.getAccessToken())
                     Shared.prefs.setString("refreshToken",response.body()!!.getRefreshToken())
+                    Shared.prefs.setLong("profileId",response.body()!!.getProfileId())
                     onShared()
                     moveToHome()
                 }

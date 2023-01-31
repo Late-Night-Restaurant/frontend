@@ -1,8 +1,9 @@
 package com.example.simya.server.story
 
-data class LoadMyStoryResponse(
+data class LoadAllStoryResponse(
+    var code: Int,
     var status: Int,
     var isSuccess: Boolean,
     var message: String,
-    var result: List<LoadMyStoryResult>
+    var result: List<LoadAllStoryResult>
 )

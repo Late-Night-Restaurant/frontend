@@ -56,10 +56,19 @@ interface RetrofitService {
         @Header("Refresh-Token") refreshToken: String
     ): Call<LoadMyStoryResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("/simya/house")
+    fun getAllStory(
+        @Header("Access-Token") accessToken: String,
+        @Header("Refresh-Token") refreshToken: String
+    ): Call<LoadAllStoryResponse>
+
     // 이야기 집 오픈
     @Headers("Content-Type: application/json")
     @PATCH("/simya/house/open")
     fun openStory(
+        @Header("Access-Token") accessToken: String,
+        @Header("Refresh-Token") refreshToken: String,
         @Body houseData: OpenStoryDTO
     ): Call<OpenStoryResponse>
 
