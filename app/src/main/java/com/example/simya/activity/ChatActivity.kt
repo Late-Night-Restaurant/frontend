@@ -55,11 +55,11 @@ class ChatActivity : AppCompatActivity() {
             it.proceed(
                 it.request().newBuilder().header(
                     "Access-Token",
-                    "Access eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODExODE5OUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjc1MTU0MTgzfQ.Ioq_fdA_OIHsiYu71b8OIoJf7j8u1t7So-HZ_ns_9IzzSxYdKxZhtNglRmXDiW3uucbQUC5NMg1GKkjppC3oVQ"
+                    UserTokenData.accessToken
                 )
                     .header(
                         "Refresh-Token",
-                        "Refresh eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzU2MjU5MDB9.HH-OuX4wmFaJrWdHiU9S8zTrEia3yrmeEFXkdLyt9yGdS32x5uclTrY4iSddcFZL6CfqomE4AiKgkieHNR_nLQ"
+                        UserTokenData.refreshToken
                     ).build()
             )
         }
@@ -71,18 +71,19 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDrawerChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        // 인텐트 데이터값이 0 일경우 채팅방 예외처리 -> 다시메인으로
         testUserCheck(Constants.CHAT_GUEST_CODE)
         init()
     }
 
     private fun init() {
+        Log.d("Status","CHAT ACTIVITY")
         stomp.url = "ws://10.0.2.2:8080/simya/ws-stomp/websocket"
         stompConnection = stomp.connect().subscribe { it->
             when (it.type) {
                 Event.Type.OPENED -> {
                     Log.d("CONNECT", "OPENED")
-                    topic = stomp.join("/sub/simya/chat/room/1")
+                    topic = stomp.join("/sub/simya/chat/room/${intent.getLongExtra(HOUSE_ID,0)}")
                         .subscribe {
                             Header(
                                 "Access-Token",
@@ -131,7 +132,7 @@ class ChatActivity : AppCompatActivity() {
                 val msg = binding.includedChat.etChatInput.text.toString()
                 Log.d("msg",msg)
                 jsonObject.put("type", "TALK")
-                jsonObject.put("roomId", intent.getStringExtra(HOUSE_ID))
+                jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID,0))
                 jsonObject.put("sender", "choi")
                 jsonObject.put("token", convertToken(UserTokenData.accessToken))
                 jsonObject.put("message",msg)

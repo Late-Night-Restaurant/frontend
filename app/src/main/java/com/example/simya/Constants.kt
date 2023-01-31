@@ -1,8 +1,7 @@
 package com.example.simya
 
 object Constants {
-
-    const val DEFAULT = "Default"
+    const val UNKNOWN = 0
     const val CHAT_MASTER_CODE = 1
     const val CHAT_GUEST_CODE = 2
     const val CHAT_SELF = 3
@@ -29,7 +28,8 @@ object Constants {
     const val FAILED_JWT_IN_ACCESS = 500 // 토근을 헤더에 넣지 못한 경우
 
 
-    // INTENT STRING CODE
+    // STRING CODE
+    const val DEFAULT = "Default"
     const val BORDER_TITLE = "title"
     const val BORDER_MAIN_MENU = "borderMainMenu"
     const val PROFILE_ID = "profileId"
