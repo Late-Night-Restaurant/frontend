@@ -51,8 +51,7 @@ class EmailLoginActivity : AppCompatActivity() {
 
     private fun init() {
         binding.btnEmailSigninLogin.isEnabled = false
-        binding.tietEmailSigninInputEmail.setText("a8118199@gmail.com")
-        binding.tietEmailSigninInputPassword.setText("4637wlsdud!")
+
         //EditText 입력확인
         binding.tietEmailSigninInputEmail.addTextChangedListener(textWatcher)
         binding.tietEmailSigninInputPassword.addTextChangedListener(textWatcher)
@@ -85,15 +84,23 @@ class EmailLoginActivity : AppCompatActivity() {
                 call: Call<AccountResponse>,
                 response: Response<AccountResponse>
             ) {
-                if(response.code()==OK){
+                if(response.body()!!.code==OK){
                     Log.d("Response check",response.message().toString())
                     Log.d("Response check",response.code().toString())
                     Log.d("Response check",response.body().toString())
                     Shared.prefs.setString("accessToken",response.body()!!.getAccessToken())
                     Shared.prefs.setString("refreshToken",response.body()!!.getRefreshToken())
                     Shared.prefs.setLong("profileId",response.body()!!.getProfileId())
+                    UserTokenData.setProfileId(response.body()!!.result!!.profileId)
+                    UserTokenData.setProfileName(response.body()!!.result!!.nickname)
                     onShared()
                     moveToHome()
+                }else if(response.body()!!.code == 400){
+                    if(response.body()!!.message == "존재하지 않는 사용자입니다."){
+                        Toast.makeText(this@EmailLoginActivity,"존재하지 않는 사용자입니다.",Toast.LENGTH_SHORT).show()
+                    }
+                }else if(response.body()!!.code == 404){
+                    Toast.makeText(this@EmailLoginActivity,"존재하지 않는 아이디이거나 비밀번호가 틀렸습니다.",Toast.LENGTH_SHORT).show()
                 }
                 Toast.makeText(this@EmailLoginActivity,response.message(),Toast.LENGTH_SHORT).show()
             }

@@ -81,7 +81,7 @@ class StoryIntroActivity : AppCompatActivity() {
                             binding.tvIntroTitle.text = response.body()!!.result!!.houseInfo.houseName
                             binding.tvStoryProfileStoryIntro.text = response.body()!!.result!!.houseInfo.comment
                             binding.btnStoryIntroEnterChat.setOnClickListener {
-                                moveToChat(response.body()!!.result!!.houseInfo.houseId,response.body()!!.result!!.masterProfile.profileId)
+                                moveToChat(response.body()!!.result!!.houseInfo.houseId,UserTokenData.getProfileId())
                             }
                         }
                     }

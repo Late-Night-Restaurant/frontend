@@ -7,37 +7,38 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.simya.Constants.CHAT_SELF
+import com.example.simya.data.ChatRVData
 import com.example.simya.databinding.ItemChatReceiveBinding
 import com.example.simya.databinding.ItemChatSendBinding
 import com.example.simya.databinding.ItemDrawerProfileBinding
 import com.example.simya.testData.TestChatData
 
-class ChatRVAdapter (private val context: Context, private val dataList:ArrayList<TestChatData>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatRVAdapter (private val context: Context, private val dataList:ArrayList<ChatRVData>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class ReceiveDataViewHolder(private val binding: ItemChatReceiveBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: TestChatData) {
-            binding.tvChatReceiveContent.text = data.content
-            binding.tvChatReceiveNick.text = data.user.nick
-            Glide.with(context).load(data.user.image).centerCrop().into(binding.civChatReceiveProfile)
+        fun bind(data: ChatRVData) {
+            binding.tvChatReceiveContent.text = data.message
+            binding.tvChatReceiveNick.text = data.sender
+//            Glide.with(context).load(data.picture).centerCrop().into(binding.civChatReceiveProfile)
         }
     }
     inner class SendDataViewHolder(private val binding: ItemChatSendBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: TestChatData) {
-            binding.tvChatSendContent.text = data.content
-            binding.tvChatSendNick.text = data.user.nick
-            Glide.with(context).load(data.user.image).centerCrop().into(binding.civChatSendProfile)
+        fun bind(data: ChatRVData) {
+            binding.tvChatSendContent.text = data.message
+            binding.tvChatSendNick.text = data.sender
+//            Glide.with(context).load(data.user.image).centerCrop().into(binding.civChatSendProfile)
         }
     }
     // test return if를 3개로 나누어서 CHAT_SELF , CHAT_OTHERS , ERROR
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (dataList[viewType].user.type== CHAT_SELF) {
+        return if (dataList[viewType].userType == CHAT_SELF) {
            SendDataViewHolder((ItemChatSendBinding.inflate(LayoutInflater.from(parent.context),parent,false)))
         }else{
             ReceiveDataViewHolder(ItemChatReceiveBinding.inflate(LayoutInflater.from(parent.context),parent,false))
         }
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (dataList[position].user.type == 1){
+        if (dataList[position].userType == CHAT_SELF){
             (holder as SendDataViewHolder).bind(dataList[position])
         }else{
             (holder as ReceiveDataViewHolder).bind(dataList[position])

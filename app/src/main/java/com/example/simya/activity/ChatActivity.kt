@@ -13,11 +13,14 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.Constants
+import com.example.simya.Constants.CHAT_OTHERS
+import com.example.simya.Constants.CHAT_SELF
 import com.example.simya.Constants.HOUSE_ID
 import com.example.simya.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.adpter.chatAdapter.ChatDrawerRVAdapter
 import com.example.simya.adpter.chatAdapter.ChatRVAdapter
+import com.example.simya.data.ChatRVData
 import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.ActivityDrawerChatBinding
 import com.example.simya.testData.TestChatData
@@ -33,7 +36,7 @@ import org.json.JSONObject
 
 class ChatActivity : AppCompatActivity() {
     lateinit var binding: ActivityDrawerChatBinding
-    private lateinit var dataList: ArrayList<TestChatData>
+    private lateinit var dataList: ArrayList<ChatRVData>
     private lateinit var profileList: ArrayList<TestChatDrawerProfileData>
     lateinit var sendUser: TestUserData
     lateinit var receiveUser1: TestUserData
@@ -47,7 +50,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var topic: Disposable
     private val intervalMillis = 1000L
     private val jsonObject = JSONObject()
-    private val responseObject = JSONObject()
+    private lateinit var chatObject: JSONObject
 
     //    private val client = OkHttpClient()
     private val client = OkHttpClient.Builder()
@@ -77,21 +80,25 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        Log.d("Status","CHAT ACTIVITY")
+        Log.d("Status", "CHAT ACTIVITY")
         stomp.url = "ws://10.0.2.2:8080/simya/ws-stomp/websocket"
-        stompConnection = stomp.connect().subscribe { it->
+        stompConnection = stomp.connect().subscribe {
             when (it.type) {
                 Event.Type.OPENED -> {
                     Log.d("CONNECT", "OPENED")
-                    topic = stomp.join("/sub/simya/chat/room/${intent.getLongExtra(HOUSE_ID,0)}")
-                        .subscribe {
+                    topic = stomp.join("/sub/simya/chat/room/${intent.getLongExtra(HOUSE_ID, 0)}")
+                        .subscribe { chatData ->
                             Header(
                                 "Access-Token",
-                                UserTokenData.accessToken)
+                                UserTokenData.accessToken
+                            )
                             Header(
                                 "Refresh-Token",
-                                UserTokenData.refreshToken)
-                            Log.d("test ReceiveMessage",it)
+                                UserTokenData.refreshToken
+                            )
+                            chatObject = JSONObject(chatData)
+                            receiveMessage(chatObject)
+
                         }
                 }
                 Event.Type.CLOSED -> {
@@ -129,23 +136,23 @@ class ChatActivity : AppCompatActivity() {
             if (binding.includedChat.etChatInput.text.isNotEmpty()) {
                 Log.d("send message", binding.includedChat.etChatInput.text.toString())
 
-                val msg = binding.includedChat.etChatInput.text.toString()
-                Log.d("msg",msg)
                 jsonObject.put("type", "TALK")
-                jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID,0))
-                jsonObject.put("sender", "choi")
+                jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID, 0))
+                jsonObject.put("sender", UserTokenData.getProfileName())
                 jsonObject.put("token", convertToken(UserTokenData.accessToken))
-                jsonObject.put("message",msg)
+                jsonObject.put("message", binding.includedChat.etChatInput.text.toString())
                 jsonObject.put("userCount", 1)
-                Log.d("JSON OBJECT MESSAGE",jsonObject.get("message").toString())
-                Log.d("Check JSON OBJECT",jsonObject.toString())
+                Log.d("JSON OBJECT MESSAGE", jsonObject.get("message").toString())
+                Log.d("Check JSON OBJECT", jsonObject.toString())
                 stomp.send(
                     "/pub/simya/chat/androidMessage",
                     jsonObject.toString()
                 ).subscribe {
-                    if(it) {
+                    if (it) {
                     }
                 }
+                binding.includedChat.etChatInput.text = null
+
 //                Handler(Looper.getMainLooper()).postDelayed(
 //                    Runnable {
 //
@@ -160,21 +167,46 @@ class ChatActivity : AppCompatActivity() {
         }
 
     }
+
     private fun convertToken(testAccessToken: String): String {
         return testAccessToken.substring(7)
     }
+
     private fun moveLastItem(layoutManager: LinearLayoutManager) {
         Handler(Looper.getMainLooper()).postDelayed(
             Runnable { layoutManager.scrollToPositionWithOffset(dataList.size - 1, 0) }, 300
         )
     }
-    private fun chatCasting(chatType: Long){
-        if(chatType==intent.getLongExtra(PROFILE_ID,0)){
-            //  왼쪽
-        }else{
-            //  오른쪽
+
+    private fun receiveMessage(chat: JSONObject) {
+        Log.d("Receive Message is", chat.toString())
+        val profileId = chat.getLong("profileId")
+        val picture = chat.getString("picture")
+        val sender = chat.getString("sender")
+        val message = chat.getString("message")
+
+
+        runOnUiThread {
+            var senderType = 0
+            Log.d("profileId",profileId.toString())
+            Log.d("intent profileId",intent.getLongExtra(PROFILE_ID,0).toString())
+            if (profileId == intent.getLongExtra(PROFILE_ID, 0)) {
+                senderType = CHAT_SELF
+            } else {
+                senderType = CHAT_OTHERS
+            }
+            dataList.add(ChatRVData(profileId, picture, sender, message, senderType))
+            Log.d("sender is",sender)
+            Log.d("sender type",senderType.toString())
+            binding.includedChat.rvChatList.apply {
+                adapter!!.notifyItemInserted(dataList.size - 1)
+                scrollToPosition(dataList.size - 1)
+            }
         }
+
+
     }
+
     private fun testUserCheck(code: Int) {
         if (code == Constants.CHAT_MASTER_CODE) {
             // 주인장 캐스팅
@@ -192,7 +224,8 @@ class ChatActivity : AppCompatActivity() {
             setGuestType()
         }
     }
-    private fun receiveMessage(name: String,){
+
+    private fun receiveMessage(name: String) {
 
     }
 
@@ -205,16 +238,11 @@ class ChatActivity : AppCompatActivity() {
         binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_heart)
     }
 
-//    private fun sendMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
-//        dataList.add(TestChatData(user, content, "오후 9시"))
-//        binding.includedChat.rvChatList.apply {
-//            adapter.notifyDataSetChanged()
-//            scrollToPosition(dataList.size - 1)
-//        }
-//
-//        binding.includedChat.etChatInput.text = null
-//    }
-//    private fun receiveMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
+    private fun sendMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
+
+    }
+
+    //    private fun receiveMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
 //        dataList.add(TestChatData(user, content, "오후 9시"))
 //        binding.includedChat.rvChatList.apply {
 //            adapter.notifyDataSetChanged()
