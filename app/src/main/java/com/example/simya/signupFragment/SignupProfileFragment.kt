@@ -30,6 +30,7 @@ class SignupProfileFragment: Fragment() {
     private lateinit var binding: FragmentSignupProfileBinding
     private val nicknameValidation = "^[가-힣]{1,8}$"
     private val commentValidation = "^[가-힣a-zA-Z]{1,24}$"
+    // 공백 추가하기
     private lateinit var emailData: String
     private lateinit var pwData: String
     private lateinit var profile: ProfileDTO
@@ -39,17 +40,6 @@ class SignupProfileFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // email프래그먼트에서 email 받아오기
-        setFragmentResultListener("email") { _, bundle ->
-            emailData = bundle.getString("bundleKeyEmail").toString()
-            Toast.makeText(this.context, emailData, Toast.LENGTH_SHORT).show()
-        }
-        // pw프래그먼트에서 pw 받아오기
-        setFragmentResultListener("pw") { _, bundle ->
-            pwData = bundle.getString("bundleKeyPw").toString()
-            Toast.makeText(this.context, pwData, Toast.LENGTH_SHORT).show()
-        }
 
 
     }
@@ -70,26 +60,36 @@ class SignupProfileFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        FalseButton()
+        falseButton()
         initTW()
+        setFragmentResultListener("email") { _, bundle ->
+            emailData = bundle.getString("bundleKeyEmail").toString()
+            Toast.makeText(this.context, emailData, Toast.LENGTH_SHORT).show()
+        }
+        // pw프래그먼트에서 pw 받아오기
+        setFragmentResultListener("pw") { _, bundle ->
+            pwData = bundle.getString("bundleKeyPw").toString()
+            Toast.makeText(this.context, pwData, Toast.LENGTH_SHORT).show()
+        }
+        // email프래그먼트에서 email 받아오기
+
 
         binding.tietSignupInputNickname.addTextChangedListener(textWatcher)
         binding.tietSignupInputComment.addTextChangedListener(textWatcher)
 
 
         binding.btnSignupNextProfile.setOnClickListener {
-            // onSignUp(SignupDTO(emailData, pwData, profile))
+
             if (nicknameCheck() && commentCheck()){
                 val nicknameData = binding.tietSignupInputNickname.text.toString()
                 val commentData = binding.tietSignupInputComment.text.toString()
 
-                Toast.makeText(this.context, nicknameData, Toast.LENGTH_SHORT).show()
-                Toast.makeText(this.context, commentData, Toast.LENGTH_SHORT).show()
-                Toast.makeText(this.context, pwData, Toast.LENGTH_SHORT).show()
-
                 viewModel.pbValue.value = 100
 
-                moveToFin()
+                profile = ProfileDTO(nicknameData,commentData,"default")
+//                Log.d("Before","onSignUp")
+                onSignUp(SignupDTO(emailData, pwData, profile))
+
 
             } else {
                 Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
@@ -142,12 +142,12 @@ class SignupProfileFragment: Fragment() {
                 call: Call<SignupResponse>,
                 response: Response<SignupResponse>
             ) {
-                if(response.code()==Constants.OK){
+                if(response.body()!!.code==Constants.OK){
                     Log.d("Response check", response.toString())
                     Log.d("Response check", response.message().toString())
                     Log.d("Response check", response.code().toString())
                     Log.d("Response check", response.body().toString())
-
+                    moveToFin()
                 }
                 Toast.makeText(this@SignupProfileFragment.context, response.message(), Toast.LENGTH_SHORT).show()
             }
@@ -169,10 +169,10 @@ class SignupProfileFragment: Fragment() {
                 val commentInput = binding.tietSignupInputComment!!.text.toString()
 
                 if (nicknameInput.isNotEmpty() && commentInput.isNotEmpty()) {
-                    TrueButton()
+                    trueButton()
                 }
                 if (nicknameInput.isEmpty() || commentInput.isEmpty()) {
-                    FalseButton()
+                    falseButton()
                 }
             }
 
@@ -182,7 +182,7 @@ class SignupProfileFragment: Fragment() {
     }
 
 
-    private fun TrueButton() {
+    private fun trueButton() {
         binding.btnSignupNextProfile.isEnabled = true
         binding.btnSignupNextProfile.isClickable = true
         binding.btnSignupNextProfile.setBackgroundResource(R.drawable.low_radius_button_on)
@@ -190,7 +190,7 @@ class SignupProfileFragment: Fragment() {
 
     }
 
-    private fun FalseButton() {
+    private fun falseButton() {
         binding.btnSignupNextProfile.isEnabled = false
         binding.btnSignupNextProfile.isClickable = false
         binding.btnSignupNextProfile.setBackgroundResource(R.drawable.low_radius_button_off)
