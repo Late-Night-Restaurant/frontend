@@ -96,6 +96,7 @@ class ChatActivity : AppCompatActivity() {
                                 "Refresh-Token",
                                 UserTokenData.refreshToken
                             )
+                            Log.d("NOTIFY???????????????",it.toString())
                             chatObject = JSONObject(chatData)
                             receiveMessage(chatObject)
 
@@ -112,7 +113,13 @@ class ChatActivity : AppCompatActivity() {
                 else -> {}
             }
         }
-
+//        stomp.send(
+//            "/pub/simya/chat/androidMessage",
+//            jsonObject.toString()
+//        ).subscribe {
+//            if (it) {
+//            }
+//        }
         val drawerLayout = binding.dlChat
         binding.includedChat.includedDefault.tvDefaultChatTitle.text = "테스트용 이야기방"
         binding.includedChat.includedDefault.ibDefaultChatDrawer.setOnClickListener {
@@ -167,7 +174,14 @@ class ChatActivity : AppCompatActivity() {
         }
 
     }
-
+    private fun enterNotify(){
+        jsonObject.put("type", "TALK")
+        jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID, 0))
+        jsonObject.put("sender", UserTokenData.getProfileName())
+        jsonObject.put("token", convertToken(UserTokenData.accessToken))
+        jsonObject.put("message", binding.includedChat.etChatInput.text.toString())
+        jsonObject.put("userCount", 1)
+    }
     private fun convertToken(testAccessToken: String): String {
         return testAccessToken.substring(7)
     }
