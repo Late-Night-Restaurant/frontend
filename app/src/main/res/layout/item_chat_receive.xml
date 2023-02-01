@@ -12,10 +12,11 @@
         android:id="@+id/civ_chat_receive_profile"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="#00ff0000"
-        android:src="@color/Gray_04"
+        android:src="@drawable/ic_baseline_person_24"
+        android:background="@drawable/bg_profile"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
     <TextView
         android:id="@+id/tv_chat_receive_nick"
         android:layout_width="wrap_content"

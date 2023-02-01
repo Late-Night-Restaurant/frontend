@@ -6,6 +6,7 @@ object Constants {
     const val CHAT_GUEST_CODE = 2
     const val CHAT_SELF = 3
     const val CHAT_OTHERS = 4
+    const val CHAT_NOTIFY = 5
 
     const val SORT_RECENT = 11
     const val SORT_LONG = 12
