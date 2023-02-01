@@ -102,11 +102,8 @@ class EmailLoginActivity : AppCompatActivity() {
                 }else if(response.body()!!.code == 404){
                     Toast.makeText(this@EmailLoginActivity,"존재하지 않는 아이디이거나 비밀번호가 틀렸습니다.",Toast.LENGTH_SHORT).show()
                 }
-                Toast.makeText(this@EmailLoginActivity,response.message(),Toast.LENGTH_SHORT).show()
             }
             override fun onFailure(call: Call<AccountResponse>, t: Throwable) {
-                Toast.makeText(this@EmailLoginActivity,t.toString(),Toast.LENGTH_SHORT).show()
-
                 Log.d("Reponse check",t.toString())
             }
         })
