@@ -26,11 +26,6 @@ class SignupPwFragment: Fragment() {
     // 받아온 emailData 담아둘 변수
     private lateinit var emailData: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // email프래그먼트에서 email 받아오기
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,14 +46,14 @@ class SignupPwFragment: Fragment() {
         FalseButton()
         initTW()
 
-        binding.tietEmailSigninInputPw.addTextChangedListener(textWatcher)
-        binding.tietEmailSigninInputRepw.addTextChangedListener(textWatcher)
+        binding.tietPwSignupInput.addTextChangedListener(textWatcher)
+        binding.tietRepwSignupInput.addTextChangedListener(textWatcher)
 
 
         binding.btnSignupNextPw.setOnClickListener {
             if (pwCheck() && rePwCheck()) {
                 // profile 프래그먼트 데이터 전달
-                val pwData = binding.tietEmailSigninInputPw.text.toString()
+                val pwData = binding.tietPwSignupInput.text.toString()
 
                 setFragmentResult("pw", bundleOf("bundleKeyPw" to pwData))
 
@@ -75,28 +70,28 @@ class SignupPwFragment: Fragment() {
 
 
     private fun pwCheck(): Boolean {
-        var pwLength = binding.tietEmailSigninInputPw.text!!.length
-        var pw = binding.tietEmailSigninInputPw.text.toString().trim()
+        var pwLength = binding.tietPwSignupInput.text!!.length
+        var pw = binding.tietPwSignupInput.text.toString().trim()
         val pattern = Pattern.matches(pwValidation, pw)
 
         return if (pattern && pwLength in 8..12) {
             binding.btnSignupNextPw.error = null
             true
         } else {
-            binding.tilEmailSigninInputPw.error = "영문과 숫자를 조합해서 입력해주세요.(8-12자)"
+            binding.tilPwSignupInput.error = "영문과 숫자를 조합해서 입력해주세요.(8-12자)"
             false
         }
     }
 
     private fun rePwCheck(): Boolean {
-        var rePw = binding.tietEmailSigninInputRepw.text.toString().trim()
-        val pw = binding.tietEmailSigninInputPw.text.toString().trim()
+        var rePw = binding.tietRepwSignupInput.text.toString().trim()
+        val pw = binding.tietPwSignupInput.text.toString().trim()
 
         return if (rePw == pw) {
-            binding.tilEmailSigninInputRepw.error = null
+            binding.tilRepwSignupInput.error = null
             true
         } else {
-            binding.tilEmailSigninInputRepw.error = "입력하신 비밀번호와 일치하지 않습니다."
+            binding.tilRepwSignupInput.error = "입력하신 비밀번호와 일치하지 않습니다."
             false
         }
 
@@ -107,8 +102,8 @@ class SignupPwFragment: Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val pwInput = binding.tietEmailSigninInputPw!!.text.toString()
-                val rePwInput = binding.tietEmailSigninInputRepw!!.text.toString()
+                val pwInput = binding.tietPwSignupInput!!.text.toString()
+                val rePwInput = binding.tietRepwSignupInput!!.text.toString()
 
                 if (pwInput.isNotEmpty() && rePwInput.isNotEmpty()) {
                     TrueButton()

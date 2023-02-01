@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw_2">
         <!--        비밀번호 입력창-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_email_signin_input_pw"
+            android:id="@+id/til_pw_signup_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -53,7 +53,7 @@
             tools:ignore="MissingConstraints">
 
             <EditText
-                android:id="@+id/tiet_email_signin_input_pw"
+                android:id="@+id/tiet_pw_signup_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/Gray_06"
@@ -61,7 +61,7 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_email_signin_input_repw"
+            android:id="@+id/til_repw_signup_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -70,7 +70,7 @@
             app:hintEnabled="false">
 
             <EditText
-                android:id="@+id/tiet_email_signin_input_repw"
+                android:id="@+id/tiet_repw_signup_input"
                 android:layout_width="match_parent"
                 android:layout_height="37dp"
                 android:backgroundTint="@color/Gray_06"
