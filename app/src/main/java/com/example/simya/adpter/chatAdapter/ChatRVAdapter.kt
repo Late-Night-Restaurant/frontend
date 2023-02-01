@@ -6,8 +6,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.simya.Constants.CHAT_NOTIFY
+import com.example.simya.Constants.CHAT_OTHERS
 import com.example.simya.Constants.CHAT_SELF
+import com.example.simya.Constants.DEFAULT
+import com.example.simya.Constants.UNKNOWN
 import com.example.simya.data.ChatRVData
+import com.example.simya.databinding.ItemChatNotifyBinding
 import com.example.simya.databinding.ItemChatReceiveBinding
 import com.example.simya.databinding.ItemChatSendBinding
 import com.example.simya.databinding.ItemDrawerProfileBinding
@@ -29,19 +34,35 @@ class ChatRVAdapter (private val context: Context, private val dataList:ArrayLis
 //            Glide.with(context).load(data.user.image).centerCrop().into(binding.civChatSendProfile)
         }
     }
+    inner class NotifyDataViewHolder(private val binding: ItemChatNotifyBinding): RecyclerView.ViewHolder(binding.root){
+        fun bind(data: ChatRVData) {
+            binding.tvChatNotifyEnter.text = data.message
+//            Glide.with(context).load(data.user.image).centerCrop().into(binding.civChatSendProfile)
+        }
+    }
     // test return if를 3개로 나누어서 CHAT_SELF , CHAT_OTHERS , ERROR
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (dataList[viewType].userType == CHAT_SELF) {
-           SendDataViewHolder((ItemChatSendBinding.inflate(LayoutInflater.from(parent.context),parent,false)))
-        }else{
-            ReceiveDataViewHolder(ItemChatReceiveBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        when (dataList[viewType].userType) {
+            CHAT_SELF -> {
+                return SendDataViewHolder((ItemChatSendBinding.inflate(LayoutInflater.from(parent.context),parent,false)))
+            }
+            CHAT_OTHERS -> {
+                return ReceiveDataViewHolder(ItemChatReceiveBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+            }
+            CHAT_NOTIFY -> {
+                return NotifyDataViewHolder(ItemChatNotifyBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+            }
         }
+        //조치 취해야함
+        return SendDataViewHolder((ItemChatSendBinding.inflate(LayoutInflater.from(parent.context),parent,false)))
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (dataList[position].userType == CHAT_SELF){
             (holder as SendDataViewHolder).bind(dataList[position])
-        }else{
+        }else if(dataList[position].userType == CHAT_OTHERS){
             (holder as ReceiveDataViewHolder).bind(dataList[position])
+        }else if(dataList[position].userType == CHAT_NOTIFY){
+            (holder as NotifyDataViewHolder).bind(dataList[position])
         }
     }
 

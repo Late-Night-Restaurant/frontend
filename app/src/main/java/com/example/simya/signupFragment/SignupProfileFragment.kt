@@ -64,12 +64,10 @@ class SignupProfileFragment: Fragment() {
         initTW()
         setFragmentResultListener("email") { _, bundle ->
             emailData = bundle.getString("bundleKeyEmail").toString()
-            Toast.makeText(this.context, emailData, Toast.LENGTH_SHORT).show()
         }
         // pw프래그먼트에서 pw 받아오기
         setFragmentResultListener("pw") { _, bundle ->
             pwData = bundle.getString("bundleKeyPw").toString()
-            Toast.makeText(this.context, pwData, Toast.LENGTH_SHORT).show()
         }
         // email프래그먼트에서 email 받아오기
 
@@ -149,11 +147,9 @@ class SignupProfileFragment: Fragment() {
                     Log.d("Response check", response.body().toString())
                     moveToFin()
                 }
-                Toast.makeText(this@SignupProfileFragment.context, response.message(), Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-                Toast.makeText(this@SignupProfileFragment.context, t.toString(), Toast.LENGTH_SHORT).show()
                 Log.d("Response check", t.toString())
             }
         })
