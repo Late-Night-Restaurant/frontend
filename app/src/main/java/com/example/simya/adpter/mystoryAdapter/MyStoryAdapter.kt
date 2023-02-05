@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.databinding.ItemMyBorderRv328156Binding
 import com.example.simya.testData.TestDataBorder
 
-class MyStoryRVAdpater(private val dataList: ArrayList<TestDataBorder>) :
-    RecyclerView.Adapter<MyStoryRVAdpater.DataViewHolder>() {
+class MyStoryAdapter(private val dataList: ArrayList<TestDataBorder>) :
+    RecyclerView.Adapter<MyStoryAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val binding: ItemMyBorderRv328156Binding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: TestDataBorder) {

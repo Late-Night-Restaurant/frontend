@@ -1,6 +1,5 @@
 package com.example.simya.adpter.mystoryAdapter
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.databinding.ItemMyBorderGv156156Binding
 import com.example.simya.server.story.LoadMyStoryResult
 
-class MyStoryGVAdater(private val dataList:ArrayList<LoadMyStoryResult>): RecyclerView.Adapter<MyStoryGVAdater.DataViewHolder>() {
+class MyStoryGVAdapter(private val dataList:ArrayList<LoadMyStoryResult>): RecyclerView.Adapter<MyStoryGVAdapter.DataViewHolder>() {
     private var listener: OnItemClickListener? = null
     inner class DataViewHolder(private val binding: ItemMyBorderGv156156Binding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: LoadMyStoryResult) {

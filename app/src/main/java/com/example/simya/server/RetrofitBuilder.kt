@@ -8,15 +8,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
     private var instance: Retrofit? = null
-    private val gson = GsonBuilder().setLenient().create()
 
     fun getInstnace(): Retrofit {
-        if (com.example.simya.server.RetrofitBuilder.instance == null) {
-            com.example.simya.server.RetrofitBuilder.instance = Retrofit.Builder()
+        if (instance == null) {
+            instance = Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
-        return com.example.simya.server.RetrofitBuilder.instance!!
+        return instance!!
     }
 }
