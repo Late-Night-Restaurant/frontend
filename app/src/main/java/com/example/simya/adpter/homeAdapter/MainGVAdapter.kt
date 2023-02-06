@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.simya.adpter.mystoryAdapter.MyStoryGVAdater
 import com.example.simya.testData.TestDataBorder
 import com.example.simya.databinding.ItemBorderGv156156Binding
 import com.example.simya.server.story.LoadAllStoryResult

@@ -9,8 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.Constants
 import com.example.simya.databinding.FragmentHomeMainRecyclerBinding
-import com.example.simya.adpter.homeAdapter.MainRVAdapter
-import com.example.simya.adpter.mystoryAdapter.MyStoryRVAdpater
+import com.example.simya.adpter.mystoryAdapter.MyStoryAdapter
 import com.example.simya.data.UserTokenData
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
@@ -47,7 +46,7 @@ class MyStoryRecyclerFragment: Fragment() {
         dataList = arrayListOf()
         dataList.apply{
         }
-        val dataRVAdapter = MyStoryRVAdpater(dataList)
+        val dataRVAdapter = MyStoryAdapter(dataList)
         binding.rvHomeMainRecycler.adapter = dataRVAdapter
         binding.rvHomeMainRecycler.layoutManager = LinearLayoutManager(this.context)
     }

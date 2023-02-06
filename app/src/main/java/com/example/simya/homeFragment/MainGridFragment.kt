@@ -17,7 +17,6 @@ import com.example.simya.activity.StoryIntroActivity
 import com.example.simya.testData.TestDataBorder
 import com.example.simya.databinding.FragmentHomeMainGridBinding
 import com.example.simya.adpter.homeAdapter.MainGVAdapter
-import com.example.simya.adpter.mystoryAdapter.MyStoryGVAdater
 import com.example.simya.data.UserTokenData
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
@@ -93,7 +92,6 @@ class MainGridFragment: Fragment() {
         dataGVAdapter.setOnItemClickListener(object : MainGVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: LoadAllStoryResult, position: Int) {
                 //뭐보낼까
-                Toast.makeText(this@MainGridFragment.context,"${data.houseId}",Toast.LENGTH_SHORT).show()
                 val intent = Intent(this@MainGridFragment.context,StoryIntroActivity::class.java)
                 intent.putExtra(HOUSE_ID,data.houseId)
                 startActivity(intent)

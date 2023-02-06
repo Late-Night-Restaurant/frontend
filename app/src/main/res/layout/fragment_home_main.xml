@@ -13,7 +13,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_bell"
+            android:src="@drawable/ic_bell_no"
             android:background="#00ff0000"
             />
         <TextView

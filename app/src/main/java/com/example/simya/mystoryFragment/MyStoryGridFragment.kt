@@ -15,7 +15,7 @@ import com.example.simya.Constants.HOUSE_ID
 import com.example.simya.activity.OpenMyStoryActivity
 import com.example.simya.databinding.FragmentHomeMainGridBinding
 import com.example.simya.adpter.homeAdapter.MainGVAdapter
-import com.example.simya.adpter.mystoryAdapter.MyStoryGVAdater
+import com.example.simya.adpter.mystoryAdapter.MyStoryGVAdapter
 import com.example.simya.data.UserTokenData
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
@@ -29,7 +29,7 @@ import retrofit2.Response
 class MyStoryGridFragment : Fragment() {
     private lateinit var binding: FragmentHomeMainGridBinding
     private var dataList: ArrayList<LoadMyStoryResult> = arrayListOf()
-    private lateinit var dataGVAdapter: MyStoryGVAdater
+    private lateinit var dataGVAdapter: MyStoryGVAdapter
 
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
@@ -79,7 +79,7 @@ class MyStoryGridFragment : Fragment() {
                                     }
                                 }
                                 val gridLayoutManager = GridLayoutManager(activity, 2)
-                                dataGVAdapter = MyStoryGVAdater(dataList)
+                                dataGVAdapter = MyStoryGVAdapter(dataList)
                                 binding.gvHomeMainGrid.adapter = dataGVAdapter
                                 binding.gvHomeMainGrid.layoutManager = gridLayoutManager
                                 clickMyStory()
@@ -96,7 +96,7 @@ class MyStoryGridFragment : Fragment() {
     }
 
     private fun clickMyStory() {
-        dataGVAdapter.setOnItemClickListener(object : MyStoryGVAdater.OnItemClickListener {
+        dataGVAdapter.setOnItemClickListener(object : MyStoryGVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: LoadMyStoryResult, position: Int) {
                 val intent =
                     Intent(this@MyStoryGridFragment.context, OpenMyStoryActivity::class.java)
