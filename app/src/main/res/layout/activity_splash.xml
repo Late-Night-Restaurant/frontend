@@ -3,32 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.jetradarmobile.snowfall.SnowfallView
-        android:id="@+id/snow_fall"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:snowflakesNum="100"
-        app:snowflakeAlphaMin="150"
-        app:snowflakeAlphaMax="255"
-        app:snowflakeAngleMax="5"
-        app:snowflakeSizeMin="8dp"
-        app:snowflakeSizeMax="32dp"
-        app:snowflakeSpeedMin="4"
-        app:snowflakeSpeedMax="12"
-        app:snowflakesFadingEnabled="true"
-        app:snowflakesAlreadyFalling="false"
-        app:snowflakeImage="@drawable/ic_baseline_circle_24"/>
+<!--    <com.jetradarmobile.snowfall.SnowfallView-->
+<!--        android:id="@+id/snow_fall"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:snowflakesNum="100"-->
+<!--        app:snowflakeAlphaMin="150"-->
+<!--        app:snowflakeAlphaMax="255"-->
+<!--        app:snowflakeAngleMax="5"-->
+<!--        app:snowflakeSizeMin="8dp"-->
+<!--        app:snowflakeSizeMax="32dp"-->
+<!--        app:snowflakeSpeedMin="4"-->
+<!--        app:snowflakeSpeedMax="12"-->
+<!--        app:snowflakesFadingEnabled="true"-->
+<!--        app:snowflakesAlreadyFalling="false"-->
+<!--        app:snowflakeImage="@drawable/ic_baseline_circle_24"/>-->
+
     <ImageView
-        android:id="@+id/iv_splash_1"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:src="@drawable/splash_moon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    <ImageView
-        android:id="@+id/iv_splash_2"
+        android:id="@+id/iv_moon"
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:src="@drawable/splash_moon_on"
@@ -36,45 +28,38 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
+
     <ImageView
-        android:id="@+id/iv_splash_3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/splash_moon_on"
-        app:layout_constraintStart_toStartOf="@id/iv_splash_2"
-        app:layout_constraintEnd_toStartOf="@id/iv_splash_2"
-        app:layout_constraintBottom_toTopOf="@id/iv_splash_2"
-        android:visibility="invisible"/>
-    <ImageView
-        android:id="@+id/iv_splash_4_moon"
+        android:id="@+id/iv_stars"
         android:layout_width="280dp"
         android:layout_height="228dp"
-        android:src="@drawable/splash_moon_star"
+        android:src="@drawable/splash_stars"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/iv_splash_3"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"
-        android:visibility="invisible"/>
+        android:layout_marginStart="16dp"
+        android:visibility="visible"/>
     <ImageView
-        android:id="@+id/iv_splash_4_building"
+        android:id="@+id/iv_building_off"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@drawable/splash_building_off"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
     <ImageView
-        android:id="@+id/iv_splash_5"
+        android:id="@+id/iv_building_on"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@drawable/splash_building_on"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
     <ImageView
-        android:id="@+id/iv_splash_6"
+        android:id="@+id/iv_logo"
         android:layout_width="212dp"
         android:layout_height="72dp"
         android:src="@drawable/splash_title"
@@ -82,14 +67,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
     <ImageView
-        android:id="@+id/iv_splash_7"
+        android:id="@+id/iv_intro"
         android:layout_width="241dp"
         android:layout_height="22dp"
         android:src="@drawable/splash_intro"
-        app:layout_constraintTop_toBottomOf="@id/iv_splash_6"
+        app:layout_constraintTop_toBottomOf="@id/iv_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

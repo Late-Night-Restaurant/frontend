@@ -33,45 +33,32 @@ class SplashActivity : AppCompatActivity() {
     }
 
 //    )
-    /*  달이 밝게 비춤
-    **  달이 이동
-    **  달과 별이 나타남 + 도시 나타남
-    **  도시에 불이 켜짐
-    **  메인 타이틀
-    **  인트로
-    **  타이틀+ 인트로만 남김 */
+    /*  달이 밝게 비춤 (시작)
+    **  달이 이동하면서 별, 도시들이 나타남
+    **  불이켜지면서 심야식당 로고 등장
+    **  심야식당 인트로 등장
+    **  로고 + 인트로 빼고 페이드 아웃 */
     private fun init() {
+        moveXY(binding.ivMoon)
+//    splashHandler.postDelayed(
+//            Runnable { sequenceOne() }, 1000
+//        )
+//
+//    splashHandler.postDelayed(
+//            Runnable { moveToHome() }, 16000
+//        )
+    }
+    private fun moveXY(imageView: ImageView){
+        val moveXY = ObjectAnimator.ofFloat(imageView, "translationX", 100f).apply {
+            duration = 2000
+            start()
+        }
 
-    splashHandler.postDelayed(
-            Runnable { sequenceOne() }, 1000
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceTwo() }, 3000
-
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceThree() }, 5000
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceFour() }, 7000
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceFive() }, 9000
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceSix() }, 11000
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceLast() }, 13000
-        )
-    splashHandler.postDelayed(
-            Runnable { moveToHome() }, 16000
-        )
     }
     // 페이드인 애니메이션
     private fun fadeIn(imageView: ImageView) {
         val fadeIn = ObjectAnimator.ofFloat(imageView, "alpha", 0f, 1f)
-        fadeIn.duration = 2000
+        fadeIn.duration = 1000
         fadeIn.start()
     }
     // 페이드 아웃 애니메이션
@@ -91,44 +78,15 @@ class SplashActivity : AppCompatActivity() {
     }
     // 스플래쉬 시퀀스
     private fun sequenceOne() {
-        binding.ivSplash2.isInvisible = false
-        fadeIn(binding.ivSplash2)
+        //달의 이동
+        fadeIn(binding.ivStars)
+        fadeIn(binding.ivBuildingOff)
+    }
+    private fun sequenceTwo(){
+        fadeIn(binding.ivBuildingOn)
+        fadeIn(binding.ivLogo)
     }
 
-    private fun sequenceTwo() {
-        fadeOut(binding.ivSplash1)
-        fadeOut(binding.ivSplash2)
-        binding.ivSplash3.isInvisible = false
-        fadeIn(binding.ivSplash3)
-    }
-
-    private fun sequenceThree() {
-        fadeOut(binding.ivSplash3)
-        binding.ivSplash4Moon.isInvisible = false
-        binding.ivSplash4Building.isInvisible = false
-        fadeIn(binding.ivSplash4Moon)
-        fadeIn(binding.ivSplash4Building)
-    }
-
-    private fun sequenceFour() {
-        binding.ivSplash5.isInvisible = false
-        fadeIn(binding.ivSplash5)
-    }
-
-    private fun sequenceFive() {
-        binding.ivSplash6.isInvisible = false
-        fadeIn(binding.ivSplash6)
-    }
-
-    private fun sequenceSix() {
-        binding.ivSplash7.isInvisible = false
-        fadeIn(binding.ivSplash7)
-    }
-    private fun sequenceLast() {
-        fadeOut(binding.ivSplash4Moon)
-        fadeOut(binding.ivSplash4Building)
-        fadeOut(binding.ivSplash5)
-    }
     // 홈으로 이동
     private fun moveToHome(){
         val intent = Intent(this,LoginActivity::class.java)
