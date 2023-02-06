@@ -11,8 +11,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_bell_no"
             android:background="#00ff0000"
             />
@@ -25,8 +26,9 @@
             android:textColor="@color/Primary_01"
             android:layout_gravity="center"/>
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_search"
             android:background="#00ff0000"
             android:layout_gravity="end"
@@ -49,14 +51,16 @@
             android:text="현재 손님순"/>
         <ImageButton
             android:id="@+id/ib_home_main_sort_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_down"
             android:background="#00ff0000"/>
         <ImageButton
             android:id="@+id/ib_home_main_view_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_box_4"
             android:background="#00ff0000"/>
     </LinearLayout>

@@ -33,8 +33,9 @@
 
         <ImageButton
             android:id="@+id/ib_chat_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
             android:background="#00ff0000"
             android:src="@drawable/ic_image"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -61,10 +62,10 @@
 
         <ImageButton
             android:id="@+id/ib_chat_send"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="#00ff0000"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
             android:scaleType="fitCenter"
+            android:background="#00ff0000"
             android:src="@drawable/ic_send"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ib_chat_emoji"
@@ -73,8 +74,9 @@
 
         <ImageButton
             android:id="@+id/ib_chat_emoji"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
             android:layout_marginStart="8dp"
             android:background="#00ff0000"
             android:src="@drawable/ic_emoji"
