@@ -13,9 +13,11 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.example.simya.Constants
+import com.example.simya.CustomToast
 import com.example.simya.R
 import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.ActivitySplashBinding
@@ -105,6 +107,8 @@ class SplashActivity : AppCompatActivity() {
         moveMoon(binding.ivMoon)
         fadeIn(binding.ivStars)
         fadeIn(binding.ivBuildingOff)
+        CustomToast.createToast(this,"에러아니다!!!!!!!!!!!!!!!!!!!!")!!.show()
+        Toast.makeText(this,"text",Toast.LENGTH_SHORT).show()
     }
 
     private fun sequenceTwo() {
