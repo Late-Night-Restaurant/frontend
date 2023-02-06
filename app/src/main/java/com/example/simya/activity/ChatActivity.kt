@@ -260,7 +260,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun setGuestType() {
         binding.btnChatPause.isInvisible = true
-        binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_heart)
+        binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_alert_story)
     }
 
     private fun sendMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {

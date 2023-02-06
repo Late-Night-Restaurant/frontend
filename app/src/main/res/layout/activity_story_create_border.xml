@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -24,8 +25,9 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
         <ImageButton
             android:id="@+id/ib_my_story_create_border_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_small_width"
+            android:layout_height="@dimen/icon_small_height"
+            android:scaleType="fitCenter"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_my_story_create_border_headline"
@@ -55,8 +57,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/low_radius_border"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_camera"/>
+        android:layout_marginTop="16dp"/>
+
+    <ImageView
+        android:layout_width="@dimen/icon_big_width"
+        android:layout_height="@dimen/icon_big_height"
+        android:src="@drawable/ic_camera"
+        app:layout_constraintBottom_toBottomOf="@+id/ib_my_story_create_border"
+        app:layout_constraintEnd_toEndOf="@+id/ib_my_story_create_border"
+        app:layout_constraintStart_toStartOf="@+id/ib_my_story_create_border"
+        app:layout_constraintTop_toTopOf="@+id/ib_my_story_create_border" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_my_story_create_border_input"
         android:layout_width="match_parent"

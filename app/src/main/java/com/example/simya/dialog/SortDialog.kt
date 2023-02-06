@@ -65,21 +65,21 @@ class SortDialog(private val context: AppCompatActivity) : View.OnClickListener 
     }
 
     private fun orderRecent() {
-        binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_on)
-        binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_off)
-        binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_off)
+        binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_enabled)
+        binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_disabled)
+        binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_disabled)
     }
 
     private fun orderLike() {
-        binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_off)
-        binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_on)
-        binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_off)
+        binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_disabled)
+        binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_enabled)
+        binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_disabled)
     }
 
     private fun orderLong() {
-        binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_off)
-        binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_off)
-        binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_on)
+        binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_disabled)
+        binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_disabled)
+        binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_enabled)
 
     }
 
