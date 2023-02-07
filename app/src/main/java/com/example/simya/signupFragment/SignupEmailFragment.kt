@@ -1,6 +1,7 @@
 package com.example.simya.signupFragment
 
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,8 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.*
+import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE
+import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
+import com.example.simya.activity.SignupActivity
 import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.server.account.SignupDTO
@@ -19,14 +23,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
+import kotlin.math.sign
 
-class SignupEmailFragment: Fragment() {
+class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
     private lateinit var binding: FragmentSignupEmailBinding
     private val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     private lateinit var textWatcher: TextWatcher
     private lateinit var bindingMain: ActivitySignupBinding
     private lateinit var viewModel: SignUpViewModel
 
+    var signupActivity: SignupActivity? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        signupActivity = context as SignupActivity
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,11 +56,14 @@ class SignupEmailFragment: Fragment() {
     // 다시 상속받는
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.pbValue.value = 25
         FalseButton()
 
         initTW()
 
         binding.tietEmailSignupInput.addTextChangedListener(textWatcher)
+
+
 
         binding.btnSignupNextEmail.setOnClickListener {
             if (emailCheck()) {
@@ -59,11 +74,7 @@ class SignupEmailFragment: Fragment() {
                 // progress bar 값 변경
                 viewModel.pbValue.value = 50
 
-                // 프래그먼트 전환
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fm_signup, SignupPwFragment())
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
+                signupActivity!!.nextFragmentSignUp(3)
             }
         }
     }
@@ -119,6 +130,10 @@ class SignupEmailFragment: Fragment() {
         binding.btnSignupNextEmail.setBackgroundResource(R.drawable.low_radius_button_off)
         binding.btnSignupNextEmail.setTextColor(resources.getColor(R.color.Gray_10))
 
+    }
+
+    override fun onBackPressed() {
+        signupActivity!!.nextFragmentSignUp(1)
     }
 
 }

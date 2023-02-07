@@ -1,5 +1,6 @@
 package com.example.simya.signupFragment
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,6 +15,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.Constants
 import com.example.simya.R
+import com.example.simya.activity.SignupActivity
 import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
@@ -26,7 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
 
-class SignupProfileFragment: Fragment() {
+class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
     private lateinit var binding: FragmentSignupProfileBinding
     private val nicknameValidation = "^[가-힣]{1,8}$"
     private val commentValidation = "^[가-힣a-zA-Z]{1,24}$"
@@ -37,6 +39,12 @@ class SignupProfileFragment: Fragment() {
     private lateinit var textWatcher: TextWatcher
     private lateinit var viewModel: SignUpViewModel
 
+    var signupActivity: SignupActivity? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        signupActivity = context as SignupActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -117,10 +125,7 @@ class SignupProfileFragment: Fragment() {
     }
 
     private fun moveToFin(){
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fm_signup, SignupFinFragment())
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .commit()
+        signupActivity!!.nextFragmentSignUp(5)
     }
 
 
@@ -187,4 +192,10 @@ class SignupProfileFragment: Fragment() {
         binding.btnSignupNextProfile.setTextColor(resources.getColor(R.color.Gray_10))
 
     }
+
+    override fun onBackPressed() {
+        signupActivity!!.nextFragmentSignUp(3)
+    }
+
+
 }
