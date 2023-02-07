@@ -1,5 +1,6 @@
 package com.example.simya.signupFragment
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,20 +13,25 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
+import com.example.simya.activity.SignupActivity
+import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.databinding.FragmentSignupPwBinding
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
-import com.example.simya.signUpViewModel.SignUpViewModel
 import java.util.regex.Pattern
 
-class SignupPwFragment: Fragment() {
+class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
     private lateinit var binding: FragmentSignupPwBinding
     private val pwValidation =  """^[0-9a-zA-Z!@#$%^+\-=]*$"""
     private lateinit var textWatcher: TextWatcher
-    private lateinit var viewModel: SignUpViewModel
-    // 받아온 emailData 담아둘 변수
     private lateinit var emailData: String
 
+    var signupActivity: SignupActivity? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        signupActivity = context as SignupActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,17 +40,16 @@ class SignupPwFragment: Fragment() {
     ): View? {
         binding = FragmentSignupPwBinding.inflate(layoutInflater)
 
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())
-            .get(SignUpViewModel::class.java)
-
         return binding.root
 
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         FalseButton()
         initTW()
+        signupActivity!!.binding.pbSignup.progress = 50
 
         binding.tietPwSignupInput.addTextChangedListener(textWatcher)
         binding.tietRepwSignupInput.addTextChangedListener(textWatcher)
@@ -57,12 +62,7 @@ class SignupPwFragment: Fragment() {
 
                 setFragmentResult("pw", bundleOf("bundleKeyPw" to pwData))
 
-                viewModel.pbValue.value = 75
-
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fm_signup, SignupProfileFragment())
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
+                signupActivity!!.nextFragmentSignUp(4)
             }
         }
 
@@ -134,6 +134,11 @@ class SignupPwFragment: Fragment() {
         binding.btnSignupNextPw.setTextColor(resources.getColor(R.color.Gray_10))
 
     }
+
+    override fun onBackPressed() {
+        signupActivity!!.nextFragmentSignUp(2)
+    }
+
 
 }
 

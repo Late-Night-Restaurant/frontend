@@ -1,5 +1,6 @@
 package com.example.simya.signupFragment
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,29 +15,33 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.Constants
 import com.example.simya.R
+import com.example.simya.activity.SignupActivity
 import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
 import com.example.simya.server.account.ProfileDTO
 import com.example.simya.server.account.SignupDTO
 import com.example.simya.server.account.SignupResponse
-import com.example.simya.signUpViewModel.SignUpViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
 
-class SignupProfileFragment: Fragment() {
+class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
     private lateinit var binding: FragmentSignupProfileBinding
     private val nicknameValidation = "^[가-힣]{1,8}$"
-    private val commentValidation = "^[가-힣a-zA-Z]{1,24}$"
-    // 공백 추가하기
+    private val commentValidation = "^.{1,24}$" // 모든 문자 가능, 24자 이내
     private lateinit var emailData: String
     private lateinit var pwData: String
     private lateinit var profile: ProfileDTO
     private lateinit var textWatcher: TextWatcher
-    private lateinit var viewModel: SignUpViewModel
 
+    var signupActivity: SignupActivity? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        signupActivity = context as SignupActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,9 +49,6 @@ class SignupProfileFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignupProfileBinding.inflate(layoutInflater)
-
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())
-            .get(SignUpViewModel::class.java)
 
         return binding.root
 
@@ -56,6 +58,8 @@ class SignupProfileFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         falseButton()
         initTW()
+        signupActivity!!.binding.pbSignup.progress = 75
+
         setFragmentResultListener("email") { _, bundle ->
             emailData = bundle.getString("bundleKeyEmail").toString()
         }
@@ -75,8 +79,6 @@ class SignupProfileFragment: Fragment() {
             if (nicknameCheck() && commentCheck()){
                 val nicknameData = binding.tietNicknameSignupInput.text.toString()
                 val commentData = binding.tietCommentSignupInput.text.toString()
-
-                viewModel.pbValue.value = 100
 
                 profile = ProfileDTO(nicknameData,commentData,"default")
 //                Log.d("Before","onSignUp")
@@ -117,10 +119,7 @@ class SignupProfileFragment: Fragment() {
     }
 
     private fun moveToFin(){
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fm_signup, SignupFinFragment())
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .commit()
+        signupActivity!!.nextFragmentSignUp(5)
     }
 
 
@@ -187,4 +186,10 @@ class SignupProfileFragment: Fragment() {
         binding.btnSignupNextProfile.setTextColor(resources.getColor(R.color.Gray_10))
 
     }
+
+    override fun onBackPressed() {
+        signupActivity!!.nextFragmentSignUp(3)
+    }
+
+
 }
