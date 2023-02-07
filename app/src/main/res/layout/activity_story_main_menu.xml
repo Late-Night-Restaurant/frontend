@@ -49,99 +49,32 @@
             android:visibility="invisible"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/cl_my_story_create_main_menu"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="horizontal"
-            android:columnCount="3"
-            android:rowCount="3"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            >
-            <Button
-                android:id="@+id/btn_main_menu_love"
-                android:layout_width="0dp"
-                android:layout_height="104dp"
-                android:layout_columnWeight="1"
-                android:text="사랑"
-                android:gravity="bottom"
-                android:paddingLeft="8dp"
-                android:background="@drawable/low_radius_border_highlight"
-                android:layout_margin="4dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gv_my_story_create_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_my_story_create_main_menu"
+        app:layout_constraintBottom_toTopOf="@id/btn_main_menu_next"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"/>
 
-            <Button
-                android:id="@+id/btn_main_menu_family"
-                android:layout_width="0dp"
-                android:layout_height="104dp"
-                android:layout_columnWeight="1"
-                android:text="가족"
-                android:gravity="bottom"
-                android:paddingLeft="8dp"
-                android:background="@drawable/low_radius_border_highlight"
-                android:layout_margin="4dp" />
-
-            <Button
-                android:id="@+id/btn_main_menu_relationship"
-                android:layout_width="0dp"
-                android:layout_height="104dp"
-                android:layout_columnWeight="1"
-                android:text="인간관계"
-                android:gravity="bottom"
-                android:paddingLeft="8dp"
-                android:background="@drawable/low_radius_border_highlight"
-                android:layout_margin="4dp"/>
-            <Button
-                android:id="@+id/btn_main_menu_stress"
-                android:layout_width="0dp"
-                android:layout_height="104dp"
-                android:layout_columnWeight="1"
-                android:text="스트레스"
-                android:gravity="bottom"
-                android:paddingLeft="8dp"
-                android:background="@drawable/low_radius_border_highlight"
-                android:layout_margin="4dp" />
-
-            <Button
-                android:id="@+id/btn_main_menu_hobby"
-                android:layout_width="0dp"
-                android:layout_height="104dp"
-                android:layout_columnWeight="1"
-                android:text="취미"
-                android:gravity="bottom"
-                android:paddingLeft="8dp"
-                android:background="@drawable/low_radius_border_highlight"
-                android:layout_margin="4dp"
-                />
-
-            <Button
-                android:id="@+id/btn_main_menu_culture"
-                android:layout_width="0dp"
-                android:layout_height="104dp"
-                android:layout_columnWeight="1"
-                android:text="문화생활"
-                android:gravity="bottom"
-                android:paddingLeft="8dp"
-                android:background="@drawable/low_radius_border_highlight"
-                android:layout_margin="4dp"
-                />
-        </GridLayout>
     <Button
         android:id="@+id/btn_main_menu_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="다음"
-        android:textColor="@color/Gray_10"
+        android:textColor="@drawable/btn_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="56dp"
-        android:background="@drawable/low_radius_button_off"
+        android:background="@drawable/low_radius_button"
         android:enabled="false"
         android:clickable="false"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:layout_marginTop="16dp"
+    android:background="#00ff0000">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rl_item_main_menu_gv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/low_radius_border_highlight"
+        >
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize12Percent"
+            android:id="@+id/iv_gv_main_menu"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            android:alpha="0.7"
+            android:foreground="@drawable/main_menu_gradient"
+            app:strokeColor="@null"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <TextView
+            android:id="@+id/tv_gv_main_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="메인 메뉴"
+            android:textStyle="bold"
+            android:textColor="@color/Gray_03"
+            android:textSize="12dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_gv_main_menu"
+            app:layout_constraintStart_toStartOf="@id/iv_gv_main_menu"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

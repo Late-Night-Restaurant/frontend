@@ -85,11 +85,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="로그인"
-        android:background="@drawable/low_radius_button_off"
+        android:background="@drawable/low_radius_button"
         app:layout_constraintBottom_toTopOf="@id/ll_signup_email_find"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:enabled="false" />
     <!--    계정찾기 레이아웃-->
     <LinearLayout
         android:id="@+id/ll_signup_email_find"

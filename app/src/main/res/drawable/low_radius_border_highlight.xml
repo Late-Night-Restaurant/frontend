@@ -4,15 +4,12 @@
     <!-- 버튼이 눌렸을 때 -->
     <item android:state_selected="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/Gray_06" />
-            <stroke android:width="1dp" android:color="@color/Primary_02" />
-            <solid android:color="@color/Gray_06"/>
+            <stroke android:width="2dp" android:color="@color/Primary_02" />
             <padding
-                android:left="1dp"
-                android:right="1dp"
-                android:top="1dp"
-                android:bottom="1dp">
-            </padding>
+                android:top="2dp"
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"/>
             <corners
                 android:bottomRightRadius="12dp"
                 android:bottomLeftRadius="12dp"
@@ -21,11 +18,10 @@
         </shape>
     </item>
 
-    <!-- 버튼이 안 눌렸을 때(디폴트) -->
+<!--     버튼이 안 눌렸을 때(디폴트)-->
     <item android:state_selected="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/Gray_06"/>
-            <stroke android:width="1dp" android:color="#00ff0000" />
+            <stroke android:width="2dp" android:color="#00ff0000" />
             <corners
                 android:bottomRightRadius="12dp"
                 android:bottomLeftRadius="12dp"

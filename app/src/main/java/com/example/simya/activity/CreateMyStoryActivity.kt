@@ -10,13 +10,12 @@ import com.bumptech.glide.Glide
 import com.example.simya.Constants
 import com.example.simya.Constants.PROFILE_ID
 import com.example.simya.R
-import com.example.simya.adpter.createMyStoryAdapter.CreateMyStoryRVAdapter
+import com.example.simya.adpter.createMyStoryAdapter.CreateMyStoryMultiProfileAdapter
 import com.example.simya.data.UserTokenData
 import com.example.simya.databinding.ActivityMyStoryCreateBinding
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
 import com.example.simya.server.profile.ProfileResponse
-import com.example.simya.sharedpreferences.Shared
 import com.example.simya.testData.TestDataMultiProfile
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,7 +26,7 @@ class CreateMyStoryActivity : AppCompatActivity() {
       ActivityMyStoryCreateBinding.inflate(layoutInflater)
     }
     private var dataList: ArrayList<TestDataMultiProfile> = arrayListOf()
-    private val dataRVAdapter = CreateMyStoryRVAdapter(this, dataList)
+    private val dataRVAdapter = CreateMyStoryMultiProfileAdapter(this, dataList)
 
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
@@ -111,7 +110,7 @@ class CreateMyStoryActivity : AppCompatActivity() {
     }
 
     private fun clickMultiProfile() {
-        dataRVAdapter.setOnItemClickListener(object : CreateMyStoryRVAdapter.OnItemClickListener {
+        dataRVAdapter.setOnItemClickListener(object : CreateMyStoryMultiProfileAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: TestDataMultiProfile, position: Int) {
                 Glide.with(this@CreateMyStoryActivity).load(data.imageSource).centerCrop()
                     .into(binding.civMyStoryCreateSelectProfileImage)

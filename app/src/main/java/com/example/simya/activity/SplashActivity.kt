@@ -107,8 +107,7 @@ class SplashActivity : AppCompatActivity() {
         moveMoon(binding.ivMoon)
         fadeIn(binding.ivStars)
         fadeIn(binding.ivBuildingOff)
-        CustomToast.createToast(this,"에러아니다!!!!!!!!!!!!!!!!!!!!")!!.show()
-        Toast.makeText(this,"text",Toast.LENGTH_SHORT).show()
+
     }
 
     private fun sequenceTwo() {

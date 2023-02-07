@@ -18,7 +18,8 @@ class LoginActivity : AppCompatActivity() {
     private fun init() {
         // 카카오 로그인(현재 테스트용으로 홈화면으로 이동으로 바꿈)
         binding.ibLoginMainKakao.setOnClickListener {
-            moveToKaKao()
+            //잠시테스트
+//            moveToKaKao()
         }
 
         // 이메일 로그인

@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.simya.R
 import com.example.simya.databinding.ItemMultiProfileBinding
 import com.example.simya.testData.TestDataMultiProfile
 
-class CreateMyStoryRVAdapter(
+class CreateMyStoryMultiProfileAdapter(
     private val context: Context,
     private val dataList: ArrayList<TestDataMultiProfile>
-) : RecyclerView.Adapter<CreateMyStoryRVAdapter.DataViewHolder>() {
+) : RecyclerView.Adapter<CreateMyStoryMultiProfileAdapter.DataViewHolder>() {
     private var listener: OnItemClickListener? = null
 
     inner class DataViewHolder(private val binding: ItemMultiProfileBinding) :
