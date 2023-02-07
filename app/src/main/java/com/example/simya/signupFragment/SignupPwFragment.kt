@@ -18,15 +18,12 @@ import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.databinding.FragmentSignupPwBinding
 import com.example.simya.server.RetrofitBuilder
 import com.example.simya.server.RetrofitService
-import com.example.simya.signUpViewModel.SignUpViewModel
 import java.util.regex.Pattern
 
 class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
     private lateinit var binding: FragmentSignupPwBinding
     private val pwValidation =  """^[0-9a-zA-Z!@#$%^+\-=]*$"""
     private lateinit var textWatcher: TextWatcher
-    private lateinit var viewModel: SignUpViewModel
-    // 받아온 emailData 담아둘 변수
     private lateinit var emailData: String
 
     var signupActivity: SignupActivity? = null
@@ -43,8 +40,6 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
     ): View? {
         binding = FragmentSignupPwBinding.inflate(layoutInflater)
 
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[SignUpViewModel::class.java]
-
         return binding.root
 
     }
@@ -54,6 +49,7 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
         super.onViewCreated(view, savedInstanceState)
         FalseButton()
         initTW()
+        signupActivity!!.binding.pbSignup.progress = 50
 
         binding.tietPwSignupInput.addTextChangedListener(textWatcher)
         binding.tietRepwSignupInput.addTextChangedListener(textWatcher)
@@ -65,8 +61,6 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
                 val pwData = binding.tietPwSignupInput.text.toString()
 
                 setFragmentResult("pw", bundleOf("bundleKeyPw" to pwData))
-
-                viewModel.pbValue.value = 75
 
                 signupActivity!!.nextFragmentSignUp(4)
             }

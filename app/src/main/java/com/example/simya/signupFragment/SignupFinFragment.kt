@@ -37,6 +37,7 @@ class SignupFinFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        signupActivity!!.binding.pbSignup.progress = 100
 
         binding.btnSignupNext.setOnClickListener {
             var intent = Intent(activity, LoginActivity::class.java)

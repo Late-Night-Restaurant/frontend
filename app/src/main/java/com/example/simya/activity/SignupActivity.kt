@@ -10,12 +10,10 @@ import androidx.navigation.NavController
 import com.example.simya.R
 import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupAgreeBinding
-import com.example.simya.signUpViewModel.SignUpViewModel
 import com.example.simya.signupFragment.*
 
 class SignupActivity: AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding
-    private lateinit var viewModel: SignUpViewModel
     private lateinit var textWatcher: TextWatcher
 
     private var fragmentAgree = SignupAgreeFragment()
@@ -42,20 +40,7 @@ class SignupActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         val view = binding.root
-
-
         setContentView(view)
-
-
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(SignUpViewModel::class.java)
-
-
-        viewModel.pbValue.observe(this, Observer {
-            binding.pbSignup.progress = it
-        })
-
-
 
         init()
 

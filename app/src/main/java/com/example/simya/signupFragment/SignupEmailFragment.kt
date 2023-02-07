@@ -18,7 +18,6 @@ import com.example.simya.activity.SignupActivity
 import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.server.account.SignupDTO
-import com.example.simya.signUpViewModel.SignUpViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,7 +29,6 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
     private val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     private lateinit var textWatcher: TextWatcher
     private lateinit var bindingMain: ActivitySignupBinding
-    private lateinit var viewModel: SignUpViewModel
 
     var signupActivity: SignupActivity? = null
 
@@ -46,8 +44,6 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
     ): View? {
         binding = FragmentSignupEmailBinding.inflate(layoutInflater)
 
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[SignUpViewModel::class.java]
-
         return binding.root
 
     }
@@ -56,7 +52,7 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
     // 다시 상속받는
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.pbValue.value = 25
+        signupActivity!!.binding.pbSignup.progress = 25
         FalseButton()
 
         initTW()
@@ -70,9 +66,6 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
                 // pw프래그먼트로 데이터 전달
                 val email = binding.tietEmailSignupInput.text.toString()
                 setFragmentResult("email", bundleOf("bundleKeyEmail" to email))
-
-                // progress bar 값 변경
-                viewModel.pbValue.value = 50
 
                 signupActivity!!.nextFragmentSignUp(3)
             }

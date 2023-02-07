@@ -16,11 +16,10 @@ import com.example.simya.activity.EmailLoginActivity
 import com.example.simya.activity.SignupActivity
 import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupAgreeBinding
-import com.example.simya.signUpViewModel.SignUpViewModel
+
 
 class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
     private lateinit var binding: FragmentSignupAgreeBinding
-    private lateinit var viewModel: SignUpViewModel
 
     var signupActivity: SignupActivity? = null
     override fun onAttach(context: Context) {
@@ -35,9 +34,6 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
     ): View? {
         binding = FragmentSignupAgreeBinding.inflate(layoutInflater)
 
-        // ViewModel으로 Activiy와 통신
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())
-            .get(SignUpViewModel::class.java)
 
         return binding.root
 
@@ -45,7 +41,7 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.pbValue.value = 0
+        signupActivity!!.binding.pbSignup.progress = 0
 
         agreeCheck()
 
@@ -55,8 +51,6 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
                 signupActivity!!.nextFragmentSignUp(2)
                 initAgree()
             } else {
-                // progress bar 값 변경
-                viewModel.pbValue.value = 0
                 Toast.makeText(this.activity, "동의하지 않았습니다.", Toast.LENGTH_SHORT).show()
             }
         }
