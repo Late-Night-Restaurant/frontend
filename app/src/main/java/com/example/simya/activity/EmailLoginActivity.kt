@@ -149,14 +149,14 @@ class EmailLoginActivity : AppCompatActivity() {
                 if (emailInput.isNotEmpty() && passwordInput.isNotEmpty()) {
                     binding.btnEmailSigninLogin.isEnabled = true
                     binding.btnEmailSigninLogin.isClickable = true
-                    binding.btnEmailSigninLogin.setBackgroundResource(R.drawable.low_radius_button_on)
-                    binding.btnEmailSigninLogin.setTextColor(application.resources.getColor(R.color.Gray_03))
+//                    binding.btnEmailSigninLogin.setBackgroundResource(R.drawable.low_radius_button_on)
+//                    binding.btnEmailSigninLogin.setTextColor(application.resources.getColor(R.color.Gray_03))
                 }
                 if (emailInput.isEmpty() || passwordInput.isEmpty()) {
                     binding.btnEmailSigninLogin.isEnabled = false
                     binding.btnEmailSigninLogin.isClickable = false
-                    binding.btnEmailSigninLogin.setBackgroundResource(R.drawable.low_radius_button_off)
-                    binding.btnEmailSigninLogin.setTextColor(application.resources.getColor(R.color.Gray_10))
+//                    binding.btnEmailSigninLogin.setBackgroundResource(R.drawable.low_radius_button_off)
+//                    binding.btnEmailSigninLogin.setTextColor(application.resources.getColor(R.color.Gray_10))
                 }
             }
             override fun afterTextChanged(s: Editable) {
