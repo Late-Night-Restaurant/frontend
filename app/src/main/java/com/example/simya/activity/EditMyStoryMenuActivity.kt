@@ -8,7 +8,7 @@ import androidx.core.view.isInvisible
 import com.example.simya.R
 import com.example.simya.databinding.ActivityStoryMainMenuBinding
 
-class EditMyStoryMenuActivity : AppCompatActivity(), View.OnClickListener {
+class EditMyStoryMenuActivity : AppCompatActivity() {
     lateinit var binding: ActivityStoryMainMenuBinding
     var holdBtn: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,17 +33,17 @@ class EditMyStoryMenuActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnMainMenuNext.setOnClickListener{
             mainMenuModify()
         }
-        buttonSingleSelected()
+//        buttonSingleSelected()
     }
 
-    private fun buttonSingleSelected() {
-        binding.btnMainMenuLove.setOnClickListener(this)
-        binding.btnMainMenuFamily.setOnClickListener(this)
-        binding.btnMainMenuRelationship.setOnClickListener(this)
-        binding.btnMainMenuStress.setOnClickListener(this)
-        binding.btnMainMenuHobby.setOnClickListener(this)
-        binding.btnMainMenuCulture.setOnClickListener(this)
-    }
+//    private fun buttonSingleSelected() {
+//        binding.btnMainMenuLove.setOnClickListener(this)
+//        binding.btnMainMenuFamily.setOnClickListener(this)
+//        binding.btnMainMenuRelationship.setOnClickListener(this)
+//        binding.btnMainMenuStress.setOnClickListener(this)
+//        binding.btnMainMenuHobby.setOnClickListener(this)
+//        binding.btnMainMenuCulture.setOnClickListener(this)
+//    }
     private fun mainMenuModify(){
         binding.btnMainMenuNext.setBackgroundResource(R.drawable.low_radius_button_off)
         binding.btnMainMenuNext.setTextColor(application.resources.getColor(R.color.Gray_10))
@@ -61,16 +61,16 @@ class EditMyStoryMenuActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnMainMenuNext.text = "수정하기"
         binding.btnMainMenuNext.isEnabled= true
     }
-    override fun onClick(view: View?) {
-        if(view !=null){
-            when(view.id){
-                R.id.btn_main_menu_love -> btnHighlighted(binding.btnMainMenuLove,holdBtn)
-                R.id.btn_main_menu_family -> btnHighlighted(binding.btnMainMenuFamily,holdBtn)
-                R.id.btn_main_menu_culture -> btnHighlighted(binding.btnMainMenuCulture,holdBtn)
-                R.id.btn_main_menu_hobby-> btnHighlighted(binding.btnMainMenuHobby,holdBtn)
-                R.id.btn_main_menu_stress -> btnHighlighted(binding.btnMainMenuStress,holdBtn)
-                R.id.btn_main_menu_relationship -> btnHighlighted(binding.btnMainMenuRelationship,holdBtn)
-            }
-        }
-    }
+//    override fun onClick(view: View?) {
+//        if(view !=null){
+//            when(view.id){
+//                R.id.btn_main_menu_love -> btnHighlighted(binding.btnMainMenuLove,holdBtn)
+//                R.id.btn_main_menu_family -> btnHighlighted(binding.btnMainMenuFamily,holdBtn)
+//                R.id.btn_main_menu_culture -> btnHighlighted(binding.btnMainMenuCulture,holdBtn)
+//                R.id.btn_main_menu_hobby-> btnHighlighted(binding.btnMainMenuHobby,holdBtn)
+//                R.id.btn_main_menu_stress -> btnHighlighted(binding.btnMainMenuStress,holdBtn)
+//                R.id.btn_main_menu_relationship -> btnHighlighted(binding.btnMainMenuRelationship,holdBtn)
+//            }
+//        }
+//    }
 }
