@@ -14,7 +14,7 @@
             android:id="@+id/iv_rv_border_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:foreground="@drawable/border_gradient_black"/>
+            android:foreground="@drawable/main_menu_gradient"/>
         <TextView
             android:id="@+id/tv_rv_main_menu"
             android:layout_width="wrap_content"

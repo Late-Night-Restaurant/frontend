@@ -1,25 +1,33 @@
 package com.example.simya.adpter.createMyStoryAdapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.simya.data.MainMenuData
 import com.example.simya.databinding.ItemMainMenuGvBinding
+import kotlinx.coroutines.selects.select
 
 class CreateMyStoryMainMenuAdapter(
     private val context: Context,
     private val dataList: ArrayList<MainMenuData>
 ) : RecyclerView.Adapter<CreateMyStoryMainMenuAdapter.DataViewHolder>() {
     private var listener: OnItemClickListener? = null
-
+    private  var selectLayout: ConstraintLayout? = null
     inner class DataViewHolder(private val binding: ItemMainMenuGvBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: MainMenuData) {
             Glide.with(context).load(data.menuImage).into(binding.ivGvMainMenu)
             binding.tvGvMainMenu.text = data.menuName
+            Log.d("bind",binding.tvGvMainMenu.text.toString())
+        }
+        fun onSelectLayout(){
+            selectLayout = binding.rlItemMainMenuGv
+            binding.rlItemMainMenuGv.isSelected = true
         }
     }
 
@@ -36,6 +44,12 @@ class CreateMyStoryMainMenuAdapter(
         if (position != RecyclerView.NO_POSITION) {
             holder.itemView.setOnClickListener {
                 listener?.onItemClick(holder.itemView, dataList[position], position)
+                if(selectLayout ==  null){
+                    holder.onSelectLayout()
+                }else{
+                    selectLayout!!.isSelected = false
+                    holder.onSelectLayout()
+                }
             }
         }
     }
@@ -53,5 +67,7 @@ class CreateMyStoryMainMenuAdapter(
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
+    fun unCheck(){
 
+    }
 }

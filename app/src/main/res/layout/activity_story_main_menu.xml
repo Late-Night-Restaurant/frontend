@@ -67,14 +67,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="다음"
-        android:textColor="@color/Gray_10"
+        android:textColor="@drawable/btn_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="56dp"
-        android:background="@drawable/low_radius_button_off"
+        android:background="@drawable/low_radius_button"
         android:enabled="false"
         android:clickable="false"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
