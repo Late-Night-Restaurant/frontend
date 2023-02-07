@@ -25,8 +25,9 @@
         app:layout_constraintStart_toStartOf="@id/tv_item_review_nick"/>
     <ImageButton
         android:id="@+id/ib_item_review_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/icon_width"
+        android:layout_height="@dimen/icon_height"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_down"
         android:background="#00ff0000"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,9 +42,10 @@
         app:layout_constraintBottom_toBottomOf="parent">
         <ImageView
             android:id="@+id/iv_item_review_star"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_star_rating_full"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_star_rating_fill"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
         <TextView

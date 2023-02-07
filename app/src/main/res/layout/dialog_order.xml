@@ -28,9 +28,10 @@
 
         <ImageView
             android:id="@+id/btn_dialog_order_recent_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_check_on"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_check_enabled"
             android:layout_marginRight="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/btn_dialog_order_recent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,9 +51,10 @@
 
         <ImageView
             android:id="@+id/btn_dialog_order_like_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_check_off"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_check_disabled"
             android:layout_marginRight="20dp"
             app:layout_constraintTop_toTopOf="@id/btn_dialog_order_like"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,9 +74,10 @@
 
         <ImageView
             android:id="@+id/btn_dialog_order_long_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_check_off"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_check_disabled"
             android:layout_marginRight="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/btn_dialog_order_long"

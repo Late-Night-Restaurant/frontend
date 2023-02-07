@@ -38,12 +38,6 @@ class SignupProfileFragment: Fragment() {
     private lateinit var viewModel: SignUpViewModel
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,15 +66,15 @@ class SignupProfileFragment: Fragment() {
         // email프래그먼트에서 email 받아오기
 
 
-        binding.tietSignupInputNickname.addTextChangedListener(textWatcher)
-        binding.tietSignupInputComment.addTextChangedListener(textWatcher)
+        binding.tietNicknameSignupInput.addTextChangedListener(textWatcher)
+        binding.tietCommentSignupInput.addTextChangedListener(textWatcher)
 
 
         binding.btnSignupNextProfile.setOnClickListener {
 
             if (nicknameCheck() && commentCheck()){
-                val nicknameData = binding.tietSignupInputNickname.text.toString()
-                val commentData = binding.tietSignupInputComment.text.toString()
+                val nicknameData = binding.tietNicknameSignupInput.text.toString()
+                val commentData = binding.tietCommentSignupInput.text.toString()
 
                 viewModel.pbValue.value = 100
 
@@ -96,28 +90,28 @@ class SignupProfileFragment: Fragment() {
     }
 
     private fun nicknameCheck() : Boolean {
-        var nickname = binding.tietSignupInputNickname.text.toString().trim()
+        var nickname = binding.tietNicknameSignupInput.text.toString().trim()
         val pattern = Pattern.matches(nicknameValidation, nickname)
 
         return if (pattern) {
-            binding.tilSignupInputNickname.error = null
+            binding.tilNicknameSignupInput.error = null
             true
         } else {
-            binding.tilSignupInputNickname.error = "올바른 닉네임 형식을 입력해주세요."
+            binding.tilNicknameSignupInput.error = "올바른 닉네임 형식을 입력해주세요."
             false
         }
     }
 
     private fun commentCheck() : Boolean {
-        var comment = binding.tietSignupInputComment.text.toString().trim()
+        var comment = binding.tietCommentSignupInput.text.toString().trim()
         val pattern = Pattern.matches(commentValidation, comment)
-        var commentLength = binding.tietSignupInputComment.text!!.length
+        var commentLength = binding.tietCommentSignupInput.text!!.length
 
         return if (pattern && commentLength in 1..24) {
-            binding.tilSignupInputComment.error = null
+            binding.tilCommentSignupInput.error = null
             true
         } else {
-            binding.tilSignupInputComment.error = "24자 이내로 입력해주세요."
+            binding.tilCommentSignupInput.error = "24자 이내로 입력해주세요."
             false
         }
     }
@@ -161,8 +155,8 @@ class SignupProfileFragment: Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val nicknameInput = binding.tietSignupInputNickname!!.text.toString()
-                val commentInput = binding.tietSignupInputComment!!.text.toString()
+                val nicknameInput = binding.tietNicknameSignupInput!!.text.toString()
+                val commentInput = binding.tietCommentSignupInput!!.text.toString()
 
                 if (nicknameInput.isNotEmpty() && commentInput.isNotEmpty()) {
                     trueButton()

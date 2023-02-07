@@ -37,13 +37,14 @@
         android:id="@+id/ib_login_main_kakao"
         android:layout_width="328dp"
         android:layout_height="48dp"
-        android:background="@drawable/kakao_login_btn"
+        android:src="@drawable/btn_effect_ripple_login"
+        android:background="@null"
         app:layout_constraintBottom_toTopOf="@id/ib_login_main_email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="8dp"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         />
     <ImageButton
         android:id="@+id/ib_login_main_email"

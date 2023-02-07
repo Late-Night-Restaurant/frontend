@@ -48,12 +48,12 @@ class SignupEmailFragment: Fragment() {
 
         initTW()
 
-        binding.tietEmailSignupInputEmail.addTextChangedListener(textWatcher)
+        binding.tietEmailSignupInput.addTextChangedListener(textWatcher)
 
         binding.btnSignupNextEmail.setOnClickListener {
             if (emailCheck()) {
                 // pw프래그먼트로 데이터 전달
-                val email = binding.tietEmailSignupInputEmail.text.toString()
+                val email = binding.tietEmailSignupInput.text.toString()
                 setFragmentResult("email", bundleOf("bundleKeyEmail" to email))
 
                 // progress bar 값 변경
@@ -72,14 +72,14 @@ class SignupEmailFragment: Fragment() {
 
 
     private fun emailCheck() : Boolean {
-        var email = binding.tietEmailSignupInputEmail.text.toString().trim()
+        var email = binding.tietEmailSignupInput.text.toString().trim()
         val pattern = Pattern.matches(emailValidation, email)
 
         return if (pattern){
-            binding.tilEmailSignupInputEmail.error = null
+            binding.tilEmailSignupInput.error = null
             true
         } else {
-            binding.tilEmailSignupInputEmail.error = "올바른 이메일 형식을 입력해주세요."
+            binding.tilEmailSignupInput.error = "올바른 이메일 형식을 입력해주세요."
             false
         }
     }
@@ -90,7 +90,7 @@ class SignupEmailFragment: Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val emailInput = binding.tietEmailSignupInputEmail!!.text.toString()
+                val emailInput = binding.tietEmailSignupInput!!.text.toString()
 
                 if (emailInput.isNotEmpty()) {
                     TrueButton()

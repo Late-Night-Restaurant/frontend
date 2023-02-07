@@ -75,8 +75,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civ_story_profile_image"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="@dimen/icon_big_width"
+                android:layout_height="@dimen/icon_big_height"
                 android:src="@drawable/test_simya"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -170,8 +170,9 @@
                     android:layout_weight="1" />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:scaleType="fitCenter"
                     android:background="#00ff0000"
                     android:src="@drawable/ic_right" />
             </LinearLayout>

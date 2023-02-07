@@ -30,7 +30,7 @@
             android:id="@+id/civ_my_page_profile"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_my"
+            android:src="@drawable/ic_profile"
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -57,8 +57,9 @@
 
         <ImageButton
             android:id="@+id/btn_my_page_profile"
-            android:layout_width="18dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:background="@color/Gray_11"
@@ -125,8 +126,9 @@
 
             <ImageButton
                 android:id="@+id/ib_my_page_menu_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:scaleType="fitCenter"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="end"
@@ -160,8 +162,9 @@
 
             <ImageButton
                 android:id="@+id/ib_my_page_menu_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:scaleType="fitCenter"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="end"
@@ -195,8 +198,9 @@
 
             <ImageButton
                 android:id="@+id/ib_my_page_menu_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:scaleType="fitCenter"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="end"
@@ -230,8 +234,9 @@
 
             <ImageButton
                 android:id="@+id/ib_my_page_menu_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:scaleType="fitCenter"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="end"
@@ -265,8 +270,9 @@
 
             <ImageButton
                 android:id="@+id/ib_my_page_menu_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:scaleType="fitCenter"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="end"

@@ -1,23 +1,25 @@
 package com.example.simya.activity
 
 import android.animation.Animator
+import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.MotionEvent
-import android.view.inputmethod.InputMethodManager
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import com.example.simya.Constants
+import com.example.simya.CustomToast
+import com.example.simya.R
 import com.example.simya.data.UserTokenData
-import com.example.simya.databinding.ActivityMainBinding
 import com.example.simya.databinding.ActivitySplashBinding
 import com.example.simya.sharedpreferences.Shared
 
@@ -32,46 +34,54 @@ class SplashActivity : AppCompatActivity() {
         init()
     }
 
-//    )
-    /*  달이 밝게 비춤
-    **  달이 이동
-    **  달과 별이 나타남 + 도시 나타남
-    **  도시에 불이 켜짐
-    **  메인 타이틀
-    **  인트로
-    **  타이틀+ 인트로만 남김 */
-    private fun init() {
 
-    splashHandler.postDelayed(
+    //    )
+    /*  달이 밝게 비춤 (시작)
+    **  달이 이동하면서 별, 도시들이 나타남
+    **  불이켜지면서 심야식당 로고 등장
+    **  심야식당 인트로 등장
+    **  로고 + 인트로 빼고 페이드 아웃 */
+    private fun init() {
+//    **    달이 밝게 비춤 (시작)
+//    **    달이 이동하면서 별, 도시들이 나타남
+        splashHandler.postDelayed(
             Runnable { sequenceOne() }, 1000
         )
-    splashHandler.postDelayed(
-            Runnable { sequenceTwo() }, 3000
+        splashHandler.postDelayed(
+            Runnable { sequenceTwo() }, 2000
+        )
+        splashHandler.postDelayed(
+            Runnable { sequenceThree() }, 3000
+        )
+        splashHandler.postDelayed(
+            Runnable { sequenceFour() }, 4000
+        )
 
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceThree() }, 5000
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceFour() }, 7000
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceFive() }, 9000
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceSix() }, 11000
-        )
-    splashHandler.postDelayed(
-            Runnable { sequenceLast() }, 13000
-        )
-    splashHandler.postDelayed(
+
+        splashHandler.postDelayed(
             Runnable { moveToHome() }, 16000
         )
     }
+
+    private fun zoomOut(imageView: ImageView) {
+        ObjectAnimator.ofFloat(imageView, View.SCALE_X, .5F).setDuration(1000).start()
+        ObjectAnimator.ofFloat(imageView, View.SCALE_Y, .5F).setDuration(1000).start()
+    }
+
+    private fun moveMoon(imageView: ImageView) {
+        ObjectAnimator.ofFloat(
+            imageView,
+            View.TRANSLATION_X,
+            (binding.ivStars.x - binding.ivMoon.x)
+        ).setDuration(1000).start()
+        ObjectAnimator.ofFloat(imageView, View.TRANSLATION_Y, binding.ivStars.y - binding.ivMoon.y)
+            .setDuration(1000).start()
+    }
     // 페이드인 애니메이션
     private fun fadeIn(imageView: ImageView) {
+        imageView.isInvisible = false
         val fadeIn = ObjectAnimator.ofFloat(imageView, "alpha", 0f, 1f)
-        fadeIn.duration = 2000
+        fadeIn.duration = 1000
         fadeIn.start()
     }
     // 페이드 아웃 애니메이션
@@ -79,74 +89,58 @@ class SplashActivity : AppCompatActivity() {
         val fadeOut = ObjectAnimator.ofFloat(imageView, "alpha", 1f, 0f)
         fadeOut.duration = 1500
         fadeOut.start()
-        fadeOut.addListener(object : Animator.AnimatorListener{
+        fadeOut.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(p0: Animator?) {}
             override fun onAnimationEnd(p0: Animator?) {
                 imageView.isInvisible = true
             }
+
             override fun onAnimationCancel(p0: Animator?) {}
             override fun onAnimationRepeat(p0: Animator?) {}
 
         })
     }
+
     // 스플래쉬 시퀀스
     private fun sequenceOne() {
-<<<<<<< Updated upstream
-        binding.ivSplash2.isInvisible = false
-        fadeIn(binding.ivSplash2)
-=======
         zoomOut(binding.ivMoon)
         moveMoon(binding.ivMoon)
         fadeIn(binding.ivStars)
         fadeIn(binding.ivBuildingOff)
->>>>>>> Stashed changes
+
     }
 
     private fun sequenceTwo() {
-        fadeOut(binding.ivSplash1)
-        fadeOut(binding.ivSplash2)
-        binding.ivSplash3.isInvisible = false
-        fadeIn(binding.ivSplash3)
+        fadeIn(binding.ivBuildingOn)
+        fadeIn(binding.ivLogo)
     }
 
     private fun sequenceThree() {
-        fadeOut(binding.ivSplash3)
-        binding.ivSplash4Moon.isInvisible = false
-        binding.ivSplash4Building.isInvisible = false
-        fadeIn(binding.ivSplash4Moon)
-        fadeIn(binding.ivSplash4Building)
+        fadeIn(binding.ivIntro)
     }
 
     private fun sequenceFour() {
-        binding.ivSplash5.isInvisible = false
-        fadeIn(binding.ivSplash5)
+        fadeOut(binding.ivMoon)
+        fadeOut(binding.ivBuildingOff)
+        fadeOut(binding.ivStars)
+        fadeOut(binding.ivBuildingOn)
     }
 
-    private fun sequenceFive() {
-        binding.ivSplash6.isInvisible = false
-        fadeIn(binding.ivSplash6)
-    }
-
-    private fun sequenceSix() {
-        binding.ivSplash7.isInvisible = false
-        fadeIn(binding.ivSplash7)
-    }
-    private fun sequenceLast() {
-        fadeOut(binding.ivSplash4Moon)
-        fadeOut(binding.ivSplash4Building)
-        fadeOut(binding.ivSplash5)
-    }
     // 홈으로 이동
-    private fun moveToHome(){
-        val intent = Intent(this,LoginActivity::class.java)
+    private fun moveToHome() {
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
+
     // SharedPreferences
-    private fun onShared(){
-        UserTokenData.init(Shared.prefs.getString("accessToken",Constants.DEFAULT),Shared.prefs.getString("refreshToken",Constants.DEFAULT))
-        Log.d("User AccessToken",UserTokenData.getUserAccessToken())
-        Log.d("User RefreshToken",UserTokenData.getUserRefreshToken())
+    private fun onShared() {
+        UserTokenData.init(
+            Shared.prefs.getString("accessToken", Constants.DEFAULT),
+            Shared.prefs.getString("refreshToken", Constants.DEFAULT)
+        )
+        Log.d("User AccessToken", UserTokenData.getUserAccessToken())
+        Log.d("User RefreshToken", UserTokenData.getUserRefreshToken())
     }
 
     // 테스트용 터치 이벤트
