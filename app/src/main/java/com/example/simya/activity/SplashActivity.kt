@@ -91,8 +91,15 @@ class SplashActivity : AppCompatActivity() {
     }
     // 스플래쉬 시퀀스
     private fun sequenceOne() {
+<<<<<<< Updated upstream
         binding.ivSplash2.isInvisible = false
         fadeIn(binding.ivSplash2)
+=======
+        zoomOut(binding.ivMoon)
+        moveMoon(binding.ivMoon)
+        fadeIn(binding.ivStars)
+        fadeIn(binding.ivBuildingOff)
+>>>>>>> Stashed changes
     }
 
     private fun sequenceTwo() {
