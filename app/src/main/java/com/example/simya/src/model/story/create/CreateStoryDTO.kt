@@ -1,7 +1,7 @@
-package com.example.simya.src.model.story
+package com.example.simya.src.model.story.create
 
-data class LoadMyStoryResult(
-    var houseId: Long,
+data class CreateStoryDTO(
+    var profileId: Long,
     var category: String,
     var signboardImageUrl: String,
     var houseName: String,

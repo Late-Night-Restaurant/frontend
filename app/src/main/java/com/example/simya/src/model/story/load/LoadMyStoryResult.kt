@@ -1,9 +1,9 @@
-package com.example.simya.src.model.story
+package com.example.simya.src.model.story.load
 
-data class OpenStoryResult(
+data class LoadMyStoryResult(
     var houseId: Long,
     var category: String,
     var signboardImageUrl: String,
     var houseName: String,
-    var todayTopicTitle: String
+    var comment: String
 )

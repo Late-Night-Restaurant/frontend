@@ -1,4 +1,4 @@
-package com.example.simya.src.model.story
+package com.example.simya.src.model.story.open
 
 data class OpenStoryResponse(
     var code: Int,

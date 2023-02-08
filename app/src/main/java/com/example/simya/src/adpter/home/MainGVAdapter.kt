@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.databinding.ItemBorderGv156156Binding
-import com.example.simya.src.model.story.LoadAllStoryResult
+import com.example.simya.src.model.story.load.LoadAllStoryResult
 
 class MainGVAdapter (private val dataList:ArrayList<LoadAllStoryResult>): RecyclerView.Adapter<MainGVAdapter.DataViewHolder>() {
     private var listener: OnItemClickListener? = null

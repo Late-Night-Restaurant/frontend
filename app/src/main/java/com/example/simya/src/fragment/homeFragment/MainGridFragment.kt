@@ -16,8 +16,8 @@ import com.example.simya.src.adpter.home.MainGVAdapter
 import com.example.simya.src.data.UserTokenData
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
-import com.example.simya.src.model.story.LoadAllStoryResponse
-import com.example.simya.src.model.story.LoadAllStoryResult
+import com.example.simya.src.model.story.load.LoadAllStoryResponse
+import com.example.simya.src.model.story.load.LoadAllStoryResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

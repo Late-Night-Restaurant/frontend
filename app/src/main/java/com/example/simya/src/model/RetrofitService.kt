@@ -11,6 +11,13 @@ import com.example.simya.model.story.*
 import com.example.simya.src.model.account.SignupDTO
 import com.example.simya.src.model.account.SignupResponse
 import com.example.simya.src.model.story.*
+import com.example.simya.src.model.story.create.CreateStoryDTO
+import com.example.simya.src.model.story.create.CreateStoryResponse
+import com.example.simya.src.model.story.inquiry.InquiryStoryDetailResponse
+import com.example.simya.src.model.story.load.LoadAllStoryResponse
+import com.example.simya.src.model.story.load.LoadMyStoryResponse
+import com.example.simya.src.model.story.open.OpenStoryDTO
+import com.example.simya.src.model.story.open.OpenStoryResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers

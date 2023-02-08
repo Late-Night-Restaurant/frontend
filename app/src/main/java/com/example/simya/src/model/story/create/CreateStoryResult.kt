@@ -1,7 +1,7 @@
-package com.example.simya.src.model.story
+package com.example.simya.src.model.story.create
 
-data class CreateStoryDTO(
-    var profileId: Long,
+data class CreateStoryResult(
+    var houseId: Int,
     var category: String,
     var signboardImageUrl: String,
     var houseName: String,

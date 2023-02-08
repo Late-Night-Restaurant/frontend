@@ -18,8 +18,8 @@ import com.example.simya.src.adpter.mystory.MyStoryGVAdapter
 import com.example.simya.src.data.UserTokenData
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
-import com.example.simya.src.model.story.LoadMyStoryResponse
-import com.example.simya.src.model.story.LoadMyStoryResult
+import com.example.simya.src.model.story.load.LoadMyStoryResponse
+import com.example.simya.src.model.story.load.LoadMyStoryResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
