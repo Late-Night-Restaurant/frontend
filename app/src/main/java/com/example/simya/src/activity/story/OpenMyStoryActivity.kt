@@ -8,7 +8,7 @@ import com.example.simya.src.Constants.BORDER_MAIN_MENU
 import com.example.simya.src.Constants.BORDER_TITLE
 import com.example.simya.src.Constants.HOUSE_ID
 import com.example.simya.databinding.ActivityDrawerMyStroyOpenBinding
-import com.example.simya.src.dialog.CloseDialog
+import com.example.simya.util.dialog.CloseDialog
 
 class OpenMyStoryActivity: AppCompatActivity() {
     lateinit var binding: ActivityDrawerMyStroyOpenBinding

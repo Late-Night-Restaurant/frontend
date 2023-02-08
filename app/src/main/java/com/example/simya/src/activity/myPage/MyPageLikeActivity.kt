@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.simya.R
 import com.example.simya.databinding.ActivityMyPageLikeBinding
-import com.example.simya.src.dialog.SortDialog
+import com.example.simya.util.dialog.SortDialog
 import com.example.simya.src.fragment.mypageFragment.MyPageLikeGridFragment
 import com.example.simya.src.fragment.mypageFragment.MyPageLikeRecyclerFragment
 

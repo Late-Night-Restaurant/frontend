@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.simya.src.Constants
 import com.example.simya.R
 import com.example.simya.databinding.FragmentHomeMainBinding
-import com.example.simya.src.dialog.SortDialog
+import com.example.simya.util.dialog.SortDialog
 
 class MainFragment: Fragment() {
     private lateinit var binding: FragmentHomeMainBinding

@@ -20,7 +20,7 @@ import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.account.AccountDTO
-import com.example.simya.src.sharedpreferences.Shared
+import com.example.simya.util.sharedpreferences.Shared
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

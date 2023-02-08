@@ -1,4 +1,4 @@
-package com.example.simya.src.dialog
+package com.example.simya.util.dialog
 
 import android.app.Dialog
 import android.graphics.Color

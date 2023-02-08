@@ -1,4 +1,4 @@
-package com.example.simya.src.sharedpreferences
+package com.example.simya.util.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences

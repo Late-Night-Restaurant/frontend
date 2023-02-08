@@ -20,7 +20,7 @@ import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.story.open.OpenStoryDTO
 import com.example.simya.src.model.story.open.OpenStoryResponse
 import com.example.simya.src.model.story.topic.TopicRequestDTO
-import com.example.simya.src.sharedpreferences.Shared
+import com.example.simya.util.sharedpreferences.Shared
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
