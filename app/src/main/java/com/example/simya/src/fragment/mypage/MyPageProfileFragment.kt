@@ -6,15 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.R
 import com.example.simya.src.activity.myPage.MyPageLikeActivity
 import com.example.simya.src.activity.myPage.MyPageReviewActivity
 import com.example.simya.src.activity.myPage.ProfileEditActivity
 import com.example.simya.databinding.FragmentHomeMyPageBinding
+import com.example.simya.src.adpter.myPage.MultiProfileAdapter
+import com.example.simya.src.testData.TestDataMultiProfile
 
 class MyPageProfileFragment: Fragment() {
     private lateinit var binding: FragmentHomeMyPageBinding
+    private lateinit var dataList: ArrayList<TestDataMultiProfile>
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,11 +56,16 @@ class MyPageProfileFragment: Fragment() {
     }
 
     private fun init() {
-        childFragmentManager.beginTransaction()
-            .replace(R.id.fm_my_page_multi_profile, MultiProfileFragment())
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .commit()
-
+        dataList = arrayListOf()
+        dataList.apply {
+            add(dataList.size,TestDataMultiProfile(R.drawable.ic_plus_small, "추가하기","추가하기"))
+        }
+        val dataRVAdapter = MultiProfileAdapter(this,dataList)
+        binding.rvMyPageMultiProfile.adapter = dataRVAdapter
+        binding.rvMyPageMultiProfile.layoutManager =
+            LinearLayoutManager(this.context,
+                RecyclerView.HORIZONTAL,
+                false)
     }
 
 }

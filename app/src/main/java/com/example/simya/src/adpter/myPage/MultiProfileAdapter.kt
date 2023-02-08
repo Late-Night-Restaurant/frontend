@@ -1,15 +1,21 @@
-package com.example.simya.src.adpter.home
+package com.example.simya.src.adpter.myPage
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.simya.R
 import com.example.simya.databinding.ItemMultiProfileBinding
-import com.example.simya.src.testData.TestDataMultiProfileMyPage
+import com.example.simya.src.fragment.mypage.MyPageProfileFragment
+import com.example.simya.src.testData.TestDataMultiProfile
 
-class MultiProfileAdapter(private val dataList: ArrayList<TestDataMultiProfileMyPage>) : RecyclerView.Adapter<MultiProfileAdapter.DataViewHolder>() {
+class MultiProfileAdapter(private val context: Fragment, private val dataList: ArrayList<TestDataMultiProfile>) : RecyclerView.Adapter<MultiProfileAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val binding: ItemMultiProfileBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: TestDataMultiProfileMyPage) {
-            binding.tvMultiNickname.text = data.nick
+        fun bind(data: TestDataMultiProfile) {
+            binding.tvMultiNickname.text = data.nickname
+            Glide.with(context).load(data.imageSource).into(binding.civItemMultiProfile)
         }
     }
 

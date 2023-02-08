@@ -1,13 +1,11 @@
 package com.example.simya.src.model
 
 
-import com.example.simya.model.account.*
 import retrofit2.Call
 import retrofit2.http.*
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.src.model.profile.ProfileResponse
-import com.example.simya.model.story.*
 import com.example.simya.src.model.account.SignupDTO
 import com.example.simya.src.model.account.SignupResponse
 import com.example.simya.src.model.story.*
