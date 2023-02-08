@@ -20,40 +20,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Simya"
-        android:name="com.example.simya.sharedpreferences.Shared"
+        android:name="com.example.simya.src.sharedpreferences.Shared"
         tools:targetApi="31">
 
 
-        <activity android:name=".activity.SplashActivity"
+        <activity android:name=".src.activity.splash.SplashActivity"
             android:exported="true">
 
         </activity>
-        <activity android:name=".activity.LoginActivity"
+        <activity android:name=".src.activity.login.LoginActivity"
             android:exported="true">
 
         </activity>
-        <activity android:name=".activity.EmailLoginActivity"
+        <activity android:name=".src.activity.login.signIn.EmailLoginActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".activity.HomeMainActivity"
+            android:name=".src.activity.home.HomeMainActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.StoryReviewActivity"
+        <activity android:name=".src.activity.story.StoryReviewActivity"
             android:exported="true"/>
-        <activity android:name=".activity.StoryIntroActivity"
+        <activity android:name=".src.activity.story.StoryIntroActivity"
             android:exported="true"/>
         <activity
-            android:name=".activity.SignupActivity"
+            android:name=".src.activity.login.singUp.SignupActivity"
             android:exported="true">
 
         </activity>
 
-        <activity android:name=".activity.CreateMyStoryActivity"
+        <activity android:name=".src.activity.story.CreateMyStoryActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.CreateMyStoryMainMenuActivity"
+        <activity android:name=".src.activity.story.CreateMyStoryMainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,28 +63,28 @@
                 android:name="android.app.lib_name"
                 android:value=""/>
         </activity>
-        <activity android:name=".activity.CreateMyStoryBorderActivity"
+        <activity android:name=".src.activity.story.CreateMyStoryBorderActivity"
             android:exported="true">
 
         </activity>
-        <activity android:name=".activity.OpenMyStoryActivity"
+        <activity android:name=".src.activity.story.OpenMyStoryActivity"
             android:exported="true"/>
-        <activity android:name=".activity.ProfileEditActivity"
+        <activity android:name=".src.activity.myPage.ProfileEditActivity"
             android:exported="true"/>
-        <activity android:name=".activity.MyPageLikeActivity"
+        <activity android:name=".src.activity.myPage.MyPageLikeActivity"
             android:exported="true"/>
-        <activity android:name=".activity.MyPageReviewActivity"
+        <activity android:name=".src.activity.myPage.MyPageReviewActivity"
             android:exported="true"/>
-        <activity android:name=".activity.StoryLikeActivity"
+        <activity android:name=".src.activity.story.StoryLikeActivity"
             android:exported="true"/>
-        <activity android:name=".activity.OpenMyStoryInputActivity"
+        <activity android:name=".src.activity.story.OpenMyStoryInputActivity"
             android:exported="true"/>
-        <activity android:name=".activity.EditMyStoryMenuActivity"
+        <activity android:name=".src.activity.story.EditMyStoryMenuActivity"
             android:exported="true"/>
-        <activity android:name=".activity.ChatActivity"
+        <activity android:name=".src.activity.chat.ChatActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.TodayMenuActivity"
+        <activity android:name=".src.activity.story.TodayMenuActivity"
             android:exported="true"/>
     </application>
 
