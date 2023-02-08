@@ -29,6 +29,7 @@ import com.example.simya.testData.TestChatDrawerProfileData
 import com.example.simya.testData.TestUserData
 import com.gmail.bishoybasily.stomp.lib.Event
 import com.gmail.bishoybasily.stomp.lib.StompClient
+import com.ms.square.android.expandabletextview.ExpandableTextView
 import io.reactivex.disposables.Disposable
 import okhttp3.OkHttpClient
 import okhttp3.internal.http2.Header
