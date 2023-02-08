@@ -1,4 +1,4 @@
-package com.example.simya.src.fragment.homeFragment
+package com.example.simya.src.fragment.location
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,9 +1,8 @@
 package com.example.simya.src.model.story.inquiry
 
+import com.example.simya.config.BaseResponse
+
 data class InquiryStoryDetailResponse(
     var status: Int?,
-    var code: Int,
-    var isSuccess: Boolean,
-    var message: String,
     var result: InquiryStoryDetailResult?
-)
+): BaseResponse()

@@ -6,15 +6,13 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.simya.R
 import com.example.simya.databinding.ActivityMyPageLikeBinding
 import com.example.simya.util.dialog.SortDialog
-import com.example.simya.src.fragment.mypageFragment.MyPageLikeGridFragment
-import com.example.simya.src.fragment.mypageFragment.MyPageLikeRecyclerFragment
+import com.example.simya.src.fragment.mypage.MyPageLikeGridFragment
+import com.example.simya.src.fragment.mypage.MyPageLikeRecyclerFragment
 
 class MyPageLikeActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMyPageLikeBinding
     // 보기 방식 설정
     private var defaultViewType = R.drawable.ic_box_4
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyPageLikeBinding.inflate(layoutInflater)

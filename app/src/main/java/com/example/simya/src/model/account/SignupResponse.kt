@@ -1,11 +1,10 @@
 package com.example.simya.src.model.account
 
+import com.example.simya.config.BaseResponse
+
 data class SignupResponse(
-    var isSuccess: Boolean?,
-    var code: Int?,
-    var message: String?,
     var result: SignupResult?,
-){
+):BaseResponse(){
     fun getEmail(): String{
         return result!!.email
     }

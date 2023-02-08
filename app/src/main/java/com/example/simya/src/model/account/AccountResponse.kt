@@ -1,11 +1,10 @@
 package com.example.simya.src.model.account
 
+import com.example.simya.config.BaseResponse
+
 data class AccountResponse(
-    var isSuccess: Boolean,
-    var code: Int,
-    var message: String,
     var result: AccountResult?,
-    ){
+    ):BaseResponse(){
     fun getProfileId(): Long{
         return result!!.profileId
     }
@@ -15,5 +14,4 @@ data class AccountResponse(
     fun getRefreshToken(): String{
         return result!!.refreshToken
     }
-
 }

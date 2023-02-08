@@ -1,4 +1,4 @@
-package com.example.simya.src.fragment.mystoryFragment
+package com.example.simya.src.fragment.mystory
 
 import android.content.Intent
 import android.os.Bundle

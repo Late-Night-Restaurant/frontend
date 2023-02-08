@@ -1,8 +1,7 @@
 package com.example.simya.src.model.story.open
 
+import com.example.simya.config.BaseResponse
+
 data class OpenStoryResponse(
-    var code: Int,
-    var isSuccess: Boolean,
-    var message: String,
     var result: OpenStoryResult
-)
+): BaseResponse()

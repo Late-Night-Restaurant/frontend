@@ -1,4 +1,4 @@
-package com.example.simya.src.fragment.homeFragment
+package com.example.simya.src.fragment.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.example.simya.src.adpter.home.MainRVAdapter
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 
-class MainRecyclerFragment: Fragment() {
+class HomeRecyclerFragment: Fragment() {
     private lateinit var binding: FragmentHomeMainRecyclerBinding
     private lateinit var dataList: ArrayList<TestDataBorder>
     private val retrofit by lazy {

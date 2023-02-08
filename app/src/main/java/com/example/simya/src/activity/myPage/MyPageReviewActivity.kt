@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.simya.databinding.ActivityMyPageReviewBinding
 import com.example.simya.util.dialog.SortDialog
-import com.example.simya.src.fragment.mypageFragment.MyPageReviewFragment
+import com.example.simya.src.fragment.mypage.MyPageReviewFragment
 
 class MyPageReviewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyPageReviewBinding

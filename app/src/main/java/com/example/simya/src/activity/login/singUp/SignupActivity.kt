@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.databinding.ActivitySignupBinding
-import com.example.simya.src.fragment.signupFragment.*
+import com.example.simya.src.fragment.signup.*
 
 class SignupActivity: AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding

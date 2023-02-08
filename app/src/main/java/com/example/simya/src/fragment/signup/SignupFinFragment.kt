@@ -1,4 +1,4 @@
-package com.example.simya.src.fragment.signupFragment
+package com.example.simya.src.fragment.signup
 
 import android.content.Context
 import android.content.Intent

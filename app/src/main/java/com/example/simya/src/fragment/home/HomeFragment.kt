@@ -1,4 +1,4 @@
-package com.example.simya.src.fragment.homeFragment
+package com.example.simya.src.fragment.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import com.example.simya.R
 import com.example.simya.databinding.FragmentHomeMainBinding
 import com.example.simya.util.dialog.SortDialog
 
-class MainFragment: Fragment() {
+class HomeFragment: Fragment() {
     private lateinit var binding: FragmentHomeMainBinding
     private var defaultViewType = R.drawable.ic_box_4
 
@@ -33,7 +33,7 @@ class MainFragment: Fragment() {
     private fun init(){
         // 기본 View type, Sort type 정의
         childFragmentManager.beginTransaction()
-            .replace(R.id.fm_home_main, MainGridFragment())
+            .replace(R.id.fm_home_main, HomeGridFragment())
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
 
@@ -68,13 +68,13 @@ class MainFragment: Fragment() {
                 when (defaultViewType){
                     R.drawable.ic_box_4 ->{
                         childFragmentManager.beginTransaction()
-                            .replace(R.id.fm_home_main, MainGridFragment())
+                            .replace(R.id.fm_home_main, HomeGridFragment())
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .commit()
                     }
                     R.drawable.ic_box_2 ->{
                         childFragmentManager.beginTransaction()
-                            .replace(R.id.fm_home_main, MainRecyclerFragment())
+                            .replace(R.id.fm_home_main, HomeRecyclerFragment())
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .commit()
                     }

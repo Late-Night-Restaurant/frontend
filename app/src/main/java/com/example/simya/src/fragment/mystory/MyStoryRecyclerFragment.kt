@@ -1,4 +1,4 @@
-package com.example.simya.src.fragment.mystoryFragment
+package com.example.simya.src.fragment.mystory
 
 import android.os.Bundle
 import android.util.Log

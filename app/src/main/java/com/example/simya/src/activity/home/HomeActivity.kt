@@ -4,12 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.R
 import com.example.simya.databinding.ActivityHomeBinding
-import com.example.simya.src.fragment.homeFragment.LocationFragment
-import com.example.simya.src.fragment.homeFragment.MainFragment
-import com.example.simya.src.fragment.mypageFragment.MyPageProfileFragment
-import com.example.simya.src.fragment.mystoryFragment.MyStoryFragment
+import com.example.simya.src.fragment.location.LocationFragment
+import com.example.simya.src.fragment.home.HomeFragment
+import com.example.simya.src.fragment.mypage.MyPageProfileFragment
+import com.example.simya.src.fragment.mystory.MyStoryFragment
 
-class HomeMainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class HomeMainActivity : AppCompatActivity() {
                     R.id.tab_home_main_home -> {
                         supportFragmentManager
                             .beginTransaction()
-                            .replace(binding.fmHome.id, MainFragment())
+                            .replace(binding.fmHome.id, HomeFragment())
                             .commitAllowingStateLoss()
                     }
                     R.id.tab_home_main_my_chat -> {
