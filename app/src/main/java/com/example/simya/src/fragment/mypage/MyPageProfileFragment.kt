@@ -14,12 +14,27 @@ import com.example.simya.src.activity.myPage.MyPageReviewActivity
 import com.example.simya.src.activity.myPage.ProfileEditActivity
 import com.example.simya.databinding.FragmentHomeMyPageBinding
 import com.example.simya.src.adpter.myPage.MultiProfileAdapter
+import com.example.simya.src.data.UserTokenData
+import com.example.simya.src.model.RetrofitBuilder
+import com.example.simya.src.model.RetrofitService
+import com.example.simya.src.model.profile.MyProfileResponse
+import com.example.simya.src.model.profile.ProfileDTO
 import com.example.simya.src.testData.TestDataMultiProfile
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MyPageProfileFragment: Fragment() {
+class MyPageProfileFragment : Fragment() {
     private lateinit var binding: FragmentHomeMyPageBinding
-    private lateinit var dataList: ArrayList<TestDataMultiProfile>
+    private lateinit var dataList: ArrayList<ProfileDTO>
+    private lateinit var dataRVAdapter: MultiProfileAdapter
 
+    private val retrofit by lazy {
+        RetrofitBuilder.getInstnace()
+    }
+    private val simyaApi by lazy {
+        retrofit.create(RetrofitService::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,16 +71,45 @@ class MyPageProfileFragment: Fragment() {
     }
 
     private fun init() {
+
         dataList = arrayListOf()
         dataList.apply {
-            add(dataList.size,TestDataMultiProfile(R.drawable.ic_plus_small, "추가하기","추가하기"))
+            add(dataList.size, ProfileDTO(0, "추가하기", "추가하기", "R.drawable.ic_baseline_add_24"))
         }
-        val dataRVAdapter = MultiProfileAdapter(this,dataList)
+        dataRVAdapter = MultiProfileAdapter(this, dataList)
         binding.rvMyPageMultiProfile.adapter = dataRVAdapter
         binding.rvMyPageMultiProfile.layoutManager =
-            LinearLayoutManager(this.context,
+            LinearLayoutManager(
+                this.context,
                 RecyclerView.HORIZONTAL,
-                false)
+                false
+            )
+        getAllMyProfileService()
     }
 
+    private fun getAllMyProfileService() {
+        simyaApi.getMyAllProfile(UserTokenData.accessToken, UserTokenData.refreshToken)
+            .enqueue(object : Callback<MyProfileResponse> {
+                override fun onResponse(
+                    call: Call<MyProfileResponse>,
+                    response: Response<MyProfileResponse>
+                ) {
+                    val code = response.body()!!.code
+                    if (code == 200) {
+                        activity!!.runOnUiThread {
+                            dataList.apply {
+                                for (i: Int in 0 until response.body()!!.result.size) {
+                                    add(response.body()!!.result[i])
+                                    dataRVAdapter.notifyItemInserted(i+1)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
 }

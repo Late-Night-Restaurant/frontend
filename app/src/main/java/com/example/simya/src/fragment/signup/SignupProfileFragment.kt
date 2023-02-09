@@ -17,9 +17,7 @@ import com.example.simya.src.activity.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
-import com.example.simya.src.model.account.ProfileDTO
-import com.example.simya.src.model.account.SignupDTO
-import com.example.simya.src.model.account.SignupResponse
+import com.example.simya.src.model.account.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,7 +29,7 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
     private val commentValidation = "^.{1,24}$" // 모든 문자 가능, 24자 이내
     private lateinit var emailData: String
     private lateinit var pwData: String
-    private lateinit var profile: ProfileDTO
+    private lateinit var profile: SignUpProfileDTO
     private lateinit var textWatcher: TextWatcher
 
     var signupActivity: SignupActivity? = null
@@ -78,7 +76,7 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
                 val nicknameData = binding.tietNicknameSignupInput.text.toString()
                 val commentData = binding.tietCommentSignupInput.text.toString()
 
-                profile = ProfileDTO(nicknameData,commentData,"default")
+                profile = SignUpProfileDTO(nicknameData,commentData,"default")
 //                Log.d("Before","onSignUp")
                 onSignUp(SignupDTO(emailData, pwData, profile))
 

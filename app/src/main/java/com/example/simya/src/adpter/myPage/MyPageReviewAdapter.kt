@@ -24,4 +24,8 @@ class MyPageReviewAdapter(private val dataList: ArrayList<TestDataReview>) : Rec
     }
 
     override fun getItemCount(): Int = dataList.size
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 }

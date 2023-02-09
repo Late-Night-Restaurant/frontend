@@ -8,6 +8,9 @@ import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.src.model.profile.ProfileResponse
 import com.example.simya.src.model.account.SignupDTO
 import com.example.simya.src.model.account.SignupResponse
+import com.example.simya.src.model.mystory.like.MyStoryLikeResponse
+import com.example.simya.src.model.mystory.review.MyWriteReviewResponse
+import com.example.simya.src.model.profile.MyProfileResponse
 import com.example.simya.src.model.story.*
 import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
@@ -81,11 +84,41 @@ interface RetrofitService {
     ): Call<OpenStoryResponse>
 
     // 특정 이야기 집 조회
+    @Headers("Content-Type: application/json")
     @GET("/simya/house/{houseId}")
     fun getStoryDetail(
         @Header("Access-Token") accessToken: String,
         @Header("Refresh-Token") refreshToken: String,
         @Path("houseId") houseId: Long
     ): Call<InquiryStoryDetailResponse>
+
+    // 내 모든 프로필 조회
+    @Headers("Content-Type: application/json")
+    @GET("/simya/users/profile")
+    fun getMyAllProfile(
+        @Header("Access-Token") accessToken: String,
+        @Header("Refresh-Token") refreshToken: String,
+    ): Call<MyProfileResponse>
+
+    // 내가 찜한 집들 모두 조회
+    @Headers("Content-Type: application/json")
+    @GET("/simya/favorite/my")
+    fun getMyLikeStory(
+        @Header("Access-Token") accessToken: String,
+        @Header("Refresh-Token") refreshToken: String,
+    ): Call<MyStoryLikeResponse>
+
+    // 현재 프로필로 쓴 모든 리뷰 조회
+    @Headers("Content-Type: application/json")
+    @GET("/simya/review/my")
+    fun getMyWriteReview(
+        @Header("Access-Token") accessToken: String,
+        @Header("Refresh-Token") refreshToken: String,
+    ): Call<MyWriteReviewResponse>
+
+    // 내가 쓴 리뷰 수정하기
+    // 내가 쓴 리뷰 삭제하기
+    // 프로필 수정
+    // 프로필 삭제
 
 }

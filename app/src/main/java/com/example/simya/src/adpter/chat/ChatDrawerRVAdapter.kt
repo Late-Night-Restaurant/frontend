@@ -27,6 +27,8 @@ class ChatDrawerRVAdapter (private val context: Context, private val dataList:Ar
     // 표현할 Item의 총 개수
     override fun getItemCount(): Int= dataList.size
 
-
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
 }

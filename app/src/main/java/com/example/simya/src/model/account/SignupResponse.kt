@@ -8,7 +8,7 @@ data class SignupResponse(
     fun getEmail(): String{
         return result!!.email
     }
-    fun getProfile(): ProfileDTO {
+    fun getProfile(): SignUpProfileDTO {
         return result!!.profile
     }
 }

@@ -1,9 +1,8 @@
-package com.example.simya.src.model.profile
+package com.example.simya.src.model.account
 
 import com.google.gson.annotations.SerializedName
 
-data class ProfileDTO(
-    @SerializedName("profileId") var profileId: Long,
+data class SignUpProfileDTO(
     @SerializedName("nickname") var nickname: String,
     @SerializedName("comment") var comment: String,
     @SerializedName("picture") var picture: String
