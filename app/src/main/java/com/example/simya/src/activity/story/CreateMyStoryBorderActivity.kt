@@ -14,13 +14,13 @@ import com.example.simya.src.Constants.BORDER_MAIN_MENU
 import com.example.simya.src.Constants.OK
 import com.example.simya.src.Constants.PROFILE_ID
 import com.example.simya.R
-import com.example.simya.src.activity.home.HomeMainActivity
+import com.example.simya.src.activity.home.HomeActivity
 import com.example.simya.src.data.UserTokenData
 import com.example.simya.databinding.ActivityStoryCreateBorderBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
-import com.example.simya.src.model.story.CreateStoryDTO
-import com.example.simya.src.model.story.CreateStoryResponse
+import com.example.simya.src.model.story.create.CreateStoryDTO
+import com.example.simya.src.model.story.create.CreateStoryResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,7 +62,7 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
         }
     }
     private fun moveToHome(){
-        val intent = Intent(this, HomeMainActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
     private fun setBorderData(): CreateStoryDTO {

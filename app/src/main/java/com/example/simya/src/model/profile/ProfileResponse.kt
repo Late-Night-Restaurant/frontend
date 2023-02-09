@@ -1,8 +1,8 @@
 package com.example.simya.src.model.profile
 
+import com.example.simya.config.BaseResponse
+import com.google.gson.annotations.SerializedName
+
 data class ProfileResponse(
-    var isSuccess: Boolean?,
-    var code: Int?,
-    var message: String?,
-    var result: List<ProfileResult>?
-)
+    @SerializedName("result") val result: List<ProfileDTO>
+): BaseResponse()

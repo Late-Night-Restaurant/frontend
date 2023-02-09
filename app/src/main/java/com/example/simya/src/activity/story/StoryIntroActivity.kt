@@ -14,7 +14,7 @@ import com.example.simya.src.data.UserTokenData
 import com.example.simya.databinding.ActivityStoryIntroBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
-import com.example.simya.src.model.story.InquiryStoryDetailResponse
+import com.example.simya.src.model.story.inquiry.InquiryStoryDetailResponse
 import com.taufiqrahman.reviewratings.BarLabels
 import retrofit2.Call
 import retrofit2.Callback

@@ -3,7 +3,7 @@ package com.example.simya.src.activity.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.simya.src.activity.home.HomeMainActivity
+import com.example.simya.src.activity.home.HomeActivity
 import com.example.simya.src.activity.login.signIn.EmailLoginActivity
 import com.example.simya.databinding.ActivityLoginMainBinding
 
@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun moveToKaKao() {
-        val intent = Intent(this, HomeMainActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
 

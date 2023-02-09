@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.src.Constants
 import com.example.simya.src.Constants.OK
-import com.example.simya.src.activity.home.HomeMainActivity
+import com.example.simya.src.activity.home.HomeActivity
 import com.example.simya.src.activity.login.singUp.SignupActivity
 import com.example.simya.src.data.UserTokenData
 import com.example.simya.databinding.ActivitySigninEmailBinding
@@ -20,7 +20,7 @@ import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.account.AccountDTO
-import com.example.simya.src.sharedpreferences.Shared
+import com.example.simya.util.sharedpreferences.Shared
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -76,7 +76,7 @@ class EmailLoginActivity : AppCompatActivity() {
         }
     }
     private fun moveToHome(){
-        val intent = Intent(this, HomeMainActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
     private fun onSignIn(user: AccountDTO){

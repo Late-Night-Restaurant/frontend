@@ -3,7 +3,7 @@ package com.example.simya.src.activity.myPage
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.simya.src.activity.home.HomeMainActivity
+import com.example.simya.src.activity.home.HomeActivity
 import com.example.simya.databinding.ActivityProfileEditBinding
 
 class ProfileEditActivity : AppCompatActivity() {
@@ -18,7 +18,7 @@ class ProfileEditActivity : AppCompatActivity() {
 
     private fun init() {
         binding.btnProfileNext.setOnClickListener {
-            val intent = Intent(this, HomeMainActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
     }

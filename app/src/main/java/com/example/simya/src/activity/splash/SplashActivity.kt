@@ -16,7 +16,7 @@ import com.example.simya.src.Constants
 import com.example.simya.src.activity.login.LoginActivity
 import com.example.simya.src.data.UserTokenData
 import com.example.simya.databinding.ActivitySplashBinding
-import com.example.simya.src.sharedpreferences.Shared
+import com.example.simya.util.sharedpreferences.Shared
 
 class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplashBinding
