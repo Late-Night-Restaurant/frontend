@@ -357,4 +357,10 @@ class ChatActivity : AppCompatActivity() {
         return true
     }
 
+    private fun onNotify() {
+        binding.includedChat.ibChatNoticeDown.setOnClickListener {
+            
+        }
+    }
+
 }

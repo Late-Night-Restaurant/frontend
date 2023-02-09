@@ -10,6 +10,14 @@
         layout="@layout/default_chat" />
 
 
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true" >
 
     <ImageView
         android:id="@+id/iv_notice_1"
@@ -38,16 +46,15 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_notice_1" />
 
     <TextView
-        android:id="@id/expandable_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="dad"
-        android:gravity="center"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toTopOf="@+id/iv_notice_2"
         app:layout_constraintTop_toTopOf="@+id/iv_notice_1" />
 
     <ImageButton
-        android:id="@id/expand_collapse"
+        android:id="@+id/ib_chat_notice_down"
         android:layout_width="@dimen/icon_width"
         android:layout_height="@dimen/icon_height"
         android:background="@drawable/ic_down"
@@ -56,6 +63,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/iv_notice_1"
         app:layout_constraintEnd_toEndOf="@+id/iv_notice_1" />
 
+
+
+</LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chat_list"
