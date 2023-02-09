@@ -30,20 +30,22 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_my_page_profile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_profile"
-            tools:ignore="MissingConstraints" />
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/ic_baseline_person_24"
+            tools:ignore="MissingConstraints"
+            android:background="@drawable/bg_profile"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/ll_my_page_profile"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:orientation="vertical"
+            android:gravity="center_vertical"
             app:layout_constraintStart_toEndOf="@+id/civ_my_page_profile"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
