@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.simya.util.dialog.BasicDialog
 import com.example.simya.util.dialog.LoadingDialog
 
 abstract class BaseFragment<B : ViewBinding>(
@@ -17,7 +18,7 @@ abstract class BaseFragment<B : ViewBinding>(
 ) : Fragment(layoutResId) {
     private var _binding: B? = null
     lateinit var mLoadingDialog: LoadingDialog
-
+    lateinit var mBasicDialog: BasicDialog
     protected val binding get() = _binding!!
 
     override fun onCreateView(
@@ -34,10 +35,15 @@ abstract class BaseFragment<B : ViewBinding>(
         super.onDestroyView()
     }
 
-    fun showCustomToast(message: String) {
-        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+    fun showBasicDialog(context: Context,title: String){
+        mBasicDialog = BasicDialog(context, title)
+        mBasicDialog.show()
     }
-
+    fun dismissBasicDialog(){
+        if (mBasicDialog.isShowing) {
+            mBasicDialog.dismiss()
+        }
+    }
     fun showLoadingDialog(context: Context) {
         mLoadingDialog = LoadingDialog(context)
         mLoadingDialog.show()

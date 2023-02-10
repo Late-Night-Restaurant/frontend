@@ -1,34 +1,35 @@
 package com.example.simya.util.dialog
 
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.util.Constants
 import com.example.simya.databinding.DialogDefaultBinding
 
-class BasicDialog (private val context: AppCompatActivity,private val title: String) : View.OnClickListener {
-    private val dialog = Dialog(context)
+class BasicDialog (context: Context,private val title: String) : Dialog(context),View.OnClickListener {
     private lateinit var binding: DialogDefaultBinding
     private var listener: DefaultDialogClickedListener? = null
-
-    fun showDia() {
+    override fun onCreate(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
         init()
-        dialog.show()
     }
 
     private fun init() {
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        binding = DialogDefaultBinding.inflate(context.layoutInflater)
-        dialog.window!!.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
-        dialog.setCanceledOnTouchOutside(true)
-        dialog.setCancelable(true)
-        dialog.setContentView(binding.root)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        binding = DialogDefaultBinding.inflate(layoutInflater)
+//        window!!.setLayout(
+//            WindowManager.LayoutParams.MATCH_PARENT,
+//            WindowManager.LayoutParams.WRAP_CONTENT
+//        )
+        setContentView(binding.root)
+        setCanceledOnTouchOutside(true)
+        setCancelable(true)
         // 제목연결
         binding.tvQuestion.text = title
         // 클릭리스너
@@ -48,15 +49,17 @@ class BasicDialog (private val context: AppCompatActivity,private val title: Str
         when (p0?.id) {
             binding.btnYes.id->{
                 listener?.onClick(Constants.YES)
+                Log.d("onClick","YES")
             }
             binding.btnNo.id -> {
-                orderCancel()
+                listener?.onClick(Constants.NO)
+//                orderCancel()
             }
         }
     }
 
     private fun orderCancel() {
-        dialog.dismiss()
+        this@BasicDialog.dismiss()
     }
 
 }

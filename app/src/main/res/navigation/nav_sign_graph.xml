@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/signupAgreeFragment"
-        android:name="com.example.simya.src.fragment.signup.SignupAgreeFragment"
+        android:name="com.example.simya.src.main.login.singUp.fragment.SignupAgreeFragment"
         android:label="SignupAgreeFragment" >
         <action
             android:id="@+id/action_signupAgreeFragment_to_signupPwFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/signupEmailFragment"
-        android:name="com.example.simya.src.fragment.signup.SignupEmailFragment"
+        android:name="com.example.simya.src.main.login.singUp.fragment.SignupEmailFragment"
         android:label="SignupEmailFragment" >
         <action
             android:id="@+id/action_signupEmailFragment_to_signupAgreeFragment"
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/signupPwFragment"
-        android:name="com.example.simya.src.fragment.signup.SignupPwFragment"
+        android:name="com.example.simya.src.main.login.singUp.fragment.SignupPwFragment"
         android:label="SignupPwFragment" >
         <action
             android:id="@+id/action_signupPwFragment_to_signupProfileFragment"
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/signupProfileFragment"
-        android:name="com.example.simya.src.fragment.signup.SignupProfileFragment"
+        android:name="com.example.simya.src.main.login.singUp.fragment.SignupProfileFragment"
         android:label="SignupProfileFragment" >
         <action
             android:id="@+id/action_signupProfileFragment_to_signupFinFragment"
@@ -38,6 +38,6 @@
     </fragment>
     <fragment
         android:id="@+id/signupFinFragment"
-        android:name="com.example.simya.src.fragment.signup.SignupFinFragment"
+        android:name="com.example.simya.src.main.login.singUp.fragment.SignupFinFragment"
         android:label="SignupFinFragment" />
 </navigation>
