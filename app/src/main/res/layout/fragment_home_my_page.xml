@@ -299,25 +299,25 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tv_my_page_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="ver 0.0.0 최신버전"
             android:textColor="@color/Gray_08"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintEnd_toStartOf="@+id/btn_my_page_logout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_my_page_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/Gray_11"
             android:text="로그아웃"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintStart_toEndOf="@+id/tv_my_page_version"
             tools:ignore="MissingConstraints" />
 
 

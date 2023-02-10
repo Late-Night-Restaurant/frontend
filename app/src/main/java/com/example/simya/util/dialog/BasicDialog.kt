@@ -6,7 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import com.example.simya.src.Constants
+import com.example.simya.util.Constants
 import com.example.simya.databinding.DialogDefaultBinding
 
 class BasicDialog (private val context: AppCompatActivity,private val title: String) : View.OnClickListener {

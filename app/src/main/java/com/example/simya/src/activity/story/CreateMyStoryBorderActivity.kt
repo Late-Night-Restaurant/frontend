@@ -10,9 +10,9 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
-import com.example.simya.src.Constants.BORDER_MAIN_MENU
-import com.example.simya.src.Constants.OK
-import com.example.simya.src.Constants.PROFILE_ID
+import com.example.simya.util.Constants.BORDER_MAIN_MENU
+import com.example.simya.util.Constants.OK
+import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.src.activity.home.HomeActivity
 import com.example.simya.src.data.UserTokenData

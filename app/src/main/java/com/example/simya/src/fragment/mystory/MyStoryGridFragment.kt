@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.simya.src.Constants
-import com.example.simya.src.Constants.BORDER_MAIN_MENU
-import com.example.simya.src.Constants.BORDER_TITLE
-import com.example.simya.src.Constants.HOUSE_ID
+import com.example.simya.util.Constants
+import com.example.simya.util.Constants.BORDER_MAIN_MENU
+import com.example.simya.util.Constants.BORDER_TITLE
+import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.src.activity.story.OpenMyStoryActivity
 import com.example.simya.databinding.FragmentHomeMainGridBinding
 import com.example.simya.src.adpter.mystory.MyStoryGVAdapter

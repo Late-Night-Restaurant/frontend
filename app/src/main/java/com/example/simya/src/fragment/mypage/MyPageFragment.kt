@@ -1,14 +1,18 @@
 package com.example.simya.src.fragment.mypage
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.simya.R
+import com.example.simya.config.BaseResponse
 import com.example.simya.src.activity.myPage.MyPageLikeActivity
 import com.example.simya.src.activity.myPage.MyPageReviewActivity
 import com.example.simya.src.activity.myPage.ProfileEditActivity
@@ -19,16 +23,16 @@ import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.profile.MyProfileResponse
 import com.example.simya.src.model.profile.ProfileDTO
-import com.example.simya.src.testData.TestDataMultiProfile
+import com.example.simya.util.dialog.LoadingDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MyPageProfileFragment : Fragment() {
+class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentHomeMyPageBinding
     private lateinit var dataList: ArrayList<ProfileDTO>
     private lateinit var dataRVAdapter: MultiProfileAdapter
-
+    private lateinit var mLoadingDialog: LoadingDialog
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
     }
@@ -50,8 +54,6 @@ class MyPageProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
 
-        // Fragment에서 Activity로 넘어가깅!!
-        // Fragment는 this 사용 불가이므로, this 대신 activity를 씀
         binding.btnMyPageProfile.setOnClickListener {
             val intent = Intent(activity, ProfileEditActivity::class.java)
             startActivity(intent)
@@ -71,7 +73,6 @@ class MyPageProfileFragment : Fragment() {
     }
 
     private fun init() {
-
         dataList = arrayListOf()
         dataList.apply {
             add(dataList.size, ProfileDTO(0, "추가하기", "추가하기", "R.drawable.ic_baseline_add_24"))
@@ -84,6 +85,11 @@ class MyPageProfileFragment : Fragment() {
                 RecyclerView.HORIZONTAL,
                 false
             )
+        // 로그아웃
+        binding.btnMyPageLogout.setOnClickListener {
+//            showLoadingDialog(this@MyPageFragment.requireContext())
+            onLogoutService()
+        }
         getAllMyProfileService()
     }
 
@@ -108,8 +114,33 @@ class MyPageProfileFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Log.d("Response",t.toString())
                 }
             })
     }
+    private fun onLogoutService(){
+        simyaApi.onLogout(UserTokenData.accessToken,UserTokenData.refreshToken).enqueue(object : Callback<BaseResponse>{
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                val code = response.body()!!.code
+                Log.d("status code",code.toString())
+                if(code == 200){
+
+                }
+            }
+
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+            }
+
+        })
+    }
+    fun showLoadingDialog(context: Context) {
+        mLoadingDialog = LoadingDialog(context)
+        mLoadingDialog.show()
+    }
+    fun dismissLoadingDialog(){
+        if (mLoadingDialog.isShowing) {
+            mLoadingDialog.dismiss()
+        }
+    }
+
 }

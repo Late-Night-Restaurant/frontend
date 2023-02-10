@@ -12,12 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.simya.src.Constants
-import com.example.simya.src.Constants.CHAT_NOTIFY
-import com.example.simya.src.Constants.CHAT_OTHERS
-import com.example.simya.src.Constants.CHAT_SELF
-import com.example.simya.src.Constants.HOUSE_ID
-import com.example.simya.src.Constants.PROFILE_ID
+import com.example.simya.util.Constants
+import com.example.simya.util.Constants.CHAT_NOTIFY
+import com.example.simya.util.Constants.CHAT_OTHERS
+import com.example.simya.util.Constants.CHAT_SELF
+import com.example.simya.util.Constants.HOUSE_ID
+import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.src.activity.story.StoryIntroActivity
 import com.example.simya.src.adpter.chat.ChatDrawerRVAdapter
@@ -125,7 +125,6 @@ class ChatActivity : AppCompatActivity() {
 
         //표시할 채팅 리스트
         dataList = arrayListOf()
-        setTestData()
         val dataRVAdapter = ChatRVAdapter(this, dataList)
         binding.includedChat.rvChatList.adapter = dataRVAdapter
         binding.includedChat.rvChatList.layoutManager = LinearLayoutManager(this).apply {
@@ -233,40 +232,11 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-//    private fun userCheck(user: TestUserData) {
-//        if (user.type == Constants.CHAT_MASTER_CODE) {
-//            // 주인장 캐스팅
-//        } else if (
-//            user.type == Constants.CHAT_GUEST_CODE) {
-//            setGuestType()
-//        }
-//    }
-
-    private fun receiveMessage(name: String) {
-
-    }
-
-    private fun setMasterType() {
-        // 딱히없음
-    }
-
     private fun setGuestType() {
         binding.btnChatPause.isInvisible = true
         binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_alert_story)
     }
 
-    private fun sendMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
-
-    }
-
-    //    private fun receiveMessage(user: TestUserData, content: String, adapter: ChatRVAdapter) {
-//        dataList.add(TestChatData(user, content, "오후 9시"))
-//        binding.includedChat.rvChatList.apply {
-//            adapter.notifyDataSetChanged()
-//            scrollToPosition(dataList.size - 1)
-//        }
-//
-//    }
     private fun testDrawerUserListed() {
         binding.btnDrawerIntro.setOnClickListener {
             val intent = Intent(this, StoryIntroActivity::class.java)
@@ -296,49 +266,6 @@ class ChatActivity : AppCompatActivity() {
         receiveUser4 = TestUserData("채니", R.drawable.test_chani, Constants.CHAT_GUEST_CODE)
     }
 
-    // 테스트용 채팅 데이터 입력
-    private fun setTestData() {
-        dataList.apply {
-//            add(TestChatData(sendUser, "오늘은 레이아웃 끝내는날", "오후 2시 22분"))
-//            add(
-//                TestChatData(
-//                    receiveUser1,
-//                    "내용이 굉장히 길면 어디까지 될까에 대한 궁금증 해결을 위한 예시용 텍스트, 최대 20까지 잡았으나 적용이 잘되나 확인이 필요하다",
-//                    "오후 2시 24분"
-//                )
-//            )
-//            add(TestChatData(sendUser, "앞으로 추가해야할 내용은", "오후 2시 42분"))
-//            add(
-//                TestChatData(
-//                    receiveUser1,
-//                    "리사이클러뷰에 싱글 셀렉션을 추가해서 각 아이템을 클릭했을때 효과를 부여해야함 간판 수정에서는 구현했지만 앞으로 멀티프로필이나 현재 구현한 내용도 확실한 구현이 아닌 임시방편용 느낌이 강하다 디자이너와 이야기를 해야한다.",
-//                    "오후 2시 42분"
-//                )
-//            )
-//            add(TestChatData(sendUser, "끝", "오후 3시 22분"))
-//            add(TestChatData(sendUser, "중복 처리를 위한 확인용 텍스트", "오후 3시 40분"))
-//            add(TestChatData(receiveUser2, "초이.. 성장에 이르렀는가..?", "오후 9시"))
-//            add(TestChatData(sendUser, "오늘은 레이아웃 끝내는날", "오후 2시 22분"))
-//            add(
-//                TestChatData(
-//                    receiveUser1,
-//                    "내용이 굉장히 길면 어디까지 될까에 대한 궁금증 해결을 위한 예시용 텍스트, 최대 20까지 잡았으나 적용이 잘되나 확인이 필요하다",
-//                    "오후 2시 24분"
-//                )
-//            )
-//            add(TestChatData(sendUser, "앞으로 추가해야할 내용은", "오후 2시 42분"))
-//            add(
-//                TestChatData(
-//                    receiveUser1,
-//                    "리사이클러뷰에 싱글 셀렉션을 추가해서 각 아이템을 클릭했을때 효과를 부여해야함 간판 수정에서는 구현했지만 앞으로 멀티프로필이나 현재 구현한 내용도 확실한 구현이 아닌 임시방편용 느낌이 강하다 디자이너와 이야기를 해야한다.",
-//                    "오후 2시 42분"
-//                )
-//            )
-//            add(TestChatData(sendUser, "끝", "오후 3시 22분"))
-//            add(TestChatData(sendUser, "중복 처리를 위한 확인용 텍스트", "오후 3시 40분"))
-//            add(TestChatData(receiveUser2, "초이.. 성장에 이르렀는가..?", "오후 9시"))
-        }
-    }
 
     //키보드 내려감
     override fun onTouchEvent(event: MotionEvent): Boolean {

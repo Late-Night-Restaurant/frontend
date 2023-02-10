@@ -6,11 +6,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.simya.src.Constants.BORDER_MAIN_MENU
-import com.example.simya.src.Constants.BORDER_TITLE
-import com.example.simya.src.Constants.HOUSE_ID
-import com.example.simya.src.Constants.OK
-import com.example.simya.src.Constants.PROFILE_ID
+import com.example.simya.util.Constants.BORDER_MAIN_MENU
+import com.example.simya.util.Constants.BORDER_TITLE
+import com.example.simya.util.Constants.HOUSE_ID
+import com.example.simya.util.Constants.OK
+import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.src.activity.chat.ChatActivity
 import com.example.simya.src.data.UserTokenData

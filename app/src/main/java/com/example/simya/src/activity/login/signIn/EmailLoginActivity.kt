@@ -10,8 +10,8 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.simya.src.Constants
-import com.example.simya.src.Constants.OK
+import com.example.simya.util.Constants
+import com.example.simya.util.Constants.OK
 import com.example.simya.src.activity.home.HomeActivity
 import com.example.simya.src.activity.login.singUp.SignupActivity
 import com.example.simya.src.data.UserTokenData

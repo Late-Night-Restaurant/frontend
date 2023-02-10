@@ -152,4 +152,21 @@ interface RetrofitService {
         @Path("profileId") profileId: Long
     ): Call<BaseResponse>
 
+    // 대표 프로필 선택
+    @Headers("Content-Type: application/json")
+    @PATCH("/simya/users/profile/{profileId}/main")
+    fun changeMyRepresentProfile(
+        @Header("Access-Token") accessToken: String,
+        @Header("Refresh-Token") refreshToken: String,
+        @Path("profileId") profileId: Long
+    ): Call<BaseResponse>
+
+    // 로그아웃
+    @Headers("Content-Type: application/json")
+    @GET("/simya/logout")
+    fun onLogout(
+        @Header("Access-Token") accessToken: String,
+        @Header("Refresh-Token") refreshToken: String,
+    ): Call<BaseResponse>
+
 }

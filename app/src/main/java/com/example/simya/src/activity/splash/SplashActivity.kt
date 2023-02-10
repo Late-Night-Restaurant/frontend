@@ -12,7 +12,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
-import com.example.simya.src.Constants
+import com.example.simya.util.Constants
 import com.example.simya.src.activity.login.LoginActivity
 import com.example.simya.src.data.UserTokenData
 import com.example.simya.databinding.ActivitySplashBinding

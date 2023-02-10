@@ -1,4 +1,4 @@
-package com.example.simya.src
+package com.example.simya.util
 
 object Constants {
     const val UNKNOWN = 0

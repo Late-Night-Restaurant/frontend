@@ -6,7 +6,7 @@ import com.example.simya.R
 import com.example.simya.databinding.ActivityHomeBinding
 import com.example.simya.src.fragment.location.LocationFragment
 import com.example.simya.src.fragment.home.HomeFragment
-import com.example.simya.src.fragment.mypage.MyPageProfileFragment
+import com.example.simya.src.fragment.mypage.MyPageFragment
 import com.example.simya.src.fragment.mystory.MyStoryFragment
 
 class HomeActivity : AppCompatActivity() {
@@ -45,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
                     R.id.tab_home_main_my -> {
                         supportFragmentManager
                             .beginTransaction()
-                            .replace(binding.fmHome.id, MyPageProfileFragment())
+                            .replace(binding.fmHome.id, MyPageFragment())
                             .commitAllowingStateLoss()
                     }
                 }

@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
-import com.example.simya.src.Constants
+import com.example.simya.util.Constants
 import com.example.simya.R
 import com.example.simya.src.activity.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupProfileBinding

@@ -7,8 +7,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.simya.src.Constants
-import com.example.simya.src.Constants.PROFILE_ID
+import com.example.simya.util.Constants
+import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.src.adpter.createStory.CreateMyStoryMultiProfileAdapter
 import com.example.simya.src.data.UserTokenData

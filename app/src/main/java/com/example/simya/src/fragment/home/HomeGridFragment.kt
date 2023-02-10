@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.simya.src.Constants.HOUSE_ID
-import com.example.simya.src.Constants.OK
+import com.example.simya.util.Constants.HOUSE_ID
+import com.example.simya.util.Constants.OK
 import com.example.simya.src.activity.story.StoryIntroActivity
 import com.example.simya.databinding.FragmentHomeMainGridBinding
 import com.example.simya.src.adpter.home.MainGVAdapter

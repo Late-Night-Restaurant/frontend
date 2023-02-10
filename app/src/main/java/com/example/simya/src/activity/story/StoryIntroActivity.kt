@@ -6,9 +6,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.simya.src.Constants.HOUSE_ID
-import com.example.simya.src.Constants.OK
-import com.example.simya.src.Constants.PROFILE_ID
+import com.example.simya.util.Constants.HOUSE_ID
+import com.example.simya.util.Constants.OK
+import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.src.activity.chat.ChatActivity
 import com.example.simya.src.data.UserTokenData
 import com.example.simya.databinding.ActivityStoryIntroBinding

@@ -3,7 +3,6 @@ package com.example.simya.src.activity.story
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
-import com.example.simya.databinding.ActivityMainBinding
 import com.example.simya.databinding.ActivityStoryCreateBorderBinding
 
 class EditMyStoryBorderActivity : AppCompatActivity() {

@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import com.example.simya.src.Constants.BORDER_MAIN_MENU
-import com.example.simya.src.Constants.BORDER_TITLE
-import com.example.simya.src.Constants.HOUSE_ID
+import com.example.simya.util.Constants.BORDER_MAIN_MENU
+import com.example.simya.util.Constants.BORDER_TITLE
+import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.databinding.ActivityDrawerMyStroyOpenBinding
 import com.example.simya.util.dialog.CloseDialog
 

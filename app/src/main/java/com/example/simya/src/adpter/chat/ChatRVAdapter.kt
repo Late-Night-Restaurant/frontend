@@ -4,9 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.simya.src.Constants.CHAT_NOTIFY
-import com.example.simya.src.Constants.CHAT_OTHERS
-import com.example.simya.src.Constants.CHAT_SELF
+import com.example.simya.util.Constants.CHAT_NOTIFY
+import com.example.simya.util.Constants.CHAT_OTHERS
+import com.example.simya.util.Constants.CHAT_SELF
 import com.example.simya.src.data.ChatRVData
 import com.example.simya.databinding.ItemChatNotifyBinding
 import com.example.simya.databinding.ItemChatReceiveBinding
