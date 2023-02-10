@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.databinding.ItemBorderGv156156Binding
 import com.example.simya.src.testData.TestDataBorder
 
-class MyPageLikeGVAdapter(private val dataList: ArrayList<TestDataBorder>): RecyclerView.Adapter<MyPageLikeGVAdapter.DataViewHolder>() {
-    inner class DataViewHolder(private val binding: ItemBorderGv156156Binding): RecyclerView.ViewHolder(binding.root){
+class MyPageLikeGVAdapter(private val dataList: ArrayList<TestDataBorder>) :
+    RecyclerView.Adapter<MyPageLikeGVAdapter.DataViewHolder>() {
+    inner class DataViewHolder(private val binding: ItemBorderGv156156Binding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(data: TestDataBorder) {
             binding.tvGvTodayMenu.text = data.todayMenu
             binding.tvGvMainMenu.text = data.mainMenu
@@ -17,7 +19,8 @@ class MyPageLikeGVAdapter(private val dataList: ArrayList<TestDataBorder>): Recy
 
     // ViewHolder 만들어질때 실행할 동작
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
-        val binding = ItemBorderGv156156Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemBorderGv156156Binding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DataViewHolder(binding)
     }
 

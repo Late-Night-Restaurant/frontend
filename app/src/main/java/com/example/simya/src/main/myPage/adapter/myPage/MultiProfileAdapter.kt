@@ -12,27 +12,44 @@ import com.example.simya.src.main.home.adapter.HomeGVAdapter
 import com.example.simya.src.model.profile.ProfileDTO
 import com.example.simya.src.model.story.load.LoadAllStoryResult
 
-class MultiProfileAdapter(private val context: Fragment, private val dataList: ArrayList<ProfileDTO>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MultiProfileAdapter(
+    private val context: Fragment,
+    private val dataList: ArrayList<ProfileDTO>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var listener: OnItemClickListener? = null
-    inner class DataViewHolder(private val binding: ItemMypageMultiProfileBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    inner class DataViewHolder(private val binding: ItemMypageMultiProfileBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ProfileDTO) {
             binding.tvItemMyStoryMultiProfile.text = data.nickname
-            Glide.with(context).load(data.picture).placeholder(R.drawable.bg_profile).into(binding.civItemMyStoryMultiProfile)
+            Glide.with(context).load(data.picture).placeholder(R.drawable.bg_profile)
+                .into(binding.civItemMyStoryMultiProfile)
         }
     }
-    inner class AddViewHolder(private val binding: ItemMypageMultiProfileBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    inner class AddViewHolder(private val binding: ItemMypageMultiProfileBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.tvItemMyStoryMultiProfile.text = "추가하기"
-            Glide.with(context).load(R.drawable.ic_baseline_add_24).into(binding.civItemMyStoryMultiProfile)
+            Glide.with(context).load(R.drawable.ic_baseline_add_24)
+                .into(binding.civItemMyStoryMultiProfile)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if(viewType == 0){
-            val binding = ItemMypageMultiProfileBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return if (viewType == 0) {
+            val binding = ItemMypageMultiProfileBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
             AddViewHolder(binding)
-        }else{
-            val binding = ItemMypageMultiProfileBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        } else {
+            val binding = ItemMypageMultiProfileBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
             DataViewHolder(binding)
         }
     }
@@ -45,17 +62,18 @@ class MultiProfileAdapter(private val context: Fragment, private val dataList: A
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(position == 0){
+        if (position == 0) {
             (holder as AddViewHolder).bind()
-        }else{
+        } else {
             (holder as DataViewHolder).bind(dataList[position])
         }
     }
+
     interface OnItemClickListener {
         fun onItemClick(v: View, data: ProfileDTO, position: Int)
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener){
+    fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 }

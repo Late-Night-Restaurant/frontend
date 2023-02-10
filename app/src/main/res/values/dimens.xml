@@ -7,4 +7,9 @@
     <dimen name="icon_small_width">16dp</dimen>
     <dimen name="icon_big_height">72dp</dimen>
     <dimen name="icon_big_width">72dp</dimen>
+
+    <dimen name="default_side_margin">16dp</dimen>
+    <dimen name="default_bottom_margin">24dp</dimen>
+    <dimen name="default_resource_distance">16dp</dimen>
+
 </resources>

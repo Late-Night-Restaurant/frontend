@@ -133,6 +133,7 @@ class MyPageFragment : Fragment() {
                 }
             })
     }
+    // 로그아웃
     private fun onLogoutService(){
         simyaApi.onLogout(UserTokenData.accessToken,UserTokenData.refreshToken).enqueue(object : Callback<BaseResponse>{
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
@@ -147,6 +148,7 @@ class MyPageFragment : Fragment() {
             }
         })
     }
+    // 추가하가 or 멀티프로필 클릭시
     private fun clickMultiProfile(){
         dataRVAdapter.setOnItemClickListener(object: MultiProfileAdapter.OnItemClickListener{
             override fun onItemClick(v: View, data: ProfileDTO, position: Int) {
@@ -160,11 +162,13 @@ class MyPageFragment : Fragment() {
             }
         })
     }
+    // 프로필
     private fun changeMyProfile(){
         simyaApi.changeMyRepresentProfile(UserTokenData.accessToken,UserTokenData.refreshToken,UserTokenData.getProfileId()).enqueue(object : Callback<BaseResponse>{
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
                 if(response.body()!!.code == 200){
                     //멀티 프로필 변경하기
+                    // 끝나면 로딩다이얼로그 끄기
                 }
             }
 

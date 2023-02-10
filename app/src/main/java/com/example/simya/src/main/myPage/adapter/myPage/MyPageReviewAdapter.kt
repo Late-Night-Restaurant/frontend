@@ -8,8 +8,10 @@ import com.example.simya.databinding.ItemReviewBinding
 import com.example.simya.src.model.mypage.review.MyReviewDTO
 import com.example.simya.src.testData.TestDataReview
 
-class MyPageReviewAdapter(private val dataList: ArrayList<MyReviewDTO>) : RecyclerView.Adapter<MyPageReviewAdapter.DataViewHolder>() {
-    inner class DataViewHolder(private val binding: ItemMyReviewBinding) : RecyclerView.ViewHolder(binding.root){
+class MyPageReviewAdapter(private val dataList: ArrayList<MyReviewDTO>) :
+    RecyclerView.Adapter<MyPageReviewAdapter.DataViewHolder>() {
+    inner class DataViewHolder(private val binding: ItemMyReviewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(data: MyReviewDTO) {
             binding.tvItemMyReviewContent.text = data.content
             binding.tvItemMyReviewLevel.text = data.rate.toString()
@@ -17,7 +19,8 @@ class MyPageReviewAdapter(private val dataList: ArrayList<MyReviewDTO>) : Recycl
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
-        val binding = ItemMyReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemMyReviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DataViewHolder(binding)
     }
 
