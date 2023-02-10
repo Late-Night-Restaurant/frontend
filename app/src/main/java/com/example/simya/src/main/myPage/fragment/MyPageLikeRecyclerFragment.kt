@@ -39,7 +39,5 @@ class MyPageLikeRecyclerFragment: Fragment() {
         val dataRVAdpater = MyPageLikeRVAdapter(dataList)
         binding.rvMyPageLikeRecycler.adapter = dataRVAdpater
         binding.rvMyPageLikeRecycler.layoutManager = LinearLayoutManager(this.context)
-
-
     }
 }

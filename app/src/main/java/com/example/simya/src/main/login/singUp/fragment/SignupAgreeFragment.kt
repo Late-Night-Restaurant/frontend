@@ -29,8 +29,6 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignupAgreeBinding.inflate(layoutInflater)
-
-
         return binding.root
 
     }

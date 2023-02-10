@@ -53,14 +53,14 @@ class EmailLoginActivity : AppCompatActivity() {
         binding.btnEmailSigninLogin.isEnabled = false
 
         //EditText 입력확인
-        binding.tietEmailSigninInputEmail.addTextChangedListener(textWatcher)
-        binding.tietEmailSigninInputPassword.addTextChangedListener(textWatcher)
+        binding.edtEmailSignInInputEmail.addTextChangedListener(textWatcher)
+        binding.edtEmailSignInInputPassword.addTextChangedListener(textWatcher)
 
         //로그인 이벤트
         binding.btnEmailSigninLogin.setOnClickListener {
             if(checkEmail()&&checkPassword()){
-                email = binding.tietEmailSigninInputEmail.text.toString()
-                password = binding.tietEmailSigninInputPassword.text.toString()
+                email = binding.edtEmailSignInInputEmail.text.toString()
+                password = binding.edtEmailSignInInputPassword.text.toString()
                 onSignIn(
                     AccountDTO(
                         email,
@@ -109,24 +109,24 @@ class EmailLoginActivity : AppCompatActivity() {
         })
     }
     private fun checkEmail(): Boolean {
-        var email = binding.tietEmailSigninInputEmail.text.toString().trim() // 공백제거
+        var email = binding.edtEmailSignInInputEmail.text.toString().trim() // 공백제거
         val pattern = Pattern.matches(EMAIL_VALIDATION, email) // 패턴확인
         return if (pattern) {
-            binding.tilEmailSigninInputEmail.error = null
+            binding.tilEmailSignInInputEmail.error = null
             true
         } else {
-            binding.tilEmailSigninInputEmail.error = "올바른 이메일 형식을 입력해주세요."
+            binding.tilEmailSignInInputEmail.error = "올바른 이메일 형식을 입력해주세요."
             false
         }
     }
 
     private fun checkPassword(): Boolean {
-        var password = binding.tietEmailSigninInputPassword.text!!.length
+        var password = binding.edtEmailSignInInputPassword.text!!.length
         return if (password in 8..12) {
-            binding.tilEmailSigninInputPassword.error = null
+            binding.tilEmailSignInInputPassword.error = null
             true
         } else {
-            binding.tilEmailSigninInputPassword.error = "영문과 숫자를 조합해서 입력해주세요.(8-12자)"
+            binding.tilEmailSignInInputPassword.error = "영문과 숫자를 조합해서 입력해주세요.(8-12자)"
             false
         }
     }
@@ -144,8 +144,8 @@ class EmailLoginActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val emailInput = binding.tietEmailSigninInputEmail!!.text.toString()
-                val passwordInput = binding.tietEmailSigninInputPassword!!.text.toString()
+                val emailInput = binding.edtEmailSignInInputEmail!!.text.toString()
+                val passwordInput = binding.edtEmailSignInInputPassword!!.text.toString()
                 if (emailInput.isNotEmpty() && passwordInput.isNotEmpty()) {
                     binding.btnEmailSigninLogin.isEnabled = true
                     binding.btnEmailSigninLogin.isClickable = true

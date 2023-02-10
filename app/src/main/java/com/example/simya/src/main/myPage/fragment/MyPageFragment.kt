@@ -17,10 +17,13 @@ import com.example.simya.src.main.myPage.ProfileEditActivity
 import com.example.simya.databinding.FragmentHomeMyPageBinding
 import com.example.simya.src.main.myPage.adapter.myPage.MultiProfileAdapter
 import com.example.simya.src.data.UserTokenData
+import com.example.simya.src.main.myPage.ProfileAddActivity
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.profile.MyProfileResponse
 import com.example.simya.src.model.profile.ProfileDTO
+import com.example.simya.util.Constants.COMMENT
+import com.example.simya.util.Constants.NICK_NAME
 import com.example.simya.util.Constants.NO
 import com.example.simya.util.Constants.YES
 import com.example.simya.util.dialog.BasicDialog
@@ -61,13 +64,13 @@ class MyPageFragment : Fragment() {
         }
 
         // 찜한 이야기 집으로
-        binding.ibMyPageMenu1.setOnClickListener {
+        binding.ibMyPageLikeHouse.setOnClickListener {
             val intent = Intent(activity, MyPageLikeActivity::class.java)
             startActivity(intent)
         }
 
         // 내가 쓴 리뷰로
-        binding.ibMyPageMenu2.setOnClickListener {
+        binding.ibMyPageReview.setOnClickListener {
             val intent = Intent(activity, MyPageReviewActivity::class.java)
             startActivity(intent)
         }
@@ -95,15 +98,15 @@ class MyPageFragment : Fragment() {
                         dismissBasicDialog()
                         Log.d("로그아웃","YES")
                         onLogoutService()
-                    }else if(resultCode==NO){
+                    } else if(resultCode==NO) {
                         dismissBasicDialog()
                         Log.d("로그아웃","NO")
                     }
                 }
-
             })
         }
         getAllMyProfileService()
+        clickMultiProfile()
     }
 
     private fun getAllMyProfileService() {
@@ -125,7 +128,6 @@ class MyPageFragment : Fragment() {
                         }
                     }
                 }
-
                 override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
                     Log.d("Response",t.toString())
                 }
@@ -138,6 +140,31 @@ class MyPageFragment : Fragment() {
                 Log.d("status code",code.toString())
                 if(code == 200){
 
+                }
+            }
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                Log.d("Response",t.toString())
+            }
+        })
+    }
+    private fun clickMultiProfile(){
+        dataRVAdapter.setOnItemClickListener(object: MultiProfileAdapter.OnItemClickListener{
+            override fun onItemClick(v: View, data: ProfileDTO, position: Int) {
+                if(position == 0){
+                    val intent = Intent(activity,ProfileAddActivity::class.java)
+                    startActivity(intent)
+                }else{
+//                    showLoadingDialog(this@MyPageFragment.requireContext()) 다이얼로그
+                    changeMyProfile()
+                }
+            }
+        })
+    }
+    private fun changeMyProfile(){
+        simyaApi.changeMyRepresentProfile(UserTokenData.accessToken,UserTokenData.refreshToken,UserTokenData.getProfileId()).enqueue(object : Callback<BaseResponse>{
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+                if(response.body()!!.code == 200){
+                    //멀티 프로필 변경하기
                 }
             }
 

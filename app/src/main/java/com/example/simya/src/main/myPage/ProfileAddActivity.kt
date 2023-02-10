@@ -1,16 +1,20 @@
 package com.example.simya.src.main.myPage
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.simya.src.main.home.HomeActivity
+import com.example.simya.config.BaseResponse
 import com.example.simya.databinding.ActivityProfileEditBinding
+import com.example.simya.src.data.UserTokenData
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.util.Constants
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
-class ProfileEditActivity : AppCompatActivity() {
+class ProfileAddActivity : AppCompatActivity() {
     lateinit var binding: ActivityProfileEditBinding
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
@@ -24,11 +28,27 @@ class ProfileEditActivity : AppCompatActivity() {
         setContentView(binding.root)
         init()
     }
-
     private fun init() {
         binding.btnProfileEdit.setOnClickListener {
-
+            if(nicknameCheck() && commentCheck()){
+                onModifyUser()
+            }else{
+                // 수정 취소
+            }
         }
+    }
+
+    private fun onModifyUser(){
+        simyaApi.onLogout(UserTokenData.accessToken,UserTokenData.refreshToken).enqueue(object:
+            Callback<BaseResponse>{
+            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
+
+            }
+            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
+                Log.d("Response",t.toString())
+        }
+
+        })
     }
     private fun nicknameCheck() : Boolean {
         var nickname = binding.edtProfileInputNickname.text.toString().trim()

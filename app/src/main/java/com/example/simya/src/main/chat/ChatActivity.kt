@@ -234,10 +234,11 @@ class ChatActivity : AppCompatActivity() {
 
     private fun setGuestType() {
         binding.btnChatPause.isInvisible = true
-        binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_alert_story)
+        binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_heart_off)
     }
 
     private fun testDrawerUserListed() {
+        Log.d("테스트 드로어 유저 리스트","true")
         binding.btnDrawerIntro.setOnClickListener {
             val intent = Intent(this, StoryIntroActivity::class.java)
             startActivity(intent)
@@ -265,7 +266,6 @@ class ChatActivity : AppCompatActivity() {
         receiveUser3 = TestUserData("쭈니", R.drawable.test_jooni, Constants.CHAT_GUEST_CODE)
         receiveUser4 = TestUserData("채니", R.drawable.test_chani, Constants.CHAT_GUEST_CODE)
     }
-
 
     //키보드 내려감
     override fun onTouchEvent(event: MotionEvent): Boolean {

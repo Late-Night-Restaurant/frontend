@@ -1,15 +1,19 @@
 package com.example.simya.src.main.myPage.adapter.myPage
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.simya.R
 import com.example.simya.databinding.ItemMypageMultiProfileBinding
+import com.example.simya.src.main.home.adapter.HomeGVAdapter
 import com.example.simya.src.model.profile.ProfileDTO
+import com.example.simya.src.model.story.load.LoadAllStoryResult
 
 class MultiProfileAdapter(private val context: Fragment, private val dataList: ArrayList<ProfileDTO>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var listener: OnItemClickListener? = null
     inner class DataViewHolder(private val binding: ItemMypageMultiProfileBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ProfileDTO) {
             binding.tvItemMyStoryMultiProfile.text = data.nickname
@@ -46,5 +50,12 @@ class MultiProfileAdapter(private val context: Fragment, private val dataList: A
         }else{
             (holder as DataViewHolder).bind(dataList[position])
         }
+    }
+    interface OnItemClickListener {
+        fun onItemClick(v: View, data: ProfileDTO, position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        this.listener = listener
     }
 }
