@@ -20,6 +20,7 @@ import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.account.AccountDTO
+import com.example.simya.util.Constants.EMAIL_VALIDATION
 import com.example.simya.util.sharedpreferences.Shared
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,8 +30,6 @@ import java.util.regex.Pattern
 
 class EmailLoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninEmailBinding
-    private val emailValidation =
-        "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     private lateinit var textWatcher: TextWatcher
     private lateinit var email: String
     private lateinit var password: String
@@ -111,7 +110,7 @@ class EmailLoginActivity : AppCompatActivity() {
     }
     private fun checkEmail(): Boolean {
         var email = binding.tietEmailSigninInputEmail.text.toString().trim() // 공백제거
-        val pattern = Pattern.matches(emailValidation, email) // 패턴확인
+        val pattern = Pattern.matches(EMAIL_VALIDATION, email) // 패턴확인
         return if (pattern) {
             binding.tilEmailSigninInputEmail.error = null
             true

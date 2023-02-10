@@ -18,6 +18,8 @@ import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.account.*
+import com.example.simya.util.Constants.COMMENT_VALIDATION
+import com.example.simya.util.Constants.NICKNAME_VALIDATION
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,8 +27,6 @@ import java.util.regex.Pattern
 
 class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
     private lateinit var binding: FragmentSignupProfileBinding
-    private val nicknameValidation = "^[가-힣]{1,8}$"
-    private val commentValidation = "^.{1,24}$" // 모든 문자 가능, 24자 이내
     private lateinit var emailData: String
     private lateinit var pwData: String
     private lateinit var profile: SignUpProfileDTO
@@ -89,7 +89,7 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     private fun nicknameCheck() : Boolean {
         var nickname = binding.tietNicknameSignupInput.text.toString().trim()
-        val pattern = Pattern.matches(nicknameValidation, nickname)
+        val pattern = Pattern.matches(NICKNAME_VALIDATION, nickname)
 
         return if (pattern) {
             binding.tilNicknameSignupInput.error = null
@@ -102,7 +102,7 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     private fun commentCheck() : Boolean {
         var comment = binding.tietCommentSignupInput.text.toString().trim()
-        val pattern = Pattern.matches(commentValidation, comment)
+        val pattern = Pattern.matches(COMMENT_VALIDATION, comment)
         var commentLength = binding.tietCommentSignupInput.text!!.length
 
         return if (pattern && commentLength in 1..24) {

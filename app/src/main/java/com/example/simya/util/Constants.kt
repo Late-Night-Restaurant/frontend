@@ -41,4 +41,9 @@ object Constants {
     const val MAIN_MENU_HOBBY = "취미"
     const val MAIN_MENU_CULTURE = "문화 생활"
     const val HOUSE_ID = "houseId"
+
+    const val EMAIL_VALIDATION = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+    const val NICKNAME_VALIDATION = "^[가-힣]{1,8}$"
+    const val COMMENT_VALIDATION = "^.{1,24}$"
+    const val PW_VALIDATION =  """^[0-9a-zA-Z!@#$%^+\-=]*$"""
 }
