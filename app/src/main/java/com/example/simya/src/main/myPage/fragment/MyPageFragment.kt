@@ -105,11 +105,11 @@ class MyPageFragment : Fragment() {
                 }
             })
         }
-        getAllMyProfileService()
+        tryGetAllMyProfileService()
         clickMultiProfile()
     }
 
-    private fun getAllMyProfileService() {
+    private fun tryGetAllMyProfileService() {
         simyaApi.getMyAllProfile(UserTokenData.accessToken, UserTokenData.refreshToken)
             .enqueue(object : Callback<MyProfileResponse> {
                 override fun onResponse(

@@ -32,10 +32,10 @@ class MyReviewActivity: AppCompatActivity() {
         binding.included.tvDefaultLayoutTitle.text = "리뷰 수정하기"
         // 버튼을 누르면 리뷰 수정하기
         binding.btnItemEditReview.setOnClickListener {
-            modifyWriteReview()
+            tryModifyMyWriteReview()
         }
     }
-    private fun modifyWriteReview(){
+    private fun tryModifyMyWriteReview(){
         simyaApi.modifyMyWriteReview(UserTokenData.accessToken,UserTokenData.refreshToken,1).enqueue(object :
             Callback<MyModifyReviewResponse>{
             override fun onResponse(

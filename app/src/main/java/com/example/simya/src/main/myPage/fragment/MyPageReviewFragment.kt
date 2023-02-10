@@ -55,7 +55,7 @@ class MyPageReviewFragment: Fragment() {
         binding.rvMyPageReviewRecycler.layoutManager = LinearLayoutManager(this.context)
 
     }
-    private fun getMyWriteReview(){
+    private fun tryGetMyWriteReview(){
         simyaApi.getMyWriteReview(UserTokenData.accessToken,UserTokenData.refreshToken).enqueue(object:
             Callback<MyWriteReviewResponse> {
             override fun onResponse(
