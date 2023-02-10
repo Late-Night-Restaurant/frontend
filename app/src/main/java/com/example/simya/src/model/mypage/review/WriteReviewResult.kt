@@ -1,10 +1,10 @@
-package com.example.simya.src.model.mystory.review
+package com.example.simya.src.model.mypage.review
 
 import com.example.simya.src.model.HouseDTO
 import com.example.simya.src.model.UserDTO
 import com.google.gson.annotations.SerializedName
 
-data class MyWriteReviewResult(
+data class WriteReviewResult(
     @SerializedName("reviewedHouse") val reviewHouse: HouseDTO,
     @SerializedName("myReview") val myReview: MyReview,
 ){

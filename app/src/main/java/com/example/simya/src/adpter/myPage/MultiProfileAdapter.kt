@@ -35,7 +35,7 @@ class MultiProfileAdapter(private val context: Fragment, private val dataList: A
 
 
     override fun getItemCount(): Int = dataList.size
-H
+
     override fun getItemViewType(position: Int): Int {
         return position
     }
