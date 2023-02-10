@@ -17,7 +17,6 @@ class MyPageReviewActivity : AppCompatActivity() {
         setContentView(binding.root)
         init()
     }
-
     private fun init() {
         supportFragmentManager
             .beginTransaction()
