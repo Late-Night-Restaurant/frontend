@@ -8,3 +8,4 @@ data class ProfileDTO(
     @SerializedName("comment") var comment: String,
     @SerializedName("picture") var picture: String
 )
+

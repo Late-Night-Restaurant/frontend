@@ -2,7 +2,7 @@ package com.example.simya.util.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.simya.src.Constants.PROFILE_ID
+import com.example.simya.util.Constants.PROFILE_ID
 
 class PreferenceUtil(context: Context) {
     private val prefs:SharedPreferences = context.getSharedPreferences("prefs_simya",Context.MODE_PRIVATE)

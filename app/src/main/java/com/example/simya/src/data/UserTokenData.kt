@@ -1,6 +1,6 @@
 package com.example.simya.src.data
 
-import com.example.simya.src.Constants
+import com.example.simya.util.Constants
 
 // 이름 바꿔야함
 object UserTokenData {

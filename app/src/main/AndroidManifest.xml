@@ -25,22 +25,22 @@
 
 
         <activity
-            android:name=".src.activity.splash.SplashActivity"
+            android:name=".src.main.splash.SplashActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".src.activity.login.LoginActivity"
+            android:name=".src.main.login.LoginActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".src.activity.login.signIn.EmailLoginActivity"
+            android:name=".src.main.login.signIn.EmailLoginActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".src.activity.home.HomeActivity"
+            android:name=".src.main.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,51 +51,51 @@
                 android:value=""/>
         </activity>
         <activity
-            android:name=".src.activity.story.StoryReviewActivity"
+            android:name=".src.main.story.StoryReviewActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.story.StoryIntroActivity"
+            android:name=".src.main.story.StoryIntroActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.login.singUp.SignupActivity"
+            android:name=".src.main.login.singUp.SignupActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.story.CreateMyStoryActivity"
+            android:name=".src.main.story.CreateMyStoryActivity"
             android:exported="true"/>
         <activity
-            android:name=".src.activity.story.CreateMyStoryMainMenuActivity"
+            android:name=".src.main.story.CreateMyStoryMainMenuActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.story.CreateMyStoryBorderActivity"
+            android:name=".src.main.story.CreateMyStoryBorderActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".src.activity.story.OpenMyStoryActivity"
+            android:name=".src.main.story.OpenMyStoryActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.myPage.ProfileEditActivity"
+            android:name=".src.main.myPage.ProfileEditActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.myPage.MyPageLikeActivity"
+            android:name=".src.main.myPage.MyPageLikeActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.myPage.MyPageReviewActivity"
+            android:name=".src.main.myPage.MyPageReviewActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.story.StoryLikeActivity"
+            android:name=".src.main.story.StoryLikeActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.story.OpenMyStoryInputActivity"
+            android:name=".src.main.story.OpenMyStoryInputActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.story.EditMyStoryMenuActivity"
+            android:name=".src.main.story.EditMyStoryMenuActivity"
             android:exported="true" />
         <activity
-            android:name=".src.activity.chat.ChatActivity"
+            android:name=".src.main.chat.ChatActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".src.activity.story.TodayMenuActivity"
+            android:name=".src.main.story.TodayMenuActivity"
             android:exported="true" />
     </application>
 
