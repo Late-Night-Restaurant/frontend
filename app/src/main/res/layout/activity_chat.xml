@@ -10,62 +10,60 @@
         layout="@layout/default_chat" />
 
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:animateLayoutChanges="true" >
-
-    <ImageView
-        android:id="@+id/iv_notice_1"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:scaleType="fitCenter"
-        android:src="@drawable/today_menu"
-        app:layout_constraintEnd_toEndOf="@+id/included_default"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/included_default"
-        android:layout_marginTop="8dp"
-        android:textAlignment="center" />
-
-    <ImageView
-        android:id="@+id/iv_notice_2"
-        android:layout_width="320dp"
-        android:layout_height="44dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="-10dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/today_menu"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_notice_1" />
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="dad"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toTopOf="@+id/iv_notice_2"
-        app:layout_constraintTop_toTopOf="@+id/iv_notice_1" />
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/included_default">
 
-    <ImageButton
-        android:id="@+id/ib_chat_notice_down"
-        android:layout_width="@dimen/icon_width"
-        android:layout_height="@dimen/icon_height"
-        android:background="@drawable/ic_down"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_down"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_notice_1"
-        app:layout_constraintEnd_toEndOf="@+id/iv_notice_1" />
+        <ImageView
+            android:id="@+id/iv_notice_1"
+            android:layout_width="320dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/today_menu"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/included_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/included_default" />
+
+        <ImageView
+            android:id="@+id/iv_notice_2"
+            android:layout_width="320dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/today_menu"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_notice_1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="dad"
+            app:layout_constraintBottom_toTopOf="@+id/iv_notice_2"
+            app:layout_constraintTop_toTopOf="@+id/iv_notice_1" />
+
+        <ImageButton
+            android:id="@+id/ib_chat_notice_down"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:background="@drawable/ic_down"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_down"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_notice_1"
+            app:layout_constraintEnd_toEndOf="@+id/iv_notice_1" />
 
 
-
-</LinearLayout>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chat_list"
@@ -76,8 +74,7 @@
         app:layout_constraintBottom_toTopOf="@id/cl_chat_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/iv_notice_2">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
     </androidx.recyclerview.widget.RecyclerView>
 
