@@ -76,6 +76,7 @@
             android:exported="true">
 
         </activity>
+
         <activity
             android:name=".src.main.story.OpenMyStoryActivity"
             android:exported="true" />
@@ -102,6 +103,7 @@
         <activity
             android:name=".src.main.chat.ChatActivity"
             android:exported="true">
+
         </activity>
         <activity
             android:name=".src.main.story.TodayMenuActivity"
