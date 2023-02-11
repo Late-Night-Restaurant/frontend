@@ -29,12 +29,12 @@ import retrofit2.http.POST
 
 interface RetrofitService {
 
-    // 폼 로그인
-    @Headers("Content-Type: application/json")
-    @POST("/simya/form-login")
-    fun onLoginSubmit(
-        @Body login: AccountDTO
-    ): Call<AccountResponse>
+//    // 폼 로그인
+//    @Headers("Content-Type: application/json")
+//    @POST("/simya/form-login")
+//    fun onLoginSubmit(
+//        @Body login: AccountDTO
+//    ): Call<AccountResponse>
 
     // 내 모든 프로필 조회
     @Headers("Content-Type: application/json")
@@ -44,12 +44,7 @@ interface RetrofitService {
         @Header("Refresh-Token") refreshToken: String
     ): Call<ProfileResponse>
 
-    // 회원가입
-    @Headers("Content-Type: application/json")
-    @POST("/simya/form-signup")
-    fun onSignUpSubmit(
-        @Body signup: SignupDTO
-    ): Call<SignupResponse>
+
 
     // 이야기 집 생성
     @Headers("Content-Type: application/json")

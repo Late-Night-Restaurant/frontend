@@ -42,7 +42,7 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
         super.onViewCreated(view, savedInstanceState)
         FalseButton()
         initTW()
-        signupActivity!!.binding.pbSignup.progress = 50
+        signupActivity!!.increaseProgressbar()
 
         binding.tietPwSignupInput.addTextChangedListener(textWatcher)
         binding.tietRepwSignupInput.addTextChangedListener(textWatcher)

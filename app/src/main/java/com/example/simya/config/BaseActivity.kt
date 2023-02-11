@@ -3,9 +3,12 @@ package com.example.simya.config
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.example.simya.util.Constants
 import com.example.simya.util.dialog.BasicDialog
 import com.example.simya.util.dialog.LoadingDialog
 
@@ -21,7 +24,15 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
         setContentView(binding.root)
     }
 
-
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val imm: InputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        return true
+    }
+    fun showCustomToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
     // 다이얼로그
     fun showBasicDialog(context: Context,title: String){
         mBasicDialog = BasicDialog(context, title)
