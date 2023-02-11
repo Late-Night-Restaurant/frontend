@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isInvisible
@@ -79,6 +80,7 @@ class ChatActivity : AppCompatActivity() {
         setContentView(binding.root)
         // 인텐트 데이터값이 0 일경우 채팅방 예외처리 -> 다시메인으로
         testUserCheck(Constants.CHAT_GUEST_CODE)
+        onNotify()
         init()
     }
 
@@ -236,7 +238,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun setGuestType() {
         binding.btnChatPause.isInvisible = true
-        binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_alert_story)
+        binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_heart_off)
     }
 
     private fun testDrawerUserListed() {
@@ -278,8 +280,21 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun onNotify() {
-        binding.includedChat.ibChatNoticeDown.setOnClickListener {
-
+        binding.includedChat.ibTodayMenu.setOnClickListener {
+            Toast.makeText(this, "ㅋㅋ", Toast.LENGTH_SHORT).show()
+            if (binding.includedChat.cvTodayMenu2.visibility == View.VISIBLE) {
+                binding.includedChat.cvTodayMenu2.visibility = View.GONE
+                binding.includedChat.ibTodayMenu.animate().apply {
+                    duration = 300
+                    rotation(0f)
+                }
+            } else {
+                binding.includedChat.cvTodayMenu2.visibility = View.VISIBLE
+                binding.includedChat.ibTodayMenu.animate().apply {
+                    duration = 300
+                    rotation(180f)
+                }
+            }
         }
     }
 }
