@@ -76,6 +76,11 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
     // stomp
     implementation 'com.github.bishoybasily:stomp:2.0.5'
+
+    // ExpandableTextView
+    implementation 'com.ms-square:expandableTextView:0.1.4'
+
     // loading
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
 }

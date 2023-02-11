@@ -6,6 +6,7 @@
     android:id="@+id/dl_chat">
     <include layout="@layout/activity_chat"
         android:id="@+id/included_chat"/>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nv_my_story_open"
         android:layout_width="200dp"
@@ -38,7 +39,7 @@
                 android:text="이야기집 소개"
                 android:textColor="@color/Gray_05"
                 android:gravity="center_vertical"
-                android:drawableEnd="@drawable/ic_right"
+                android:drawableEnd="@drawable/ic_right_small"
                 app:layout_constraintTop_toBottomOf="@id/tv_drawer_chat"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +53,7 @@
                 android:text="오늘의 메뉴"
                 android:textColor="@color/Gray_05"
                 android:gravity="center_vertical"
-                android:drawableEnd="@drawable/ic_right"
+                android:drawableEnd="@drawable/ic_right_small"
                 app:layout_constraintTop_toBottomOf="@id/btn_drawer_intro"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +67,7 @@
                 android:text="사진"
                 android:textColor="@color/Gray_05"
                 android:gravity="center_vertical"
-                android:drawableEnd="@drawable/ic_right"
+                android:drawableEnd="@drawable/ic_right_small"
                 app:layout_constraintTop_toBottomOf="@id/btn_drawer_today"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +81,7 @@
                 android:text="링크"
                 android:textColor="@color/Gray_05"
                 android:gravity="center_vertical"
-                android:drawableEnd="@drawable/ic_right"
+                android:drawableEnd="@drawable/ic_right_small"
                 app:layout_constraintTop_toBottomOf="@id/btn_drawer_image"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -137,8 +138,9 @@
                 android:layout_marginBottom="16dp">
                 <ImageButton
                     android:id="@+id/ib_chat_out"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:scaleType="fitCenter"
                     android:background="#00ff0000"
                     android:src="@drawable/ic_exit"
                     app:layout_constraintStart_toStartOf="parent"
@@ -146,10 +148,11 @@
                     app:layout_constraintBottom_toBottomOf="parent" />
                 <ImageButton
                     android:id="@+id/ib_chat_close_or_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_close"
-                    android:background="#00ff0000"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_heart_off"
+                    android:background="@drawable/ic_heart_off"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
