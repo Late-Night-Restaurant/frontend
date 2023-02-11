@@ -14,8 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/included_default"
+        tools:context=".src.main.chat.ChatActivity"
         tools:ignore="MissingConstraints">
 
         <androidx.cardview.widget.CardView
@@ -53,29 +56,35 @@
                 android:background="@android:color/transparent"
                 android:clickable="false"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_down"
-                android:textSize="22sp" />
+                android:src="@drawable/ic_down" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_today_menu_2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="4dp"
-            app:cardBackgroundColor="@color/Gray_05"
+            android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/ib_today_menu">
+            android:layout_marginTop="-8dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/Gray_05"
+            app:cardCornerRadius="4dp">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
                 android:text="가나다라마바"
-                android:textSize="18sp" />
+                android:textColor="@color/Gray_09"
+                android:textSize="12sp" />
+
+
         </androidx.cardview.widget.CardView>
 
 

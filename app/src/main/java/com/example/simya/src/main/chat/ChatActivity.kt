@@ -281,7 +281,6 @@ class ChatActivity : AppCompatActivity() {
 
     private fun onNotify() {
         binding.includedChat.ibTodayMenu.setOnClickListener {
-            Toast.makeText(this, "ㅋㅋ", Toast.LENGTH_SHORT).show()
             if (binding.includedChat.cvTodayMenu2.visibility == View.VISIBLE) {
                 binding.includedChat.cvTodayMenu2.visibility = View.GONE
                 binding.includedChat.ibTodayMenu.animate().apply {

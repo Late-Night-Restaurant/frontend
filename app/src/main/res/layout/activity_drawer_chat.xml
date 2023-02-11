@@ -6,6 +6,7 @@
     android:id="@+id/dl_chat">
     <include layout="@layout/activity_chat"
         android:id="@+id/included_chat"/>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nv_my_story_open"
         android:layout_width="200dp"
