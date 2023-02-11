@@ -22,7 +22,7 @@
         tools:ignore="MissingConstraints">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_today_menu_1"
+            android:id="@+id/cv_today_menu_off"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -36,7 +36,7 @@
 
 
             <TextView
-                android:id="@+id/tv_today_menu_1"
+                android:id="@+id/tv_today_menu_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -46,7 +46,7 @@
                 android:textSize="12sp" />
 
             <ImageButton
-                android:id="@+id/ib_today_menu"
+                android:id="@+id/ib_today_menu_button"
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
                 android:layout_gravity="right"
@@ -61,7 +61,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_today_menu_2"
+            android:id="@+id/cv_today_menu_on"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
@@ -74,6 +74,7 @@
 
 
             <TextView
+                android:id="@+id/tv_today_menu_text_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

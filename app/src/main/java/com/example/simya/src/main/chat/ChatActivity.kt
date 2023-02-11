@@ -289,7 +289,7 @@ class ChatActivity : AppCompatActivity() {
     // 공지사항 버튼 애니이션
 
     private fun onNotify(view: View, message: String) {
-        binding.includedChat.ibTodayMenu.setOnClickListener {
+        binding.includedChat.ibTodayMenuButton.setOnClickListener {
             var snackBar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
 
             val snackBarView: View = layoutInflater.inflate(R.layout.snackbar_layout, null)
@@ -301,15 +301,15 @@ class ChatActivity : AppCompatActivity() {
             snackBarLayout.addView(snackBarView)
 
             snackBar.show()
-            if (binding.includedChat.cvTodayMenu2.visibility == View.VISIBLE) {
-                binding.includedChat.cvTodayMenu2.visibility = View.GONE
-                binding.includedChat.ibTodayMenu.animate().apply {
+            if (binding.includedChat.cvTodayMenuOn.visibility == View.VISIBLE) {
+                binding.includedChat.cvTodayMenuOn.visibility = View.GONE
+                binding.includedChat.ibTodayMenuButton.animate().apply {
                     duration = 300
                     rotation(0f)
                 }
             } else {
-                binding.includedChat.cvTodayMenu2.visibility = View.VISIBLE
-                binding.includedChat.ibTodayMenu.animate().apply {
+                binding.includedChat.cvTodayMenuOn.visibility = View.VISIBLE
+                binding.includedChat.ibTodayMenuButton.animate().apply {
                     duration = 300
                     rotation(180f)
                 }
