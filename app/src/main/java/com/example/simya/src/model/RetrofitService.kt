@@ -142,7 +142,8 @@ interface RetrofitService {
     fun modifyMyProfile(
         @Header("Access-Token") accessToken: String,
         @Header("Refresh-Token") refreshToken: String,
-        @Path("profileId") profileId: Long
+        @Path("profileId") profileId: Long,
+        @Body userDTO: UserDTO
     ): Call<BaseResponse>
 
     // 프로필 삭제

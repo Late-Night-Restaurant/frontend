@@ -69,14 +69,18 @@
                 android:layout_marginEnd="16dp"
                 app:errorEnabled="true"
                 app:hintEnabled="false">
-                <EditText
+                <TextView
                     android:id="@+id/edt_modify_profile_input_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="유저 이름"
                     android:inputType="text"
-                    android:backgroundTint="@color/Gray_06"
-                    android:focusableInTouchMode="false"/>
+                    android:textSize="16dp"
+                    android:textColor="@color/Gray_03"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/Gray_06"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -85,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
                 app:errorEnabled="true"
                 app:hintEnabled="false">
                 <TextView
@@ -101,14 +106,18 @@
                 android:layout_marginEnd="16dp"
                 app:errorEnabled="true"
                 app:hintEnabled="false">
-                <EditText
+                <TextView
                     android:id="@+id/edt_modify_profile_input_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="한줄 소개"
                     android:inputType="text"
-                    android:backgroundTint="@color/Gray_06"
-                    android:focusableInTouchMode="false"/>
+                    android:textSize="16dp"
+                    android:textColor="@color/Gray_03"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/Gray_06"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </LinearLayout>

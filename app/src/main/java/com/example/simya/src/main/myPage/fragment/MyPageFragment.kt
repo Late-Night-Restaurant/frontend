@@ -13,14 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.simya.R
 import com.example.simya.config.BaseResponse
-import com.example.simya.src.main.myPage.MyPageLikeActivity
-import com.example.simya.src.main.myPage.MyPageReviewActivity
-import com.example.simya.src.main.myPage.ProfileEditActivity
 import com.example.simya.databinding.FragmentHomeMyPageBinding
 import com.example.simya.src.main.myPage.adapter.myPage.MultiProfileAdapter
 import com.example.simya.util.data.UserData
 import com.example.simya.src.main.login.signIn.EmailLoginActivity
-import com.example.simya.src.main.myPage.ProfileAddActivity
+import com.example.simya.src.main.myPage.*
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.profile.MyProfileResponse
@@ -59,7 +56,7 @@ class MyPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         binding.btnMyPageProfile.setOnClickListener {
-            val intent = Intent(activity, ProfileEditActivity::class.java)
+            val intent = Intent(activity, ProfileModifyActivity::class.java)
             startActivity(intent)
         }
 
@@ -141,7 +138,7 @@ class MyPageFragment : Fragment() {
             })
     }
     private fun initMainProfile(){
-        Glide.with(this).load(UserData.getProfileImage()).into(binding.civMyPageProfile)
+        Glide.with(this).load(UserData.getProfileImage()).placeholder(R.drawable.ic_base_profile).into(binding.civMyPageProfile)
         binding.tvMyPageMainNick.text = UserData.getProfileName()
         binding.tvMyPageMainComment.text = UserData.getProfileComment()
     }
@@ -177,7 +174,7 @@ class MyPageFragment : Fragment() {
             override fun onItemClick(v: View, data: ProfileDTO, position: Int) {
                 Log.d("Click","multiProfile")
                 if (position == 0) {
-                    moveTOAdd()
+                    moveToAdd()
                 } else {
                     showLoadingDialog(this@MyPageFragment.requireContext())
                     tryChangeMyProfile(data)
@@ -185,7 +182,7 @@ class MyPageFragment : Fragment() {
             }
         })
     }
-    private fun moveTOAdd(){
+    private fun moveToAdd(){
         val intent = Intent(activity, ProfileAddActivity::class.java)
         startActivity(intent)
     }

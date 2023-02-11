@@ -2,6 +2,8 @@ package com.example.simya.src.main.login.signIn
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,17 +12,17 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.simya.util.Constants
-import com.example.simya.util.Constants.OK
+import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.src.main.login.singUp.SignupActivity
-import com.example.simya.util.data.UserData
-import com.example.simya.databinding.ActivitySigninEmailBinding
-import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.account.AccountDTO
+import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.util.Constants
 import com.example.simya.util.Constants.EMAIL_VALIDATION
+import com.example.simya.util.Constants.OK
+import com.example.simya.util.data.UserData
 import com.example.simya.util.sharedpreferences.Shared
 import retrofit2.Call
 import retrofit2.Callback
@@ -76,6 +78,8 @@ class EmailLoginActivity : AppCompatActivity() {
     }
     private fun moveToHome(){
         val intent = Intent(this, HomeActivity::class.java)
+        // 메인,로그인 액티비티 스택 제거
+//        intent.flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
     private fun onSignIn(user: AccountDTO){
@@ -84,6 +88,9 @@ class EmailLoginActivity : AppCompatActivity() {
                 call: Call<AccountResponse>,
                 response: Response<AccountResponse>
             ) {
+                Log.d("access",UserData.accessToken)
+                Log.d("refresh",UserData.refreshToken)
+                Log.d("Response",response.toString())
                 if(response.body()!!.code==OK){
                     Log.d("Response check",response.message().toString())
                     Log.d("Response check",response.code().toString())
@@ -98,6 +105,7 @@ class EmailLoginActivity : AppCompatActivity() {
 //                    UserData.setProfileImage(response.body()!!.result!!.profileImage)
                     onShared()
                     moveToHome()
+
                 }else if(response.body()!!.code == 400){
                     if(response.body()!!.message == "존재하지 않는 사용자입니다."){
                         Toast.makeText(this@EmailLoginActivity,"존재하지 않는 사용자입니다.",Toast.LENGTH_SHORT).show()
@@ -152,14 +160,10 @@ class EmailLoginActivity : AppCompatActivity() {
                 if (emailInput.isNotEmpty() && passwordInput.isNotEmpty()) {
                     binding.btnEmailSigninLogin.isEnabled = true
                     binding.btnEmailSigninLogin.isClickable = true
-//                    binding.btnEmailSigninLogin.setBackgroundResource(R.drawable.low_radius_button_on)
-//                    binding.btnEmailSigninLogin.setTextColor(application.resources.getColor(R.color.Gray_03))
                 }
                 if (emailInput.isEmpty() || passwordInput.isEmpty()) {
                     binding.btnEmailSigninLogin.isEnabled = false
                     binding.btnEmailSigninLogin.isClickable = false
-//                    binding.btnEmailSigninLogin.setBackgroundResource(R.drawable.low_radius_button_off)
-//                    binding.btnEmailSigninLogin.setTextColor(application.resources.getColor(R.color.Gray_10))
                 }
             }
             override fun afterTextChanged(s: Editable) {

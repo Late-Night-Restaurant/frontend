@@ -1,7 +1,6 @@
 package com.example.simya.util.data
 
 import com.example.simya.util.Constants.DEFAULT
-import org.w3c.dom.Comment
 
 object UserData {
     var accessToken: String = DEFAULT

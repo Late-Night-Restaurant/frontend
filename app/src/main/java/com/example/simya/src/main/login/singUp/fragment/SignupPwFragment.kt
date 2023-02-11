@@ -33,7 +33,6 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignupPwBinding.inflate(layoutInflater)
-
         return binding.root
 
     }
