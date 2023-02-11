@@ -24,7 +24,6 @@ class SignUpService(val signUpInterface: SignUpInterface) {
                     signUpInterface.onPostSignUpSubmitFailure(response.body() as SignupResponse)
                 }
             }
-
             override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
                 Log.d("Retrofit2",t.toString())
             }

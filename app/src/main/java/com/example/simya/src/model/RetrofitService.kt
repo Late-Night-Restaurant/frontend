@@ -37,12 +37,12 @@ interface RetrofitService {
 //    ): Call<AccountResponse>
 
     // 내 모든 프로필 조회
-    @Headers("Content-Type: application/json")
-    @GET("/simya/users/profile")
-    fun getUserProfile(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String
-    ): Call<ProfileResponse>
+//    @Headers("Content-Type: application/json")
+//    @GET("/simya/users/profile")
+//    fun getUserProfile(
+//        @Header("Access-Token") accessToken: String,
+//        @Header("Refresh-Token") refreshToken: String
+//    ): Call<ProfileResponse>
 
 
 
@@ -160,12 +160,10 @@ interface RetrofitService {
     ): Call<BaseResponse>
 
     // 로그아웃
-    @Headers("Content-Type: application/json")
-    @GET("/simya/logout")
-    fun onLogout(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-    ): Call<BaseResponse>
-
-
+//    @Headers("Content-Type: application/json")
+//    @GET("/simya/logout")
+//    fun onLogout(
+//        @Header("Access-Token") accessToken: String,
+//        @Header("Refresh-Token") refreshToken: String,
+//    ): Call<BaseResponse>
 }
