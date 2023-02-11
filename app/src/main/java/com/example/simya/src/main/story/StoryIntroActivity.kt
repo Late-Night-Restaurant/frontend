@@ -10,7 +10,7 @@ import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.src.main.chat.ChatActivity
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityStoryIntroBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
@@ -64,8 +64,8 @@ class StoryIntroActivity : AppCompatActivity() {
     }
     fun inquiryStoryDetail(){
         simyaApi.getStoryDetail(
-            UserTokenData.accessToken,
-            UserTokenData.refreshToken,intent.getLongExtra(HOUSE_ID,0))
+            UserData.accessToken,
+            UserData.refreshToken,intent.getLongExtra(HOUSE_ID,0))
             .enqueue(object: Callback<InquiryStoryDetailResponse>{
                 override fun onResponse(
                     call: Call<InquiryStoryDetailResponse>,
@@ -83,7 +83,7 @@ class StoryIntroActivity : AppCompatActivity() {
                             binding.tvStoryProfileStoryIntro.text = response.body()!!.result!!.houseInfo.comment
                             binding.btnStoryIntroEnterChat.setOnClickListener {
                                 moveToChat(response.body()!!.result!!.houseInfo.houseId,
-                                    UserTokenData.getProfileId())
+                                    UserData.getProfileId())
                             }
                         }
                     }

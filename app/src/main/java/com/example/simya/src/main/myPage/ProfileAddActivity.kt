@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.config.BaseResponse
 import com.example.simya.databinding.ActivityProfileEditBinding
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.util.Constants
@@ -29,7 +29,8 @@ class ProfileAddActivity : AppCompatActivity() {
         init()
     }
     private fun init() {
-        binding.btnProfileEdit.setOnClickListener {
+        binding.included.tvDefaultLayoutTitle.text = "프로필 생성"
+        binding.btnEditProfileEdit.setOnClickListener {
             if(nicknameCheck() && commentCheck()){
                 onModifyUser()
             }else{
@@ -39,7 +40,7 @@ class ProfileAddActivity : AppCompatActivity() {
     }
 
     private fun onModifyUser(){
-        simyaApi.onLogout(UserTokenData.accessToken,UserTokenData.refreshToken).enqueue(object:
+        simyaApi.onLogout(UserData.accessToken, UserData.refreshToken).enqueue(object:
             Callback<BaseResponse>{
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
 
@@ -51,7 +52,7 @@ class ProfileAddActivity : AppCompatActivity() {
         })
     }
     private fun nicknameCheck() : Boolean {
-        var nickname = binding.edtProfileInputNickname.text.toString().trim()
+        var nickname = binding.edtEditProfileInputNickname.text.toString().trim()
         val pattern = Pattern.matches(Constants.NICKNAME_VALIDATION, nickname)
 
         return if (pattern) {
@@ -64,9 +65,9 @@ class ProfileAddActivity : AppCompatActivity() {
     }
 
     private fun commentCheck() : Boolean {
-        var comment = binding.edtProfileInputComment.text.toString().trim()
+        var comment = binding.edtEditProfileInputComment.text.toString().trim()
         val pattern = Pattern.matches(Constants.COMMENT_VALIDATION, comment)
-        var commentLength = binding.edtProfileInputComment.text!!.length
+        var commentLength = binding.edtEditProfileInputComment.text!!.length
 
         return if (pattern && commentLength in 1..24) {
             binding.tilProfileInputComment.error = null

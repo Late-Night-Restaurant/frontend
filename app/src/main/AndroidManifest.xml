@@ -32,7 +32,13 @@
         <activity
             android:name=".src.main.login.LoginActivity"
             android:exported="true">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value=""/>
         </activity>
         <activity
             android:name=".src.main.login.signIn.EmailLoginActivity"
@@ -46,13 +52,7 @@
         </activity>
         <activity android:name=".src.main.myPage.MyReviewActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value=""/>
+
         </activity>
         <activity
             android:name=".src.main.story.StoryReviewActivity"
@@ -106,6 +106,8 @@
         <activity
             android:name=".src.main.story.TodayMenuActivity"
             android:exported="true" />
+        <activity android:name=".src.main.myPage.ProfileAddActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

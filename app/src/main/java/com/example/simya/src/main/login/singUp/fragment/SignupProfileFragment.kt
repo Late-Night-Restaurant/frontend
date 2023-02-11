@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
-import com.example.simya.util.Constants
 import com.example.simya.R
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupProfileBinding
@@ -19,7 +18,14 @@ import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.account.*
 import com.example.simya.util.Constants.COMMENT_VALIDATION
+import com.example.simya.util.Constants.DEFAULT
+import com.example.simya.util.Constants.ERROR_STRING_DUPLICATE
+import com.example.simya.util.Constants.ERROR_STRING_FAILED_SIGN_UP
+import com.example.simya.util.Constants.ERROR_STRING_INPUT
 import com.example.simya.util.Constants.NICKNAME_VALIDATION
+import com.example.simya.util.Constants.OK
+import com.example.simya.util.Constants.POST_FAIL_USER
+import com.example.simya.util.Constants.REQUEST_ERROR
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,9 +51,7 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignupProfileBinding.inflate(layoutInflater)
-
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,16 +75,13 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
 
 
         binding.btnSignupNextProfile.setOnClickListener {
-
+            Log.d("nicknameCheck()",nicknameCheck().toString())
+            Log.d("commentCheck()",commentCheck().toString())
             if (nicknameCheck() && commentCheck()){
                 val nicknameData = binding.tietNicknameSignupInput.text.toString()
                 val commentData = binding.tietCommentSignupInput.text.toString()
-
-                profile = SignUpProfileDTO(nicknameData,commentData,"default")
-//                Log.d("Before","onSignUp")
+                profile = SignUpProfileDTO(nicknameData,commentData, DEFAULT)
                 onSignUp(SignupDTO(emailData, pwData, profile))
-
-
             } else {
                 Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -129,17 +130,26 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
                 call: Call<SignupResponse>,
                 response: Response<SignupResponse>
             ) {
-                if(response.body()!!.code== Constants.OK){
+                if(response.body()!!.code== OK){
                     Log.d("Response check", response.toString())
                     Log.d("Response check", response.message().toString())
                     Log.d("Response check", response.code().toString())
                     Log.d("Response check", response.body().toString())
                     moveToFin()
                 }
+                if(response.body()!!.code== REQUEST_ERROR){
+                    when(response.body()!!.message){
+                        ERROR_STRING_INPUT -> Log.d("@스낵바", ERROR_STRING_INPUT)
+                        ERROR_STRING_DUPLICATE -> Log.d("@스낵바", ERROR_STRING_DUPLICATE)
+                    }
+                }
+                if(response.body()!!.code == POST_FAIL_USER){
+                    Log.d("@스낵바",ERROR_STRING_FAILED_SIGN_UP)
+                }
             }
 
             override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-                Log.d("Response check", t.toString())
+                Log.d("Response", t.toString())
             }
         })
     }
@@ -165,14 +175,11 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
             }
         }
     }
-
-
     private fun trueButton() {
         binding.btnSignupNextProfile.isEnabled = true
         binding.btnSignupNextProfile.isClickable = true
         binding.btnSignupNextProfile.setBackgroundResource(R.drawable.low_radius_button_on)
         binding.btnSignupNextProfile.setTextColor(resources.getColor(R.color.Gray_03))
-
     }
 
     private fun falseButton() {

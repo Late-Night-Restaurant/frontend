@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.example.simya.R
 import com.example.simya.src.main.story.adapter.createStory.CreateMyStoryMainMenuAdapter
-import com.example.simya.src.data.MainMenuData
+import com.example.simya.util.data.MainMenuData
 import com.example.simya.databinding.ActivityStoryMainMenuBinding
 
 class CreateMyStoryMainMenuActivity : AppCompatActivity() {

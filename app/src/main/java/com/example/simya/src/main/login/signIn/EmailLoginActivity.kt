@@ -14,7 +14,7 @@ import com.example.simya.util.Constants
 import com.example.simya.util.Constants.OK
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.src.main.login.singUp.SignupActivity
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.src.model.RetrofitBuilder
@@ -91,8 +91,11 @@ class EmailLoginActivity : AppCompatActivity() {
                     Shared.prefs.setString("accessToken",response.body()!!.getAccessToken())
                     Shared.prefs.setString("refreshToken",response.body()!!.getRefreshToken())
                     Shared.prefs.setLong("profileId",response.body()!!.getProfileId())
-                    UserTokenData.setProfileId(response.body()!!.result!!.profileId)
-                    UserTokenData.setProfileName(response.body()!!.result!!.nickname)
+                    UserData.setProfileId(response.body()!!.result!!.profileId)
+                    UserData.setProfileName(response.body()!!.result!!.nickname)
+                    UserData.setProfileComment(response.body()!!.result!!.comment)
+                    // 프로필 이미지 추가하기
+//                    UserData.setProfileImage(response.body()!!.result!!.profileImage)
                     onShared()
                     moveToHome()
                 }else if(response.body()!!.code == 400){
@@ -164,11 +167,11 @@ class EmailLoginActivity : AppCompatActivity() {
         }
     }
     private fun onShared(){
-        UserTokenData.init(
+        UserData.init(
             Shared.prefs.getString("accessToken", Constants.DEFAULT),
             Shared.prefs.getString("refreshToken", Constants.DEFAULT))
-        Log.d("User AccessToken", UserTokenData.getUserAccessToken())
-        Log.d("User RefreshToken", UserTokenData.getUserRefreshToken())
+        Log.d("User AccessToken", UserData.getUserAccessToken())
+        Log.d("User RefreshToken", UserData.getUserRefreshToken())
     }
 
 }

@@ -26,6 +26,7 @@ object Constants {
     const val FAILED_TO_LOGIN = 404 // 로그인에 실패한 경우
     const val BANNED_USER_IN_LOGIN = 404 // 비활성화된 유저가 접근한 경우
     const val FAILED_TO_JWT = 500 // 토큰 발급에 실패한 경우
+    const val POST_FAIL_USER = 500
     const val FAILED_JWT_IN_ACCESS = 500 // 토근을 헤더에 넣지 못한 경우
 
 
@@ -47,4 +48,8 @@ object Constants {
     const val NICKNAME_VALIDATION = "^[가-힣]{1,8}$"
     const val COMMENT_VALIDATION = "^.{1,24}$"
     const val PW_VALIDATION =  """^[0-9a-zA-Z!@#$%^+\-=]*$"""
+
+    const val ERROR_STRING_INPUT ="입력값을 확인해주세요"
+    const val ERROR_STRING_DUPLICATE = "중복된 이메일입니다."
+    const val ERROR_STRING_FAILED_SIGN_UP = "회원가입에 실패했습니다."
 }

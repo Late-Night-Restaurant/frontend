@@ -20,8 +20,8 @@ import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.src.main.story.StoryIntroActivity
-import com.example.simya.src.data.ChatRVData
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.ChatRVData
+import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityDrawerChatBinding
 import com.example.simya.src.main.chat.adapter.ChatDrawerRVAdapter
 import com.example.simya.src.main.chat.adapter.ChatRVAdapter
@@ -59,11 +59,11 @@ class ChatActivity : AppCompatActivity() {
             it.proceed(
                 it.request().newBuilder().header(
                     "Access-Token",
-                    UserTokenData.accessToken
+                    UserData.accessToken
                 )
                     .header(
                         "Refresh-Token",
-                        UserTokenData.refreshToken
+                        UserData.refreshToken
                     ).build()
             )
         }
@@ -92,11 +92,11 @@ class ChatActivity : AppCompatActivity() {
                         .subscribe { chatData ->
                             Header(
                                 "Access-Token",
-                                UserTokenData.accessToken
+                                UserData.accessToken
                             )
                             Header(
                                 "Refresh-Token",
-                                UserTokenData.refreshToken
+                                UserData.refreshToken
                             )
                             chatObject = JSONObject(chatData)
                             receiveMessage(chatObject)
@@ -149,8 +149,8 @@ class ChatActivity : AppCompatActivity() {
     private fun sendMessage(){
         jsonObject.put("type", "TALK")
         jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID, 0))
-        jsonObject.put("sender", UserTokenData.getProfileName())
-        jsonObject.put("token", convertToken(UserTokenData.accessToken))
+        jsonObject.put("sender", UserData.getProfileName())
+        jsonObject.put("token", convertToken(UserData.accessToken))
         jsonObject.put("message", binding.includedChat.etChatInput.text.toString())
         jsonObject.put("userCount", 1)
         Log.d("JSON OBJECT MESSAGE", jsonObject.get("message").toString())
@@ -200,8 +200,8 @@ class ChatActivity : AppCompatActivity() {
     private fun enterNotify(){
         jsonObject.put("type", "ENTER")
         jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID, 0))
-        jsonObject.put("sender", UserTokenData.getProfileName())
-        jsonObject.put("token", convertToken(UserTokenData.accessToken))
+        jsonObject.put("sender", UserData.getProfileName())
+        jsonObject.put("token", convertToken(UserData.accessToken))
         jsonObject.put("message", "입장")
         jsonObject.put("userCount", 1)
         stomp.send(

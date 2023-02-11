@@ -32,7 +32,7 @@
             android:id="@+id/civ_my_page_profile"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:src="@drawable/ic_baseline_person_24"
+            android:src="@drawable/ic_base_profile"
             tools:ignore="MissingConstraints"
             android:background="@drawable/bg_profile"/>
 

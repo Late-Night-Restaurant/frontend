@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.util.Constants
 import com.example.simya.databinding.FragmentHomeMainRecyclerBinding
 import com.example.simya.src.main.story.adapter.mystory.MyStoryAdapter
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.story.load.LoadMyStoryResponse
@@ -51,7 +51,7 @@ class MyStoryRecyclerFragment: Fragment() {
         binding.rvHomeMainRecycler.layoutManager = LinearLayoutManager(this.context)
     }
     private fun loadMyStory(){
-        simyaApi.getMyStory(UserTokenData.accessToken, UserTokenData.getUserRefreshToken()).enqueue(object:
+        simyaApi.getMyStory(UserData.accessToken, UserData.getUserRefreshToken()).enqueue(object:
             Callback<LoadMyStoryResponse> {
             override fun onResponse(
                 call: Call<LoadMyStoryResponse>,

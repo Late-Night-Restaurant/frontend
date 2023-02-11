@@ -15,7 +15,7 @@ import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.src.main.home.HomeActivity
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityStoryCreateBorderBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
@@ -85,8 +85,8 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
 
     private fun onCreateStory(data: CreateStoryDTO) {
         simyaApi.onCreateMyHouse(
-            UserTokenData.getUserAccessToken(),
-            UserTokenData.getUserRefreshToken(),data).enqueue(object : Callback<CreateStoryResponse> {
+            UserData.getUserAccessToken(),
+            UserData.getUserRefreshToken(),data).enqueue(object : Callback<CreateStoryResponse> {
             override fun onResponse(
                 call: Call<CreateStoryResponse>,
                 response: Response<CreateStoryResponse>

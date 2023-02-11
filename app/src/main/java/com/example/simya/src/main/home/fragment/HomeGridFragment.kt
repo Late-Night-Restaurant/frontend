@@ -13,7 +13,7 @@ import com.example.simya.util.Constants.OK
 import com.example.simya.src.main.story.StoryIntroActivity
 import com.example.simya.databinding.FragmentHomeMainGridBinding
 import com.example.simya.src.main.home.adapter.HomeGVAdapter
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.story.load.LoadAllStoryResponse
@@ -47,7 +47,7 @@ class HomeGridFragment: Fragment() {
         loadAllStory()
     }
     private fun loadAllStory(){
-        simyaApi.getAllStory(UserTokenData.accessToken, UserTokenData.refreshToken)
+        simyaApi.getAllStory(UserData.accessToken, UserData.refreshToken)
             .enqueue(object: Callback<LoadAllStoryResponse>{
                 override fun onResponse(
                     call: Call<LoadAllStoryResponse>,

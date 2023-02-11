@@ -8,14 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.databinding.FragmentMyPageReviewRecyclerBinding
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.src.main.myPage.adapter.myPage.MyPageReviewAdapter
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
-import com.example.simya.src.model.mypage.review.MyModifyReviewRequest
 import com.example.simya.src.model.mypage.review.MyReviewDTO
 import com.example.simya.src.model.mypage.review.MyWriteReviewResponse
-import com.example.simya.src.testData.TestDataReview
 import com.example.simya.util.Constants.OK
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,7 +54,7 @@ class MyPageReviewFragment: Fragment() {
 
     }
     private fun tryGetMyWriteReview(){
-        simyaApi.getMyWriteReview(UserTokenData.accessToken,UserTokenData.refreshToken).enqueue(object:
+        simyaApi.getMyWriteReview(UserData.accessToken, UserData.refreshToken).enqueue(object:
             Callback<MyWriteReviewResponse> {
             override fun onResponse(
                 call: Call<MyWriteReviewResponse>,

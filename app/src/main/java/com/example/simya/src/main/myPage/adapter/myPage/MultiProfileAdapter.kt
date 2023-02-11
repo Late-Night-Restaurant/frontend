@@ -11,6 +11,7 @@ import com.example.simya.databinding.ItemMypageMultiProfileBinding
 import com.example.simya.src.main.home.adapter.HomeGVAdapter
 import com.example.simya.src.model.profile.ProfileDTO
 import com.example.simya.src.model.story.load.LoadAllStoryResult
+import com.example.simya.util.Constants.DEFAULT
 
 class MultiProfileAdapter(
     private val context: Fragment,
@@ -22,8 +23,10 @@ class MultiProfileAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ProfileDTO) {
             binding.tvItemMyStoryMultiProfile.text = data.nickname
-            Glide.with(context).load(data.picture).placeholder(R.drawable.bg_profile)
-                .into(binding.civItemMyStoryMultiProfile)
+            if(data.picture != DEFAULT){
+                Glide.with(context).load(data.picture).placeholder(R.drawable.bg_profile).placeholder(R.drawable.ic_base_profile)
+                    .into(binding.civItemMyStoryMultiProfile)
+            }
         }
     }
 
@@ -66,6 +69,11 @@ class MultiProfileAdapter(
             (holder as AddViewHolder).bind()
         } else {
             (holder as DataViewHolder).bind(dataList[position])
+        }
+        if(position != RecyclerView.NO_POSITION){
+            holder.itemView.setOnClickListener{
+                listener?.onItemClick(holder.itemView,dataList[position],position)
+            }
         }
     }
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.simya.databinding.FragmentMyPageLikeGridBinding
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.src.main.myPage.adapter.myPageLike.MyPageLikeGVAdapter
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
@@ -57,7 +57,7 @@ class MyPageLikeGridFragment: Fragment() {
         binding.gvMyPageLikeGrid.layoutManager = gridLayoutManager
     }
     private fun tryGetMyLikeStory(){
-        simyaApi.getMyLikeStory(UserTokenData.accessToken,UserTokenData.refreshToken).enqueue(object:
+        simyaApi.getMyLikeStory(UserData.accessToken, UserData.refreshToken).enqueue(object:
             Callback<MyLikeStoryResponse> {
             override fun onResponse(
                 call: Call<MyLikeStoryResponse>,

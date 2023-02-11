@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.databinding.ActivityReviewBinding
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.mypage.review.MyModifyReviewResponse
@@ -36,7 +36,7 @@ class MyReviewActivity: AppCompatActivity() {
         }
     }
     private fun tryModifyMyWriteReview(){
-        simyaApi.modifyMyWriteReview(UserTokenData.accessToken,UserTokenData.refreshToken,1).enqueue(object :
+        simyaApi.modifyMyWriteReview(UserData.accessToken, UserData.refreshToken,1).enqueue(object :
             Callback<MyModifyReviewResponse>{
             override fun onResponse(
                 call: Call<MyModifyReviewResponse>,

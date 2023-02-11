@@ -26,12 +26,13 @@ class ProfileEditActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        binding.btnProfileEdit.setOnClickListener {
+        binding.included.tvDefaultLayoutTitle.text = "프로필 수정"
+        binding.btnEditProfileEdit.setOnClickListener {
 
         }
     }
     private fun nicknameCheck() : Boolean {
-        var nickname = binding.edtProfileInputNickname.text.toString().trim()
+        var nickname = binding.edtEditProfileInputNickname.text.toString().trim()
         val pattern = Pattern.matches(Constants.NICKNAME_VALIDATION, nickname)
 
         return if (pattern) {
@@ -44,9 +45,9 @@ class ProfileEditActivity : AppCompatActivity() {
     }
 
     private fun commentCheck() : Boolean {
-        var comment = binding.edtProfileInputComment.text.toString().trim()
+        var comment = binding.edtEditProfileInputComment.text.toString().trim()
         val pattern = Pattern.matches(Constants.COMMENT_VALIDATION, comment)
-        var commentLength = binding.edtProfileInputComment.text!!.length
+        var commentLength = binding.edtEditProfileInputComment.text!!.length
 
         return if (pattern && commentLength in 1..24) {
             binding.tilProfileInputComment.error = null
