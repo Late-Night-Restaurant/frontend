@@ -126,6 +126,7 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
 
     }
 
+    // 프로필 가져오기 성공
     override fun onGetUserProfileSuccess(response: ProfileResponse) {
         requireActivity().runOnUiThread {
             dataList.apply {
@@ -137,19 +138,22 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
             // 어댑터 재연결하기? 리스트를 추가한걸 봐야함
         }
     }
-
+    // 프로필 가져오기 실패
     override fun onGetUserProfileFailure(response: ProfileResponse) {
         Log.d("@@@@@ CHECK @@@@@@", "멀티 프로필 가져오기 실패")
     }
 
+    // 현재 메인 프로필 바꾸기 성공
     override fun onSetMyRepresentProfileSuccess(response: BaseResponse,data: ProfileDTO) {
         dismissLoadingDialog()
         tryChangeMyProfile(data)
     }
 
+    // 현재 메인 프로필 바꾸기 실패
     override fun onSetMyRepresentProfileFailure(response: BaseResponse) {
     }
 
+    // 로그아웃 성공
     override fun onLogoutSuccess(response: BaseResponse) {
         val intent = Intent(
             this@MyPageFragment.requireContext(),
@@ -158,6 +162,7 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
         startActivity(intent)
     }
 
+    // 로그아웃 실패
     override fun onLogoutFailure(response: BaseResponse) {
         Log.d("@@@@@ CHECK @@@@@@", "로그아웃 실패")
     }

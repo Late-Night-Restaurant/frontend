@@ -89,21 +89,21 @@ interface RetrofitService {
         @Path("houseId") houseId: Long
     ): Call<InquiryStoryDetailResponse>
 
-    // 내 모든 프로필 조회
-    @Headers("Content-Type: application/json")
-    @GET("/simya/users/profile")
-    fun getMyAllProfile(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-    ): Call<MyProfileResponse>
+//    // 내 모든 프로필 조회
+//    @Headers("Content-Type: application/json")
+//    @GET("/simya/users/profile")
+//    fun getMyAllProfile(
+//        @Header("Access-Token") accessToken: String,
+//        @Header("Refresh-Token") refreshToken: String,
+//    ): Call<MyProfileResponse>
 
-    // 내가 찜한 집들 모두 조회
-    @Headers("Content-Type: application/json")
-    @GET("/simya/favorite/my")
-    fun getMyLikeStory(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-    ): Call<MyLikeStoryResponse>
+//    // 내가 찜한 집들 모두 조회
+//    @Headers("Content-Type: application/json")
+//    @GET("/simya/favorite/my")
+//    fun getMyLikeStory(
+//        @Header("Access-Token") accessToken: String,
+//        @Header("Refresh-Token") refreshToken: String,
+//    ): Call<MyLikeStoryResponse>
 
     // 현재 프로필로 쓴 모든 리뷰 조회
     @Headers("Content-Type: application/json")
@@ -150,14 +150,14 @@ interface RetrofitService {
         @Path("profileId") profileId: Long
     ): Call<BaseResponse>
 
-    // 대표 프로필 선택
-    @Headers("Content-Type: application/json")
-    @PATCH("/simya/users/profile/{profileId}/main")
-    fun changeMyRepresentProfile(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-        @Path("profileId") profileId: Long
-    ): Call<BaseResponse>
+//    // 대표 프로필 선택
+//    @Headers("Content-Type: application/json")
+//    @PATCH("/simya/users/profile/{profileId}/main")
+//    fun changeMyRepresentProfile(
+//        @Header("Access-Token") accessToken: String,
+//        @Header("Refresh-Token") refreshToken: String,
+//        @Path("profileId") profileId: Long
+//    ): Call<BaseResponse>
 
     // 로그아웃
 //    @Headers("Content-Type: application/json")
