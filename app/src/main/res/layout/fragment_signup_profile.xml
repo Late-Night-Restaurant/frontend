@@ -61,7 +61,7 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_person_24"
+                android:src="@drawable/ic_base_profile"
                 android:background="@drawable/bg_profile"
                 />
             <ImageButton

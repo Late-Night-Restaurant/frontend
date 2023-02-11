@@ -55,67 +55,67 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_profile_nickname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="닉네임"
-                android:textColor="@color/Gray_04"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_profile_input_nickname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false">
-            <EditText
-                android:id="@+id/edt_edit_profile_input_nickname"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_profile_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="영문, 특수 문자 제외 8자 이내"
-                android:inputType="text"
-                android:backgroundTint="@color/Gray_06"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:errorEnabled="true"
+                app:hintEnabled="false">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="닉네임"
+                    android:textColor="@color/Gray_04"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_profile_input_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:errorEnabled="true"
+                app:hintEnabled="false">
+                <EditText
+                    android:id="@+id/edt_edit_profile_input_nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="영문, 특수 문자 제외 8자 이내"
+                    android:inputType="text"
+                    android:backgroundTint="@color/Gray_06"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_profile_comment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="한줄 소개"
-                android:textColor="@color/Gray_04"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_profile_input_comment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false">
-            <EditText
-                android:id="@+id/edt_edit_profile_input_comment"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_profile_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="24자 이내로 입력해주세요"
-                android:inputType="text"
-                android:backgroundTint="@color/Gray_06"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:errorEnabled="true"
+                app:hintEnabled="false">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="한줄 소개"
+                    android:textColor="@color/Gray_04"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_profile_input_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:errorEnabled="true"
+                app:hintEnabled="false">
+                <EditText
+                    android:id="@+id/edt_edit_profile_input_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="24자 이내로 입력해주세요"
+                    android:inputType="text"
+                    android:backgroundTint="@color/Gray_06"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </LinearLayout>
 

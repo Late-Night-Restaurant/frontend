@@ -11,8 +11,8 @@ data class WriteReviewResult(
     data class MyReview(
         @SerializedName("reviewersProfile") val reviewersProfile: UserDTO,
         @SerializedName("reviewId") val reviewId: Long,
-        @SerializedName("rate") val rate: Long,
-        @SerializedName("content") val content: Long,
+        @SerializedName("rate") val rate: Int,
+        @SerializedName("content") val content: String,
 
         )
 }

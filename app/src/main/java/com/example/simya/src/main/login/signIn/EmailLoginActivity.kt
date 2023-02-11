@@ -2,6 +2,8 @@ package com.example.simya.src.main.login.signIn
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Message
@@ -14,17 +16,19 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.R
-import com.example.simya.util.Constants
-import com.example.simya.util.Constants.OK
-import com.example.simya.src.main.home.HomeActivity
-import com.example.simya.src.main.login.singUp.SignupActivity
-import com.example.simya.src.data.UserTokenData
+
 import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.databinding.SnackbarLayoutBinding
-import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.src.main.home.HomeActivity
+import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.account.AccountDTO
+import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.util.Constants
+import com.example.simya.util.Constants.EMAIL_VALIDATION
+import com.example.simya.util.Constants.OK
+import com.example.simya.util.data.UserData
 import com.example.simya.util.sharedpreferences.Shared
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -35,8 +39,6 @@ import java.util.regex.Pattern
 
 class EmailLoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninEmailBinding
-    private val emailValidation =
-        "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     private lateinit var textWatcher: TextWatcher
     private lateinit var email: String
     private lateinit var password: String
@@ -61,15 +63,16 @@ class EmailLoginActivity : AppCompatActivity() {
         binding.btnEmailSigninLogin.isEnabled = false
 
         //EditText 입력확인
-        binding.tietEmailSigninInputEmail.addTextChangedListener(textWatcher)
-        binding.tietEmailSigninInputPassword.addTextChangedListener(textWatcher)
+        binding.edtEmailSignInInputEmail.addTextChangedListener(textWatcher)
+        binding.edtEmailSignInInputPassword.addTextChangedListener(textWatcher)
 
         //로그인 이벤트
         binding.btnEmailSigninLogin.setOnClickListener {
             if(checkEmail()&&checkPassword()){
 
-                email = binding.tietEmailSigninInputEmail.text.toString()
-                password = binding.tietEmailSigninInputPassword.text.toString()
+                email = binding.edtEmailSignInInputEmail.text.toString()
+                password = binding.edtEmailSignInInputPassword.text.toString()
+
                 onSignIn(
                     AccountDTO(
                         email,
@@ -85,6 +88,8 @@ class EmailLoginActivity : AppCompatActivity() {
     }
     private fun moveToHome(){
         val intent = Intent(this, HomeActivity::class.java)
+        // 메인,로그인 액티비티 스택 제거
+//        intent.flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
     private fun onSignIn(user: AccountDTO){
@@ -93,6 +98,9 @@ class EmailLoginActivity : AppCompatActivity() {
                 call: Call<AccountResponse>,
                 response: Response<AccountResponse>
             ) {
+                Log.d("access",UserData.accessToken)
+                Log.d("refresh",UserData.refreshToken)
+                Log.d("Response",response.toString())
                 if(response.body()!!.code==OK){
                     Log.d("Response check",response.message().toString())
                     Log.d("Response check",response.code().toString())
@@ -100,10 +108,14 @@ class EmailLoginActivity : AppCompatActivity() {
                     Shared.prefs.setString("accessToken",response.body()!!.getAccessToken())
                     Shared.prefs.setString("refreshToken",response.body()!!.getRefreshToken())
                     Shared.prefs.setLong("profileId",response.body()!!.getProfileId())
-                    UserTokenData.setProfileId(response.body()!!.result!!.profileId)
-                    UserTokenData.setProfileName(response.body()!!.result!!.nickname)
+                    UserData.setProfileId(response.body()!!.result!!.profileId)
+                    UserData.setProfileName(response.body()!!.result!!.nickname)
+                    UserData.setProfileComment(response.body()!!.result!!.comment)
+                    // 프로필 이미지 추가하기
+//                    UserData.setProfileImage(response.body()!!.result!!.profileImage)
                     onShared()
                     moveToHome()
+
                 }else if(response.body()!!.code == 400){
                     if(response.body()!!.message == "존재하지 않는 사용자입니다."){
                         onSnackBar(binding.root, "존재하지 않는 사용자입니다.")
@@ -118,24 +130,24 @@ class EmailLoginActivity : AppCompatActivity() {
         })
     }
     private fun checkEmail(): Boolean {
-        var email = binding.tietEmailSigninInputEmail.text.toString().trim() // 공백제거
-        val pattern = Pattern.matches(emailValidation, email) // 패턴확인
+        var email = binding.edtEmailSignInInputEmail.text.toString().trim() // 공백제거
+        val pattern = Pattern.matches(EMAIL_VALIDATION, email) // 패턴확인
         return if (pattern) {
-            binding.tilEmailSigninInputEmail.error = null
+            binding.tilEmailSignInInputEmail.error = null
             true
         } else {
-            binding.tilEmailSigninInputEmail.error = "올바른 이메일 형식을 입력해주세요."
+            binding.tilEmailSignInInputEmail.error = "올바른 이메일 형식을 입력해주세요."
             false
         }
     }
 
     private fun checkPassword(): Boolean {
-        var password = binding.tietEmailSigninInputPassword.text!!.length
+        var password = binding.edtEmailSignInInputPassword.text!!.length
         return if (password in 8..12) {
-            binding.tilEmailSigninInputPassword.error = null
+            binding.tilEmailSignInInputPassword.error = null
             true
         } else {
-            binding.tilEmailSigninInputPassword.error = "영문과 숫자를 조합해서 입력해주세요.(8-12자)"
+            binding.tilEmailSignInInputPassword.error = "영문과 숫자를 조합해서 입력해주세요.(8-12자)"
             false
         }
     }
@@ -153,19 +165,15 @@ class EmailLoginActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val emailInput = binding.tietEmailSigninInputEmail!!.text.toString()
-                val passwordInput = binding.tietEmailSigninInputPassword!!.text.toString()
+                val emailInput = binding.edtEmailSignInInputEmail!!.text.toString()
+                val passwordInput = binding.edtEmailSignInInputPassword!!.text.toString()
                 if (emailInput.isNotEmpty() && passwordInput.isNotEmpty()) {
                     binding.btnEmailSigninLogin.isEnabled = true
                     binding.btnEmailSigninLogin.isClickable = true
-//                    binding.btnEmailSigninLogin.setBackgroundResource(R.drawable.low_radius_button_on)
-//                    binding.btnEmailSigninLogin.setTextColor(application.resources.getColor(R.color.Gray_03))
                 }
                 if (emailInput.isEmpty() || passwordInput.isEmpty()) {
                     binding.btnEmailSigninLogin.isEnabled = false
                     binding.btnEmailSigninLogin.isClickable = false
-//                    binding.btnEmailSigninLogin.setBackgroundResource(R.drawable.low_radius_button_off)
-//                    binding.btnEmailSigninLogin.setTextColor(application.resources.getColor(R.color.Gray_10))
                 }
             }
             override fun afterTextChanged(s: Editable) {
@@ -173,11 +181,11 @@ class EmailLoginActivity : AppCompatActivity() {
         }
     }
     private fun onShared(){
-        UserTokenData.init(
+        UserData.init(
             Shared.prefs.getString("accessToken", Constants.DEFAULT),
             Shared.prefs.getString("refreshToken", Constants.DEFAULT))
-        Log.d("User AccessToken", UserTokenData.getUserAccessToken())
-        Log.d("User RefreshToken", UserTokenData.getUserRefreshToken())
+        Log.d("User AccessToken", UserData.getUserAccessToken())
+        Log.d("User RefreshToken", UserData.getUserRefreshToken())
     }
 
     // SnackBar 구현

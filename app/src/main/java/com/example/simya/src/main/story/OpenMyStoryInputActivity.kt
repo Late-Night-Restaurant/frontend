@@ -13,7 +13,7 @@ import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.src.main.chat.ChatActivity
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityMyStoryOpenInputBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
@@ -79,7 +79,7 @@ class OpenMyStoryInputActivity : AppCompatActivity() {
     }
     
     private fun openMyStory(dto: OpenStoryDTO) {
-        simyaApi.openStory(UserTokenData.accessToken, UserTokenData.refreshToken,dto).enqueue(object : Callback<OpenStoryResponse> {
+        simyaApi.openStory(UserData.accessToken, UserData.refreshToken,dto).enqueue(object : Callback<OpenStoryResponse> {
             override fun onResponse(
                 call: Call<OpenStoryResponse>,
                 response: Response<OpenStoryResponse>

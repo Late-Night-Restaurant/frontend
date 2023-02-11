@@ -11,7 +11,7 @@ import com.example.simya.util.Constants
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.src.main.story.adapter.createStory.CreateMyStoryMultiProfileAdapter
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityMyStoryCreateBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
@@ -44,8 +44,8 @@ class CreateMyStoryActivity : AppCompatActivity() {
 //            Shared.prefs.getString("accessToken",Constants.DEFAULT),
 //            Shared.prefs.getString("refreshToken",Constants.DEFAULT))
 //
-        Log.d("User AccessToken", UserTokenData.getUserAccessToken())
-        Log.d("User RefreshToken", UserTokenData.getUserRefreshToken())
+        Log.d("User AccessToken", UserData.getUserAccessToken())
+        Log.d("User RefreshToken", UserData.getUserRefreshToken())
         init()
         showMyAllProfile()
     }
@@ -71,7 +71,7 @@ class CreateMyStoryActivity : AppCompatActivity() {
     }
     private fun showMyAllProfile(){
         Log.d("showMyAllProfile check","true")
-        simyaApi.getUserProfile(UserTokenData.getUserAccessToken(), UserTokenData.getUserRefreshToken()).enqueue(object:
+        simyaApi.getUserProfile(UserData.getUserAccessToken(), UserData.getUserRefreshToken()).enqueue(object:
             Callback<ProfileResponse>{
             override fun onResponse(
                 call: Call<ProfileResponse>,

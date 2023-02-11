@@ -135,14 +135,17 @@ interface RetrofitService {
         @Header("Refresh-Token") refreshToken: String,
         @Path("reviewId") reviewId: Long
     ): Call<BaseResponse>
+
     // 프로필 수정
     @Headers("Content-Type: application/json")
     @PATCH("/simya/users/profile/{profileId}")
     fun modifyMyProfile(
         @Header("Access-Token") accessToken: String,
         @Header("Refresh-Token") refreshToken: String,
-        @Path("profileId") profileId: Long
+        @Path("profileId") profileId: Long,
+        @Body userDTO: UserDTO
     ): Call<BaseResponse>
+
     // 프로필 삭제
     @Headers("Content-Type: application/json")
     @DELETE("/simya/users/profile/{profileId}")
@@ -168,5 +171,6 @@ interface RetrofitService {
         @Header("Access-Token") accessToken: String,
         @Header("Refresh-Token") refreshToken: String,
     ): Call<BaseResponse>
+
 
 }

@@ -36,10 +36,8 @@ class MyPageLikeRecyclerFragment: Fragment() {
             add(TestDataBorder(2,"삼겹살","안드로이드","최고"))
             add(TestDataBorder(4,"곱창","서버","고소해"))
         }
-        val dataRVAdpater = MyPageLikeRVAdapter(dataList)
-        binding.rvMyPageLikeRecycler.adapter = dataRVAdpater
+        val dataRVAdapter = MyPageLikeRVAdapter(dataList)
+        binding.rvMyPageLikeRecycler.adapter = dataRVAdapter
         binding.rvMyPageLikeRecycler.layoutManager = LinearLayoutManager(this.context)
-
-
     }
 }
