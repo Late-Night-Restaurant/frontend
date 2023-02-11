@@ -1,19 +1,34 @@
 package com.example.simya.src.main.myPage.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simya.databinding.FragmentMyPageReviewRecyclerBinding
+import com.example.simya.util.data.UserData
 import com.example.simya.src.main.myPage.adapter.myPage.MyPageReviewAdapter
-import com.example.simya.src.testData.TestDataReview
+import com.example.simya.src.model.RetrofitBuilder
+import com.example.simya.src.model.RetrofitService
+import com.example.simya.src.model.mypage.review.MyReviewDTO
+import com.example.simya.src.model.mypage.review.MyWriteReviewResponse
+import com.example.simya.util.Constants.OK
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MyPageReviewFragment: Fragment() {
     private lateinit var binding: FragmentMyPageReviewRecyclerBinding
-    private lateinit var dataList: ArrayList<TestDataReview>
-
+    private lateinit var dataList: ArrayList<MyReviewDTO>
+    private lateinit var dataRVAdapter: MyPageReviewAdapter
+    private val retrofit by lazy {
+        RetrofitBuilder.getInstnace()
+    }
+    private val simyaApi by lazy {
+        retrofit.create(RetrofitService::class.java)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,15 +46,34 @@ class MyPageReviewFragment: Fragment() {
     private fun init() {
         dataList = arrayListOf()
         dataList.apply {
-            add(TestDataReview("더글로리", "재밌당", 3))
-            add(TestDataReview("해리포터", "굿", 5))
-            add(TestDataReview("짱구는 못말려", "추억", 4))
-            add(TestDataReview("냐?", "엥", 2))
         }
 
-        val dataRVAdpater = MyPageReviewAdapter(dataList)
-        binding.rvMyPageReviewRecycler.adapter = dataRVAdpater
+        dataRVAdapter = MyPageReviewAdapter(dataList)
+        binding.rvMyPageReviewRecycler.adapter = dataRVAdapter
         binding.rvMyPageReviewRecycler.layoutManager = LinearLayoutManager(this.context)
 
+    }
+    private fun tryGetMyWriteReview(){
+        simyaApi.getMyWriteReview(UserData.accessToken, UserData.refreshToken).enqueue(object:
+            Callback<MyWriteReviewResponse> {
+            override fun onResponse(
+                call: Call<MyWriteReviewResponse>,
+                response: Response<MyWriteReviewResponse>
+            ) {
+                if(response.body()!!.code == OK){
+                    dataList.apply{
+                        for(i: Int in 0 until response.body()!!.result.size){
+                            add(MyReviewDTO(response.body()!!.result[i].myReview.rate,response.body()!!.result[i].myReview.content))
+
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<MyWriteReviewResponse>, t: Throwable) {
+                Log.d("Response",t.toString())
+            }
+
+        })
     }
 }

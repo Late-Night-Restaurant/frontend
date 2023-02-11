@@ -43,7 +43,7 @@
         android:orientation="vertical">
         <!--        이메일 입력창-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_email_signin_input_email"
+            android:id="@+id/til_email_sign_in_input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -52,7 +52,7 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/tiet_email_signin_input_email"
+                android:id="@+id/edt_email_sign_in_input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="이메일을 입력하세요"
@@ -62,7 +62,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <!--        비밀번호 입력창-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_email_signin_input_password"
+            android:id="@+id/til_email_sign_in_input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -70,7 +70,7 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/tiet_email_signin_input_password"
+                android:id="@+id/edt_email_sign_in_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="비밀번호를 입력하세요"

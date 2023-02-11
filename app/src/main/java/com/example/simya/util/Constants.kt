@@ -23,9 +23,13 @@ object Constants {
     const val REQUEST_ERROR = 400 // 올바른 형식이 아닌 경우
     const val USERS_INVALID_ACCESS = 401 // 인가 접근 경로가 잘못된 경우
     const val USERS_NOT_AUTHORIZED = 401 // 인가 요청에 실패한 경우
+    const val UNAUTHORIZED = 401 // 헤더에 토큰이 없는경우, JWT토큰이 만료되었거나 유효하지 않은 경우
     const val FAILED_TO_LOGIN = 404 // 로그인에 실패한 경우
     const val BANNED_USER_IN_LOGIN = 404 // 비활성화된 유저가 접근한 경우
     const val FAILED_TO_JWT = 500 // 토큰 발급에 실패한 경우
+    const val POST_FAIL_USER = 500
+    const val DATABASE = 500 // 서버내부 오류로 회원 정보 조회에 실패 한 경우
+    const val UPDATE_FAIL_PROFILE = 500 //서버 내부 오류로 프로필 수정에 실패한 경우
     const val FAILED_JWT_IN_ACCESS = 500 // 토근을 헤더에 넣지 못한 경우
 
 
@@ -41,4 +45,18 @@ object Constants {
     const val MAIN_MENU_HOBBY = "취미"
     const val MAIN_MENU_CULTURE = "문화 생활"
     const val HOUSE_ID = "houseId"
+    const val NICK_NAME = "nickname"
+    const val COMMENT = "comment"
+    const val EMAIL_VALIDATION = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+    const val NICKNAME_VALIDATION = "^[가-힣]{1,8}$"
+    const val COMMENT_VALIDATION = "^.{1,24}$"
+    const val PW_VALIDATION =  """^[0-9a-zA-Z!@#$%^+\-=]*$"""
+
+    const val SUCCESS_STRING_MODIFY ="프로필 수정이 완료되었습니다."
+    const val ERROR_STRING_INPUT ="입력값을 확인해주세요"
+    const val ERROR_STRING_DUPLICATE = "중복된 이메일입니다."
+    const val ERROR_STRING_FAILED_SIGN_UP = "회원가입에 실패했습니다."
+    const val ERROR_STRING_DATABASE ="데이터베이스 연결에 실패했습니다."
+    const val ERROR_STRING_FAIL_UPDATE_PROFILE ="프로필 수정에 실패했습니다."
+
 }

@@ -1,4 +1,4 @@
-package com.example.simya.src.data
+package com.example.simya.util.data
 
 data class MainMenuData(
     var menuName: String,

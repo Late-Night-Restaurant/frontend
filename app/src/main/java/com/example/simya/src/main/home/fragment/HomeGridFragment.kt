@@ -12,8 +12,8 @@ import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.util.Constants.OK
 import com.example.simya.src.main.story.StoryIntroActivity
 import com.example.simya.databinding.FragmentHomeMainGridBinding
-import com.example.simya.src.main.home.adapter.MainGVAdapter
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.src.main.home.adapter.HomeGVAdapter
+import com.example.simya.util.data.UserData
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.story.load.LoadAllStoryResponse
@@ -25,7 +25,7 @@ import retrofit2.Response
 class HomeGridFragment: Fragment() {
     private lateinit var binding: FragmentHomeMainGridBinding
     private var dataList:  ArrayList<LoadAllStoryResult> = arrayListOf()
-    private lateinit var dataGVAdapter: MainGVAdapter
+    private lateinit var dataGVAdapter: HomeGVAdapter
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
     }
@@ -47,7 +47,7 @@ class HomeGridFragment: Fragment() {
         loadAllStory()
     }
     private fun loadAllStory(){
-        simyaApi.getAllStory(UserTokenData.accessToken, UserTokenData.refreshToken)
+        simyaApi.getAllStory(UserData.accessToken, UserData.refreshToken)
             .enqueue(object: Callback<LoadAllStoryResponse>{
                 override fun onResponse(
                     call: Call<LoadAllStoryResponse>,
@@ -67,7 +67,7 @@ class HomeGridFragment: Fragment() {
                                     }
                                 }
                                 val gridLayoutManager = GridLayoutManager(activity, 2)
-                                dataGVAdapter = MainGVAdapter(dataList)
+                                dataGVAdapter = HomeGVAdapter(dataList)
                                 binding.gvHomeMainGrid.adapter = dataGVAdapter
                                 binding.gvHomeMainGrid.layoutManager = gridLayoutManager
                                 clickStory()
@@ -83,7 +83,7 @@ class HomeGridFragment: Fragment() {
             })
     }
     private fun clickStory() {
-        dataGVAdapter.setOnItemClickListener(object : MainGVAdapter.OnItemClickListener {
+        dataGVAdapter.setOnItemClickListener(object : HomeGVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: LoadAllStoryResult, position: Int) {
                 //뭐보낼까
                 val intent = Intent(this@HomeGridFragment.context, StoryIntroActivity::class.java)

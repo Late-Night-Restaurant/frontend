@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.databinding.ItemBorderGv156156Binding
 import com.example.simya.src.model.story.load.LoadAllStoryResult
 
-class MainGVAdapter (private val dataList:ArrayList<LoadAllStoryResult>): RecyclerView.Adapter<MainGVAdapter.DataViewHolder>() {
+class HomeGVAdapter (private val dataList:ArrayList<LoadAllStoryResult>): RecyclerView.Adapter<HomeGVAdapter.DataViewHolder>() {
     private var listener: OnItemClickListener? = null
     inner class DataViewHolder(private val binding: ItemBorderGv156156Binding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: LoadAllStoryResult) {

@@ -14,11 +14,11 @@ import com.example.simya.R
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupEmailBinding
+import com.example.simya.util.Constants.EMAIL_VALIDATION
 import java.util.regex.Pattern
 
 class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
     private lateinit var binding: FragmentSignupEmailBinding
-    private val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     private lateinit var textWatcher: TextWatcher
     private lateinit var bindingMain: ActivitySignupBinding
 
@@ -69,7 +69,7 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     private fun emailCheck() : Boolean {
         var email = binding.tietEmailSignupInput.text.toString().trim()
-        val pattern = Pattern.matches(emailValidation, email)
+        val pattern = Pattern.matches(EMAIL_VALIDATION, email)
 
         return if (pattern){
             binding.tilEmailSignupInput.error = null

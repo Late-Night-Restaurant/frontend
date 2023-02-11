@@ -36,8 +36,7 @@ class SignupFinFragment: Fragment(), SignupActivity.onBackPressedListener {
         signupActivity!!.binding.pbSignup.progress = 100
 
         binding.btnSignupNext.setOnClickListener {
-            var intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
+            requireActivity().finish()
         }
     }
 
