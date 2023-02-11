@@ -15,7 +15,9 @@ import com.example.simya.src.main.login.model.LoginService
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.util.Constants.ACCESS_TOKEN
 import com.example.simya.util.Constants.EMAIL_VALIDATION
+import com.example.simya.util.Constants.REFRESH_TOKEN
 import com.example.simya.util.data.UserData
 import java.util.regex.Pattern
 
@@ -26,7 +28,6 @@ class EmailLoginActivity :
     private lateinit var email: String
     private lateinit var password: String
     private val editor = ApplicationClass.sSharedPreferences
-    private val constants = ApplicationClass.constants
 //    private val retrofit by lazy {
 //       RetrofitBuilder.getInstnace()
 //    }
@@ -75,9 +76,9 @@ class EmailLoginActivity :
     override fun onPostLoginSubmitSuccess(response: AccountResponse) {
         Log.d("response", response.toString())
         editor.edit()
-            .putString(constants.ACCESS_TOKEN, response.result!!.accessToken)
+            .putString(ACCESS_TOKEN, response.result!!.accessToken)
         editor.edit()
-            .putString(constants.REFRESH_TOKEN, response.result!!.refreshToken)
+            .putString(REFRESH_TOKEN, response.result!!.refreshToken)
         UserData.setProfileId(response.result!!.profileId)
         UserData.setProfileName(response.result!!.nickname)
         UserData.setProfileComment(response.result!!.comment)

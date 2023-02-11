@@ -14,6 +14,7 @@ import com.example.simya.util.Constants.BORDER_MAIN_MENU
 import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
+import com.example.simya.config.BaseActivity
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityStoryCreateBorderBinding
@@ -25,10 +26,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CreateMyStoryBorderActivity : AppCompatActivity() {
-    private val binding: ActivityStoryCreateBorderBinding by lazy {
-        ActivityStoryCreateBorderBinding.inflate(layoutInflater)
-    }
+class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBinding>(ActivityStoryCreateBorderBinding::inflate)
+{
     private lateinit var textWatcher: TextWatcher
     private val retrofit by lazy {
        RetrofitBuilder.getInstnace()
@@ -38,7 +37,6 @@ class CreateMyStoryBorderActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
         initTextWatcher()
         init()
     }

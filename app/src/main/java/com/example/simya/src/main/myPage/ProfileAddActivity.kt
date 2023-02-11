@@ -3,6 +3,7 @@ package com.example.simya.src.main.myPage
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.simya.config.BaseActivity
 import com.example.simya.config.BaseResponse
 import com.example.simya.databinding.ActivityProfileEditBinding
 import com.example.simya.util.data.UserData
@@ -14,8 +15,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
 
-class ProfileAddActivity : AppCompatActivity() {
-    lateinit var binding: ActivityProfileEditBinding
+class ProfileAddActivity : BaseActivity<ActivityProfileEditBinding>(ActivityProfileEditBinding::inflate)
+{
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
     }
@@ -24,8 +25,6 @@ class ProfileAddActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileEditBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
     }
     private fun init() {

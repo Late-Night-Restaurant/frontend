@@ -3,6 +3,7 @@ package com.example.simya.src.main.myPage
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivityReviewBinding
 import com.example.simya.util.data.UserData
 import com.example.simya.src.model.RetrofitBuilder
@@ -13,8 +14,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MyReviewActivity: AppCompatActivity() {
-    lateinit var binding: ActivityReviewBinding
+class MyReviewActivity: BaseActivity<ActivityReviewBinding>(ActivityReviewBinding::inflate)
+{
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
     }
@@ -24,8 +25,6 @@ class MyReviewActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityReviewBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
     }
     private fun init() {

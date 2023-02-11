@@ -3,18 +3,15 @@ package com.example.simya.src.main.myPage
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivityMyPageReviewBinding
 import com.example.simya.util.dialog.SortDialog
 import com.example.simya.src.main.myPage.fragment.MyPageReviewFragment
 
-class MyPageReviewActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMyPageReviewBinding
-
-
+class MyPageReviewActivity : BaseActivity<ActivityMyPageReviewBinding>(ActivityMyPageReviewBinding::inflate)
+{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMyPageReviewBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
     }
     private fun init() {

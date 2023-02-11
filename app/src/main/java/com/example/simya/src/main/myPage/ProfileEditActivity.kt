@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.simya.config.BaseActivity
 import com.example.simya.config.BaseResponse
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.databinding.ActivityProfileEditBinding
@@ -25,10 +26,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
 
-class ProfileEditActivity : AppCompatActivity() {
-    lateinit var binding: ActivityProfileEditBinding
-    private lateinit var mLoadingDialog: LoadingDialog
-    private lateinit var mBasicDialog: BasicDialog
+class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityProfileEditBinding::inflate)
+{
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
     }
@@ -38,8 +37,6 @@ class ProfileEditActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileEditBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
     }
 
@@ -123,25 +120,4 @@ class ProfileEditActivity : AppCompatActivity() {
         })
     }
 
-    private fun showBasicDialog(context: Context, title: String) {
-        mBasicDialog = BasicDialog(context, title)
-        mBasicDialog.show()
-    }
-
-    private fun dismissBasicDialog() {
-        if (mBasicDialog.isShowing) {
-            mBasicDialog.dismiss()
-        }
-    }
-
-    private fun showLoadingDialog(context: Context) {
-        mLoadingDialog = LoadingDialog(context)
-        mLoadingDialog.show()
-    }
-
-    private fun dismissLoadingDialog() {
-        if (mLoadingDialog.isShowing) {
-            mLoadingDialog.dismiss()
-        }
-    }
 }

@@ -10,9 +10,11 @@ import com.bumptech.glide.Glide
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
+import com.example.simya.config.BaseActivity
 import com.example.simya.src.main.story.adapter.createStory.CreateMyStoryMultiProfileAdapter
 import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityMyStoryCreateBinding
+import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.profile.ProfileResponse
@@ -21,10 +23,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CreateMyStoryActivity : AppCompatActivity() {
-    private val binding: ActivityMyStoryCreateBinding by lazy{
-      ActivityMyStoryCreateBinding.inflate(layoutInflater)
-    }
+class CreateMyStoryActivity : BaseActivity<ActivityMyStoryCreateBinding>(ActivityMyStoryCreateBinding::inflate) {
     private var dataList: ArrayList<TestDataMultiProfile> = arrayListOf()
     private val dataRVAdapter = CreateMyStoryMultiProfileAdapter(this, dataList)
 
@@ -38,8 +37,6 @@ class CreateMyStoryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
 //        UserTokenData.init(
 //            Shared.prefs.getString("accessToken",Constants.DEFAULT),
 //            Shared.prefs.getString("refreshToken",Constants.DEFAULT))

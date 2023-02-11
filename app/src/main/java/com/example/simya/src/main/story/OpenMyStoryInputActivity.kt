@@ -12,6 +12,7 @@ import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
+import com.example.simya.config.BaseActivity
 import com.example.simya.src.main.chat.ChatActivity
 import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityMyStoryOpenInputBinding
@@ -25,8 +26,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OpenMyStoryInputActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMyStoryOpenInputBinding
+class OpenMyStoryInputActivity :
+    BaseActivity<ActivityMyStoryOpenInputBinding>(ActivityMyStoryOpenInputBinding::inflate) {
     private lateinit var textWatcher: TextWatcher
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
@@ -37,8 +38,6 @@ class OpenMyStoryInputActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMyStoryOpenInputBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         initTextWatcher()
         init()
     }
@@ -73,27 +72,28 @@ class OpenMyStoryInputActivity : AppCompatActivity() {
         if (binding.btnMyStoryOpen.isEnabled) {
             val intent = Intent(this, ChatActivity::class.java)
             intent.putExtra(HOUSE_ID, houseId)
-            intent.putExtra(PROFILE_ID, Shared.prefs.getLong(PROFILE_ID,0))
+            intent.putExtra(PROFILE_ID, Shared.prefs.getLong(PROFILE_ID, 0))
             startActivity(intent)
         }
     }
-    
+
     private fun openMyStory(dto: OpenStoryDTO) {
-        simyaApi.openStory(UserData.accessToken, UserData.refreshToken,dto).enqueue(object : Callback<OpenStoryResponse> {
-            override fun onResponse(
-                call: Call<OpenStoryResponse>,
-                response: Response<OpenStoryResponse>
-            ) {
-                if (response.body()!!.code == OK) {
-                    moveMyStory(intent.getLongExtra(HOUSE_ID, 0))
+        simyaApi.openStory(UserData.accessToken, UserData.refreshToken, dto)
+            .enqueue(object : Callback<OpenStoryResponse> {
+                override fun onResponse(
+                    call: Call<OpenStoryResponse>,
+                    response: Response<OpenStoryResponse>
+                ) {
+                    if (response.body()!!.code == OK) {
+                        moveMyStory(intent.getLongExtra(HOUSE_ID, 0))
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<OpenStoryResponse>, t: Throwable) {
-                Log.d("Response",t.toString())
-            }
+                override fun onFailure(call: Call<OpenStoryResponse>, t: Throwable) {
+                    Log.d("Response", t.toString())
+                }
 
-        })
+            })
     }
 
     private fun initTextWatcher() {

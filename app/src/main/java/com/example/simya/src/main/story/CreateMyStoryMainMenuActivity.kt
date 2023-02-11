@@ -6,19 +6,18 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.example.simya.R
+import com.example.simya.config.BaseActivity
 import com.example.simya.src.main.story.adapter.createStory.CreateMyStoryMainMenuAdapter
 import com.example.simya.util.data.MainMenuData
 import com.example.simya.databinding.ActivityStoryMainMenuBinding
 
-class CreateMyStoryMainMenuActivity : AppCompatActivity() {
-    lateinit var binding: ActivityStoryMainMenuBinding
+class CreateMyStoryMainMenuActivity : BaseActivity<ActivityStoryMainMenuBinding>(ActivityStoryMainMenuBinding::inflate)
+{
     private val mainMenuData: ArrayList<MainMenuData> = arrayListOf()
     private lateinit var dataGVAdapter: CreateMyStoryMainMenuAdapter
     private lateinit var selectMainMenu: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStoryMainMenuBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
     }
 
