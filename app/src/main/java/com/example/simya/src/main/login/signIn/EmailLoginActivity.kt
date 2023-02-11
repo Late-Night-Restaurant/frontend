@@ -2,25 +2,31 @@ package com.example.simya.src.main.login.signIn
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Message
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.simya.R
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.OK
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.src.data.UserTokenData
 import com.example.simya.databinding.ActivitySigninEmailBinding
+import com.example.simya.databinding.SnackbarLayoutBinding
 import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.util.sharedpreferences.Shared
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,6 +54,7 @@ class EmailLoginActivity : AppCompatActivity() {
         initTextWatcher()
         init()
 
+
     }
 
     private fun init() {
@@ -60,6 +67,7 @@ class EmailLoginActivity : AppCompatActivity() {
         //로그인 이벤트
         binding.btnEmailSigninLogin.setOnClickListener {
             if(checkEmail()&&checkPassword()){
+
                 email = binding.tietEmailSigninInputEmail.text.toString()
                 password = binding.tietEmailSigninInputPassword.text.toString()
                 onSignIn(
@@ -98,10 +106,10 @@ class EmailLoginActivity : AppCompatActivity() {
                     moveToHome()
                 }else if(response.body()!!.code == 400){
                     if(response.body()!!.message == "존재하지 않는 사용자입니다."){
-                        Toast.makeText(this@EmailLoginActivity,"존재하지 않는 사용자입니다.",Toast.LENGTH_SHORT).show()
+                        onSnackBar(binding.root, "존재하지 않는 사용자입니다.")
                     }
                 }else if(response.body()!!.code == 404){
-                    Toast.makeText(this@EmailLoginActivity,"존재하지 않는 아이디이거나 비밀번호가 틀렸습니다.",Toast.LENGTH_SHORT).show()
+                    onSnackBar(binding.root, "존재하지 않는 아이디이거나 비밀번호가 틀렸습니다.")
                 }
             }
             override fun onFailure(call: Call<AccountResponse>, t: Throwable) {
@@ -170,6 +178,21 @@ class EmailLoginActivity : AppCompatActivity() {
             Shared.prefs.getString("refreshToken", Constants.DEFAULT))
         Log.d("User AccessToken", UserTokenData.getUserAccessToken())
         Log.d("User RefreshToken", UserTokenData.getUserRefreshToken())
+    }
+
+    // SnackBar 구현
+    private fun onSnackBar(view: View, message: String){
+        var snackBar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+
+        val snackBarView: View = layoutInflater.inflate(R.layout.snackbar_layout, null)
+        val snackBarBinding = SnackbarLayoutBinding.bind(snackBarView)
+        snackBar.view.setBackgroundColor(Color.TRANSPARENT)
+        snackBarBinding.snackBarMessage.text = message
+
+        val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
+        snackBarLayout.addView(snackBarView)
+
+        snackBar.show()
     }
 
 }

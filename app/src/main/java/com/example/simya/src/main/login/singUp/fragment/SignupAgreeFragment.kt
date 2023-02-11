@@ -2,6 +2,7 @@ package com.example.simya.src.main.login.singUp.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import com.example.simya.R
 import com.example.simya.src.main.login.signIn.EmailLoginActivity
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupAgreeBinding
+import com.example.simya.databinding.SnackbarLayoutBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
@@ -47,7 +50,7 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
                 signupActivity!!.nextFragmentSignUp(2)
                 initAgree()
             } else {
-                Toast.makeText(this.activity, "동의하지 않았습니다.", Toast.LENGTH_SHORT).show()
+                onSnackBar(binding.root, "동의하지 않았습니다.")
             }
         }
 
@@ -148,5 +151,21 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
     override fun onBackPressed() {
         val intent = Intent(this.context, EmailLoginActivity::class.java)
         startActivity(intent)
+    }
+
+
+    // SnackBar 구현
+    private fun onSnackBar(view: View, message: String){
+        var snackBar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+
+        val snackBarView: View = layoutInflater.inflate(R.layout.snackbar_layout, null)
+        val snackBarBinding = SnackbarLayoutBinding.bind(snackBarView)
+        snackBar.view.setBackgroundColor(Color.TRANSPARENT)
+        snackBarBinding.snackBarMessage.text = message
+
+        val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
+        snackBarLayout.addView(snackBarView)
+
+        snackBar.show()
     }
 }

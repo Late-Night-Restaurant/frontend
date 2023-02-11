@@ -1,6 +1,7 @@
 package com.example.simya.src.main.login.singUp.fragment
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,9 +16,11 @@ import com.example.simya.util.Constants
 import com.example.simya.R
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupProfileBinding
+import com.example.simya.databinding.SnackbarLayoutBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.account.*
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -82,7 +85,7 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
 
 
             } else {
-                Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
+                onSnackBar(binding.root, "올바른 형식에 맞게 작성해주세요.")
             }
         }
     }
@@ -187,5 +190,19 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
         signupActivity!!.nextFragmentSignUp(3)
     }
 
+    // SnackBar 구현
+    private fun onSnackBar(view: View, message: String){
+        var snackBar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+
+        val snackBarView: View = layoutInflater.inflate(R.layout.snackbar_layout, null)
+        val snackBarBinding = SnackbarLayoutBinding.bind(snackBarView)
+        snackBar.view.setBackgroundColor(Color.TRANSPARENT)
+        snackBarBinding.snackBarMessage.text = message
+
+        val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
+        snackBarLayout.addView(snackBarView)
+
+        snackBar.show()
+    }
 
 }

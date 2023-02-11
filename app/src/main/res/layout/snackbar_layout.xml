@@ -3,16 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/toast_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:text="Custom Toast Message"
-        android:textColor="#ffffff"
-        android:background="@drawable/toast_radius"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+    <TextView
+        android:id="@+id/snack_bar_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/snack_bar_radius"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"/>
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        android:layout_gravity="center"
+        android:text=""
+        android:textColor="#ffffff" />
 </LinearLayout>
