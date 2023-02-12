@@ -15,26 +15,26 @@ import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
+import com.example.simya.config.BaseResponse
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityStoryCreateBorderBinding
+import com.example.simya.src.main.story.model.CreateMyHouseInterface
+import com.example.simya.src.main.story.model.CreateMyHouseService
+import com.example.simya.src.model.HouseDTO
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
+import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBinding>(ActivityStoryCreateBorderBinding::inflate)
+class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBinding>(ActivityStoryCreateBorderBinding::inflate), CreateMyHouseInterface
 {
     private lateinit var textWatcher: TextWatcher
-    private val retrofit by lazy {
-       RetrofitBuilder.getInstnace()
-    }
-    private val simyaApi by lazy{
-        retrofit.create(RetrofitService::class.java)
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initTextWatcher()
@@ -55,7 +55,7 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
             binding.ibMyStoryCreateBorder.setBackgroundResource(R.drawable.test_simya)
         }
         binding.btnMyStoryCreateBorderNext.setOnClickListener {
-            onCreateStory(setBorderData())
+            CreateMyHouseService(this).tryOnCreateMyHouse(setBorderData())
             // 서버에 전송 데이터 전송해서 이야기집 생성
         }
     }
@@ -63,7 +63,7 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
-    private fun setBorderData(): CreateStoryDTO {
+    private fun setBorderData(): HouseDTO {
         var profileId = intent.getStringExtra(PROFILE_ID)!!.toLong()
         var mainMenu = intent.getStringExtra(BORDER_MAIN_MENU)
         var imageUrl = "R.drawable.test_simya"
@@ -72,7 +72,7 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
         Log.d("PROFILE_ID",profileId!!.toString())
         Log.d("BORDER_MAIN_MENU",mainMenu!!)
         Log.d("test background",imageUrl)
-        return CreateStoryDTO(
+        return HouseDTO(
             profileId,
             mainMenu,
             imageUrl,
@@ -80,36 +80,6 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
             comment
         )
     }
-
-    private fun onCreateStory(data: CreateStoryDTO) {
-        simyaApi.onCreateMyHouse(
-            UserData.getUserAccessToken(),
-            UserData.getUserRefreshToken(),data).enqueue(object : Callback<CreateStoryResponse> {
-            override fun onResponse(
-                call: Call<CreateStoryResponse>,
-                response: Response<CreateStoryResponse>
-            ) {
-                if(response.body()!!.code == OK){
-                    Log.d("Response",response.body().toString())
-                    moveToHome()
-
-                }
-            }
-            override fun onFailure(call: Call<CreateStoryResponse>, t: Throwable) {
-                Log.d("Response",t.toString())
-            }
-        })
-    }
-
-//    private fun moveToStoryMain() {
-//        if(binding.btnMyStoryCreateBorderNext.isEnabled){
-//            setBorderData()
-//            val intent = Intent(this, OpenMyStoryActivity::class.java)
-//            intent.putExtra("borderData", setBorderData())
-//            startActivity(intent)
-//        }
-//    }
-
     private fun initTextWatcher() {
         textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -120,15 +90,11 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
                 if (titleInput.isNotEmpty() && introInput.isNotEmpty()) {
                     binding.btnMyStoryCreateBorderNext.isEnabled = true
                     binding.btnMyStoryCreateBorderNext.isClickable = true
-                    binding.btnMyStoryCreateBorderNext.setBackgroundResource(R.drawable.low_radius_button_on)
-                    binding.btnMyStoryCreateBorderNext.setTextColor(application.resources.getColor(R.color.Gray_03))
                 }
                 // 공백이 있을시 버튼 비활성화
                 if (titleInput.isEmpty() || introInput.isEmpty()) {
                     binding.btnMyStoryCreateBorderNext.isEnabled = false
                     binding.btnMyStoryCreateBorderNext.isClickable = false
-                    binding.btnMyStoryCreateBorderNext.setBackgroundResource(R.drawable.low_radius_button_off)
-                    binding.btnMyStoryCreateBorderNext.setTextColor(application.resources.getColor(R.color.Gray_10))
                 }
             }
             override fun afterTextChanged(s: Editable) {}
@@ -141,6 +107,14 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         return true
+    }
+
+    override fun onPostCreateMyHouseSuccess(response: CreateStoryResponse) {
+        // 메인으로 돌아가기
+    }
+
+    override fun onPostCreateMyHouseFailure(response: BaseResponse) {
+        Log.d("@@@@@ CHECK @@@@@@", "찜한이야기집 가져오기 실패")
     }
 
 }

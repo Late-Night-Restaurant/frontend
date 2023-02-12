@@ -9,6 +9,8 @@ import com.example.simya.config.BaseActivity
 import com.example.simya.config.BaseResponse
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.databinding.ActivityProfileEditBinding
+import com.example.simya.src.main.myPage.model.ProfileModifyInterface
+import com.example.simya.src.main.myPage.model.ProfileModifyService
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.UserDTO
@@ -26,7 +28,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
 
-class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityProfileEditBinding::inflate)
+class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityProfileEditBinding::inflate), ProfileModifyInterface
 {
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
@@ -46,14 +48,12 @@ class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityPro
             if (nicknameCheck() && commentCheck()) {
                 showLoadingDialog(this)
                 // 사진부분 수정해야함
-                tryModifyMyProfile(
-                    UserDTO(
-                        UserData.getProfileId(),
-                        binding.edtEditProfileInputNickname.text.toString(),
-                        binding.edtEditProfileInputComment.text.toString(),
-                        DEFAULT
-                    )
-                )
+                ProfileModifyService(this).tryModifyMyProfile(UserDTO(
+                    UserData.getProfileId(),
+                    binding.edtEditProfileInputNickname.text.toString(),
+                    binding.edtEditProfileInputComment.text.toString(),
+                    DEFAULT
+                ))
             }
         }
     }
@@ -84,40 +84,16 @@ class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityPro
             false
         }
     }
+    override fun onModifyMyProfileSuccess(response: BaseResponse) {
+        // 수정하고 나서 해야 할 것
+    }
 
-    private fun tryModifyMyProfile(userDTO: UserDTO) {
-        simyaApi.modifyMyProfile(
-            UserData.accessToken,
-            UserData.refreshToken,
-            UserData.getProfileId(),
-            userDTO
-        ).enqueue(object :
-            Callback<BaseResponse> {
-            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-                Log.d("Response", response.body().toString())
-                Log.d("Response",response.toString())
-                Log.d("accessToken",UserData.accessToken)
-                Log.d("refreshToken",UserData.refreshToken)
-                val code = response.body()!!.code
-                if (code == OK) {
-                    Log.d("@스낵바", SUCCESS_STRING_MODIFY)
-                } else if (code == 500) {
-                    if (response.body()!!.message == ERROR_STRING_DATABASE) {
-                        Log.d("@스낵바", ERROR_STRING_DATABASE)
-                    } else if (response.body()!!.message == ERROR_STRING_FAIL_UPDATE_PROFILE) {
-                        Log.d("@스낵바", ERROR_STRING_FAIL_UPDATE_PROFILE)
-                    }
-                }
-                dismissLoadingDialog()
-                finish()
-            }
-
-            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                Log.d("Response", t.toString())
-                dismissLoadingDialog()
-            }
-
-        })
+    override fun onModifyMyProfileFailure(response: BaseResponse) {
+        // 실패했다고 올려주기
+    }
+    override fun onDeleteMyProfileSuccess(response: BaseResponse) {
+    }
+    override fun onDeleteMyProfileFailure(response: BaseResponse) {
     }
 
 }

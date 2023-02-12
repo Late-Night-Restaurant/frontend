@@ -66,7 +66,4 @@ class CreateMyStoryMainMenuAdapter(
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
-    fun unCheck(){
-
-    }
 }

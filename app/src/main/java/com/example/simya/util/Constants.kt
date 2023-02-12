@@ -58,6 +58,7 @@ object Constants {
 
     const val SUCCESS_STRING_MODIFY = "프로필 수정이 완료되었습니다."
     const val ERROR_STRING_INPUT = "입력값을 확인해주세요"
+    const val ERROR_STRING_NULL_STORY ="이야기 집이 없습니다."
     const val ERROR_STRING_DUPLICATE = "중복된 이메일입니다."
     const val ERROR_STRING_FAILED_SIGN_UP = "회원가입에 실패했습니다."
     const val ERROR_STRING_DATABASE = "데이터베이스 연결에 실패했습니다."

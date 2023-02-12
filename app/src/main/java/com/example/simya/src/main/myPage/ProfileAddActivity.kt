@@ -17,12 +17,6 @@ import java.util.regex.Pattern
 
 class ProfileAddActivity : BaseActivity<ActivityProfileEditBinding>(ActivityProfileEditBinding::inflate)
 {
-    private val retrofit by lazy {
-        RetrofitBuilder.getInstnace()
-    }
-    private val simyaApi by lazy{
-        retrofit.create(RetrofitService::class.java)
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -31,25 +25,13 @@ class ProfileAddActivity : BaseActivity<ActivityProfileEditBinding>(ActivityProf
         binding.included.tvDefaultLayoutTitle.text = "프로필 생성"
         binding.btnEditProfileEdit.setOnClickListener {
             if(nicknameCheck() && commentCheck()){
-                onModifyUser()
+                // 수정하기
             }else{
                 // 수정 취소
             }
         }
     }
 
-    private fun onModifyUser(){
-        simyaApi.onLogout(UserData.accessToken, UserData.refreshToken).enqueue(object:
-            Callback<BaseResponse>{
-            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-
-            }
-            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                Log.d("Response",t.toString())
-        }
-
-        })
-    }
     private fun nicknameCheck() : Boolean {
         var nickname = binding.edtEditProfileInputNickname.text.toString().trim()
         val pattern = Pattern.matches(Constants.NICKNAME_VALIDATION, nickname)

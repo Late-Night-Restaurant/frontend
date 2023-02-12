@@ -1,5 +1,6 @@
 package com.example.simya.src.main.story
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,8 @@ import com.example.simya.config.BaseActivity
 import com.example.simya.src.main.story.adapter.createStory.CreateMyStoryMainMenuAdapter
 import com.example.simya.util.data.MainMenuData
 import com.example.simya.databinding.ActivityStoryMainMenuBinding
+import com.example.simya.util.Constants.BORDER_MAIN_MENU
+import com.example.simya.util.Constants.PROFILE_ID
 
 class CreateMyStoryMainMenuActivity : BaseActivity<ActivityStoryMainMenuBinding>(ActivityStoryMainMenuBinding::inflate)
 {
@@ -31,21 +34,20 @@ class CreateMyStoryMainMenuActivity : BaseActivity<ActivityStoryMainMenuBinding>
             binding.tvMyStoryCreateMainInfo.isInvisible = !binding.tvMyStoryCreateMainInfo.isInvisible
         }
         binding.btnMainMenuNext.setOnClickListener {
-//            moveToSetBorder()
+            moveToSetBorder()
         }
         clickMainMenu()
     }
 
-//    private fun moveToSetBorder() {
-//        val profileId = intent.getStringExtra(PROFILE_ID)
-//        if (binding.btnMainMenuNext.isEnabled) {
-//            Log.d("hold btn text",holdBtn!!.text.toString())
-//            val intent = Intent(this, CreateMyStoryBorderActivity::class.java)
-//            intent.putExtra(PROFILE_ID,profileId)
-//            intent.putExtra(BORDER_MAIN_MENU, holdBtn!!.text.toString())
-//            startActivity(intent)
-//        }
-//    }
+    private fun moveToSetBorder() {
+        val profileId = intent.getStringExtra(PROFILE_ID)
+        if (binding.btnMainMenuNext.isEnabled) {
+            val intent = Intent(this, CreateMyStoryBorderActivity::class.java)
+            intent.putExtra(PROFILE_ID,profileId)
+            intent.putExtra(BORDER_MAIN_MENU, selectMainMenu)
+            startActivity(intent)
+        }
+    }
     private fun initMainMenu() {
         mainMenuData.apply {
             add(MainMenuData("사랑", R.drawable.img_menu_love))

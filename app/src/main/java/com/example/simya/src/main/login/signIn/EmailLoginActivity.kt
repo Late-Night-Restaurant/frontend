@@ -16,6 +16,7 @@ import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.util.Constants.ACCESS_TOKEN
+import com.example.simya.util.Constants.DEFAULT
 import com.example.simya.util.Constants.EMAIL_VALIDATION
 import com.example.simya.util.Constants.REFRESH_TOKEN
 import com.example.simya.util.data.UserData
@@ -27,7 +28,6 @@ class EmailLoginActivity :
     private lateinit var textWatcher: TextWatcher
     private lateinit var email: String
     private lateinit var password: String
-    private val editor = ApplicationClass.sSharedPreferences
 //    private val retrofit by lazy {
 //       RetrofitBuilder.getInstnace()
 //    }
@@ -73,23 +73,7 @@ class EmailLoginActivity :
 //        intent.flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
-    override fun onPostLoginSubmitSuccess(response: AccountResponse) {
-        Log.d("response", response.toString())
-        editor.edit()
-            .putString(ACCESS_TOKEN, response.result!!.accessToken)
-        editor.edit()
-            .putString(REFRESH_TOKEN, response.result!!.refreshToken)
-        UserData.setProfileId(response.result!!.profileId)
-        UserData.setProfileName(response.result!!.nickname)
-        UserData.setProfileComment(response.result!!.comment)
-//                    UserData.setProfileImage(response.result!!.profileImage)
-        moveToHome()
-    }
 
-    override fun onPostLoginSubmitFailure(response: BaseResponse) {
-        Log.d("ERROR message", response.toString())
-        showCustomToast(response.message!!)
-    }
 
     private fun checkEmail(): Boolean {
         var email = binding.edtEmailSignInInputEmail.text.toString().trim() // 공백제거
@@ -137,6 +121,25 @@ class EmailLoginActivity :
         }
     }
 
+    override fun onPostLoginSubmitSuccess(response: AccountResponse) {
+        Log.d("response@@@@@@@@@@@@@@@",response.toString())
+        Log.d("response", response.toString())
+        ApplicationClass.sSharedPreferences.edit()
+            .putString(ACCESS_TOKEN, "Access "+response.result!!.accessToken).commit()
+        Log.d("accessToken CHECK @@@",ApplicationClass.sSharedPreferences.getString(ACCESS_TOKEN, DEFAULT)!!)
+        ApplicationClass.sSharedPreferences.edit()
+            .putString(REFRESH_TOKEN, "Refresh "+response.result!!.refreshToken).commit()
+        Log.d("refreshToken CHECK @@@",ApplicationClass.sSharedPreferences.getString(REFRESH_TOKEN, DEFAULT)!!)
+        UserData.setProfileId(response.result!!.profileId)
+        UserData.setProfileName(response.result!!.nickname)
+        UserData.setProfileComment(response.result!!.comment)
+//                    UserData.setProfileImage(response.result!!.profileImage)
+        moveToHome()
+    }
 
+    override fun onPostLoginSubmitFailure(response: BaseResponse) {
+        Log.d("ERROR message", response.toString())
+        showCustomToast(response.message!!)
+    }
 
 }
