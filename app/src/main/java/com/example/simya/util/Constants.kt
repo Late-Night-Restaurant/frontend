@@ -1,7 +1,7 @@
 package com.example.simya.util
 
 object Constants {
-    const val BASE_URL = "http://10.0.2.2:8080"
+    const val BASE_URL = "http://www.simya.kro.kr:8080/"
     const val ACCESS_TOKEN = "ACCESS_TOKEN"
     const val REFRESH_TOKEN = "REFRESH_TOKEN"
     const val UNKNOWN = 0
@@ -50,11 +50,14 @@ object Constants {
     const val HOUSE_ID = "houseId"
     const val NICK_NAME = "nickname"
     const val COMMENT = "comment"
+    const val TODAY_MENU_TITLE = "오늘의 메뉴"
+    const val TODAY_MENU_DETAIL = "오늘의 메뉴 디테일"
+
     const val EMAIL_VALIDATION =
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     const val NICKNAME_VALIDATION = "^[가-힣]{1,8}$"
     const val COMMENT_VALIDATION = "^.{1,24}$"
-    const val PW_VALIDATION = """^[0-9a-zA-Z!@#$%^+\-=]*$"""
+    const val PW_VALIDATION = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&])[A-Za-z[0-9]\$@\$!%*#?&]{8,20}\$"
 
     const val SUCCESS_STRING_MODIFY = "프로필 수정이 완료되었습니다."
     const val ERROR_STRING_INPUT = "입력값을 확인해주세요"

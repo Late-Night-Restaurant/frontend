@@ -2,13 +2,10 @@ package com.example.simya.src.main.chat
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.Message
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -16,8 +13,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isInvisible
-import androidx.core.view.setPadding
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.CHAT_NOTIFY
 import com.example.simya.util.Constants.CHAT_OTHERS
@@ -30,15 +27,14 @@ import com.example.simya.src.main.story.StoryIntroActivity
 import com.example.simya.util.data.ChatRVData
 import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityDrawerChatBinding
-import com.example.simya.databinding.SnackbarLayoutBinding
 import com.example.simya.src.main.chat.adapter.ChatDrawerRVAdapter
 import com.example.simya.src.main.chat.adapter.ChatRVAdapter
 import com.example.simya.src.testData.TestChatDrawerProfileData
 import com.example.simya.src.testData.TestUserData
+import com.example.simya.util.data.BorderData
+import com.example.simya.util.data.TodayMenuData
 import com.gmail.bishoybasily.stomp.lib.Event
 import com.gmail.bishoybasily.stomp.lib.StompClient
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.snackbar.Snackbar.SnackbarLayout
 import com.ms.square.android.expandabletextview.ExpandableTextView
 import io.reactivex.disposables.Disposable
 import okhttp3.OkHttpClient
@@ -86,8 +82,9 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         super.onCreate(savedInstanceState)
         // 인텐트 데이터값이 0 일경우 채팅방 예외처리 -> 다시메인으로
         testUserCheck(Constants.CHAT_GUEST_CODE)
-        onNotify(binding.root, "안녕")
+        onNotify()
         init()
+        initNotify()
     }
 
     private fun init() {
@@ -285,30 +282,17 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         return true
     }
 
-    // 공지사항 버튼 애니이션
-
-    private fun onNotify(view: View, message: String) {
-        binding.includedChat.ibTodayMenu.setOnClickListener {
-            var snackBar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
-
-            val snackBarView: View = layoutInflater.inflate(R.layout.snackbar_layout, null)
-            val snackBarBinding = SnackbarLayoutBinding.bind(snackBarView)
-            snackBar.view.setBackgroundColor(Color.TRANSPARENT)
-            snackBarBinding.snackBarMessage.text = message
-
-            val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
-            snackBarLayout.addView(snackBarView)
-
-            snackBar.show()
-            if (binding.includedChat.cvTodayMenu2.visibility == View.VISIBLE) {
-                binding.includedChat.cvTodayMenu2.visibility = View.GONE
-                binding.includedChat.ibTodayMenu.animate().apply {
+    private fun onNotify() {
+        binding.includedChat.ibTodayMenuTitle.setOnClickListener {
+            if (binding.includedChat.cvTodayMenuDetail.visibility == View.VISIBLE) {
+                binding.includedChat.cvTodayMenuDetail.visibility = View.GONE
+                binding.includedChat.ibTodayMenuTitle.animate().apply {
                     duration = 300
                     rotation(0f)
                 }
             } else {
-                binding.includedChat.cvTodayMenu2.visibility = View.VISIBLE
-                binding.includedChat.ibTodayMenu.animate().apply {
+                binding.includedChat.cvTodayMenuDetail.visibility = View.VISIBLE
+                binding.includedChat.ibTodayMenuTitle.animate().apply {
                     duration = 300
                     rotation(180f)
                 }
@@ -316,4 +300,8 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         }
     }
 
+    private fun initNotify() {
+        binding.includedChat.tvTodayMenuTitle.text = TodayMenuData.getTodayMenuTitle()
+        binding.includedChat.tvTodayMenuDetail.text = TodayMenuData.getTodayMenuDetail()
+    }
 }

@@ -54,5 +54,4 @@ object UserData {
         return refreshToken
     }
 
-
 }

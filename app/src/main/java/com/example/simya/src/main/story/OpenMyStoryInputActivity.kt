@@ -21,6 +21,9 @@ import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.story.open.OpenStoryDTO
 import com.example.simya.src.model.story.open.OpenStoryResponse
 import com.example.simya.src.model.story.topic.TopicRequestDTO
+import com.example.simya.util.Constants.COMMENT
+import com.example.simya.util.Constants.TODAY_MENU_TITLE
+import com.example.simya.util.data.TodayMenuData
 import com.example.simya.util.sharedpreferences.Shared
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,17 +46,24 @@ class OpenMyStoryInputActivity :
     }
 
     private fun init() {
+        val todayMenuTitle = String
+
         binding.included.tvDefaultLayoutTitle.text = "내 이야기 집 오픈 준비하기"
         binding.tvRvTitle.text = intent.getStringExtra(BORDER_TITLE)
         binding.tvRvMainMenu.text = intent.getStringExtra(BORDER_MAIN_MENU)
 
         binding.tvRvMainMenu.text = intent.getStringExtra(BORDER_MAIN_MENU)
         binding.tvRvTitle.text = intent.getStringExtra(BORDER_TITLE)
+
         binding.etMyStoryOpenInputMenuIntro.addTextChangedListener(textWatcher)
         binding.etMyStoryOpenInputPerson.addTextChangedListener(textWatcher)
         binding.etMyStoryOpenInputMenu.addTextChangedListener(textWatcher)
         // test
         binding.btnMyStoryOpen.setOnClickListener {
+            val intent = Intent(this, ChatActivity::class.java)
+            TodayMenuData.setTodayMenuTitle(binding.etMyStoryOpenInputMenu.text.toString())
+            TodayMenuData.setTodayMenuDetail(binding.etMyStoryOpenInputMenuIntro.text.toString())
+            startActivity(intent)
             openMyStory(
                 OpenStoryDTO(
                     intent.getLongExtra(HOUSE_ID, 0),
@@ -73,6 +83,8 @@ class OpenMyStoryInputActivity :
             val intent = Intent(this, ChatActivity::class.java)
             intent.putExtra(HOUSE_ID, houseId)
             intent.putExtra(PROFILE_ID, Shared.prefs.getLong(PROFILE_ID, 0))
+            TodayMenuData.setTodayMenuTitle(binding.etMyStoryOpenInputMenu.toString())
+            TodayMenuData.setTodayMenuDetail(binding.etMyStoryOpenInputMenuIntro.toString())
             startActivity(intent)
         }
     }
