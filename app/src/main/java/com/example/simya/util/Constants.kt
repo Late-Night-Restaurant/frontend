@@ -54,7 +54,7 @@ object Constants {
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     const val NICKNAME_VALIDATION = "^[가-힣]{1,8}$"
     const val COMMENT_VALIDATION = "^.{1,24}$"
-    const val PW_VALIDATION = """^[0-9a-zA-Z!@#$%^+\-=]*$"""
+    const val PW_VALIDATION = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&])[A-Za-z[0-9]\$@\$!%*#?&]{8,20}\$"
 
     const val SUCCESS_STRING_MODIFY = "프로필 수정이 완료되었습니다."
     const val ERROR_STRING_INPUT = "입력값을 확인해주세요"
