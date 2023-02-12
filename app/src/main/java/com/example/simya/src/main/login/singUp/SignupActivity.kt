@@ -3,13 +3,18 @@ package com.example.simya.src.main.login.singUp
 import android.os.Bundle
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
+import com.example.simya.config.BaseActivity
+import com.example.simya.config.BaseResponse
+import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.databinding.ActivitySignupBinding
+import com.example.simya.src.main.login.model.LoginInterface
+import com.example.simya.src.main.login.model.SignUpInterface
 import com.example.simya.src.main.login.singUp.fragment.*
+import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.src.model.account.SignupResponse
 
-class SignupActivity: AppCompatActivity() {
-    lateinit var binding: ActivitySignupBinding
-    private lateinit var textWatcher: TextWatcher
-
+class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding::inflate),
+    SignUpInterface{
     private var fragmentAgree = SignupAgreeFragment()
     private var fragmentEmail = SignupEmailFragment()
     private var fragmentPw = SignupPwFragment()
@@ -19,7 +24,6 @@ class SignupActivity: AppCompatActivity() {
     interface onBackPressedListener {
         fun onBackPressed()
     }
-
     override fun onBackPressed() {
         val fragmentList = supportFragmentManager.fragments
         for (fragment in fragmentList) {
@@ -29,10 +33,8 @@ class SignupActivity: AppCompatActivity() {
             }
         }
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySignupBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -48,6 +50,13 @@ class SignupActivity: AppCompatActivity() {
         transaction.commit()
         binding.pbSignup.progress = 0
     }
+    fun increaseProgressbar(){
+        binding.pbSignup.progress += 25
+    }
+
+    fun decreaseProgressbar(){
+        binding.pbSignup.progress -= 25
+    }
 
     fun nextFragmentSignUp(int: Int) {
         val transaction = supportFragmentManager.beginTransaction()
@@ -61,5 +70,9 @@ class SignupActivity: AppCompatActivity() {
         transaction.commit()
     }
 
+    override fun onPostSignUpSubmitSuccess(response: SignupResponse) {
+    }
 
+    override fun onPostSignUpSubmitFailure(response: SignupResponse) {
+    }
 }

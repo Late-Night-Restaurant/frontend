@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.simya.util.Constants
 import com.example.simya.util.dialog.BasicDialog
 import com.example.simya.util.dialog.LoadingDialog
 
@@ -19,6 +20,7 @@ abstract class BaseFragment<B : ViewBinding>(
     private var _binding: B? = null
     lateinit var mLoadingDialog: LoadingDialog
     lateinit var mBasicDialog: BasicDialog
+    val constants  = Constants
     protected val binding get() = _binding!!
 
     override fun onCreateView(

@@ -2,18 +2,16 @@ package com.example.simya.src.main.story
 
 import android.os.Bundle
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.example.simya.R
+import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivityStoryMainMenuBinding
 
-class EditMyStoryMenuActivity : AppCompatActivity() {
-    lateinit var binding: ActivityStoryMainMenuBinding
+class EditMyStoryMenuActivity :
+    BaseActivity<ActivityStoryMainMenuBinding>(ActivityStoryMainMenuBinding::inflate) {
     var holdBtn: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStoryMainMenuBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
     }
 
@@ -29,13 +27,13 @@ class EditMyStoryMenuActivity : AppCompatActivity() {
         binding.ibMyStoryCreateMainMenuInfo.setOnClickListener {
             binding.tvMyStoryCreateMainInfo.isInvisible = false
         }
-        binding.btnMainMenuNext.setOnClickListener{
+        binding.btnMainMenuNext.setOnClickListener {
             mainMenuModify()
         }
 //        buttonSingleSelected()
     }
 
-//    private fun buttonSingleSelected() {
+    //    private fun buttonSingleSelected() {
 //        binding.btnMainMenuLove.setOnClickListener(this)
 //        binding.btnMainMenuFamily.setOnClickListener(this)
 //        binding.btnMainMenuRelationship.setOnClickListener(this)
@@ -43,22 +41,24 @@ class EditMyStoryMenuActivity : AppCompatActivity() {
 //        binding.btnMainMenuHobby.setOnClickListener(this)
 //        binding.btnMainMenuCulture.setOnClickListener(this)
 //    }
-    private fun mainMenuModify(){
+    private fun mainMenuModify() {
         binding.btnMainMenuNext.setBackgroundResource(R.drawable.low_radius_button_off)
         binding.btnMainMenuNext.setTextColor(application.resources.getColor(R.color.Gray_10))
         binding.btnMainMenuNext.text = "수정완료"
     }
-    private fun btnHighlighted(selectBtn: Button, preBtn: Button?){
+
+    private fun btnHighlighted(selectBtn: Button, preBtn: Button?) {
         selectBtn.isSelected = selectBtn?.isSelected != true
         preBtn?.isSelected = preBtn?.isSelected != true
         holdBtn = selectBtn
         nextButtonEnabled()
     }
-    private fun nextButtonEnabled(){
+
+    private fun nextButtonEnabled() {
         binding.btnMainMenuNext.setBackgroundResource(R.drawable.low_radius_button_on)
         binding.btnMainMenuNext.setTextColor(application.resources.getColor(R.color.Gray_03))
         binding.btnMainMenuNext.text = "수정하기"
-        binding.btnMainMenuNext.isEnabled= true
+        binding.btnMainMenuNext.isEnabled = true
     }
 //    override fun onClick(view: View?) {
 //        if(view !=null){

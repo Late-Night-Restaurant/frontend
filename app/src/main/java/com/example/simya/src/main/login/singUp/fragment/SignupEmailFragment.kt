@@ -44,7 +44,7 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
     // 다시 상속받는
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signupActivity!!.binding.pbSignup.progress = 25
+        signupActivity!!.increaseProgressbar()
         FalseButton()
 
         initTW()
@@ -119,6 +119,7 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     override fun onBackPressed() {
         signupActivity!!.nextFragmentSignUp(1)
+        signupActivity!!.decreaseProgressbar()
     }
 
 }

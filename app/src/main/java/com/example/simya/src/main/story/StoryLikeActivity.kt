@@ -4,17 +4,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.simya.R
+import com.example.simya.config.BaseActivity
 import com.example.simya.src.main.story.adapter.story.StoryLikeGVAdapter
 import com.example.simya.databinding.ActivityStoryLikeListBinding
 import com.example.simya.src.testData.TestDataLike
 
-class StoryLikeActivity : AppCompatActivity() {
-    lateinit var binding: ActivityStoryLikeListBinding
+class StoryLikeActivity : BaseActivity<ActivityStoryLikeListBinding>(ActivityStoryLikeListBinding::inflate)
+{
     lateinit var dataList: ArrayList<TestDataLike>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStoryLikeListBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
     }
     private fun init(){

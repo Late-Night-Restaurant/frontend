@@ -21,6 +21,7 @@ import com.example.simya.util.Constants.CHAT_SELF
 import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
+import com.example.simya.config.BaseActivity
 import com.example.simya.src.main.story.StoryIntroActivity
 import com.example.simya.util.data.ChatRVData
 import com.example.simya.util.data.UserData
@@ -38,8 +39,8 @@ import okhttp3.internal.http2.Header
 import org.json.JSONObject
 
 
-class ChatActivity : AppCompatActivity() {
-    lateinit var binding: ActivityDrawerChatBinding
+class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatBinding::inflate)
+{
     private lateinit var dataList: ArrayList<ChatRVData>
     private lateinit var profileList: ArrayList<TestChatDrawerProfileData>
     lateinit var sendUser: TestUserData
@@ -76,8 +77,6 @@ class ChatActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDrawerChatBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         // 인텐트 데이터값이 0 일경우 채팅방 예외처리 -> 다시메인으로
         testUserCheck(Constants.CHAT_GUEST_CODE)
         onNotify()

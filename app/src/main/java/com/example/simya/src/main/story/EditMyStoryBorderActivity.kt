@@ -3,14 +3,13 @@ package com.example.simya.src.main.story
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
+import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivityStoryCreateBorderBinding
 
-class EditMyStoryBorderActivity : AppCompatActivity() {
-    lateinit var binding: ActivityStoryCreateBorderBinding
+class EditMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBinding>(ActivityStoryCreateBorderBinding::inflate)
+{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStoryCreateBorderBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
     }
     private fun init(){

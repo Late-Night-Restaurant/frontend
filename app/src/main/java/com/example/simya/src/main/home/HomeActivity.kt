@@ -3,18 +3,17 @@ package com.example.simya.src.main.home
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.R
+import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivityHomeBinding
 import com.example.simya.src.main.loaction.LocationFragment
 import com.example.simya.src.main.home.fragment.HomeFragment
 import com.example.simya.src.main.myPage.fragment.MyPageFragment
 import com.example.simya.src.main.story.fragment.MyStoryFragment
 
-class HomeActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityHomeBinding
+class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate)
+{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
 
     }

@@ -5,15 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.databinding.ItemBorderGv156156Binding
 import com.example.simya.src.testData.TestDataBorder
+import com.example.simya.util.data.BorderData
 
-class MyPageLikeGVAdapter(private val dataList: ArrayList<TestDataBorder>) :
+class MyPageLikeGVAdapter(private val dataList: ArrayList<BorderData>) :
     RecyclerView.Adapter<MyPageLikeGVAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val binding: ItemBorderGv156156Binding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: TestDataBorder) {
-            binding.tvGvTodayMenu.text = data.todayMenu
-            binding.tvGvMainMenu.text = data.mainMenu
-            binding.tvGvTitle.text = data.title
+        fun bind(data: BorderData) {
+            binding.tvGvTodayMenu.text = ""
+            binding.tvGvMainMenu.text = data.category
+            binding.tvGvTitle.text = data.houseName
         }
     }
 
