@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw_2">
         <!--        비밀번호 입력창-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_email_signin_input_pw"
+            android:id="@+id/til_pw_signup_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -53,15 +53,15 @@
             tools:ignore="MissingConstraints">
 
             <EditText
-                android:id="@+id/tiet_email_signin_input_pw"
+                android:id="@+id/tiet_pw_signup_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/Gray_06"
-                android:hint="숫자, 영문 조합 최소 8자"
+                android:hint="숫자, 영문, 특수문자 조합 최소 8자"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_email_signin_input_repw"
+            android:id="@+id/til_repw_signup_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -70,13 +70,12 @@
             app:hintEnabled="false">
 
             <EditText
-                android:id="@+id/tiet_email_signin_input_repw"
+                android:id="@+id/tiet_repw_signup_input"
                 android:layout_width="match_parent"
-                android:layout_height="37dp"
+                android:layout_height="wrap_content"
                 android:backgroundTint="@color/Gray_06"
                 android:hint="비밀번호 재입력"
-                android:inputType="textPassword"
-                android:drawableEnd="@drawable/ic_eye_off" >
+                android:inputType="textPassword" >
             </EditText>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -84,7 +83,7 @@
 
     <!--    다음 버튼-->
     <Button
-        android:id="@+id/btn_signup_next"
+        android:id="@+id/btn_signup_next_pw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -96,7 +95,8 @@
         android:text="다음으로"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="DuplicateIds">
 
     </Button>
 
