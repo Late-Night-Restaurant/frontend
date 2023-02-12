@@ -15,7 +15,7 @@ import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.src.main.story.OpenMyStoryActivity
 import com.example.simya.databinding.FragmentHomeMainGridBinding
 import com.example.simya.src.main.story.adapter.mystory.MyStoryGVAdapter
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.story.load.LoadMyStoryResponse
@@ -55,7 +55,7 @@ class MyStoryGridFragment : Fragment() {
     }
 
     private fun loadMyStory() {
-        simyaApi.getMyStory(UserTokenData.accessToken, UserTokenData.refreshToken)
+        simyaApi.getMyStory(UserData.accessToken, UserData.refreshToken)
             .enqueue(object :
                 Callback<LoadMyStoryResponse> {
                 override fun onResponse(

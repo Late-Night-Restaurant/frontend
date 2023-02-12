@@ -1,83 +1,66 @@
 package com.example.simya.src.main.myPage.fragment
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.simya.R
+import com.example.simya.config.BaseFragment
 import com.example.simya.config.BaseResponse
-import com.example.simya.src.main.myPage.MyPageLikeActivity
-import com.example.simya.src.main.myPage.MyPageReviewActivity
-import com.example.simya.src.main.myPage.ProfileEditActivity
 import com.example.simya.databinding.FragmentHomeMyPageBinding
+import com.example.simya.src.main.login.signIn.EmailLoginActivity
 import com.example.simya.src.main.myPage.adapter.myPage.MultiProfileAdapter
-import com.example.simya.src.data.UserTokenData
-import com.example.simya.src.model.RetrofitBuilder
-import com.example.simya.src.model.RetrofitService
-import com.example.simya.src.model.profile.MyProfileResponse
+import com.example.simya.util.data.UserData
+import com.example.simya.src.main.myPage.*
+import com.example.simya.src.main.myPage.model.MyPageProfileInterface
+import com.example.simya.src.main.myPage.model.MyPageProfileService
 import com.example.simya.src.model.profile.ProfileDTO
+import com.example.simya.src.model.profile.ProfileResponse
 import com.example.simya.util.Constants.NO
 import com.example.simya.util.Constants.YES
 import com.example.simya.util.dialog.BasicDialog
-import com.example.simya.util.dialog.LoadingDialog
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class MyPageFragment : Fragment() {
-    private lateinit var binding: FragmentHomeMyPageBinding
-    private lateinit var dataList: ArrayList<ProfileDTO>
+class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
+    FragmentHomeMyPageBinding::bind,
+    R.layout.fragment_home_my_page
+), MyPageProfileInterface {
+
+    private var dataList: ArrayList<ProfileDTO> = arrayListOf()
     private lateinit var dataRVAdapter: MultiProfileAdapter
-    private lateinit var mLoadingDialog: LoadingDialog
-    private lateinit var mBasicDialog: BasicDialog
-    private val retrofit by lazy {
-        RetrofitBuilder.getInstnace()
-    }
-    private val simyaApi by lazy {
-        retrofit.create(RetrofitService::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentHomeMyPageBinding.inflate(layoutInflater)
-        return binding.root
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
         binding.btnMyPageProfile.setOnClickListener {
-            val intent = Intent(activity, ProfileEditActivity::class.java)
+            val intent = Intent(activity, ProfileModifyActivity::class.java)
             startActivity(intent)
         }
 
         // 찜한 이야기 집으로
-        binding.ibMyPageMenu1.setOnClickListener {
+        binding.ibMyPageLikeHouse.setOnClickListener {
             val intent = Intent(activity, MyPageLikeActivity::class.java)
             startActivity(intent)
         }
 
         // 내가 쓴 리뷰로
-        binding.ibMyPageMenu2.setOnClickListener {
+        binding.ibMyPageReview.setOnClickListener {
             val intent = Intent(activity, MyPageReviewActivity::class.java)
             startActivity(intent)
         }
     }
 
     private fun init() {
-        dataList = arrayListOf()
+        // 메인 프로필 init
+        initMainProfile()
+
+        // 추가하기 버튼 활성화
         dataList.apply {
             add(dataList.size, ProfileDTO(0, "추가하기", "추가하기", "R.drawable.ic_baseline_add_24"))
         }
+        // 어댑터 연결
         dataRVAdapter = MultiProfileAdapter(this, dataList)
         binding.rvMyPageMultiProfile.adapter = dataRVAdapter
         binding.rvMyPageMultiProfile.layoutManager =
@@ -86,85 +69,103 @@ class MyPageFragment : Fragment() {
                 RecyclerView.HORIZONTAL,
                 false
             )
+
         // 로그아웃
         binding.btnMyPageLogout.setOnClickListener {
-            showBasicDialog(this@MyPageFragment.requireContext(),"로그아웃 하시겠습니까?")
-            mBasicDialog.setOnItemClickListener(object: BasicDialog.DefaultDialogClickedListener{
+            showBasicDialog(this@MyPageFragment.requireContext(), "로그아웃 하시겠습니까?")
+            mBasicDialog.setOnItemClickListener(object : BasicDialog.DefaultDialogClickedListener {
                 override fun onClick(resultCode: Int) {
-                    if(resultCode == YES){
+                    if (resultCode == YES) {
                         dismissBasicDialog()
-                        Log.d("로그아웃","YES")
-                        onLogoutService()
-                    }else if(resultCode==NO){
+                        Log.d("로그아웃", "YES")
+                        MyPageProfileService(this@MyPageFragment).tryOnLogout()
+                    } else if (resultCode == NO) {
                         dismissBasicDialog()
-                        Log.d("로그아웃","NO")
+                        Log.d("로그아웃", "NO")
                     }
                 }
-
             })
         }
-        getAllMyProfileService()
+        clickMultiProfile()
+        MyPageProfileService(this).tryGetUserProfile()
     }
 
-    private fun getAllMyProfileService() {
-        simyaApi.getMyAllProfile(UserTokenData.accessToken, UserTokenData.refreshToken)
-            .enqueue(object : Callback<MyProfileResponse> {
-                override fun onResponse(
-                    call: Call<MyProfileResponse>,
-                    response: Response<MyProfileResponse>
-                ) {
-                    val code = response.body()!!.code
-                    if (code == 200) {
-                        activity!!.runOnUiThread {
-                            dataList.apply {
-                                for (i: Int in 0 until response.body()!!.result.size) {
-                                    add(response.body()!!.result[i])
-                                    dataRVAdapter.notifyItemInserted(i+1)
-                                }
-                            }
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
-                    Log.d("Response",t.toString())
-                }
-            })
+    private fun initMainProfile() {
+        Glide.with(this).load(UserData.getProfileImage()).placeholder(R.drawable.ic_base_profile)
+            .into(binding.civMyPageProfile)
+        binding.tvMyPageMainNick.text = UserData.getProfileName()
+        binding.tvMyPageMainComment.text = UserData.getProfileComment()
     }
-    private fun onLogoutService(){
-        simyaApi.onLogout(UserTokenData.accessToken,UserTokenData.refreshToken).enqueue(object : Callback<BaseResponse>{
-            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-                val code = response.body()!!.code
-                Log.d("status code",code.toString())
-                if(code == 200){
 
+    // 추가하기 or 멀티프로필 클릭시
+    private fun clickMultiProfile() {
+        dataRVAdapter.setOnItemClickListener(object : MultiProfileAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, data: ProfileDTO, position: Int) {
+                Log.d("Click", "multiProfile")
+                if (position == 0) {
+                    moveToAdd()
+                } else {
+                    showLoadingDialog(this@MyPageFragment.requireContext())
+                    MyPageProfileService(this@MyPageFragment).trySetMyRepresentProfile(data)
                 }
             }
-
-            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                Log.d("Response",t.toString())
-            }
-
         })
     }
-    //다이얼로그 메소드
-    private fun showBasicDialog(context: Context,title: String){
-        mBasicDialog = BasicDialog(context, title)
-        mBasicDialog.show()
+
+    private fun moveToAdd() {
+        val intent = Intent(activity, ProfileAddActivity::class.java)
+        startActivity(intent)
     }
-    private fun dismissBasicDialog(){
-        if (mBasicDialog.isShowing) {
-            mBasicDialog.dismiss()
+
+    private fun tryChangeMyProfile(data: ProfileDTO) {
+        binding.tvMyPageMainNick.text = data.nickname
+        binding.tvMyPageMainComment.text = data.comment
+        Glide.with(this@MyPageFragment).load(data.picture).placeholder(R.drawable.ic_base_profile)
+            .into(binding.civMyPageProfile)
+        UserData.setProfileId(data.profileId)
+
+    }
+
+    // 프로필 가져오기 성공
+    override fun onGetUserProfileSuccess(response: ProfileResponse) {
+        requireActivity().runOnUiThread {
+            dataList.apply {
+                for (i: Int in 0 until response.result.size) {
+                    add(response.result[i])
+                    dataRVAdapter.notifyItemInserted(i + 1)
+                }
+            }
+            // 어댑터 재연결하기? 리스트를 추가한걸 봐야함
         }
     }
-    private fun showLoadingDialog(context: Context) {
-        mLoadingDialog = LoadingDialog(context)
-        mLoadingDialog.show()
+    // 프로필 가져오기 실패
+    override fun onGetUserProfileFailure(response: ProfileResponse) {
+        Log.d("@@@@@ CHECK @@@@@@", "멀티 프로필 가져오기 실패")
     }
-    private fun dismissLoadingDialog(){
-        if (mLoadingDialog.isShowing) {
-            mLoadingDialog.dismiss()
-        }
+
+    // 현재 메인 프로필 바꾸기 성공
+    override fun onSetMyRepresentProfileSuccess(response: BaseResponse,data: ProfileDTO) {
+        dismissLoadingDialog()
+        tryChangeMyProfile(data)
     }
+
+    // 현재 메인 프로필 바꾸기 실패
+    override fun onSetMyRepresentProfileFailure(response: BaseResponse) {
+    }
+
+    // 로그아웃 성공
+    override fun onLogoutSuccess(response: BaseResponse) {
+        val intent = Intent(
+            this@MyPageFragment.requireContext(),
+            EmailLoginActivity::class.java
+        )
+        startActivity(intent)
+    }
+
+    // 로그아웃 실패
+    override fun onLogoutFailure(response: BaseResponse) {
+        Log.d("@@@@@ CHECK @@@@@@", "로그아웃 실패")
+    }
+
 
 }

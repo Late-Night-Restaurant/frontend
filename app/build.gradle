@@ -83,4 +83,7 @@ dependencies {
     // loading
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
+    // okhttp-logging-interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
+
 }

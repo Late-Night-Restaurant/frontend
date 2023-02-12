@@ -12,11 +12,11 @@ import androidx.fragment.app.*
 import com.example.simya.R
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupPwBinding
+import com.example.simya.util.Constants.PW_VALIDATION
 import java.util.regex.Pattern
 
 class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
     private lateinit var binding: FragmentSignupPwBinding
-    private val pwValidation =  """^[0-9a-zA-Z!@#$%^+\-=]*$"""
     private lateinit var textWatcher: TextWatcher
     private lateinit var emailData: String
 
@@ -33,7 +33,6 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignupPwBinding.inflate(layoutInflater)
-
         return binding.root
 
     }
@@ -43,7 +42,7 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
         super.onViewCreated(view, savedInstanceState)
         FalseButton()
         initTW()
-        signupActivity!!.binding.pbSignup.progress = 50
+        signupActivity!!.increaseProgressbar()
 
         binding.tietPwSignupInput.addTextChangedListener(textWatcher)
         binding.tietRepwSignupInput.addTextChangedListener(textWatcher)
@@ -66,7 +65,7 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
     private fun pwCheck(): Boolean {
         var pwLength = binding.tietPwSignupInput.text!!.length
         var pw = binding.tietPwSignupInput.text.toString().trim()
-        val pattern = Pattern.matches(pwValidation, pw)
+        val pattern = Pattern.matches(PW_VALIDATION, pw)
 
         return if (pattern && pwLength in 8..12) {
             binding.btnSignupNextPw.error = null

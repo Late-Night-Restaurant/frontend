@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.util.Constants.CHAT_NOTIFY
 import com.example.simya.util.Constants.CHAT_OTHERS
 import com.example.simya.util.Constants.CHAT_SELF
-import com.example.simya.src.data.ChatRVData
+import com.example.simya.util.data.ChatRVData
 import com.example.simya.databinding.ItemChatNotifyBinding
 import com.example.simya.databinding.ItemChatReceiveBinding
 import com.example.simya.databinding.ItemChatSendBinding

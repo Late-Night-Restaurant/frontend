@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.example.simya.util.Constants
 import com.example.simya.src.main.login.LoginActivity
-import com.example.simya.src.data.UserTokenData
+import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivitySplashBinding
 import com.example.simya.util.sharedpreferences.Shared
 
@@ -130,12 +130,12 @@ class SplashActivity : AppCompatActivity() {
 
     // SharedPreferences
     private fun onShared() {
-        UserTokenData.init(
+        UserData.init(
             Shared.prefs.getString("accessToken", Constants.DEFAULT),
             Shared.prefs.getString("refreshToken", Constants.DEFAULT)
         )
-        Log.d("User AccessToken", UserTokenData.getUserAccessToken())
-        Log.d("User RefreshToken", UserTokenData.getUserRefreshToken())
+        Log.d("User AccessToken", UserData.getUserAccessToken())
+        Log.d("User RefreshToken", UserData.getUserRefreshToken())
     }
 
     // 테스트용 터치 이벤트

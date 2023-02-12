@@ -32,18 +32,13 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignupAgreeBinding.inflate(layoutInflater)
-
-
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signupActivity!!.binding.pbSignup.progress = 0
-
         agreeCheck()
-
         binding.btnSignupNextAgree.setOnClickListener {
 
             if (agreeCheck()) {

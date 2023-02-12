@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.simya.src.data.MainMenuData
+import com.example.simya.util.data.MainMenuData
 import com.example.simya.databinding.ItemMainMenuGvBinding
 
 class CreateMyStoryMainMenuAdapter(
@@ -65,8 +65,5 @@ class CreateMyStoryMainMenuAdapter(
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
-    }
-    fun unCheck(){
-
     }
 }
