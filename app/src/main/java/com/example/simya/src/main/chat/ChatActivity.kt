@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.CHAT_NOTIFY
 import com.example.simya.util.Constants.CHAT_OTHERS
@@ -30,6 +31,8 @@ import com.example.simya.src.main.chat.adapter.ChatDrawerRVAdapter
 import com.example.simya.src.main.chat.adapter.ChatRVAdapter
 import com.example.simya.src.testData.TestChatDrawerProfileData
 import com.example.simya.src.testData.TestUserData
+import com.example.simya.util.data.BorderData
+import com.example.simya.util.data.TodayMenuData
 import com.gmail.bishoybasily.stomp.lib.Event
 import com.gmail.bishoybasily.stomp.lib.StompClient
 import com.ms.square.android.expandabletextview.ExpandableTextView
@@ -81,6 +84,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         testUserCheck(Constants.CHAT_GUEST_CODE)
         onNotify()
         init()
+        initNotify()
     }
 
     private fun init() {
@@ -279,20 +283,25 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
     }
 
     private fun onNotify() {
-        binding.includedChat.ibTodayMenu.setOnClickListener {
-            if (binding.includedChat.cvTodayMenu2.visibility == View.VISIBLE) {
-                binding.includedChat.cvTodayMenu2.visibility = View.GONE
-                binding.includedChat.ibTodayMenu.animate().apply {
+        binding.includedChat.ibTodayMenuTitle.setOnClickListener {
+            if (binding.includedChat.cvTodayMenuDetail.visibility == View.VISIBLE) {
+                binding.includedChat.cvTodayMenuDetail.visibility = View.GONE
+                binding.includedChat.ibTodayMenuTitle.animate().apply {
                     duration = 300
                     rotation(0f)
                 }
             } else {
-                binding.includedChat.cvTodayMenu2.visibility = View.VISIBLE
-                binding.includedChat.ibTodayMenu.animate().apply {
+                binding.includedChat.cvTodayMenuDetail.visibility = View.VISIBLE
+                binding.includedChat.ibTodayMenuTitle.animate().apply {
                     duration = 300
                     rotation(180f)
                 }
             }
         }
+    }
+
+    private fun initNotify() {
+        binding.includedChat.tvTodayMenuTitle.text = TodayMenuData.getTodayMenuTitle()
+        binding.includedChat.tvTodayMenuDetail.text = TodayMenuData.getTodayMenuDetail()
     }
 }

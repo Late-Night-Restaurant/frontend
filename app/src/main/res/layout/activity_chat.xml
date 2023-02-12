@@ -22,7 +22,7 @@
         tools:ignore="MissingConstraints">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_today_menu_1"
+            android:id="@+id/cv_today_menu_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -34,19 +34,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <TextView
-                android:id="@+id/tv_today_menu_1"
+                android:id="@+id/tv_today_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="16dp"
-                android:text="오늘의 메뉴 : 심야식당"
+                android:text="오늘의 메뉴 :"
+                android:textColor="@color/Gray_09"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_today_menu_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="85dp"
+                android:text="심야식당"
                 android:textColor="@color/Gray_09"
                 android:textSize="12sp" />
 
             <ImageButton
-                android:id="@+id/ib_today_menu"
+                android:id="@+id/ib_today_menu_title"
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
                 android:layout_gravity="right"
@@ -61,7 +70,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cv_today_menu_2"
+            android:id="@+id/cv_today_menu_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
@@ -74,6 +83,7 @@
 
 
             <TextView
+                android:id="@+id/tv_today_menu_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
