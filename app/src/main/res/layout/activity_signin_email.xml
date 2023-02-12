@@ -43,7 +43,7 @@
         android:orientation="vertical">
         <!--        이메일 입력창-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_email_signin_input_email"
+            android:id="@+id/til_email_sign_in_input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -52,7 +52,7 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/tiet_email_signin_input_email"
+                android:id="@+id/edt_email_sign_in_input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="이메일을 입력하세요"
@@ -62,7 +62,7 @@
         </com.google.android.material.textfield.TextInputLayout>
         <!--        비밀번호 입력창-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_email_signin_input_password"
+            android:id="@+id/til_email_sign_in_input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -70,7 +70,7 @@
             app:errorEnabled="true"
             app:hintEnabled="false">
             <EditText
-                android:id="@+id/tiet_email_signin_input_password"
+                android:id="@+id/edt_email_sign_in_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="비밀번호를 입력하세요"
@@ -85,11 +85,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="로그인"
-        android:background="@drawable/low_radius_button_off"
+        android:background="@drawable/low_radius_button"
         app:layout_constraintBottom_toTopOf="@id/ll_signup_email_find"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:enabled="false" />
     <!--    계정찾기 레이아웃-->
     <LinearLayout
         android:id="@+id/ll_signup_email_find"

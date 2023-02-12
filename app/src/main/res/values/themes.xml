@@ -19,6 +19,15 @@
         <item name="colorAccent">@color/Primary_01</item>
         <item name="colorError">@color/Error</item>
 
+<!--    ShapeImageView-->
+    </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize12Percent" parent="">
+        <item name="cornerSize">12dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.App.CornerSize24Percent" parent="">
+        <item name="cornerSize">24dp</item>
+        <item name="cornerFamily">rounded</item>
     </style>
 
 </resources>

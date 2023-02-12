@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!--    인터넷 권한-->
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <!--    갤러리 권한-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--    카메라 권한-->
+    <uses-permission android:name="android.permission.CAMERA" />
+<!--    android:name="com.example.simya.util.sharedpreferences.Shared"-->
     <application
+        android:name=".config.ApplicationClass"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,61 +20,98 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Simya"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+
         <activity
-            android:name=".activity.HomeMainActivity"
-            android:exported="true">
-        </activity>
-
-        <activity android:name=".activity.EmailLoginActivity"
-            android:exported="true"> </activity>
-
-        <activity android:name=".activity.LoginActivity"
-            android:exported="true">
-        </activity>
-        <activity android:name=".activity.StoryIntroActivity"
+            android:name=".src.main.splash.SplashActivity"
             android:exported="true">
 
-        </activity>
-        <activity android:name=".activity.StoryReviewActivity"
-            android:exported="true">
         </activity>
         <activity
-            android:name=".activity.SignupActivity"
+            android:name=".src.main.login.LoginActivity"
             android:exported="true">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
-
+                android:value=""/>
         </activity>
-        <activity android:name=".activity.CreateMyStoryActivity"
+        <activity
+            android:name=".src.main.login.signIn.EmailLoginActivity"
             android:exported="true">
 
         </activity>
-        <activity android:name=".activity.CreateMyStoryMainMenuActivity"
+        <activity
+            android:name=".src.main.home.HomeActivity"
             android:exported="true">
 
         </activity>
-        <activity android:name=".activity.CreateMyStoryCreateBorderActivity"
+        <activity android:name=".src.main.myPage.MyReviewActivity"
             android:exported="true">
 
         </activity>
-        <activity android:name=".activity.OpenMyStoryActivity"
-            android:exported="true">
+        <activity
+            android:name=".src.main.story.StoryReviewActivity"
+            android:exported="true" >
 
+        </activity>
+        <activity
+            android:name=".src.main.story.StoryIntroActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.main.login.singUp.SignupActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.main.story.CreateMyStoryActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".src.main.story.CreateMyStoryMainMenuActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.main.story.CreateMyStoryBorderActivity"
+            android:exported="true">
 
         </activity>
 
+        <activity
+            android:name=".src.main.story.OpenMyStoryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.main.myPage.ProfileEditActivity"
+            android:exported="true" >
 
+        </activity>
+        <activity
+            android:name=".src.main.myPage.MyPageLikeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.main.myPage.MyPageReviewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.main.story.StoryLikeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.main.story.OpenMyStoryInputActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.main.story.EditMyStoryMenuActivity"
+            android:exported="true" />
+        <activity
+            android:name=".src.main.chat.ChatActivity"
+            android:exported="true">
 
+        </activity>
+        <activity
+            android:name=".src.main.story.TodayMenuActivity"
+            android:exported="true" />
+        <activity android:name=".src.main.myPage.ProfileAddActivity"
+            android:exported="true"/>
+        <activity android:name=".src.main.myPage.ProfileModifyActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

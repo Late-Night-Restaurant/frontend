@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -41,13 +42,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_my_story_create_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/civ_my_story_create_select_profile_image"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal"
-            android:layout_marginTop="16dp"/>
+            app:layout_constraintTop_toBottomOf="@id/civ_my_story_create_select_profile_image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_my_story_create_input"
@@ -73,7 +75,6 @@
             android:id="@+id/tv_my_story_create_nick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="심야식당"
             android:textColor="@color/Gray_03"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@id/tv_my_story_create_nick_headline"
@@ -99,7 +100,7 @@
             android:id="@+id/tv_my_story_create_intro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="심야식당 직원들"
+
             android:textColor="@color/Gray_03"
             app:layout_constraintTop_toBottomOf="@id/tv_my_story_create_intro_headline"
             app:layout_constraintStart_toStartOf="parent"

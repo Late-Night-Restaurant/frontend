@@ -17,11 +17,12 @@
         android:layout_height="wrap_content"
         android:text="비슷한 사람들과"
         android:textColor="@color/Primary_01"
-        android:textSize="40dp"
+        android:textSize="44dp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/default_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"/>
     <TextView
         android:id="@+id/tv_login_main_headline2"
         android:layout_width="wrap_content"
@@ -34,8 +35,8 @@
         app:layout_constraintStart_toStartOf="@id/tv_login_main_headline1" />
     <ImageButton
         android:id="@+id/ib_login_main_kakao"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="328dp"
+        android:layout_height="48dp"
         android:src="@drawable/kakao_login_btn"
         android:background="#00ff0000"
         app:layout_constraintBottom_toTopOf="@id/ib_login_main_email"
@@ -43,17 +44,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"
         />
     <ImageButton
         android:id="@+id/ib_login_main_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="328dp"
+        android:layout_height="48dp"
         android:src="@drawable/email_login_btn"
         android:background="#00ff0000"
         app:layout_constraintBottom_toTopOf="@id/v_login_main_question"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:scaleType="fitCenter"/>
     <TextView
         android:id="@+id/v_login_main_question"
         android:layout_width="wrap_content"

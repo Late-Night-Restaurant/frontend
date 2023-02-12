@@ -15,8 +15,9 @@
 
         <ImageButton
             android:id="@+id/ib_default_chat_drawer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
             android:background="#00ff0000"
             android:src="@drawable/ic_drawer" />
 
@@ -27,12 +28,14 @@
             android:layout_gravity="center"
             android:text="이야기 집 제목"
             android:textColor="@color/Gray_03"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:inputType="text"/>
 
         <ImageButton
             android:id="@+id/ib_default_chat_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
+            android:scaleType="fitCenter"
             android:layout_gravity="end"
             android:layout_marginRight="16dp"
             android:background="#00ff0000"

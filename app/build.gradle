@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     namespace 'com.example.simya'
@@ -14,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+//        buildConfigField "String","SIMYA_SERVER_URL",properties['simya_server_url']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -35,7 +38,16 @@ android {
     }
 }
 
+
 dependencies {
+
+    // Java language implementation
+    implementation("androidx.fragment:fragment:1.5.5")
+    // Kotlin
+    implementation("androidx.fragment:fragment-ktx:1.5.5")
+    // Testing Fragments in Isolation
+    debugImplementation("androidx.fragment:fragment-testing:1.5.5")
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -53,4 +65,25 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'com.github.jetradarmobile:android-snowfall:1.2.0'
+    // Retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // navigation component
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+    // stomp
+    implementation 'com.github.bishoybasily:stomp:2.0.5'
+
+    // ExpandableTextView
+    implementation 'com.ms-square:expandableTextView:0.1.4'
+
+    // loading
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    // okhttp-logging-interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
+
 }
