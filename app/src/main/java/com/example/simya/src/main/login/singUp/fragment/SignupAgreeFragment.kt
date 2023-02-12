@@ -38,10 +38,7 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signupActivity!!.binding.pbSignup.progress = 0
-
         agreeCheck()
-
         binding.btnSignupNextAgree.setOnClickListener {
 
             if (agreeCheck()) {

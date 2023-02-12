@@ -13,9 +13,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.example.simya.R
+import com.example.simya.config.ApplicationClass
+import com.example.simya.config.BaseFragment
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.databinding.SnackbarLayoutBinding
+import com.example.simya.src.main.login.model.SignUpInterface
+import com.example.simya.src.main.login.model.SignUpService
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.account.*
@@ -34,8 +38,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.regex.Pattern
 
-class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
-    private lateinit var binding: FragmentSignupProfileBinding
+class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
+    FragmentSignupProfileBinding::bind,
+    R.layout.fragment_signup_profile
+), SignupActivity.onBackPressedListener, SignUpInterface {
     private lateinit var emailData: String
     private lateinit var pwData: String
     private lateinit var profile: SignUpProfileDTO
@@ -48,20 +54,11 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
         signupActivity = context as SignupActivity
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSignupProfileBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         falseButton()
         initTW()
-        signupActivity!!.binding.pbSignup.progress = 75
+        signupActivity!!.increaseProgressbar()
 
         setFragmentResultListener("email") { _, bundle ->
             emailData = bundle.getString("bundleKeyEmail").toString()
@@ -78,20 +75,19 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
 
 
         binding.btnSignupNextProfile.setOnClickListener {
-            Log.d("nicknameCheck()",nicknameCheck().toString())
-            Log.d("commentCheck()",commentCheck().toString())
-            if (nicknameCheck() && commentCheck()){
+            if (nicknameCheck() && commentCheck()) {
                 val nicknameData = binding.tietNicknameSignupInput.text.toString()
                 val commentData = binding.tietCommentSignupInput.text.toString()
-                profile = SignUpProfileDTO(nicknameData,commentData, DEFAULT)
-                onSignUp(SignupDTO(emailData, pwData, profile))
+                profile = SignUpProfileDTO(nicknameData, commentData, DEFAULT)
+                SignUpService(this).trySignUpSubmit(SignupDTO(emailData, pwData, profile))
             } else {
                 onSnackBar(binding.root, "올바른 형식에 맞게 작성해주세요.")
             }
+
         }
     }
 
-    private fun nicknameCheck() : Boolean {
+    private fun nicknameCheck(): Boolean {
         var nickname = binding.tietNicknameSignupInput.text.toString().trim()
         val pattern = Pattern.matches(NICKNAME_VALIDATION, nickname)
 
@@ -104,7 +100,7 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
         }
     }
 
-    private fun commentCheck() : Boolean {
+    private fun commentCheck(): Boolean {
         var comment = binding.tietCommentSignupInput.text.toString().trim()
         val pattern = Pattern.matches(COMMENT_VALIDATION, comment)
         var commentLength = binding.tietCommentSignupInput.text!!.length
@@ -118,50 +114,15 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
         }
     }
 
-    private fun moveToFin(){
+    private fun moveToFin() {
         signupActivity!!.nextFragmentSignUp(5)
     }
-
-
-
-    private fun onSignUp(user: SignupDTO){
-        val retrofit = RetrofitBuilder.getInstnace()
-        val API = retrofit.create(RetrofitService::class.java)
-
-        API.onSignUpSubmit(user).enqueue(object: Callback<SignupResponse>{
-            override fun onResponse(
-                call: Call<SignupResponse>,
-                response: Response<SignupResponse>
-            ) {
-                if(response.body()!!.code== OK){
-                    Log.d("Response check", response.toString())
-                    Log.d("Response check", response.message().toString())
-                    Log.d("Response check", response.code().toString())
-                    Log.d("Response check", response.body().toString())
-                    moveToFin()
-                }
-                if(response.body()!!.code== REQUEST_ERROR){
-                    when(response.body()!!.message){
-                        ERROR_STRING_INPUT -> Log.d("@스낵바", ERROR_STRING_INPUT)
-                        ERROR_STRING_DUPLICATE -> Log.d("@스낵바", ERROR_STRING_DUPLICATE)
-                    }
-                }
-                if(response.body()!!.code == POST_FAIL_USER){
-                    Log.d("@스낵바",ERROR_STRING_FAILED_SIGN_UP)
-                }
-            }
-
-            override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-                Log.d("Response", t.toString())
-            }
-        })
-    }
-
 
     private fun initTW() {
         textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 val nicknameInput = binding.tietNicknameSignupInput!!.text.toString()
                 val commentInput = binding.tietCommentSignupInput!!.text.toString()
@@ -178,6 +139,7 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
             }
         }
     }
+
     private fun trueButton() {
         binding.btnSignupNextProfile.isEnabled = true
         binding.btnSignupNextProfile.isClickable = true
@@ -195,6 +157,23 @@ class SignupProfileFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     override fun onBackPressed() {
         signupActivity!!.nextFragmentSignUp(3)
+        signupActivity!!.decreaseProgressbar()
+    }
+
+    override fun onPostSignUpSubmitSuccess(response: SignupResponse) {
+        moveToFin()
+    }
+
+    override fun onPostSignUpSubmitFailure(response: SignupResponse) {
+        if (response.code == REQUEST_ERROR) {
+            when (response.message) {
+                ERROR_STRING_INPUT -> Log.d("@스낵바", ERROR_STRING_INPUT)
+                ERROR_STRING_DUPLICATE -> Log.d("@스낵바", ERROR_STRING_DUPLICATE)
+            }
+        }
+        if (response.code == POST_FAIL_USER) {
+            Log.d("@스낵바", ERROR_STRING_FAILED_SIGN_UP)
+        }
     }
 
     // SnackBar 구현

@@ -9,9 +9,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!--    카메라 권한-->
     <uses-permission android:name="android.permission.CAMERA" />
-
+<!--    android:name="com.example.simya.util.sharedpreferences.Shared"-->
     <application
-        android:name="com.example.simya.util.sharedpreferences.Shared"
+        android:name=".config.ApplicationClass"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

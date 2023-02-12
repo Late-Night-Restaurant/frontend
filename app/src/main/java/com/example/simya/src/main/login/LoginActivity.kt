@@ -3,17 +3,15 @@ package com.example.simya.src.main.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.simya.config.BaseActivity
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.src.main.login.signIn.EmailLoginActivity
 import com.example.simya.databinding.ActivityLoginMainBinding
+import com.example.simya.databinding.ActivitySigninEmailBinding
 
-class LoginActivity : AppCompatActivity() {
-    lateinit var binding: ActivityLoginMainBinding
-
+class LoginActivity : BaseActivity<ActivityLoginMainBinding>(ActivityLoginMainBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
     }
     private fun init() {

@@ -28,37 +28,14 @@ import retrofit2.http.POST
 
 
 interface RetrofitService {
-
-    // 폼 로그인
-    @Headers("Content-Type: application/json")
-    @POST("/simya/form-login")
-    fun onLoginSubmit(
-        @Body login: AccountDTO
-    ): Call<AccountResponse>
-
-    // 내 모든 프로필 조회
-    @Headers("Content-Type: application/json")
-    @GET("/simya/users/profile")
-    fun getUserProfile(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String
-    ): Call<ProfileResponse>
-
-    // 회원가입
-    @Headers("Content-Type: application/json")
-    @POST("/simya/form-signup")
-    fun onSignUpSubmit(
-        @Body signup: SignupDTO
-    ): Call<SignupResponse>
-
-    // 이야기 집 생성
-    @Headers("Content-Type: application/json")
-    @POST("/simya/house")
-    fun onCreateMyHouse(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-        @Body myStory: CreateStoryDTO
-    ): Call<CreateStoryResponse>
+//    // 이야기 집 생성
+//    @Headers("Content-Type: application/json")
+//    @POST("/simya/house")
+//    fun onCreateMyHouse(
+//        @Header("Access-Token") accessToken: String,
+//        @Header("Refresh-Token") refreshToken: String,
+//        @Body myStory: CreateStoryDTO
+//    ): Call<CreateStoryResponse>
 
     // 내 이야기 집 조회하기
     @Headers("Content-Type: application/json")
@@ -69,12 +46,12 @@ interface RetrofitService {
     ): Call<LoadMyStoryResponse>
 
     // 이야기 집 전제 조회하기
-    @Headers("Content-Type: application/json")
-    @GET("/simya/house")
-    fun getAllStory(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String
-    ): Call<LoadAllStoryResponse>
+//    @Headers("Content-Type: application/json")
+//    @GET("/simya/house")
+//    fun getAllStory(
+//        @Header("Access-Token") accessToken: String,
+//        @Header("Refresh-Token") refreshToken: String
+//    ): Call<LoadAllStoryResponse>
 
     // 이야기 집 오픈
     @Headers("Content-Type: application/json")
@@ -94,21 +71,6 @@ interface RetrofitService {
         @Path("houseId") houseId: Long
     ): Call<InquiryStoryDetailResponse>
 
-    // 내 모든 프로필 조회
-    @Headers("Content-Type: application/json")
-    @GET("/simya/users/profile")
-    fun getMyAllProfile(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-    ): Call<MyProfileResponse>
-
-    // 내가 찜한 집들 모두 조회
-    @Headers("Content-Type: application/json")
-    @GET("/simya/favorite/my")
-    fun getMyLikeStory(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-    ): Call<MyLikeStoryResponse>
 
     // 현재 프로필로 쓴 모든 리뷰 조회
     @Headers("Content-Type: application/json")
@@ -135,42 +97,4 @@ interface RetrofitService {
         @Header("Refresh-Token") refreshToken: String,
         @Path("reviewId") reviewId: Long
     ): Call<BaseResponse>
-
-    // 프로필 수정
-    @Headers("Content-Type: application/json")
-    @PATCH("/simya/users/profile/{profileId}")
-    fun modifyMyProfile(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-        @Path("profileId") profileId: Long,
-        @Body userDTO: UserDTO
-    ): Call<BaseResponse>
-
-    // 프로필 삭제
-    @Headers("Content-Type: application/json")
-    @DELETE("/simya/users/profile/{profileId}")
-    fun deleteMyProfile(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-        @Path("profileId") profileId: Long
-    ): Call<BaseResponse>
-
-    // 대표 프로필 선택
-    @Headers("Content-Type: application/json")
-    @PATCH("/simya/users/profile/{profileId}/main")
-    fun changeMyRepresentProfile(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-        @Path("profileId") profileId: Long
-    ): Call<BaseResponse>
-
-    // 로그아웃
-    @Headers("Content-Type: application/json")
-    @GET("/simya/logout")
-    fun onLogout(
-        @Header("Access-Token") accessToken: String,
-        @Header("Refresh-Token") refreshToken: String,
-    ): Call<BaseResponse>
-
-
 }

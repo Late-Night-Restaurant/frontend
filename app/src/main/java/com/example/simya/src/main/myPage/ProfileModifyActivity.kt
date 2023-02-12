@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.simya.R
+import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivityProfileEditBinding
 import com.example.simya.databinding.ActivityProfileModifyBinding
 import com.example.simya.src.model.RetrofitBuilder
@@ -13,8 +14,8 @@ import com.example.simya.util.Constants
 import com.example.simya.util.data.UserData
 import java.util.regex.Pattern
 
-class ProfileModifyActivity : AppCompatActivity() {
-    lateinit var binding: ActivityProfileModifyBinding
+class ProfileModifyActivity : BaseActivity<ActivityProfileModifyBinding>(ActivityProfileModifyBinding::inflate)
+{
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
     }
@@ -23,8 +24,6 @@ class ProfileModifyActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileModifyBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         init()
     }
 

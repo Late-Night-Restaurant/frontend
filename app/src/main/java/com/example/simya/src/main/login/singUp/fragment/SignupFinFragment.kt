@@ -33,7 +33,7 @@ class SignupFinFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signupActivity!!.binding.pbSignup.progress = 100
+        signupActivity!!.increaseProgressbar()
 
         binding.btnSignupNext.setOnClickListener {
             requireActivity().finish()
@@ -42,6 +42,7 @@ class SignupFinFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     override fun onBackPressed() {
         signupActivity!!.nextFragmentSignUp(4)
+        signupActivity!!.decreaseProgressbar()
     }
 
 

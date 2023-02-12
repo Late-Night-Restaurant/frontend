@@ -1,6 +1,9 @@
 package com.example.simya.util
 
 object Constants {
+    const val BASE_URL = "http://10.0.2.2:8080"
+    const val ACCESS_TOKEN = "ACCESS_TOKEN"
+    const val REFRESH_TOKEN = "REFRESH_TOKEN"
     const val UNKNOWN = 0
     const val CHAT_MASTER_CODE = 1
     const val CHAT_GUEST_CODE = 2
@@ -47,16 +50,18 @@ object Constants {
     const val HOUSE_ID = "houseId"
     const val NICK_NAME = "nickname"
     const val COMMENT = "comment"
-    const val EMAIL_VALIDATION = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+    const val EMAIL_VALIDATION =
+        "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     const val NICKNAME_VALIDATION = "^[가-힣]{1,8}$"
     const val COMMENT_VALIDATION = "^.{1,24}$"
-    const val PW_VALIDATION =  """^[0-9a-zA-Z!@#$%^+\-=]*$"""
+    const val PW_VALIDATION = """^[0-9a-zA-Z!@#$%^+\-=]*$"""
 
-    const val SUCCESS_STRING_MODIFY ="프로필 수정이 완료되었습니다."
-    const val ERROR_STRING_INPUT ="입력값을 확인해주세요"
+    const val SUCCESS_STRING_MODIFY = "프로필 수정이 완료되었습니다."
+    const val ERROR_STRING_INPUT = "입력값을 확인해주세요"
+    const val ERROR_STRING_NULL_STORY ="이야기 집이 없습니다."
     const val ERROR_STRING_DUPLICATE = "중복된 이메일입니다."
     const val ERROR_STRING_FAILED_SIGN_UP = "회원가입에 실패했습니다."
-    const val ERROR_STRING_DATABASE ="데이터베이스 연결에 실패했습니다."
-    const val ERROR_STRING_FAIL_UPDATE_PROFILE ="프로필 수정에 실패했습니다."
+    const val ERROR_STRING_DATABASE = "데이터베이스 연결에 실패했습니다."
+    const val ERROR_STRING_FAIL_UPDATE_PROFILE = "프로필 수정에 실패했습니다."
 
 }
