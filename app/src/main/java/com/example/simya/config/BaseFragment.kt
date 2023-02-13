@@ -36,7 +36,7 @@ abstract class BaseFragment<B : ViewBinding>(
         return if (clickable) {
             clickable = false
             Handler(Looper.getMainLooper()).postDelayed(
-                Runnable { clickable = true},3000L)
+                Runnable { clickable = true},1000)
         } else {
             Log.i("TAG", "waiting for a while")
             false
