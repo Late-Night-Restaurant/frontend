@@ -2,14 +2,15 @@ package com.example.simya.config
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.example.simya.util.Constants
 import com.example.simya.util.dialog.BasicDialog
 import com.example.simya.util.dialog.LoadingDialog
 
@@ -20,7 +21,7 @@ abstract class BaseFragment<B : ViewBinding>(
     private var _binding: B? = null
     lateinit var mLoadingDialog: LoadingDialog
     lateinit var mBasicDialog: BasicDialog
-    val constants  = Constants
+    var clickable = true
     protected val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,6 +31,16 @@ abstract class BaseFragment<B : ViewBinding>(
     ): View? {
         _binding = bind(super.onCreateView(inflater, container, savedInstanceState)!!)
         return binding.root
+    }
+    fun isThrottleClick(): Boolean {
+        return if (clickable) {
+            clickable = false
+            Handler(Looper.getMainLooper()).postDelayed(
+                Runnable { clickable = true},1000)
+        } else {
+            Log.i("TAG", "waiting for a while")
+            false
+        }
     }
 
     override fun onDestroyView() {

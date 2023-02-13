@@ -65,12 +65,15 @@ object Constants {
     const val HOUSE_ID = "houseId"
     const val NICK_NAME = "nickname"
     const val COMMENT = "comment"
+
+    // VALIDATION
     const val EMAIL_VALIDATION =
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     const val NICKNAME_VALIDATION = "^[가-힣]{1,8}$"
     const val COMMENT_VALIDATION = "^.{1,24}$"
     const val PW_VALIDATION = """^[0-9a-zA-Z!@#$%^+\-=]*$"""
 
+    // retrofit2 isSuccessful: false , message
     const val SUCCESS_STRING_MODIFY = "프로필 수정이 완료되었습니다."
     const val ERROR_STRING_INPUT = "입력값을 확인해주세요"
     const val ERROR_STRING_NULL_STORY ="아직 오픈한 이야기 집이 없습니다."
@@ -80,4 +83,6 @@ object Constants {
     const val ERROR_STRING_DATABASE = "데이터베이스 연결에 실패했습니다."
     const val ERROR_STRING_FAIL_UPDATE_PROFILE = "프로필 수정에 실패했습니다."
 
+    // REQUEST CODE
+    const val REQUEST_CODE_FOR_INTENT = 1002
 }

@@ -84,13 +84,18 @@ class SplashActivity : AppCompatActivity() {
         fadeOut.duration = 1500
         fadeOut.start()
         fadeOut.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(p0: Animator?) {}
-            override fun onAnimationEnd(p0: Animator?) {
+            override fun onAnimationStart(animation: Animator) {
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
                 imageView.isInvisible = true
             }
 
-            override fun onAnimationCancel(p0: Animator?) {}
-            override fun onAnimationRepeat(p0: Animator?) {}
+            override fun onAnimationCancel(animation: Animator) {
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+            }
 
         })
     }

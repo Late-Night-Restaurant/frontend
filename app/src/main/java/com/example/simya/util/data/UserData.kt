@@ -40,6 +40,12 @@ object UserData {
     fun getProfileId(): Long {
         return profileId
     }
+    fun setUserAccessToken(accessToken: String){
+        UserData.accessToken = "Access $accessToken"
+    }
+    fun setUserRefreshToken(refreshToken: String){
+        UserData.refreshToken = "Refresh $refreshToken"
+    }
     fun getUserAccessToken(): String {
         return accessToken
     }

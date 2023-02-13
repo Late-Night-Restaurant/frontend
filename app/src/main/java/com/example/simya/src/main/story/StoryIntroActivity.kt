@@ -24,7 +24,8 @@ import retrofit2.Response
 
 
 class StoryIntroActivity :
-    BaseActivity<ActivityStoryIntroBinding>(ActivityStoryIntroBinding::inflate),StoryIntroInterface {
+    BaseActivity<ActivityStoryIntroBinding>(ActivityStoryIntroBinding::inflate),
+    StoryIntroInterface {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,7 @@ class StoryIntroActivity :
 
     }
 
+    var houseId: Long = 0
     private fun init() {
         val ratingReviews = binding.ratingReviews
         // 별점 test
@@ -50,6 +52,15 @@ class StoryIntroActivity :
             0
         )
         ratingReviews.createRatingBars(100, BarLabels.STYPE1, colors, raters)
+        binding.btnStoryIntroEnterChat.setOnClickListener {
+            moveToChat(
+                intent.getLongExtra(HOUSE_ID,0),
+                UserData.getProfileId()
+            )
+            Log.d("@@@@@@@@@@@@house Id",houseId.toString())
+
+            Log.d("@@@@@@@@@@@@@house Id",UserData.getProfileId().toString())
+        }
     }
 
     private fun moveToChat(houseId: Long, profileId: Long) {
@@ -60,6 +71,7 @@ class StoryIntroActivity :
     }
 
     override fun onGetStoryDetailSuccess(response: InquiryStoryDetailResponse) {
+        houseId = response.result!!.houseInfo.houseId
         runOnUiThread {
             // 프로필 주인정보
             binding.tvStoryProfileNick.text =
@@ -74,12 +86,6 @@ class StoryIntroActivity :
                 response.result!!.houseInfo.houseName
             binding.tvStoryProfileStoryIntro.text =
                 response.result!!.houseInfo.comment
-            binding.btnStoryIntroEnterChat.setOnClickListener {
-                moveToChat(
-                    response.result!!.houseInfo.houseId,
-                    UserData.getProfileId()
-                )
-            }
         }
     }
 

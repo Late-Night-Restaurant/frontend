@@ -156,6 +156,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         }
 
     }
+
     private fun sendMessage(){
         jsonObject.put("type", "TALK")
         jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID, 0))
@@ -163,8 +164,24 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         jsonObject.put("token", convertToken(UserData.accessToken))
         jsonObject.put("message", binding.includedChat.etChatInput.text.toString())
         jsonObject.put("userCount", 1)
+
         Log.d("JSON OBJECT MESSAGE", jsonObject.get("message").toString())
         Log.d("Check JSON OBJECT", jsonObject.toString())
+        stomp.send(
+            "/pub/simya/chat/androidMessage",
+            jsonObject.toString()
+        ).subscribe {
+            if (it) {
+            }
+        }
+    }
+    private fun enterNotify(){
+        jsonObject.put("type", "ENTER")
+        jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID, 0))
+        jsonObject.put("sender", UserData.getProfileName())
+        jsonObject.put("token", convertToken(UserData.accessToken))
+        jsonObject.put("message", "입장")
+        jsonObject.put("userCount", 1)
         stomp.send(
             "/pub/simya/chat/androidMessage",
             jsonObject.toString()
@@ -195,6 +212,10 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
                         CHAT_OTHERS
                     }
                 }
+                "BEN" -> {
+
+                }
+
             }
 
             dataList.add(ChatRVData(profileId, picture, sender, message, senderType))
@@ -207,21 +228,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         }
     }
 
-    private fun enterNotify(){
-        jsonObject.put("type", "ENTER")
-        jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID, 0))
-        jsonObject.put("sender", UserData.getProfileName())
-        jsonObject.put("token", convertToken(UserData.accessToken))
-        jsonObject.put("message", "입장")
-        jsonObject.put("userCount", 1)
-        stomp.send(
-            "/pub/simya/chat/androidMessage",
-            jsonObject.toString()
-        ).subscribe {
-            if (it) {
-            }
-        }
-    }
+
     private fun convertToken(testAccessToken: String): String {
         return testAccessToken.substring(7)
     }
