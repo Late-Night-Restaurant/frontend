@@ -14,10 +14,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp">
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_rv_border_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize12Percent"
+            android:background="@color/Gray_06"
+            android:scaleType="centerCrop"
+            android:foreground="@drawable/main_menu_gradient"/>
 
         <TextView
             android:id="@+id/tv_rv_main_menu"

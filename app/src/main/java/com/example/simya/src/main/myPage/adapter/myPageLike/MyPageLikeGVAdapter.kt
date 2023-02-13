@@ -12,7 +12,7 @@ class MyPageLikeGVAdapter(private val dataList: ArrayList<BorderData>) :
     inner class DataViewHolder(private val binding: ItemBorderGv156156Binding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: BorderData) {
-            binding.tvGvTodayMenu.text = ""
+//            binding.tvGvTodayMenu.text = ""
             binding.tvGvMainMenu.text = data.category
             binding.tvGvTitle.text = data.houseName
         }

@@ -12,8 +12,8 @@ class MyPageLikeRVAdapter(private val dataList: ArrayList<BorderData>) :
     inner class DataViewHolder(private val binding: ItemBorderRv328156Binding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: BorderData) {
-            binding.tvRvTodayMenu.text = ""
-            binding.tvRvTodayMenu.text = data.category
+//            binding.tvRvTodayMenu.text = ""
+            binding.tvRvMainMenu.text = data.category
             binding.tvRvTitle.text = data.houseName
         }
     }

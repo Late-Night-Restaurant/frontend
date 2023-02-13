@@ -2,13 +2,17 @@ package com.example.simya.src.main.story
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isInvisible
+import com.bumptech.glide.Glide
 import com.example.simya.util.Constants.BORDER_MAIN_MENU
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
@@ -22,14 +26,27 @@ import com.example.simya.src.main.story.model.CreateMyHouseService
 import com.example.simya.src.model.story.HouseDTO
 import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
+import com.example.simya.util.Constants
+import com.example.simya.util.gallery.GalleryActivity
 
 class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBinding>(ActivityStoryCreateBorderBinding::inflate), CreateMyHouseInterface
 {
     private lateinit var textWatcher: TextWatcher
-
+    private lateinit var getResult: ActivityResultLauncher<Intent>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initTextWatcher()
+        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+                result ->
+            if(result.resultCode == Constants.REQUEST_CODE_FOR_INTENT){
+                var getUri: Uri = Uri.parse(result.data?.getStringExtra("cropImage"))
+                Glide.with(this).load(getUri).into(binding.ibMyStoryCreateBorder)
+                binding.ivMyStoryCreateBorderEx.isInvisible = true
+                Log.d("이미지크롭 성공","Success")
+            }else{
+                Log.d("RegisterForActivity","이미지를 가져오는데 실패했습니다.")
+            }
+        }
         init()
     }
 
@@ -42,15 +59,14 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
         binding.etMyStoryCreateBorderTitle.addTextChangedListener(textWatcher)
         binding.etMyStoryCreateBorderIntro.addTextChangedListener(textWatcher)
         binding.ibMyStoryCreateBorder.setOnClickListener {
-            // 권한 , 카메라 , 갤러리 -> 사진가져오기
-            // test 코드로 임시 사진주기
-            binding.ibMyStoryCreateBorder.setImageResource(R.drawable.test_simya)
-            binding.ibMyStoryCreateBorder.setBackgroundResource(R.drawable.test_simya)
+            val intent= Intent(this, GalleryActivity::class.java)
+            getResult.launch(intent)
         }
         binding.btnMyStoryCreateBorderNext.setOnClickListener {
             CreateMyHouseService(this).tryOnCreateMyHouse(setBorderData())
             // 서버에 전송 데이터 전송해서 이야기집 생성
         }
+
     }
     private fun moveToHome(){
         val intent = Intent(this, HomeActivity::class.java)
