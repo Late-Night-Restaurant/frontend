@@ -50,10 +50,8 @@ class SplashActivity : AppCompatActivity() {
         splashHandler.postDelayed(
             Runnable { sequenceFour() }, 4000
         )
-
-
         splashHandler.postDelayed(
-            Runnable { moveToHome() }, 16000
+            Runnable { moveToHome() }, 6000
         )
     }
 

@@ -17,7 +17,7 @@ class SignUpService(val signUpInterface: SignUpInterface) {
                 call: Call<SignupResponse>,
                 response: Response<SignupResponse>
             ) {
-                if(response.code() == OK){
+                if(response.body()!!.code == OK){
                     signUpInterface.onPostSignUpSubmitSuccess(response.body() as SignupResponse)
                 }else{
                     Log.d("SignUp","Fail")

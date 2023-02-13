@@ -1,6 +1,7 @@
 package com.example.simya.util.gallery
 
 import android.content.ContentUris
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -16,9 +17,14 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivityCropImageBinding
+import com.example.simya.util.Constants
+import com.example.simya.util.Constants.REQUEST_CODE_BORDER_IMAGE
+import com.example.simya.util.Constants.REQUEST_CODE_FOR_INTENT
+import com.example.simya.util.Constants.REQUEST_CODE_PROFILE_IMAGE
 import com.takusemba.cropme.CropLayout
 import com.takusemba.cropme.OnCropListener
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 
 class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageBinding::inflate) {
     private val imageList = arrayListOf<Uri>()
@@ -38,7 +44,10 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageB
         cropLayout.addOnCropListener(object : OnCropListener {
             // 성공했을 때,
             override fun onSuccess(bitmap: Bitmap) {
-                Log.d("success", "성공")
+                val image = getImageUri(this@GalleryActivity,bitmap)
+                intent.putExtra("cropImage",image.toString())
+                setResult(REQUEST_CODE_FOR_INTENT,intent)
+                finish()
             }
             // 실패했을 때,
             override fun onFailure(e: Exception) {
@@ -212,5 +221,16 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageB
             }
 
         })
+    }
+    private fun getImageUri(context: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(
+            context.contentResolver,
+            inImage,
+            "Title",
+            null
+        )
+        return Uri.parse(path)
     }
 }
