@@ -25,7 +25,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        onShared()
         init()
     }
 
@@ -129,14 +128,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     // SharedPreferences
-    private fun onShared() {
-        UserData.init(
-            Shared.prefs.getString("accessToken", Constants.DEFAULT),
-            Shared.prefs.getString("refreshToken", Constants.DEFAULT)
-        )
-        Log.d("User AccessToken", UserData.getUserAccessToken())
-        Log.d("User RefreshToken", UserData.getUserRefreshToken())
-    }
 
     // 테스트용 터치 이벤트
     override fun onTouchEvent(event: MotionEvent): Boolean {

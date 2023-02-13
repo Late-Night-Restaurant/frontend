@@ -30,7 +30,7 @@ class CreateMyStoryActivity :
     MyPageProfileInterface {
     private var dataList: ArrayList<ProfileData> = arrayListOf()
     private val dataRVAdapter = CreateMyStoryMultiProfileAdapter(this, dataList)
-    private var profileId: Long = 0
+    private var profileId: Long = UserData.getProfileId()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +39,8 @@ class CreateMyStoryActivity :
     }
 
     private fun init() {
+        UserData.printAllData()
+        Log.d("UserData@@@@@@@@@@",UserData.toString())
         binding.includedTitle.tvDefaultLayoutTitle.text = "이야기집 생성"
         binding.btnMyStoryCreateNext.setOnClickListener {
             moveToSetMenu()
@@ -50,6 +52,7 @@ class CreateMyStoryActivity :
     private fun moveToSetMenu() {
         val intent = Intent(this, CreateMyStoryMainMenuActivity::class.java)
         intent.putExtra(PROFILE_ID, profileId)
+        Log.d("profileId",profileId.toString())
         startActivity(intent)
     }
 
@@ -63,14 +66,14 @@ class CreateMyStoryActivity :
         dataRVAdapter.setOnItemClickListener(object :
             CreateMyStoryMultiProfileAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: ProfileData, position: Int) {
-                Glide.with(this@CreateMyStoryActivity).load(data.picture).centerCrop()
+                Glide.with(this@CreateMyStoryActivity).load(data.picture).placeholder(R.drawable.ic_base_profile).centerCrop()
                     .into(binding.civMyStoryCreateSelectProfileImage)
                 binding.tvMyStoryCreateNick.text = data.nickname
                 binding.tvMyStoryCreateIntro.text = data.comment
             }
 
             override fun onLongClick(v: View, data: ProfileData, position: Int) {
-                Glide.with(this@CreateMyStoryActivity).load(data.picture).centerCrop()
+                Glide.with(this@CreateMyStoryActivity).load(data.picture).placeholder(R.drawable.ic_base_profile).centerCrop()
                     .into(binding.civMyStoryCreateSelectProfileImage)
             }
         })
@@ -81,7 +84,7 @@ class CreateMyStoryActivity :
         binding.tvMyStoryCreateIntro.text = response.result[0].comment
         profileId = response.result[0].profileId
         runOnUiThread {
-            for (i: Int in 1 until response.result.size) {
+            for (i: Int in 0 until response.result.size) {
                 dataList.apply {
                     add(
                         ProfileData(

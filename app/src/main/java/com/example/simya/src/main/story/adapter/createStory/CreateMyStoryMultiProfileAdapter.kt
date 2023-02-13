@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.simya.R
 import com.example.simya.databinding.ItemMultiProfileBinding
 import com.example.simya.src.testData.TestDataMultiProfile
 import com.example.simya.util.data.ProfileData
@@ -20,7 +21,7 @@ class CreateMyStoryMultiProfileAdapter(
     inner class DataViewHolder(private val binding: ItemMultiProfileBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ProfileData) {
-            Glide.with(context).load(data.picture).centerCrop()
+            Glide.with(context).load(data.picture).placeholder(R.drawable.ic_base_profile).centerCrop()
                 .into(binding.civItemMultiProfile)
             binding.tvMultiNickname.text = data.nickname
         }

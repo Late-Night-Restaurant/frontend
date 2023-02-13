@@ -38,7 +38,7 @@
             android:id="@+id/civ_my_story_create_select_profile_image"
             android:layout_width="184dp"
             android:layout_height="184dp"
-            android:src="@color/Gray_06"
+            android:background="@drawable/bg_profile"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

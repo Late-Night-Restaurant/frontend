@@ -45,18 +45,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="8dp"
         android:scaleType="centerCrop"
+        android:visibility="invisible"
         />
-    <ImageButton
+    <Button
         android:id="@+id/ib_login_main_email"
         android:layout_width="328dp"
         android:layout_height="48dp"
-        android:src="@drawable/email_login_btn"
-        android:background="#00ff0000"
+        android:background="@drawable/low_radius_button"
         app:layout_constraintBottom_toTopOf="@id/v_login_main_question"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="8dp"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:text="시작하기"/>
+<!--    <ImageButton-->
+<!--        android:id="@+id/ib_login_main_email"-->
+<!--        android:layout_width="328dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:src="@drawable/email_login_btn"-->
+<!--        android:background="#00ff0000"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/v_login_main_question"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:scaleType="fitCenter"/>-->
     <TextView
         android:id="@+id/v_login_main_question"
         android:layout_width="wrap_content"
@@ -66,5 +78,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="56dp"/>
+        android:layout_marginBottom="56dp"
+        android:visibility="invisible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

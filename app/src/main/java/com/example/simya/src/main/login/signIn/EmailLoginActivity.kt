@@ -18,6 +18,7 @@ import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.src.main.login.model.LoginInterface
 import com.example.simya.src.main.login.model.LoginService
 import com.example.simya.src.main.login.singUp.SignupActivity
+import com.example.simya.src.main.prepare.PrepareActivity
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.util.Constants.ACCESS_TOKEN
@@ -34,15 +35,17 @@ class EmailLoginActivity :
     private lateinit var textWatcher: TextWatcher
     private lateinit var email: String
     private lateinit var password: String
-//    private val retrofit by lazy {
-//       RetrofitBuilder.getInstnace()
-//    }
-//    private val simyaApi by lazy{
-//        retrofit.create(RetrofitService::class.java)
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.btnSignInEmailFindEmail.setOnClickListener {
+            val intent = Intent(this,PrepareActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnSignInEmailFindPassword.setOnClickListener {
+            val intent = Intent(this,PrepareActivity::class.java)
+            startActivity(intent)
+        }
         initTextWatcher()
         init()
     }
@@ -127,18 +130,13 @@ class EmailLoginActivity :
     }
 
     override fun onPostLoginSubmitSuccess(response: AccountResponse) {
-        Log.d("response@@@@@@@@@@@@@@@",response.toString())
-        Log.d("response", response.toString())
-        ApplicationClass.sSharedPreferences.edit()
-            .putString(ACCESS_TOKEN, "Access "+response.result!!.accessToken).commit()
-        Log.d("accessToken CHECK @@@",ApplicationClass.sSharedPreferences.getString(ACCESS_TOKEN, DEFAULT)!!)
-        ApplicationClass.sSharedPreferences.edit()
-            .putString(REFRESH_TOKEN, "Refresh "+response.result!!.refreshToken).commit()
-        Log.d("refreshToken CHECK @@@",ApplicationClass.sSharedPreferences.getString(REFRESH_TOKEN, DEFAULT)!!)
+        LoginService(this).setAccessTokenSharedPreferences(response.result!!.accessToken)
+        LoginService(this).setRefreshTokenSharedPreferences(response.result!!.refreshToken)
         UserData.setProfileId(response.result!!.profileId)
         UserData.setProfileName(response.result!!.nickname)
         UserData.setProfileComment(response.result!!.comment)
 //                    UserData.setProfileImage(response.result!!.profileImage)
+        UserData.printAllData()
         moveToHome()
     }
 
@@ -146,6 +144,7 @@ class EmailLoginActivity :
         Log.d("ERROR message", response.toString())
         showCustomToast(response.message!!)
     }
+<<<<<<< HEAD
 
     // SnackBar 구현
     private fun onSnackBar(view: View, message: String){
@@ -162,4 +161,6 @@ class EmailLoginActivity :
         snackBar.show()
     }
 
+=======
+>>>>>>> 0406314d42f52dc6f4782c3a9145c6bc2f501511
 }

@@ -1,5 +1,6 @@
 package com.example.simya.util.data
 
+import android.util.Log
 import com.example.simya.util.Constants.DEFAULT
 
 object UserData {
@@ -12,7 +13,6 @@ object UserData {
     fun setProfileName(profileName: String) {
         UserData.profileName = profileName
     }
-
     fun getProfileName(): String {
         return profileName
     }
@@ -40,19 +40,18 @@ object UserData {
     fun getProfileId(): Long {
         return profileId
     }
-
-    fun init(accessToken: String, refreshToken: String) {
-        UserData.accessToken = "Access $accessToken"
-        UserData.refreshToken = "Refresh $refreshToken"
-    }
-
     fun getUserAccessToken(): String {
         return accessToken
     }
-
     fun getUserRefreshToken(): String {
         return refreshToken
     }
-
-
+    fun printAllData(){
+        Log.d("printAllData [accessToken]", accessToken)
+        Log.d("printAllData [refreshToken]", refreshToken)
+        Log.d("printAllData [profileId]", profileId.toString())
+        Log.d("printAllData [profileName]", profileName)
+        Log.d("printAllData [profileComment]", profileComment)
+        Log.d("printAllData [profileImage]", profileImage)
+    }
 }

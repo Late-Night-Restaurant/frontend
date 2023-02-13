@@ -10,11 +10,13 @@
         android:layout_height="180dp">
         <com.google.android.material.imageview.ShapeableImageView
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize12Percent"
-            android:src="@color/Gray_09"
+            android:background="@color/Primary_03"
+            android:scaleType="centerCrop"
+            android:foreground="@drawable/main_menu_gradient"
             android:id="@+id/iv_gv_border"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:foreground="@drawable/main_menu_gradient"/>
+            />
 
         <TextView
             android:id="@+id/tv_gv_main_menu"

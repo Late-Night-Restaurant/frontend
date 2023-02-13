@@ -1,9 +1,22 @@
 package com.example.simya.util
 
 object Constants {
+    // URL
     const val BASE_URL = "http://10.0.2.2:8080"
+
+    // TOKEN
     const val ACCESS_TOKEN = "ACCESS_TOKEN"
     const val REFRESH_TOKEN = "REFRESH_TOKEN"
+
+    // USER DATA
+    const val USER_ID = "ID"
+    const val USER_PW = "PW"
+    const val USER_NICKNAME = "NICK_NAME"
+    const val USER_PROFILE_ID = "PROFILE_ID"
+    const val USER_PROFILE_IMAGE = "PROFILE_IMAGE"
+    const val USER_PROFILE_COMMENT = "PROFILE_COMMENT"
+
+    // CHAT
     const val UNKNOWN = 0
     const val CHAT_MASTER_CODE = 1
     const val CHAT_GUEST_CODE = 2
@@ -11,10 +24,12 @@ object Constants {
     const val CHAT_OTHERS = 4
     const val CHAT_NOTIFY = 5
 
+    // SORT
     const val SORT_RECENT = 11
     const val SORT_LONG = 12
     const val SORT_LIKE = 13
 
+    // Y?N
     const val YES = 20
     const val NO = 21
 
@@ -37,7 +52,7 @@ object Constants {
 
 
     // STRING CODE
-    const val DEFAULT = "Default"
+    const val DEFAULT = "default"
     const val BORDER_TITLE = "title"
     const val BORDER_MAIN_MENU = "borderMainMenu"
     const val PROFILE_ID = "profileId"
@@ -58,7 +73,8 @@ object Constants {
 
     const val SUCCESS_STRING_MODIFY = "프로필 수정이 완료되었습니다."
     const val ERROR_STRING_INPUT = "입력값을 확인해주세요"
-    const val ERROR_STRING_NULL_STORY ="이야기 집이 없습니다."
+    const val ERROR_STRING_NULL_STORY ="아직 오픈한 이야기 집이 없습니다."
+    const val ERROR_STRING_NULL_ALL_STORY = "이야기 집이 없습니다."
     const val ERROR_STRING_DUPLICATE = "중복된 이메일입니다."
     const val ERROR_STRING_FAILED_SIGN_UP = "회원가입에 실패했습니다."
     const val ERROR_STRING_DATABASE = "데이터베이스 연결에 실패했습니다."
