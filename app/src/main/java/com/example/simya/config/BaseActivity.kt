@@ -2,6 +2,9 @@ package com.example.simya.config
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
@@ -18,6 +21,7 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
         private set
     lateinit var mLoadingDialog: LoadingDialog
     lateinit var mBasicDialog: BasicDialog
+    var clickable = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = inflate(layoutInflater)
@@ -29,6 +33,16 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         return true
+    }
+    fun isThrottleClick(): Boolean {
+        return if (clickable) {
+            clickable = false
+            Handler(Looper.getMainLooper()).postDelayed(
+                Runnable { clickable = true},3000L)
+        } else {
+            Log.i("TAG", "waiting for a while")
+            false
+        }
     }
     fun showCustomToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
