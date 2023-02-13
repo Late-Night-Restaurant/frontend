@@ -144,23 +144,5 @@ class EmailLoginActivity :
         Log.d("ERROR message", response.toString())
         showCustomToast(response.message!!)
     }
-<<<<<<< HEAD
 
-    // SnackBar 구현
-    private fun onSnackBar(view: View, message: String){
-        var snackBar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
-
-        val snackBarView: View = layoutInflater.inflate(R.layout.snackbar_layout, null)
-        val snackBarBinding = SnackbarLayoutBinding.bind(snackBarView)
-        snackBar.view.setBackgroundColor(Color.TRANSPARENT)
-        snackBarBinding.snackBarMessage.text = message
-
-        val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
-        snackBarLayout.addView(snackBarView)
-
-        snackBar.show()
-    }
-
-=======
->>>>>>> 0406314d42f52dc6f4782c3a9145c6bc2f501511
 }

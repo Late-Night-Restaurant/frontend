@@ -13,6 +13,7 @@ import com.example.simya.util.Constants
 import com.example.simya.R
 import com.example.simya.databinding.FragmentHomeMainBinding
 import com.example.simya.databinding.SnackbarLayoutBinding
+import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.dialog.SortDialog
 import com.google.android.material.snackbar.Snackbar
 
@@ -48,13 +49,13 @@ class HomeFragment: Fragment() {
                 override fun onClick(resultCode: Int) {
                    when(resultCode){
                        Constants.SORT_LIKE->{
-                           onSnackBar(binding.root,"최근 찜 순 정렬")
+                           SampleSnackBar.make(binding.root,"최근 찜 순 정렬").show()
                        }
                        Constants.SORT_LONG->{
-                           onSnackBar(binding.root,"오랫동안 들은 순 정렬")
+                           SampleSnackBar.make(binding.root,"오랫동안 들은 순 정렬").show()
                        }
                        Constants.SORT_RECENT->{
-                           onSnackBar(binding.root,"즐겨 찾는 순 정렬")
+                           SampleSnackBar.make(binding.root,"즐겨 찾는 순 정렬").show()
                        }
                    }
                 }

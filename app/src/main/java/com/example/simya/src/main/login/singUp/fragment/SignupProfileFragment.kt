@@ -32,6 +32,7 @@ import com.example.simya.util.Constants.NICKNAME_VALIDATION
 import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.POST_FAIL_USER
 import com.example.simya.util.Constants.REQUEST_ERROR
+import com.example.simya.util.SampleSnackBar
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
@@ -81,9 +82,8 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
                 profile = SignUpProfileDTO(nicknameData, commentData, DEFAULT)
                 SignUpService(this).trySignUpSubmit(SignupDTO(emailData, pwData, profile))
             } else {
-                onSnackBar(binding.root, "올바른 형식에 맞게 작성해주세요.")
+                SampleSnackBar.make(binding.root, "올바른 형식에 맞게 작성해주세요.").show()
             }
-
         }
     }
 
@@ -174,23 +174,5 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
             Log.d("@스낵바", ERROR_STRING_FAILED_SIGN_UP)
         }
     }
-<<<<<<< HEAD
 
-    // SnackBar 구현
-    private fun onSnackBar(view: View, message: String){
-        var snackBar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
-
-        val snackBarView: View = layoutInflater.inflate(R.layout.snackbar_layout, null)
-        val snackBarBinding = SnackbarLayoutBinding.bind(snackBarView)
-        snackBar.view.setBackgroundColor(Color.TRANSPARENT)
-        snackBarBinding.snackBarMessage.text = message
-
-        val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
-        snackBarLayout.addView(snackBarView)
-
-        snackBar.show()
-    }
-
-=======
->>>>>>> 0406314d42f52dc6f4782c3a9145c6bc2f501511
 }
