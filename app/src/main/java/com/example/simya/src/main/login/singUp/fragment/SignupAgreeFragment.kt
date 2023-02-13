@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.simya.R
+import com.example.simya.util.SampleSnackBar
 import com.example.simya.src.main.login.signIn.EmailLoginActivity
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupAgreeBinding
@@ -42,7 +42,7 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
                 signupActivity!!.nextFragmentSignUp(2)
                 initAgree()
             } else {
-                Toast.makeText(this.activity, "동의하지 않았습니다.", Toast.LENGTH_SHORT).show()
+                SampleSnackBar.make(binding.root, "동의하지 않았습니다.").show()
             }
         }
 
@@ -144,4 +144,5 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
         val intent = Intent(this.context, EmailLoginActivity::class.java)
         startActivity(intent)
     }
+
 }

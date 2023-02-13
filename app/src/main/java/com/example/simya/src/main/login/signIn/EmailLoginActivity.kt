@@ -1,14 +1,19 @@
 package com.example.simya.src.main.login.signIn
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Message
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import com.example.simya.R
 import com.example.simya.config.ApplicationClass
 import com.example.simya.config.BaseActivity
 import com.example.simya.config.BaseResponse
 import com.example.simya.databinding.ActivitySigninEmailBinding
+import com.example.simya.databinding.SnackbarLayoutBinding
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.src.main.login.model.LoginInterface
 import com.example.simya.src.main.login.model.LoginService
@@ -21,6 +26,7 @@ import com.example.simya.util.Constants.DEFAULT
 import com.example.simya.util.Constants.EMAIL_VALIDATION
 import com.example.simya.util.Constants.REFRESH_TOKEN
 import com.example.simya.util.data.UserData
+import com.google.android.material.snackbar.Snackbar
 import java.util.regex.Pattern
 
 
@@ -76,7 +82,6 @@ class EmailLoginActivity :
 //        intent.flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
-
 
     private fun checkEmail(): Boolean {
         var email = binding.edtEmailSignInInputEmail.text.toString().trim() // 공백제거
@@ -141,4 +146,5 @@ class EmailLoginActivity :
         Log.d("ERROR message", response.toString())
         showCustomToast(response.message!!)
     }
+
 }
