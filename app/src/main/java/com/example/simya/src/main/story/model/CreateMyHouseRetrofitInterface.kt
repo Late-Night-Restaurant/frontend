@@ -1,6 +1,6 @@
 package com.example.simya.src.main.story.model
 
-import com.example.simya.src.model.HouseDTO
+import com.example.simya.src.model.story.HouseDTO
 import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
 import retrofit2.Call
@@ -15,6 +15,6 @@ interface CreateMyHouseRetrofitInterface {
     fun onCreateMyHouse(
         @Header("Access-Token") accessToken: String,
         @Header("Refresh-Token") refreshToken: String,
-        @Body myStory: HouseDTO
+        @Body myStory: CreateStoryDTO
     ): Call<CreateStoryResponse>
 }

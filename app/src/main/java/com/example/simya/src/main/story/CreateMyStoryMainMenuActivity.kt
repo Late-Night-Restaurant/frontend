@@ -13,6 +13,7 @@ import com.example.simya.util.data.MainMenuData
 import com.example.simya.databinding.ActivityStoryMainMenuBinding
 import com.example.simya.util.Constants.BORDER_MAIN_MENU
 import com.example.simya.util.Constants.PROFILE_ID
+import com.example.simya.util.data.UserData
 
 class CreateMyStoryMainMenuActivity : BaseActivity<ActivityStoryMainMenuBinding>(ActivityStoryMainMenuBinding::inflate)
 {
@@ -25,6 +26,7 @@ class CreateMyStoryMainMenuActivity : BaseActivity<ActivityStoryMainMenuBinding>
     }
 
     private fun init() {
+        UserData.printAllData()
         // title init
         binding.included.tvDefaultLayoutTitle.text = "이야기집 생성"
         // 메인메뉴 UI 업데이트
@@ -40,7 +42,7 @@ class CreateMyStoryMainMenuActivity : BaseActivity<ActivityStoryMainMenuBinding>
     }
 
     private fun moveToSetBorder() {
-        val profileId = intent.getStringExtra(PROFILE_ID)
+        val profileId = intent.getLongExtra(PROFILE_ID,0)
         if (binding.btnMainMenuNext.isEnabled) {
             val intent = Intent(this, CreateMyStoryBorderActivity::class.java)
             intent.putExtra(PROFILE_ID,profileId)

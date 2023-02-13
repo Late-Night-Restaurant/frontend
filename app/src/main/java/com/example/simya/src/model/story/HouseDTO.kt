@@ -1,4 +1,4 @@
-package com.example.simya.src.model
+package com.example.simya.src.model.story
 
 import com.google.gson.annotations.SerializedName
 

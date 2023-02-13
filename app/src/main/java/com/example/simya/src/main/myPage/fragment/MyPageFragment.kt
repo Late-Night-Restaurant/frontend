@@ -7,6 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.simya.BuildConfig
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
 import com.example.simya.config.BaseResponse
@@ -55,7 +56,7 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     private fun init() {
         // 메인 프로필 init
         initMainProfile()
-
+        binding.tvMyPageVersion.text = "ver "+BuildConfig.VERSION_NAME+" 최신버전"
         // 추가하기 버튼 활성화
         dataList.apply {
             add(dataList.size, ProfileDTO(0, "추가하기", "추가하기", "R.drawable.ic_baseline_add_24"))

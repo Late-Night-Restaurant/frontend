@@ -1,6 +1,6 @@
 package com.example.simya.src.model.mypage.review
 
-import com.example.simya.src.model.HouseDTO
+import com.example.simya.src.model.story.HouseDTO
 import com.example.simya.src.model.UserDTO
 import com.google.gson.annotations.SerializedName
 

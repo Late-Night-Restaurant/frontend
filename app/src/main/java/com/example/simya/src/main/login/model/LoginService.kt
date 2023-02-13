@@ -5,6 +5,7 @@ import com.example.simya.config.ApplicationClass
 import com.example.simya.config.BaseResponse
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.util.Constants
 import com.example.simya.util.Constants.OK
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,8 +32,14 @@ class LoginService(val loginInterface: LoginInterface) {
                 Log.d("Retrofit2",t.toString())
                 // 통신 에러
             }
-
-
         })
+    }
+    fun setAccessTokenSharedPreferences(accessToken: String){
+        ApplicationClass.sSharedPreferences.edit()
+            .putString(Constants.ACCESS_TOKEN, "Access $accessToken").apply()
+    }
+    fun setRefreshTokenSharedPreferences(refreshToken: String){
+        ApplicationClass.sSharedPreferences.edit()
+            .putString(Constants.REFRESH_TOKEN, "Refresh $refreshToken").apply()
     }
 }

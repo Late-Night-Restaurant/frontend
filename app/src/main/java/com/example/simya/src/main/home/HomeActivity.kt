@@ -9,6 +9,7 @@ import com.example.simya.src.main.loaction.LocationFragment
 import com.example.simya.src.main.home.fragment.HomeFragment
 import com.example.simya.src.main.myPage.fragment.MyPageFragment
 import com.example.simya.src.main.story.fragment.MyStoryFragment
+import com.example.simya.util.data.UserData
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate)
 {
@@ -19,6 +20,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     }
 
     private fun init() {
+        UserData.printAllData()
 //        fragment 전환
         binding.bnvHomeNavi.run {
             setOnItemSelectedListener {

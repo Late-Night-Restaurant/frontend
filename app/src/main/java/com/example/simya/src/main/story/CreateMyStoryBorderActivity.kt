@@ -8,10 +8,8 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import com.example.simya.util.Constants.BORDER_MAIN_MENU
-import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
@@ -21,15 +19,9 @@ import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityStoryCreateBorderBinding
 import com.example.simya.src.main.story.model.CreateMyHouseInterface
 import com.example.simya.src.main.story.model.CreateMyHouseService
-import com.example.simya.src.model.HouseDTO
-import com.example.simya.src.model.RetrofitBuilder
-import com.example.simya.src.model.RetrofitService
-import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.src.model.story.HouseDTO
 import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBinding>(ActivityStoryCreateBorderBinding::inflate), CreateMyHouseInterface
 {
@@ -42,6 +34,7 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
     }
 
     private fun init() {
+        UserData.printAllData()
         binding.included.tvDefaultLayoutTitle.text = "이야기집 간판 생성"
         binding.ibMyStoryCreateBorderInfo.setOnClickListener {
             binding.tvMyStoryCreateMainInfo.isInvisible = false
@@ -63,16 +56,13 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
-    private fun setBorderData(): HouseDTO {
-        var profileId = intent.getStringExtra(PROFILE_ID)!!.toLong()
-        var mainMenu = intent.getStringExtra(BORDER_MAIN_MENU)
+    private fun setBorderData(): CreateStoryDTO {
+        var profileId = intent.getLongExtra(PROFILE_ID,0)
+        var mainMenu = intent.getStringExtra(BORDER_MAIN_MENU)!!
         var imageUrl = "R.drawable.test_simya"
         var houseName = binding.etMyStoryCreateBorderTitle.text.toString()
         var comment = binding.etMyStoryCreateBorderIntro.text.toString()
-        Log.d("PROFILE_ID",profileId!!.toString())
-        Log.d("BORDER_MAIN_MENU",mainMenu!!)
-        Log.d("test background",imageUrl)
-        return HouseDTO(
+        return CreateStoryDTO(
             profileId,
             mainMenu,
             imageUrl,

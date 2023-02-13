@@ -18,6 +18,8 @@
             android:layout_width="108dp"
             android:layout_height="108dp"
             android:alpha="0.7"
+            android:background="@color/Gray_06"
+            android:scaleType="centerCrop"
             android:foreground="@drawable/main_menu_gradient"
             app:strokeColor="@null"
             app:layout_constraintTop_toTopOf="parent"

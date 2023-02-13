@@ -10,7 +10,7 @@
         android:layout_height="156dp">
         <com.google.android.material.imageview.ShapeableImageView
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize12Percent"
-            android:src="@color/Gray_08"
+            android:background="@color/Primary_03"
             android:id="@+id/iv_rv_border_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

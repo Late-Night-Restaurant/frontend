@@ -151,7 +151,6 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         binding.btnSignupNextProfile.setTextColor(resources.getColor(R.color.Gray_10))
 
     }
-
     override fun onBackPressed() {
         signupActivity!!.nextFragmentSignUp(3)
         signupActivity!!.decreaseProgressbar()
@@ -172,6 +171,4 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
             Log.d("@스낵바", ERROR_STRING_FAILED_SIGN_UP)
         }
     }
-
-
 }

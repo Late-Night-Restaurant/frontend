@@ -16,6 +16,8 @@ import com.example.simya.config.BaseActivity
 import com.example.simya.src.main.chat.ChatActivity
 import com.example.simya.util.data.UserData
 import com.example.simya.databinding.ActivityMyStoryOpenInputBinding
+import com.example.simya.src.main.story.model.OpenMyHouseInterface
+import com.example.simya.src.main.story.model.OpenMyHouseService
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.story.open.OpenStoryDTO
@@ -27,7 +29,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class OpenMyStoryInputActivity :
-    BaseActivity<ActivityMyStoryOpenInputBinding>(ActivityMyStoryOpenInputBinding::inflate) {
+    BaseActivity<ActivityMyStoryOpenInputBinding>(ActivityMyStoryOpenInputBinding::inflate),OpenMyHouseInterface {
     private lateinit var textWatcher: TextWatcher
     private val retrofit by lazy {
         RetrofitBuilder.getInstnace()
@@ -54,7 +56,7 @@ class OpenMyStoryInputActivity :
         binding.etMyStoryOpenInputMenu.addTextChangedListener(textWatcher)
         // test
         binding.btnMyStoryOpen.setOnClickListener {
-            openMyStory(
+            OpenMyHouseService(this).tryOpenMyHouse(
                 OpenStoryDTO(
                     intent.getLongExtra(HOUSE_ID, 0),
                     Integer.parseInt(binding.etMyStoryOpenInputPerson.text.toString()),
@@ -72,30 +74,10 @@ class OpenMyStoryInputActivity :
         if (binding.btnMyStoryOpen.isEnabled) {
             val intent = Intent(this, ChatActivity::class.java)
             intent.putExtra(HOUSE_ID, houseId)
-            intent.putExtra(PROFILE_ID, Shared.prefs.getLong(PROFILE_ID, 0))
+            intent.putExtra(PROFILE_ID, UserData.getProfileId())
             startActivity(intent)
         }
     }
-
-    private fun openMyStory(dto: OpenStoryDTO) {
-        simyaApi.openStory(UserData.accessToken, UserData.refreshToken, dto)
-            .enqueue(object : Callback<OpenStoryResponse> {
-                override fun onResponse(
-                    call: Call<OpenStoryResponse>,
-                    response: Response<OpenStoryResponse>
-                ) {
-                    if (response.body()!!.code == OK) {
-                        moveMyStory(intent.getLongExtra(HOUSE_ID, 0))
-                    }
-                }
-
-                override fun onFailure(call: Call<OpenStoryResponse>, t: Throwable) {
-                    Log.d("Response", t.toString())
-                }
-
-            })
-    }
-
     private fun initTextWatcher() {
         textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -107,19 +89,23 @@ class OpenMyStoryInputActivity :
                 if (personInput.isNotEmpty() && menuInput.isNotEmpty() && menuIntroInput.isNotEmpty()) {
                     binding.btnMyStoryOpen.isEnabled = true
                     binding.btnMyStoryOpen.isClickable = true
-                    binding.btnMyStoryOpen.setBackgroundResource(R.drawable.low_radius_button_on)
-                    binding.btnMyStoryOpen.setTextColor(application.resources.getColor(R.color.Gray_03))
                 }
                 // 공백이 있을시 버튼 비활성화
                 if (personInput.isEmpty() || menuInput.isEmpty() || menuIntroInput.isEmpty()) {
                     binding.btnMyStoryOpen.isEnabled = false
                     binding.btnMyStoryOpen.isClickable = false
-                    binding.btnMyStoryOpen.setBackgroundResource(R.drawable.low_radius_button_off)
-                    binding.btnMyStoryOpen.setTextColor(application.resources.getColor(R.color.Gray_10))
                 }
             }
 
             override fun afterTextChanged(s: Editable) {}
         }
+    }
+
+    override fun onPatchCreateMyHouseSuccess(response: OpenStoryResponse) {
+        moveMyStory(intent.getLongExtra(HOUSE_ID, 0))
+    }
+
+    override fun onPatchCreateMyHouseFailure(response: OpenStoryResponse) {
+        Log.d("@@@@@ CHECK @@@@@@", "이야기집 오픈실패")
     }
 }
