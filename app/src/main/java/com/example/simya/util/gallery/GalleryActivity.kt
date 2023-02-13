@@ -1,6 +1,7 @@
 package com.example.simya.util.gallery
 
 import android.content.ContentUris
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
@@ -44,7 +45,6 @@ class GalleryActivity: BaseActivity<ActivityGalleryBinding>(ActivityGalleryBindi
                 requestPermission()
                 Log.d("LOG", "갤러리 접근 권한이 없는 경우 && 교육용 팝업을 보여줘야 하는 경우")
             }
-
             // 권한 요청 하기
             else -> {
                 requestPermission()
@@ -187,6 +187,17 @@ class GalleryActivity: BaseActivity<ActivityGalleryBinding>(ActivityGalleryBindi
     }
 
     private fun clickImage() {
+        adapter.setOnItemClickListener(object : GalleryAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, data: Uri, position: Int) {
+                val intent = Intent(this@GalleryActivity,CropperActivity::class.java)
+                intent.putExtra("image",data)
+                startActivity(intent)
+            }
 
+            override fun onLongClick(v: View, data: Uri, position: Int) {
+                Log.d("click", "길게 누르지마")
+            }
+
+        })
     }
 }
