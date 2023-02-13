@@ -4,6 +4,7 @@ import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -11,18 +12,18 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.example.simya.config.BaseActivity
-import com.example.simya.databinding.ActivityGalleryBinding
-import com.example.simya.util.Constants
+import com.example.simya.databinding.ActivityCropImageBinding
+import com.takusemba.cropme.CropLayout
+import com.takusemba.cropme.OnCropListener
 import kotlinx.coroutines.launch
 
-class GalleryActivity: BaseActivity<ActivityGalleryBinding>(ActivityGalleryBinding::inflate) {
+class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageBinding::inflate) {
     private val imageList = arrayListOf<Uri>()
     private val adapter = GalleryAdapter()
+    private lateinit var cropLayout: CropLayout
     private val PERMISSIONS_REQUEST_CODE = 100
     private var REQUIRED_PERMISSIONS = arrayOf<String>(android.Manifest.permission.READ_MEDIA_IMAGES)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +31,21 @@ class GalleryActivity: BaseActivity<ActivityGalleryBinding>(ActivityGalleryBindi
         init()
     }
     fun init() {
+        cropLayout = binding.clCropper
+        binding.ibCropAble.setOnClickListener {
+            cropLayout.crop()
+        }
+        cropLayout.addOnCropListener(object : OnCropListener {
+            // 성공했을 때,
+            override fun onSuccess(bitmap: Bitmap) {
+                Log.d("success", "성공")
+            }
+            // 실패했을 때,
+            override fun onFailure(e: Exception) {
+                Log.e("Failure", "$e")
+                Log.d("Failure", "failed")
+            }
+        })
         when {
             // 갤러리 접근 권한이 있는 겨우
             ContextCompat.checkSelfPermission(
@@ -51,7 +67,6 @@ class GalleryActivity: BaseActivity<ActivityGalleryBinding>(ActivityGalleryBindi
 
             }
         }
-
         clickImage()
     }
 
@@ -189,9 +204,7 @@ class GalleryActivity: BaseActivity<ActivityGalleryBinding>(ActivityGalleryBindi
     private fun clickImage() {
         adapter.setOnItemClickListener(object : GalleryAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: Uri, position: Int) {
-                val intent = Intent(this@GalleryActivity,CropperActivity::class.java)
-                intent.putExtra("image",data)
-                startActivity(intent)
+                cropLayout.setUri(data)
             }
 
             override fun onLongClick(v: View, data: Uri, position: Int) {

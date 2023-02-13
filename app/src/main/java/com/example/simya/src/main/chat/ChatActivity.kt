@@ -149,6 +149,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         }
 
     }
+
     private fun sendMessage(){
         jsonObject.put("type", "TALK")
         jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID, 0))
