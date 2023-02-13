@@ -20,7 +20,7 @@ class LoginService(val loginInterface: LoginInterface) {
                 call: Call<AccountResponse>,
                 response: Response<AccountResponse>
             ) {
-                if(response.code()==OK){
+                if(response.body()!!.code==OK){
                     loginInterface.onPostLoginSubmitSuccess(response.body() as AccountResponse)
                 }else{
                     Log.d("Login","Fail")

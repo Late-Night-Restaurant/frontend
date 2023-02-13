@@ -1,7 +1,9 @@
 package com.example.simya.src.main.login.singUp.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,8 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import com.bumptech.glide.Glide
 import com.example.simya.R
 import com.example.simya.config.ApplicationClass
 import com.example.simya.config.BaseFragment
@@ -31,8 +36,11 @@ import com.example.simya.util.Constants.ERROR_STRING_INPUT
 import com.example.simya.util.Constants.NICKNAME_VALIDATION
 import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.POST_FAIL_USER
+import com.example.simya.util.Constants.REQUEST_CODE_FOR_INTENT
+import com.example.simya.util.Constants.REQUEST_CODE_PROFILE_IMAGE
 import com.example.simya.util.Constants.REQUEST_ERROR
 import com.example.simya.util.SampleSnackBar
+import com.example.simya.util.gallery.GalleryActivity
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,7 +55,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     private lateinit var pwData: String
     private lateinit var profile: SignUpProfileDTO
     private lateinit var textWatcher: TextWatcher
-
+    private lateinit var getResult: ActivityResultLauncher<Intent>
     var signupActivity: SignupActivity? = null
 
     override fun onAttach(context: Context) {
@@ -59,8 +67,6 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         super.onViewCreated(view, savedInstanceState)
         falseButton()
         initTW()
-        signupActivity!!.increaseProgressbar()
-
         setFragmentResultListener("email") { _, bundle ->
             emailData = bundle.getString("bundleKeyEmail").toString()
         }
@@ -69,12 +75,23 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
             pwData = bundle.getString("bundleKeyPw").toString()
         }
         // email프래그먼트에서 email 받아오기
-
-
+        signupActivity!!.increaseProgressbar()
+        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+                result ->
+            if(result.resultCode == REQUEST_CODE_FOR_INTENT){
+                var getUri: Uri = Uri.parse(result.data?.getStringExtra("cropImage"))
+                Glide.with(this).load(getUri).into(binding.civSignupInputProfile)
+                Log.d("이미지크롭 성공","Success")
+            }else{
+                Log.d("RegisterForActivity","이미지를 가져오는데 실패했습니다.")
+            }
+        }
         binding.tietNicknameSignupInput.addTextChangedListener(textWatcher)
         binding.tietCommentSignupInput.addTextChangedListener(textWatcher)
-
-
+        binding.civSignupInputProfile.setOnClickListener {
+            val intent= Intent(requireContext(),GalleryActivity::class.java)
+            getResult.launch(intent)
+        }
         binding.btnSignupNextProfile.setOnClickListener {
             if (nicknameCheck() && commentCheck()) {
                 val nicknameData = binding.tietNicknameSignupInput.text.toString()
@@ -85,6 +102,12 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
                 SampleSnackBar.make(binding.root, "올바른 형식에 맞게 작성해주세요.").show()
             }
         }
+
+
+
+
+
+
     }
 
     private fun nicknameCheck(): Boolean {

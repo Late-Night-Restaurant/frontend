@@ -9,8 +9,8 @@ import com.example.simya.databinding.ItemBorderRv328156Binding
 class HomeRVAdapter (private val dataList:ArrayList<TestDataBorder>): RecyclerView.Adapter<HomeRVAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val binding: ItemBorderRv328156Binding):RecyclerView.ViewHolder(binding.root){
         fun bind(data: TestDataBorder) {
-            binding.tvRvTodayMenu.text = data.todayMenu
-            binding.tvRvTodayMenu.text = data.mainMenu
+//            binding.tvRvTodayMenu.text = data.todayMenu
+            binding.tvRvMainMenu.text = data.mainMenu
             binding.tvRvTitle.text = data.title
         }
     }

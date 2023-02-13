@@ -49,17 +49,21 @@
             android:paddingEnd="8dp"
             android:visibility="invisible"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <ImageButton
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ib_my_story_create_border"
         android:layout_width="328dp"
         android:layout_height="156dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize12Percent"
+        android:background="@color/Gray_06"
+        android:scaleType="centerCrop"
+        android:foreground="@drawable/main_menu_gradient"
         app:layout_constraintTop_toBottomOf="@id/cl_my_story_create_border"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/low_radius_border"
         android:layout_marginTop="16dp"/>
 
     <ImageView
+        android:id="@+id/iv_my_story_create_border_ex"
         android:layout_width="@dimen/icon_big_width"
         android:layout_height="@dimen/icon_big_height"
         android:src="@drawable/ic_camera"

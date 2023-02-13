@@ -25,6 +25,7 @@ import com.example.simya.util.Constants.ACCESS_TOKEN
 import com.example.simya.util.Constants.DEFAULT
 import com.example.simya.util.Constants.EMAIL_VALIDATION
 import com.example.simya.util.Constants.REFRESH_TOKEN
+import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.UserData
 import com.google.android.material.snackbar.Snackbar
 import java.util.regex.Pattern
@@ -143,8 +144,7 @@ class EmailLoginActivity :
     }
 
     override fun onPostLoginSubmitFailure(response: BaseResponse) {
-        Log.d("ERROR message", response.toString())
-        showCustomToast(response.message!!)
+        SampleSnackBar.make(binding.root, response.message.toString()).show()
     }
 
 }

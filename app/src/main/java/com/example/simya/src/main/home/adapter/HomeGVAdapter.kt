@@ -11,7 +11,7 @@ class HomeGVAdapter (private val dataList:ArrayList<LoadAllStoryResult>): Recycl
     private var listener: OnItemClickListener? = null
     inner class DataViewHolder(private val binding: ItemBorderGv156156Binding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: LoadAllStoryResult) {
-            binding.tvGvTodayMenu.text = data.todayTopicTitle
+//            binding.tvGvTodayMenu.text = data.todayTopicTitle
             binding.tvGvMainMenu.text = data.category
             binding.tvGvTitle.text = data.houseName
         }

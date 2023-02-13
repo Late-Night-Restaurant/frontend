@@ -10,7 +10,7 @@
         android:layout_height="180dp">
         <com.google.android.material.imageview.ShapeableImageView
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize12Percent"
-            android:background="@color/Primary_03"
+            android:background="@color/Gray_06"
             android:scaleType="centerCrop"
             android:foreground="@drawable/main_menu_gradient"
             android:id="@+id/iv_gv_border"

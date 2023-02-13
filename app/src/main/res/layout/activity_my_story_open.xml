@@ -34,20 +34,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp">
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize12Percent"
+            android:background="@color/Gray_06"
+            android:scaleType="centerCrop"
+            android:foreground="@drawable/main_menu_gradient"
             android:id="@+id/iv_rv_border_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-        <TextView
-            android:id="@+id/tv_rv_today_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="오늘의 메뉴"
-            android:textColor="@color/Gray_02"
-            android:textSize="15dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_alignParentTop="true"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_rv_today_menu"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="오늘의 메뉴"-->
+<!--            android:textColor="@color/Gray_02"-->
+<!--            android:textSize="15dp"-->
+<!--            android:layout_marginLeft="8dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_alignParentTop="true"/>-->
         <TextView
             android:id="@+id/tv_rv_main_menu"
             android:layout_width="wrap_content"
