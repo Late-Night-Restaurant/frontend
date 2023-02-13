@@ -17,6 +17,7 @@ import com.example.simya.src.main.home.model.AllStoryService
 import com.example.simya.util.data.UserData
 import com.example.simya.src.model.story.load.LoadAllStoryResponse
 import com.example.simya.src.model.story.load.LoadAllStoryResult
+import com.example.simya.util.Constants.ERROR_STRING_NULL_ALL_STORY
 import com.example.simya.util.Constants.ERROR_STRING_NULL_STORY
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,7 +56,10 @@ class HomeGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
         Log.d("response check",response.message!!)
         if(response.message == ERROR_STRING_NULL_STORY){
             Log.d("onGetAllStorySuccess",response.message!!)
-        }else{
+        }else if(response.message == ERROR_STRING_NULL_ALL_STORY){
+            Log.d("onGetAllStorySuccess",response.message!!)
+        }
+        else{
             requireActivity().runOnUiThread {
                 for(i: Int in 0 until response.result.size){
                     dataList.add(response.result[i])

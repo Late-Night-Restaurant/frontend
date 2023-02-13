@@ -130,6 +130,8 @@ class EmailLoginActivity :
         UserData.setProfileId(response.result!!.profileId)
         UserData.setProfileName(response.result!!.nickname)
         UserData.setProfileComment(response.result!!.comment)
+        UserData.setUserAccessToken(response.result!!.accessToken)
+        UserData.setUserRefreshToken(response.result!!.refreshToken)
 //                    UserData.setProfileImage(response.result!!.profileImage)
         UserData.printAllData()
         moveToHome()

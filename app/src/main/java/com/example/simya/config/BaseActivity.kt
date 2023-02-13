@@ -7,6 +7,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +28,6 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
         binding = inflate(layoutInflater)
         setContentView(binding.root)
     }
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val imm: InputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
