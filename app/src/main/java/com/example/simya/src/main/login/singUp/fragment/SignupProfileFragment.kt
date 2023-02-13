@@ -1,6 +1,7 @@
 package com.example.simya.src.main.login.singUp.fragment
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,6 +17,7 @@ import com.example.simya.config.ApplicationClass
 import com.example.simya.config.BaseFragment
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupProfileBinding
+import com.example.simya.databinding.SnackbarLayoutBinding
 import com.example.simya.src.main.login.model.SignUpInterface
 import com.example.simya.src.main.login.model.SignUpService
 import com.example.simya.src.model.RetrofitBuilder
@@ -30,6 +32,8 @@ import com.example.simya.util.Constants.NICKNAME_VALIDATION
 import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.POST_FAIL_USER
 import com.example.simya.util.Constants.REQUEST_ERROR
+import com.example.simya.util.SampleSnackBar
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,9 +82,8 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
                 profile = SignUpProfileDTO(nicknameData, commentData, DEFAULT)
                 SignUpService(this).trySignUpSubmit(SignupDTO(emailData, pwData, profile))
             } else {
-                Toast.makeText(this.context, "올바른 형식에 맞게 작성해주세요.", Toast.LENGTH_SHORT).show()
+                SampleSnackBar.make(binding.root, "올바른 형식에 맞게 작성해주세요.").show()
             }
-
         }
     }
 
@@ -171,4 +174,5 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
             Log.d("@스낵바", ERROR_STRING_FAILED_SIGN_UP)
         }
     }
+
 }

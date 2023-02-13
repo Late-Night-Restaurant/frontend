@@ -1,5 +1,6 @@
 package com.example.simya.src.main.home.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,10 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.simya.util.Constants
 import com.example.simya.R
 import com.example.simya.databinding.FragmentHomeMainBinding
+import com.example.simya.databinding.SnackbarLayoutBinding
+import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.dialog.SortDialog
+import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment: Fragment() {
     private lateinit var binding: FragmentHomeMainBinding
@@ -45,13 +49,13 @@ class HomeFragment: Fragment() {
                 override fun onClick(resultCode: Int) {
                    when(resultCode){
                        Constants.SORT_LIKE->{
-                           Toast.makeText(context,"최근 찜 순 정렬",Toast.LENGTH_SHORT).show()
+                           SampleSnackBar.make(binding.root,"최근 찜 순 정렬").show()
                        }
                        Constants.SORT_LONG->{
-                           Toast.makeText(context,"오랫동안 들은 순 정렬",Toast.LENGTH_SHORT).show()
+                           SampleSnackBar.make(binding.root,"오랫동안 들은 순 정렬").show()
                        }
                        Constants.SORT_RECENT->{
-                           Toast.makeText(context,"즐겨 찾는 순 정렬",Toast.LENGTH_SHORT).show()
+                           SampleSnackBar.make(binding.root,"즐겨 찾는 순 정렬").show()
                        }
                    }
                 }
@@ -92,4 +96,20 @@ class HomeFragment: Fragment() {
             defaultViewType = R.drawable.ic_box_4
         }
     }
+
+    // SnackBar 구현
+    private fun onSnackBar(view: View, message: String){
+        var snackBar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+
+        val snackBarView: View = layoutInflater.inflate(R.layout.snackbar_layout, null)
+        val snackBarBinding = SnackbarLayoutBinding.bind(snackBarView)
+        snackBar.view.setBackgroundColor(Color.TRANSPARENT)
+        snackBarBinding.snackBarMessage.text = message
+
+        val snackBarLayout = snackBar.view as Snackbar.SnackbarLayout
+        snackBarLayout.addView(snackBarView)
+
+        snackBar.show()
+    }
+
 }
