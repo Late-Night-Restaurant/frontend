@@ -29,33 +29,6 @@ import retrofit2.http.POST
 
 interface RetrofitService {
 
-//    // 내 이야기 집 조회하기
-//    @Headers("Content-Type: application/json")
-//    @GET("/simya/house/my-houses")
-//    fun getMyStory(
-//        @Header("Access-Token") accessToken: String,
-//        @Header("Refresh-Token") refreshToken: String
-//    ): Call<LoadMyStoryResponse>
-
-
-    // 이야기 집 오픈
-//    @Headers("Content-Type: application/json")
-//    @PATCH("/simya/house/open")
-//    fun openStory(
-//        @Header("Access-Token") accessToken: String,
-//        @Header("Refresh-Token") refreshToken: String,
-//        @Body houseData: OpenStoryDTO
-//    ): Call<OpenStoryResponse>
-
-//    // 특정 이야기 집 조회
-//    @Headers("Content-Type: application/json")
-//    @GET("/simya/house/{houseId}")
-//    fun getStoryDetail(
-//        @Header("Access-Token") accessToken: String,
-//        @Header("Refresh-Token") refreshToken: String,
-//        @Path("houseId") houseId: Long
-//    ): Call<InquiryStoryDetailResponse>
-
 
     // 현재 프로필로 쓴 모든 리뷰 조회
     @Headers("Content-Type: application/json")

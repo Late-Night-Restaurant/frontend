@@ -30,13 +30,6 @@ import java.util.regex.Pattern
 
 class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityProfileEditBinding::inflate), ProfileModifyInterface
 {
-    private val retrofit by lazy {
-        RetrofitBuilder.getInstnace()
-    }
-    private val simyaApi by lazy {
-        retrofit.create(RetrofitService::class.java)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -85,7 +78,8 @@ class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityPro
         }
     }
     override fun onModifyMyProfileSuccess(response: BaseResponse) {
-        // 수정하고 나서 해야 할 것
+        dismissLoadingDialog()
+        Log.d("@@@@@@ SUCCESS @@@@@@","수정완료")
     }
 
     override fun onModifyMyProfileFailure(response: BaseResponse) {

@@ -41,13 +41,10 @@ class HomeGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
     private fun clickStory() {
         dataGVAdapter.setOnItemClickListener(object : HomeGVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: LoadAllStoryResult, position: Int) {
-                //뭐보낼까
                 val intent = Intent(this@HomeGridFragment.context, StoryIntroActivity::class.java)
                 intent.putExtra(HOUSE_ID, data.houseId)
                 startActivity(intent)
-
             }
-
             override fun onLongClick(v: View, data: LoadAllStoryResult, position: Int) {
             }
 
@@ -55,12 +52,14 @@ class HomeGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
     }
 
     override fun onGetAllStorySuccess(response: LoadAllStoryResponse) {
-        if(response.message.equals(ERROR_STRING_NULL_STORY)){
+        Log.d("response check",response.message!!)
+        if(response.message == ERROR_STRING_NULL_STORY){
             Log.d("onGetAllStorySuccess",response.message!!)
         }else{
             requireActivity().runOnUiThread {
-                val resource = response.result
-                dataList.add(resource as LoadAllStoryResult)
+                for(i: Int in 0 until response.result.size){
+                    dataList.add(response.result[i])
+                }
                 val gridLayoutManager = GridLayoutManager(activity, 2)
                 dataGVAdapter = HomeGVAdapter(dataList)
                 binding.gvHomeMainGrid.adapter = dataGVAdapter

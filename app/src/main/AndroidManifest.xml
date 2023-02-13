@@ -112,6 +112,8 @@
             android:exported="true"/>
         <activity android:name=".src.main.myPage.ProfileModifyActivity"
             android:exported="true"/>
+        <activity android:name=".src.main.prepare.PrepareActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

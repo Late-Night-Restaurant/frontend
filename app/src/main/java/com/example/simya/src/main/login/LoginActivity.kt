@@ -20,7 +20,6 @@ class LoginActivity : BaseActivity<ActivityLoginMainBinding>(ActivityLoginMainBi
             //잠시테스트
 //            moveToKaKao()
         }
-
         // 이메일 로그인
         binding.ibLoginMainEmail.setOnClickListener {
             moveToEmail()

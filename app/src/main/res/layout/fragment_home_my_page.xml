@@ -36,7 +36,7 @@
             tools:ignore="MissingConstraints"
             android:background="@drawable/bg_profile"/>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ll_my_page_profile"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -51,15 +51,22 @@
                 android:id="@+id/tv_my_page_main_nick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="닉네임" />
+                android:text="닉네임"
+                android:textStyle="bold"
+                android:textSize="14dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_my_page_main_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="한줄소개" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                android:text="한줄소개"
+                android:textSize="12dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_my_page_main_nick"
+                app:layout_constraintStart_toStartOf="@id/tv_my_page_main_nick"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
             android:id="@+id/btn_my_page_profile"
@@ -305,7 +312,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="ver 0.0.0 최신버전"
+
             android:textColor="@color/Gray_08"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_my_page_logout"
