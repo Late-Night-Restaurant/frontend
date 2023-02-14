@@ -28,7 +28,7 @@ class CreateMyStoryFragment : BaseFragment<FragmentMyStoryCreateBinding>(
     R.layout.fragment_my_story_create),
     MyPageProfileInterface {
     private var dataList: ArrayList<UserDTO> = arrayListOf()
-    private val dataRVAdapter = CreateMyStoryMultiProfileAdapter(requireContext(), dataList)
+    private lateinit var dataRVAdapter : CreateMyStoryMultiProfileAdapter
     private var profileId: Long = UserData.getProfileId()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,12 +38,14 @@ class CreateMyStoryFragment : BaseFragment<FragmentMyStoryCreateBinding>(
     }
 
     private fun init() {
+
         UserData.printAllData()
         Log.d("UserData",UserData.toString())
         binding.includedTitle.tvDefaultLayoutTitle.text = "이야기집 생성"
         binding.btnMyStoryCreateNext.setOnClickListener {
             moveToSetMenu()
         }
+        dataRVAdapter = CreateMyStoryMultiProfileAdapter(requireContext(), dataList)
         // recyclerview click listener
         clickMultiProfile()
     }
@@ -73,6 +75,7 @@ class CreateMyStoryFragment : BaseFragment<FragmentMyStoryCreateBinding>(
     }
 
     override fun onGetUserProfileSuccess(response: ProfileResponse) {
+        dataRVAdapter = CreateMyStoryMultiProfileAdapter(requireContext(), dataList)
         binding.tvMyStoryCreateNick.text = response.result[0].nickname
         binding.tvMyStoryCreateIntro.text = response.result[0].comment
         profileId = response.result[0].profileId

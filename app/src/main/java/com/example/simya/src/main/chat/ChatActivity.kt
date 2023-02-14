@@ -306,7 +306,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
             "RELEASE-FREEZE" -> {
                 senderType = CHAT_NOTIFY
                 if(UserData.getProfileId()!= thisHouseMasterId){
-                    chatFreeze()
+                    releaseChatFreeze()
                 }
                 // 메시지는 얼리기버튼 해제와 동시에 보냄
             }

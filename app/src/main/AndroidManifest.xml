@@ -63,18 +63,10 @@
         <activity
             android:name=".src.main.login.singUp.SignupActivity"
             android:exported="true" />
-        <activity
-            android:name=".src.main.story.fragment.CreateMyStoryFragment"
-            android:exported="true"/>
-        <activity
-            android:name=".src.main.story.fragment.CreateMyStoryMainMenuFragment"
-            android:exported="true" />
-        <activity
-            android:name=".src.main.story.fragment.CreateMyStoryBorderFragment"
+        <activity android:name=".src.main.story.CreateMyStoryActivity"
             android:exported="true">
 
         </activity>
-
         <activity
             android:name=".src.main.story.OpenMyStoryActivity"
             android:exported="true" />

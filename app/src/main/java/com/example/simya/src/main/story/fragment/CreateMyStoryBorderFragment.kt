@@ -29,7 +29,7 @@ import com.example.simya.util.gallery.GalleryActivity
 
 class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBinding>(
     FragmentStoryCreateBorderBinding::bind,
-    R.layout.fragment_signup_profile
+    R.layout.fragment_story_create_border
 ), CreateMyHouseInterface {
     private lateinit var textWatcher: TextWatcher
     private lateinit var getResult: ActivityResultLauncher<Intent>
@@ -94,11 +94,6 @@ class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBindin
 
     }
 
-    private fun moveToHome() {
-        val intent = Intent(requireContext(), HomeActivity::class.java)
-        startActivity(intent)
-    }
-
     private fun setBorderData(): CreateStoryDTO {
         var profileId = selectId
         var mainMenu = mainMenu
@@ -137,7 +132,7 @@ class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBindin
     }
 
     override fun onPostCreateMyHouseSuccess(response: CreateStoryResponse) {
-        (activity as CreateMyStoryActivity).finish()
+        (activity as CreateMyStoryActivity).resultFinish()
     }
 
     override fun onPostCreateMyHouseFailure(response: BaseResponse) {

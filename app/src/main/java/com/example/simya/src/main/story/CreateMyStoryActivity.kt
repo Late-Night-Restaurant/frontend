@@ -7,6 +7,7 @@ import com.example.simya.databinding.ActivityStoryCreateBinding
 import com.example.simya.src.main.story.fragment.CreateMyStoryBorderFragment
 import com.example.simya.src.main.story.fragment.CreateMyStoryFragment
 import com.example.simya.src.main.story.fragment.CreateMyStoryMainMenuFragment
+import com.example.simya.util.Constants
 
 class CreateMyStoryActivity: BaseActivity<ActivityStoryCreateBinding>(ActivityStoryCreateBinding::inflate){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,5 +25,9 @@ class CreateMyStoryActivity: BaseActivity<ActivityStoryCreateBinding>(ActivitySt
             3 -> transaction.replace(binding.fmCreateStory.id,CreateMyStoryBorderFragment())
         }
         transaction.commit()
+    }
+    fun resultFinish(){
+        setResult(Constants.REQUEST_CODE_FOR_INTENT)
+        finish()
     }
 }

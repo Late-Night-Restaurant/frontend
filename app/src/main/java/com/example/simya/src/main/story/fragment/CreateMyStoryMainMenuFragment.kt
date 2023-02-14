@@ -48,7 +48,7 @@ class CreateMyStoryMainMenuFragment : BaseFragment<FragmentStoryMainMenuBinding>
     private fun moveToSetBorder() {
         if (binding.btnMainMenuNext.isEnabled) {
             setFragmentResult("mainMenu", bundleOf("bundleKeyMainMenu" to selectMainMenu))
-            (activity as CreateMyStoryActivity).nextFragmentSignUp(2)
+            (activity as CreateMyStoryActivity).nextFragmentSignUp(3)
         }
     }
     private fun initMainMenu() {
