@@ -11,6 +11,6 @@ import retrofit2.http.Header
 import retrofit2.http.Headers
 
 interface ChatDrawerInterface {
-    fun onPostLoginSubmitSuccess(response: ChatProfileListResponse)
-    fun onPostLoginSubmitFailure(response: BaseResponse)
+    fun onGetChatProfileListSuccess(response: ChatProfileListResponse)
+    fun onGetChatProfileListFailure(response: BaseResponse)
 }

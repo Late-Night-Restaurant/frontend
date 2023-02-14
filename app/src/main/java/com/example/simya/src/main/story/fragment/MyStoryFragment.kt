@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.simya.R
-import com.example.simya.src.main.story.CreateMyStoryActivity
 import com.example.simya.databinding.FragmentHomeMyStoryMainBinding
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
@@ -75,7 +74,7 @@ class MyStoryFragment: Fragment() {
     }
 
     private fun moveToCreateStroy(){
-        val intent = Intent(this.context, CreateMyStoryActivity::class.java)
+        val intent = Intent(this.context, CreateMyStoryFragment::class.java)
         startActivity(intent)
     }
     // View Type icon switch

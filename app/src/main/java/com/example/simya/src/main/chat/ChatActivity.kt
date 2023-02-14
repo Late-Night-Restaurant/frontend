@@ -26,6 +26,7 @@ import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
+import com.example.simya.config.BaseResponse
 import com.example.simya.src.main.story.StoryIntroActivity
 import com.example.simya.util.data.ChatRVData
 import com.example.simya.util.data.UserData
@@ -33,7 +34,11 @@ import com.example.simya.databinding.ActivityDrawerChatBinding
 import com.example.simya.databinding.SnackbarLayoutBinding
 import com.example.simya.src.main.chat.adapter.ChatDrawerRVAdapter
 import com.example.simya.src.main.chat.adapter.ChatRVAdapter
+import com.example.simya.src.main.chat.model.ChatDrawerInterface
+import com.example.simya.src.main.chat.model.ChatDrawerService
 import com.example.simya.src.main.home.adapter.HomeGVAdapter
+import com.example.simya.src.model.ChatProfileListResponse
+import com.example.simya.src.model.UserDTO
 import com.example.simya.src.testData.TestChatDrawerProfileData
 import com.example.simya.src.testData.TestUserData
 import com.example.simya.util.Constants.MASTER_ID
@@ -49,10 +54,11 @@ import okhttp3.internal.http2.Header
 import org.json.JSONObject
 
 
-class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatBinding::inflate) {
+class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatBinding::inflate), ChatDrawerInterface {
     private lateinit var dataList: ArrayList<ChatRVData>
-    private lateinit var profileList: ArrayList<TestChatDrawerProfileData>
+    private lateinit var profileList: ArrayList<UserDTO>
     private lateinit var dataRVAdapter: ChatRVAdapter
+    private lateinit var listDataRVAdapter: ChatDrawerRVAdapter
     private lateinit var stompConnection: Disposable
     private lateinit var topic: Disposable
     private val intervalMillis = 1000L
@@ -97,6 +103,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         }
     }
     private fun init() {
+        ChatDrawerService(this).tryGetChatProfileList(thisHouseId)
         Log.d("Status", "CHAT ACTIVITY")
         stomp.url = "ws://10.0.2.2:8080/simya/ws-stomp/websocket"
         stompConnection = stomp.connect().subscribe {
@@ -171,7 +178,10 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
                 allChatStatus = !allChatStatus
             }
         }
-
+        binding.btnDrawerIntro.setOnClickListener {
+            val intent = Intent(this, StoryIntroActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // 공통
@@ -436,6 +446,22 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
                 }
             }
         })
+    }
+
+    override fun onGetChatProfileListSuccess(response: ChatProfileListResponse) {
+        Log.d("채팅방 유저 정보 조회", "true")
+        profileList = arrayListOf()
+        for(i: Int in 0 until response.result.size){
+            profileList.add(response.result[i])
+        }
+        listDataRVAdapter = ChatDrawerRVAdapter(this, profileList)
+        binding.rvChatProfileList.adapter = listDataRVAdapter
+        binding.rvChatProfileList.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun onGetChatProfileListFailure(response: BaseResponse) {
+        SampleSnackBar.make(binding.root,"채팅방 유저 정보를 조회하는데 실패 했습니다.")
+        Log.d("채팅방 유저 정보 조회", "false")
     }
 
 }

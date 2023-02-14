@@ -1,54 +1,79 @@
-package com.example.simya.src.main.story
+package com.example.simya.src.main.story.fragment
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.MotionEvent
-import android.view.inputmethod.InputMethodManager
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isInvisible
+import androidx.fragment.app.setFragmentResultListener
 import com.bumptech.glide.Glide
-import com.example.simya.util.Constants.BORDER_MAIN_MENU
-import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.R
-import com.example.simya.config.BaseActivity
+import com.example.simya.util.Constants.BORDER_MAIN_MENU
+import com.example.simya.config.BaseFragment
 import com.example.simya.config.BaseResponse
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.util.data.UserData
-import com.example.simya.databinding.ActivityStoryCreateBorderBinding
+import com.example.simya.databinding.FragmentStoryCreateBorderBinding
+import com.example.simya.src.main.story.CreateMyStoryActivity
 import com.example.simya.src.main.story.model.CreateMyHouseInterface
 import com.example.simya.src.main.story.model.CreateMyHouseService
-import com.example.simya.src.model.story.HouseDTO
 import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
 import com.example.simya.util.Constants
 import com.example.simya.util.gallery.GalleryActivity
 
-class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBinding>(ActivityStoryCreateBorderBinding::inflate), CreateMyHouseInterface
-{
+class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBinding>(
+    FragmentStoryCreateBorderBinding::bind,
+    R.layout.fragment_signup_profile
+), CreateMyHouseInterface {
     private lateinit var textWatcher: TextWatcher
     private lateinit var getResult: ActivityResultLauncher<Intent>
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private var selectId = 0L
+    private lateinit var mainMenu: String
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initTextWatcher()
-        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                result ->
-            if(result.resultCode == Constants.REQUEST_CODE_FOR_INTENT){
-                var getUri: Uri = Uri.parse(result.data?.getStringExtra("cropImage"))
-                Glide.with(this).load(getUri).into(binding.ibMyStoryCreateBorder)
-                binding.ivMyStoryCreateBorderEx.isInvisible = true
-                Log.d("이미지크롭 성공","Success")
-            }else{
-                Log.d("RegisterForActivity","이미지를 가져오는데 실패했습니다.")
+        getResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Constants.REQUEST_CODE_FOR_INTENT) {
+                    var getUri: Uri = Uri.parse(result.data?.getStringExtra("cropImage"))
+                    Glide.with(this).load(getUri).into(binding.ibMyStoryCreateBorder)
+                    binding.ivMyStoryCreateBorderEx.isInvisible = true
+                    Log.d("이미지크롭 성공", "Success")
+                } else {
+                    Log.d("RegisterForActivity", "이미지를 가져오는데 실패했습니다.")
+                }
             }
+
+        setFragmentResultListener("profileId") { _, bundle ->
+            selectId = bundle.getLong("bundleKeyProfileId")
+        }
+        setFragmentResultListener("mainMenu") { _, bundle ->
+            mainMenu = bundle.getString("bundleKeyMainMenu").toString()
         }
         init()
     }
+//    override fun(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        initTextWatcher()
+//        getResult =
+//            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//                if (result.resultCode == Constants.REQUEST_CODE_FOR_INTENT) {
+//                    var getUri: Uri = Uri.parse(result.data?.getStringExtra("cropImage"))
+//                    Glide.with(this).load(getUri).into(binding.ibMyStoryCreateBorder)
+//                    binding.ivMyStoryCreateBorderEx.isInvisible = true
+//                    Log.d("이미지크롭 성공", "Success")
+//                } else {
+//                    Log.d("RegisterForActivity", "이미지를 가져오는데 실패했습니다.")
+//                }
+//            }
+//        init()
+//    }
 
     private fun init() {
         UserData.printAllData()
@@ -59,7 +84,7 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
         binding.etMyStoryCreateBorderTitle.addTextChangedListener(textWatcher)
         binding.etMyStoryCreateBorderIntro.addTextChangedListener(textWatcher)
         binding.ibMyStoryCreateBorder.setOnClickListener {
-            val intent= Intent(this, GalleryActivity::class.java)
+            val intent = Intent(requireContext(), GalleryActivity::class.java)
             getResult.launch(intent)
         }
         binding.btnMyStoryCreateBorderNext.setOnClickListener {
@@ -68,14 +93,16 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
         }
 
     }
-    private fun moveToHome(){
-        val intent = Intent(this, HomeActivity::class.java)
+
+    private fun moveToHome() {
+        val intent = Intent(requireContext(), HomeActivity::class.java)
         startActivity(intent)
     }
+
     private fun setBorderData(): CreateStoryDTO {
-        var profileId = intent.getLongExtra(PROFILE_ID,0)
-        var mainMenu = intent.getStringExtra(BORDER_MAIN_MENU)!!
-        var imageUrl = "R.drawable.test_simya"
+        var profileId = selectId
+        var mainMenu = mainMenu
+        var imageUrl = "default"
         var houseName = binding.etMyStoryCreateBorderTitle.text.toString()
         var comment = binding.etMyStoryCreateBorderIntro.text.toString()
         return CreateStoryDTO(
@@ -86,6 +113,7 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
             comment
         )
     }
+
     private fun initTextWatcher() {
         textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -103,20 +131,13 @@ class CreateMyStoryBorderActivity : BaseActivity<ActivityStoryCreateBorderBindin
                     binding.btnMyStoryCreateBorderNext.isClickable = false
                 }
             }
+
             override fun afterTextChanged(s: Editable) {}
         }
     }
 
-    // 화면터치시 키보드 내려감
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        val imm: InputMethodManager =
-            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-        return true
-    }
-
     override fun onPostCreateMyHouseSuccess(response: CreateStoryResponse) {
-        // 메인으로 돌아가기
+        (activity as CreateMyStoryActivity).finish()
     }
 
     override fun onPostCreateMyHouseFailure(response: BaseResponse) {

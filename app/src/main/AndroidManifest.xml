@@ -64,13 +64,13 @@
             android:name=".src.main.login.singUp.SignupActivity"
             android:exported="true" />
         <activity
-            android:name=".src.main.story.CreateMyStoryActivity"
+            android:name=".src.main.story.fragment.CreateMyStoryFragment"
             android:exported="true"/>
         <activity
-            android:name=".src.main.story.CreateMyStoryMainMenuActivity"
+            android:name=".src.main.story.fragment.CreateMyStoryMainMenuFragment"
             android:exported="true" />
         <activity
-            android:name=".src.main.story.CreateMyStoryBorderActivity"
+            android:name=".src.main.story.fragment.CreateMyStoryBorderFragment"
             android:exported="true">
 
         </activity>
