@@ -23,10 +23,6 @@ class BasicDialog (context: Context,private val title: String) : Dialog(context)
     private fun init() {
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding = DialogDefaultBinding.inflate(layoutInflater)
-//        window!!.setLayout(
-//            WindowManager.LayoutParams.MATCH_PARENT,
-//            WindowManager.LayoutParams.WRAP_CONTENT
-//        )
         setContentView(binding.root)
         setCanceledOnTouchOutside(true)
         setCancelable(true)

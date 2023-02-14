@@ -1,14 +1,16 @@
 package com.example.simya.util.dialog
 
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.databinding.DialogDefaultBinding
+import com.example.simya.util.SampleSnackBar
 
-class CloseDialog(private val context: AppCompatActivity){
+class CloseDialog(private val context: Context){
     private val dialog = Dialog(context)
     private lateinit var binding: DialogDefaultBinding
     fun showDia(){
@@ -27,8 +29,8 @@ class CloseDialog(private val context: AppCompatActivity){
         dialog.setContentView(binding.root)
         binding.btnYes.setOnClickListener {
             //폐점 메소드
-            context.finish()
-            Toast.makeText(context, "폐점 되었습니다.",Toast.LENGTH_SHORT).show()
+            this.finish()
+            SampleSnackBar.make(binding.root,"폐점 되었습니다")
         }
         binding.btnNo.setOnClickListener {
             dialog.dismiss()

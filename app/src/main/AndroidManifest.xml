@@ -68,7 +68,7 @@
 
         </activity>
         <activity
-            android:name=".src.main.story.OpenMyStoryActivity"
+            android:name=".src.main.story.fragment.OpenMyStoryFragment"
             android:exported="true" />
         <activity
             android:name=".src.main.myPage.ProfileEditActivity"
@@ -85,7 +85,7 @@
             android:name=".src.main.story.StoryLikeActivity"
             android:exported="true" />
         <activity
-            android:name=".src.main.story.OpenMyStoryInputActivity"
+            android:name=".src.main.story.fragment.OpenMyStoryInputFragment"
             android:exported="true" />
         <activity
             android:name=".src.main.story.EditMyStoryMenuActivity"

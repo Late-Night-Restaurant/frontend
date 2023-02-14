@@ -3,10 +3,7 @@ package com.example.simya.src.main.story.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
@@ -14,21 +11,14 @@ import com.example.simya.util.Constants
 import com.example.simya.util.Constants.BORDER_MAIN_MENU
 import com.example.simya.util.Constants.BORDER_TITLE
 import com.example.simya.util.Constants.HOUSE_ID
-import com.example.simya.src.main.story.OpenMyStoryActivity
 import com.example.simya.databinding.FragmentHomeMainGridBinding
-import com.example.simya.src.main.home.adapter.HomeGVAdapter
+import com.example.simya.src.main.story.OpenMyStoryActivity
 import com.example.simya.src.main.story.adapter.mystory.MyStoryGVAdapter
 import com.example.simya.src.main.story.model.MyStoryInterface
 import com.example.simya.src.main.story.model.MyStoryService
-import com.example.simya.util.data.UserData
-import com.example.simya.src.model.RetrofitBuilder
-import com.example.simya.src.model.RetrofitService
-import com.example.simya.src.model.story.load.LoadAllStoryResult
 import com.example.simya.src.model.story.load.LoadMyStoryResponse
 import com.example.simya.src.model.story.load.LoadMyStoryResult
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.simya.util.SampleSnackBar
 
 class MyStoryGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
     FragmentHomeMainGridBinding::bind,
@@ -65,7 +55,7 @@ class MyStoryGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
 
     override fun onGetMyStorySuccess(response: LoadMyStoryResponse) {
         if(response.message == Constants.ERROR_STRING_NULL_ALL_STORY){
-            Log.d("onGetMyStorySuccess",response.message!!)
+            SampleSnackBar.make(binding.root,"생성한 이야기 집이 없습니다.")
         }else{
             requireActivity().runOnUiThread {
                 for(i: Int in 0 until response.result.size){
@@ -81,6 +71,6 @@ class MyStoryGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
     }
 
     override fun onGetMyStoryFailure(response: LoadMyStoryResponse) {
-        Log.d("@@@@@ CHECK @@@@@@", "생성한 이야기집 가져오기")
+        SampleSnackBar.make(binding.root,"")
     }
 }
