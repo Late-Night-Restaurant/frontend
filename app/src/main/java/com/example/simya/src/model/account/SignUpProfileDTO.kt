@@ -5,6 +5,5 @@ import com.google.gson.annotations.SerializedName
 data class SignUpProfileDTO(
     @SerializedName("nickname") var nickname: String,
     @SerializedName("comment") var comment: String,
-    @SerializedName("picture") var picture: String
 )
 

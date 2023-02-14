@@ -2,6 +2,7 @@ package com.example.simya.src.main.chat.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.util.Constants.CHAT_NOTIFY
@@ -11,25 +12,34 @@ import com.example.simya.util.data.ChatRVData
 import com.example.simya.databinding.ItemChatNotifyBinding
 import com.example.simya.databinding.ItemChatReceiveBinding
 import com.example.simya.databinding.ItemChatSendBinding
+import com.example.simya.src.main.home.adapter.HomeGVAdapter
+import com.example.simya.src.model.story.load.LoadAllStoryResult
 
 class ChatRVAdapter (private val context: Context, private val dataList:ArrayList<ChatRVData>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    private var listener: ChatRVAdapter.OnItemClickListener? = null
     inner class ReceiveDataViewHolder(private val binding: ItemChatReceiveBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: ChatRVData) {
+        fun bind(data: ChatRVData,position: Int) {
             binding.tvChatReceiveContent.text = data.message
             binding.tvChatReceiveNick.text = data.sender
 //            Glide.with(context).load(data.picture).centerCrop().into(binding.civChatReceiveProfile)
+
+            if(position != RecyclerView.NO_POSITION){
+                binding.civChatReceiveProfile.setOnClickListener {
+                    listener?.onItemClick(data,position)
+                }
+            }
+
         }
     }
     inner class SendDataViewHolder(private val binding: ItemChatSendBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: ChatRVData) {
+        fun bind(data: ChatRVData,position: Int) {
             binding.tvChatSendContent.text = data.message
             binding.tvChatSendNick.text = data.sender
 //            Glide.with(context).load(data.user.image).centerCrop().into(binding.civChatSendProfile)
         }
     }
     inner class NotifyDataViewHolder(private val binding: ItemChatNotifyBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: ChatRVData) {
+        fun bind(data: ChatRVData,position: Int) {
             binding.tvChatNotifyEnter.text = data.message
 //            Glide.with(context).load(data.user.image).centerCrop().into(binding.civChatSendProfile)
         }
@@ -52,11 +62,11 @@ class ChatRVAdapter (private val context: Context, private val dataList:ArrayLis
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (dataList[position].userType == CHAT_SELF){
-            (holder as SendDataViewHolder).bind(dataList[position])
+            (holder as SendDataViewHolder).bind(dataList[position],position)
         }else if(dataList[position].userType == CHAT_OTHERS){
-            (holder as ReceiveDataViewHolder).bind(dataList[position])
+            (holder as ReceiveDataViewHolder).bind(dataList[position],position)
         }else if(dataList[position].userType == CHAT_NOTIFY){
-            (holder as NotifyDataViewHolder).bind(dataList[position])
+            (holder as NotifyDataViewHolder).bind(dataList[position],position)
         }
     }
 
@@ -64,5 +74,12 @@ class ChatRVAdapter (private val context: Context, private val dataList:ArrayLis
 
     override fun getItemViewType(position: Int): Int {
         return position
+    }
+    interface OnItemClickListener {
+        fun onItemClick(data: ChatRVData, position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        this.listener = listener
     }
 }
