@@ -35,6 +35,7 @@ import com.example.simya.src.main.chat.adapter.ChatDrawerRVAdapter
 import com.example.simya.src.main.chat.adapter.ChatRVAdapter
 import com.example.simya.src.testData.TestChatDrawerProfileData
 import com.example.simya.src.testData.TestUserData
+import com.example.simya.util.SampleSnackBar
 import com.gmail.bishoybasily.stomp.lib.Event
 import com.gmail.bishoybasily.stomp.lib.StompClient
 import com.google.android.material.snackbar.Snackbar
@@ -46,8 +47,7 @@ import okhttp3.internal.http2.Header
 import org.json.JSONObject
 
 
-class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatBinding::inflate)
-{
+class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatBinding::inflate) {
     private lateinit var dataList: ArrayList<ChatRVData>
     private lateinit var profileList: ArrayList<TestChatDrawerProfileData>
     lateinit var sendUser: TestUserData
@@ -56,14 +56,13 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
     lateinit var receiveUser3: TestUserData
     lateinit var receiveUser4: TestUserData
 
-    //Stomp Test
     private val url = "ws://10.0.2.2:8080/ws-stomp"
     private lateinit var stompConnection: Disposable
     private lateinit var topic: Disposable
     private val intervalMillis = 1000L
     private val jsonObject = JSONObject()
     private lateinit var chatObject: JSONObject
-
+    private var myProfileId: Long = UserData.getProfileId()
     //    private val client = OkHttpClient()
     private val client = OkHttpClient.Builder()
         .addInterceptor {
@@ -132,7 +131,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         }
         // 테스트 유저 초기화
         testUserInit()
-
+        testDrawerUserListed()
         //표시할 채팅 리스트
         dataList = arrayListOf()
         val dataRVAdapter = ChatRVAdapter(this, dataList)
@@ -151,13 +150,12 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
                 binding.includedChat.etChatInput.text = null
 
             }
-
-            testDrawerUserListed()
         }
+
 
     }
 
-    private fun sendMessage(){
+    private fun sendMessage() {
         jsonObject.put("type", "TALK")
         jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID, 0))
         jsonObject.put("sender", UserData.getProfileName())
@@ -170,12 +168,9 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         stomp.send(
             "/pub/simya/chat/androidMessage",
             jsonObject.toString()
-        ).subscribe {
-            if (it) {
-            }
-        }
+        ).subscribe()
     }
-    private fun enterNotify(){
+    private fun enterNotify() {
         jsonObject.put("type", "ENTER")
         jsonObject.put("roomId", intent.getLongExtra(HOUSE_ID, 0))
         jsonObject.put("sender", UserData.getProfileName())
@@ -185,11 +180,15 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         stomp.send(
             "/pub/simya/chat/androidMessage",
             jsonObject.toString()
-        ).subscribe {
-            if (it) {
-            }
-        }
+        ).subscribe()
     }
+    private fun chatBen(){
+
+    }
+    private fun chatFreeze(){
+
+    }
+
     private fun receiveMessage(chat: JSONObject) {
         Log.d("Receive Message is", chat.toString())
         val profileId = chat.getLong("profileId")
@@ -199,28 +198,51 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         val type = chat.getString("type")
         runOnUiThread {
             var senderType = 0
-            Log.d("profileId",profileId.toString())
-            Log.d("intent profileId",intent.getLongExtra(PROFILE_ID,0).toString())
-            when(type){
-                "ENTER"-> {
+            Log.d("profileId", profileId.toString())
+            Log.d("intent profileId", intent.getLongExtra(PROFILE_ID, 0).toString())
+            when (type) {
+                "ENTER" -> {
                     senderType = CHAT_NOTIFY
                 }
-                "TALK" ->{
-                    senderType = if (profileId == intent.getLongExtra(PROFILE_ID, 0)) {
+                "TALK" -> {
+                    senderType = if (profileId == myProfileId) {
                         CHAT_SELF
                     } else {
                         CHAT_OTHERS
                     }
                 }
                 "BEN" -> {
+                    if(message.toLong() == myProfileId){
+                        chatBen()
+                    }
+                }
+                "FREEZE" -> {
+                    chatFreeze()
+                    // 채팅방 얼리기 (방장제외)
+                }
+                "RELEASE-BEN"->{
 
+                }
+                "RELEASE-FREEZE"->{
+
+                }
+                "FORCE" -> {
+                    // 강제퇴장
+                }
+                "AWAY" -> {
+                    // 주인장은 자리비움, 손님은 나가기
+                }
+                "CLOSED" -> {
+                    // 폐점
+                }
+                else -> {
+                    Log.d("Stomp Type ERROR", "처리할 수 없는 요청입니다.")
                 }
 
             }
-
             dataList.add(ChatRVData(profileId, picture, sender, message, senderType))
-            Log.d("sender is",sender)
-            Log.d("sender type",senderType.toString())
+            Log.d("sender is", sender)
+            Log.d("sender type", senderType.toString())
             binding.includedChat.rvChatList.apply {
                 adapter!!.notifyItemInserted(dataList.size - 1)
                 scrollToPosition(dataList.size - 1)
@@ -255,7 +277,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
     }
 
     private fun testDrawerUserListed() {
-        Log.d("테스트 드로어 유저 리스트","true")
+        Log.d("테스트 드로어 유저 리스트", "true")
         binding.btnDrawerIntro.setOnClickListener {
             val intent = Intent(this, StoryIntroActivity::class.java)
             startActivity(intent)
@@ -293,7 +315,6 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
     }
 
     // 공지사항 버튼 애니이션
-
     private fun onNotify(view: View, message: String) {
         binding.includedChat.ibTodayMenuButton.setOnClickListener {
             var snackBar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)

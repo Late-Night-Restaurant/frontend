@@ -19,6 +19,8 @@ import com.example.simya.src.model.story.load.LoadAllStoryResponse
 import com.example.simya.src.model.story.load.LoadAllStoryResult
 import com.example.simya.util.Constants.ERROR_STRING_NULL_ALL_STORY
 import com.example.simya.util.Constants.ERROR_STRING_NULL_STORY
+import com.example.simya.util.SampleSnackBar
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,26 +56,29 @@ class HomeGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
 
     override fun onGetAllStorySuccess(response: LoadAllStoryResponse) {
         Log.d("response check",response.message!!)
-        if(response.message == ERROR_STRING_NULL_STORY){
-            Log.d("onGetAllStorySuccess",response.message!!)
-        }else if(response.message == ERROR_STRING_NULL_ALL_STORY){
-            Log.d("onGetAllStorySuccess",response.message!!)
-        }
-        else{
-            requireActivity().runOnUiThread {
-                for(i: Int in 0 until response.result.size){
-                    dataList.add(response.result[i])
+        when (response.message) {
+            ERROR_STRING_NULL_STORY -> {
+                SampleSnackBar.make(binding.root,response.message!!)
+            }
+            ERROR_STRING_NULL_ALL_STORY -> {
+                SampleSnackBar.make(binding.root,response.message!!)
+            }
+            else -> {
+                requireActivity().runOnUiThread {
+                    for(i: Int in 0 until response.result.size){
+                        dataList.add(response.result[i])
+                    }
+                    val gridLayoutManager = GridLayoutManager(activity, 2)
+                    dataGVAdapter = HomeGVAdapter(dataList)
+                    binding.gvHomeMainGrid.adapter = dataGVAdapter
+                    binding.gvHomeMainGrid.layoutManager = gridLayoutManager
+                    clickStory()
                 }
-                val gridLayoutManager = GridLayoutManager(activity, 2)
-                dataGVAdapter = HomeGVAdapter(dataList)
-                binding.gvHomeMainGrid.adapter = dataGVAdapter
-                binding.gvHomeMainGrid.layoutManager = gridLayoutManager
-                clickStory()
             }
         }
     }
 
     override fun onGetAllStoryFailure(response: LoadAllStoryResponse) {
-        Log.d("@@@@@ CHECK @@@@@@", "이야기집 가져오기")
+        SampleSnackBar.make(binding.root,response.message!!)
     }
 }
