@@ -2,21 +2,17 @@ package com.example.simya.src.main.story.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.example.simya.R
-import com.example.simya.config.BaseActivity
 import com.example.simya.config.BaseFragment
 import com.example.simya.databinding.FragmentDrawerMyStroyOpenBinding
 import com.example.simya.util.Constants.BORDER_MAIN_MENU
 import com.example.simya.util.Constants.BORDER_TITLE
 import com.example.simya.util.Constants.HOUSE_ID
-import com.example.simya.databinding.FragmentStoryMainMenuBinding
 import com.example.simya.src.main.prepare.PrepareActivity
 import com.example.simya.src.main.story.OpenMyStoryActivity
 import com.example.simya.src.main.story.StoryLikeActivity
 import com.example.simya.src.main.story.StoryReviewActivity
-import com.example.simya.util.dialog.CloseDialog
 
 class OpenMyStoryFragment :
     BaseFragment<FragmentDrawerMyStroyOpenBinding>(

@@ -22,7 +22,6 @@ import com.example.simya.src.model.profile.ProfileDTO
 import com.example.simya.src.model.profile.ProfileResponse
 import com.example.simya.util.Constants.NO
 import com.example.simya.util.Constants.YES
-import com.example.simya.util.dialog.BasicDialog
 
 class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     FragmentHomeMyPageBinding::bind,

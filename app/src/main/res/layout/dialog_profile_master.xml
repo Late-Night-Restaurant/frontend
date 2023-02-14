@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="@+id/civ_dialog_profile_master_nick"/>
 
         <Button
-            android:id="@+id/btn_dialog_profile_master_nochat"
+            android:id="@+id/btn_dialog_profile_master_ben"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_dialog_profile"
@@ -61,7 +61,7 @@
             app:layout_constraintTop_toBottomOf="@+id/civ_dialog_profile_master_intro" />
 
         <Button
-            android:id="@+id/btn_dialog_profile_master_drop"
+            android:id="@+id/btn_dialog_profile_master_force"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_dialog_profile"

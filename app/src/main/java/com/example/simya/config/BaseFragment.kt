@@ -6,15 +6,11 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.example.simya.util.dialog.BasicDialog
 import com.example.simya.util.dialog.LoadingDialog
 
 abstract class BaseFragment<B : ViewBinding>(
