@@ -33,8 +33,10 @@ import com.example.simya.databinding.ActivityDrawerChatBinding
 import com.example.simya.databinding.SnackbarLayoutBinding
 import com.example.simya.src.main.chat.adapter.ChatDrawerRVAdapter
 import com.example.simya.src.main.chat.adapter.ChatRVAdapter
+import com.example.simya.src.main.home.adapter.HomeGVAdapter
 import com.example.simya.src.testData.TestChatDrawerProfileData
 import com.example.simya.src.testData.TestUserData
+import com.example.simya.util.Constants.MASTER_ID
 import com.example.simya.util.SampleSnackBar
 import com.gmail.bishoybasily.stomp.lib.Event
 import com.gmail.bishoybasily.stomp.lib.StompClient
@@ -50,17 +52,16 @@ import org.json.JSONObject
 class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatBinding::inflate) {
     private lateinit var dataList: ArrayList<ChatRVData>
     private lateinit var profileList: ArrayList<TestChatDrawerProfileData>
-    lateinit var sendUser: TestUserData
-    lateinit var receiveUser1: TestUserData
-    lateinit var receiveUser2: TestUserData
-    lateinit var receiveUser3: TestUserData
-    lateinit var receiveUser4: TestUserData
+    private lateinit var dataRVAdapter: ChatRVAdapter
     private lateinit var stompConnection: Disposable
     private lateinit var topic: Disposable
     private val intervalMillis = 1000L
     private val jsonObject = JSONObject()
     private lateinit var chatObject: JSONObject
     private var thisHouseId: Long = 0
+    private var thisHouseMasterId: Long = 0
+    private var allChatStatus = true
+
     private val client = OkHttpClient.Builder()
         .addInterceptor {
             it.proceed(
@@ -80,13 +81,21 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 인텐트 데이터값이 0 일경우 채팅방 예외처리 -> 다시메인으로
-        testUserCheck(Constants.CHAT_GUEST_CODE)
         onNotify(binding.root, "안녕")
         thisHouseId = intent.getLongExtra(HOUSE_ID, 0)
+        thisHouseMasterId = intent.getLongExtra(MASTER_ID,0)
+        checkHouseAndMasterId(thisHouseId,thisHouseMasterId)
+        checkUserTypeSwapUI(UserData.getProfileId())
         init()
     }
-
+    private fun checkHouseAndMasterId(houseId: Long,masterId: Long){
+        Log.d("checkHouseId",houseId.toString())
+        Log.d("checkMasterId",masterId.toString())
+        if(houseId == 0L || masterId == 0L){
+            Log.d("ERROR","존재하지 않는 방입니다.")
+            finish()
+        }
+    }
     private fun init() {
         Log.d("Status", "CHAT ACTIVITY")
         stomp.url = "ws://10.0.2.2:8080/simya/ws-stomp/websocket"
@@ -106,6 +115,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
                                 UserData.refreshToken
                             )
                             chatObject = JSONObject(chatData)
+                            Log.d("chatObject check",chatObject.toString())
                             receiveMessage(chatObject)
 
                         }
@@ -125,31 +135,42 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         val drawerLayout = binding.dlChat
         binding.includedChat.includedDefault.tvDefaultChatTitle.text = "테스트용 이야기방"
         binding.includedChat.includedDefault.ibDefaultChatDrawer.setOnClickListener {
+            //채팅 내리기
+            val imm: InputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
             drawerLayout.openDrawer(GravityCompat.START)
         }
-        // 테스트 유저 초기화
-        testUserInit()
-        testDrawerUserListed()
         //표시할 채팅 리스트
         dataList = arrayListOf()
-        val dataRVAdapter = ChatRVAdapter(this, dataList)
+        dataRVAdapter = ChatRVAdapter(this, dataList)
         binding.includedChat.rvChatList.adapter = dataRVAdapter
         binding.includedChat.rvChatList.layoutManager = LinearLayoutManager(this).apply {
             stackFromEnd = true
             moveLastItem(this)
         }
 
-        // test용 메시지 보내기
         binding.includedChat.ibChatSend.setOnClickListener {
             if (binding.includedChat.etChatInput.text.isNotEmpty()) {
                 Log.d("send message", binding.includedChat.etChatInput.text.toString())
-//                sendMessage()
                 sendTypeMessage("TALK", binding.includedChat.etChatInput.text.toString())
                 binding.includedChat.etChatInput.text = null
 
             }
         }
-
+        binding.btnChatPause.setOnClickListener {
+            if(allChatStatus){
+                sendTypeMessage("FREEZE","얼리기")
+                sendTypeMessage("NOTIFY","얼리기")
+                binding.btnChatPause.text = "채팅방 녹이기"
+                allChatStatus = !allChatStatus
+            }else{
+                sendTypeMessage("RELEASE-FREEZE","녹이기")
+                sendTypeMessage("NOTIFY","녹이기")
+                binding.btnChatPause.text ="채팅방 얼리기"
+                allChatStatus = !allChatStatus
+            }
+        }
 
     }
 
@@ -262,10 +283,9 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
             }
             "FREEZE" -> {
                 senderType = CHAT_NOTIFY
-//                if(UserData.getProfileId()!= 주인장 ID){
-//                    chatFreeze()
-//                }
-                // 메시지는 얼리기버튼 누름과 동시에 보냄
+                if(UserData.getProfileId()!= thisHouseMasterId){
+                    chatFreeze()
+                }
             }
             "RELEASE-BEN" -> {
                 senderType = CHAT_NOTIFY
@@ -275,9 +295,9 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
             }
             "RELEASE-FREEZE" -> {
                 senderType = CHAT_NOTIFY
-//                if(UserData.getProfileId()!= 주인장 ID){
-//                    chatFreeze()
-//                }
+                if(UserData.getProfileId()!= thisHouseMasterId){
+                    chatFreeze()
+                }
                 // 메시지는 얼리기버튼 해제와 동시에 보냄
             }
             "FORCE" -> {
@@ -302,15 +322,13 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
 
         Log.d("sender is", sender)
         Log.d("sender type", senderType.toString())
-
-
     }
 
     private fun addMessage(chat: ChatRVData) {
         runOnUiThread {
             dataList.add(chat)
             binding.includedChat.rvChatList.apply {
-                adapter!!.notifyItemInserted(dataList.size - 1)
+                dataRVAdapter.notifyItemInserted(dataList.size - 1)
                 scrollToPosition(dataList.size - 1)
             }
         }
@@ -328,11 +346,11 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
     }
 
 
-    private fun testUserCheck(code: Int) {
-        if (code == Constants.CHAT_MASTER_CODE) {
-            // 주인장 캐스팅
-        } else if (
-            code == Constants.CHAT_GUEST_CODE) {
+    private fun checkUserTypeSwapUI(profileId: Long) {
+        if (profileId == 0L){
+            Log.d("ERROR","잘못된 요청입니다.")
+            finish()
+        } else if (profileId != thisHouseMasterId) {
             setGuestType()
         }
     }
@@ -342,35 +360,33 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         binding.ibChatCloseOrLike.setImageResource(R.drawable.ic_heart_off)
     }
 
-    private fun testDrawerUserListed() {
-        Log.d("테스트 드로어 유저 리스트", "true")
-        binding.btnDrawerIntro.setOnClickListener {
-            val intent = Intent(this, StoryIntroActivity::class.java)
-            startActivity(intent)
-        }
-        //오늘의 메뉴로 이동
-        binding.btnDrawerToday
-        profileList = arrayListOf()
-        profileList.apply {
-            add(TestChatDrawerProfileData(sendUser.nick, sendUser.image))
-            add(TestChatDrawerProfileData(receiveUser1.nick, receiveUser1.image))
-            add(TestChatDrawerProfileData(receiveUser2.nick, receiveUser2.image))
-            add(TestChatDrawerProfileData(receiveUser3.nick, receiveUser3.image))
-            add(TestChatDrawerProfileData(receiveUser4.nick, receiveUser4.image))
-        }
-        val testDataRVAdapter = ChatDrawerRVAdapter(this, profileList)
-        binding.rvChatProfileList.adapter = testDataRVAdapter
-        binding.rvChatProfileList.layoutManager = LinearLayoutManager(this)
-    }
+//    private fun testDrawerUserListed() {
+//        Log.d("테스트 드로어 유저 리스트", "true")
+//        binding.btnDrawerIntro.setOnClickListener {
+//            val intent = Intent(this, StoryIntroActivity::class.java)
+//            startActivity(intent)
+//        }
+//        profileList = arrayListOf()
+//        profileList.apply {
+//            add(TestChatDrawerProfileData(sendUser.nick, sendUser.image))
+//            add(TestChatDrawerProfileData(receiveUser1.nick, receiveUser1.image))
+//            add(TestChatDrawerProfileData(receiveUser2.nick, receiveUser2.image))
+//            add(TestChatDrawerProfileData(receiveUser3.nick, receiveUser3.image))
+//            add(TestChatDrawerProfileData(receiveUser4.nick, receiveUser4.image))
+//        }
+//        val testDataRVAdapter = ChatDrawerRVAdapter(this, profileList)
+//        binding.rvChatProfileList.adapter = testDataRVAdapter
+//        binding.rvChatProfileList.layoutManager = LinearLayoutManager(this)
+//    }
 
     // 테스트 유저용 초기화
-    private fun testUserInit() {
-        sendUser = TestUserData("초이", R.drawable.test_choi, Constants.CHAT_MASTER_CODE)
-        receiveUser1 = TestUserData("푸", R.drawable.test_poo, Constants.CHAT_GUEST_CODE)
-        receiveUser2 = TestUserData("왁", R.drawable.test_wak, Constants.CHAT_GUEST_CODE)
-        receiveUser3 = TestUserData("쭈니", R.drawable.test_jooni, Constants.CHAT_GUEST_CODE)
-        receiveUser4 = TestUserData("채니", R.drawable.test_chani, Constants.CHAT_GUEST_CODE)
-    }
+//    private fun testUserInit() {
+//        sendUser = TestUserData("초이", R.drawable.test_choi, Constants.CHAT_MASTER_CODE)
+//        receiveUser1 = TestUserData("푸", R.drawable.test_poo, Constants.CHAT_GUEST_CODE)
+//        receiveUser2 = TestUserData("왁", R.drawable.test_wak, Constants.CHAT_GUEST_CODE)
+//        receiveUser3 = TestUserData("쭈니", R.drawable.test_jooni, Constants.CHAT_GUEST_CODE)
+//        receiveUser4 = TestUserData("채니", R.drawable.test_chani, Constants.CHAT_GUEST_CODE)
+//    }
 
     //키보드 내려감
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -408,6 +424,18 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
                 }
             }
         }
+    }
+    private fun clickProfile(){
+        dataRVAdapter.setOnItemClickListener(object: ChatRVAdapter.OnItemClickListener{
+            override fun onItemClick(data: ChatRVData, position: Int) {
+                if(UserData.getProfileId() == thisHouseMasterId){
+                    // 다보여주기
+                }
+                else{
+
+                }
+            }
+        })
     }
 
 }

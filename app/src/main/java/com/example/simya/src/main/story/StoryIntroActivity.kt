@@ -18,6 +18,7 @@ import com.example.simya.src.main.story.model.StoryIntroService
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.story.inquiry.InquiryStoryDetailResponse
+import com.example.simya.util.Constants.MASTER_ID
 import com.example.simya.util.SampleSnackBar
 import com.taufiqrahman.reviewratings.BarLabels
 import retrofit2.Call
@@ -29,6 +30,7 @@ class StoryIntroActivity :
     BaseActivity<ActivityStoryIntroBinding>(ActivityStoryIntroBinding::inflate),
     StoryIntroInterface {
     private var houseId: Long = 0
+    private var masterId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +59,7 @@ class StoryIntroActivity :
         binding.btnStoryIntroEnterChat.setOnClickListener {
             moveToChat(
                 houseId,
+                masterId,
                 UserData.getProfileId()
             )
             Log.d("houseId check",houseId.toString())
@@ -64,15 +67,17 @@ class StoryIntroActivity :
         }
     }
 
-    private fun moveToChat(houseId: Long, profileId: Long) {
+    private fun moveToChat(houseId: Long,masterId: Long, profileId: Long) {
         val intent = Intent(this, ChatActivity::class.java)
         intent.putExtra(HOUSE_ID, houseId)
         intent.putExtra(PROFILE_ID, profileId)
+        intent.putExtra(MASTER_ID,masterId)
         startActivity(intent)
     }
 
     override fun onGetStoryDetailSuccess(response: InquiryStoryDetailResponse) {
         houseId = response.result!!.houseInfo.houseId
+        masterId = response.result!!.masterProfile.profileId
         runOnUiThread {
             // 프로필 주인정보
             binding.tvStoryProfileNick.text =

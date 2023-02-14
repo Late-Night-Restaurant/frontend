@@ -65,6 +65,7 @@ object Constants {
     const val HOUSE_ID = "houseId"
     const val NICK_NAME = "nickname"
     const val COMMENT = "comment"
+    const val MASTER_ID = "masterId"
 
     // VALIDATION
     const val EMAIL_VALIDATION =

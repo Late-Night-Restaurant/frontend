@@ -133,7 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/high_radius_button_on"
+
+                android:background="#00ff0000"
                 android:text="채팅방 얼리기"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
