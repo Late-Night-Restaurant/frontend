@@ -6,9 +6,12 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.simya.util.dialog.BasicDialog
@@ -47,6 +50,12 @@ abstract class BaseFragment<B : ViewBinding>(
         _binding = null
         super.onDestroyView()
     }
+//    override fun onTouchEvent(event: MotionEvent): Boolean {
+//        val imm: InputMethodManager =
+//            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+//        return true
+//    }
 
     fun showBasicDialog(context: Context,title: String){
         mBasicDialog = BasicDialog(context, title)

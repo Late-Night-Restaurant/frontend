@@ -1,27 +1,31 @@
-package com.example.simya.src.main.story
+package com.example.simya.src.main.story.fragment
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.isInvisible
+import androidx.fragment.app.setFragmentResult
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
+import com.example.simya.config.BaseFragment
 import com.example.simya.src.main.story.adapter.createStory.CreateMyStoryMainMenuAdapter
 import com.example.simya.util.data.MainMenuData
-import com.example.simya.databinding.ActivityStoryMainMenuBinding
+import com.example.simya.databinding.FragmentStoryMainMenuBinding
+import com.example.simya.src.main.story.CreateMyStoryActivity
 import com.example.simya.util.Constants.BORDER_MAIN_MENU
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.util.data.UserData
 
-class CreateMyStoryMainMenuActivity : BaseActivity<ActivityStoryMainMenuBinding>(ActivityStoryMainMenuBinding::inflate)
-{
+class CreateMyStoryMainMenuFragment : BaseFragment<FragmentStoryMainMenuBinding>(
+    FragmentStoryMainMenuBinding::bind,
+    R.layout.fragment_story_main_menu){
     private val mainMenuData: ArrayList<MainMenuData> = arrayListOf()
     private lateinit var dataGVAdapter: CreateMyStoryMainMenuAdapter
     private lateinit var selectMainMenu: String
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         init()
     }
 
@@ -42,12 +46,9 @@ class CreateMyStoryMainMenuActivity : BaseActivity<ActivityStoryMainMenuBinding>
     }
 
     private fun moveToSetBorder() {
-        val profileId = intent.getLongExtra(PROFILE_ID,0)
         if (binding.btnMainMenuNext.isEnabled) {
-            val intent = Intent(this, CreateMyStoryBorderActivity::class.java)
-            intent.putExtra(PROFILE_ID,profileId)
-            intent.putExtra(BORDER_MAIN_MENU, selectMainMenu)
-            startActivity(intent)
+            setFragmentResult("mainMenu", bundleOf("bundleKeyMainMenu" to selectMainMenu))
+            (activity as CreateMyStoryActivity).nextFragmentSignUp(3)
         }
     }
     private fun initMainMenu() {
@@ -59,7 +60,7 @@ class CreateMyStoryMainMenuActivity : BaseActivity<ActivityStoryMainMenuBinding>
             add(MainMenuData("취미", R.drawable.img_menu_hobby))
             add(MainMenuData("문화생활", R.drawable.img_menu_culture))
         }
-        dataGVAdapter = CreateMyStoryMainMenuAdapter(this, mainMenuData)
+        dataGVAdapter = CreateMyStoryMainMenuAdapter(requireContext(), mainMenuData)
         binding.gvMyStoryCreateMain.adapter = dataGVAdapter
     }
     private fun clickMainMenu(){
