@@ -1,6 +1,5 @@
 package com.example.simya.src.main.myPage.model
 
-import android.provider.ContactsContract.Profile
 import android.util.Log
 import com.example.simya.config.ApplicationClass
 import com.example.simya.config.BaseResponse
@@ -10,7 +9,6 @@ import com.example.simya.util.Constants.ACCESS_TOKEN
 import com.example.simya.util.Constants.DEFAULT
 import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.REFRESH_TOKEN
-import com.example.simya.util.dialog.BasicDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

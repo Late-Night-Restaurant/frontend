@@ -41,7 +41,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-
                 android:layout_marginTop="16dp"
                 android:background="#00ff0000"
                 android:drawableEnd="@drawable/ic_right_small"
@@ -51,13 +50,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_drawer_chat" />
-
             <Button
                 android:id="@+id/btn_drawer_today"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:background="#00ff0000"
                 android:drawableEnd="@drawable/ic_right_small"
                 android:gravity="center_vertical"
@@ -66,13 +64,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_drawer_intro" />
-
             <Button
                 android:id="@+id/btn_drawer_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:background="#00ff0000"
                 android:drawableEnd="@drawable/ic_right_small"
                 android:gravity="center_vertical"
@@ -87,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:background="#00ff0000"
                 android:drawableEnd="@drawable/ic_right_small"
                 android:gravity="center_vertical"
@@ -114,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="사람들"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line1" />
@@ -122,11 +119,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_chat_profile_list"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_chat_profile_headline"
                 app:layout_constraintBottom_toTopOf="@id/btn_chat_pause"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_chat_profile_headline" />
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
 
             <Button
                 android:id="@+id/btn_chat_pause"
@@ -134,13 +133,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/high_radius_button_on"
+
+                android:background="#00ff0000"
                 android:text="채팅방 얼리기"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_chat_profile_list" />
+                app:layout_constraintTop_toBottomOf="@+id/rv_chat_profile_list"
+                app:layout_constraintBottom_toTopOf="@+id/cl_chat_bottom"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_chat_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

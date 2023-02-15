@@ -3,7 +3,7 @@ package com.example.simya.util
 object Constants {
     // URL
     const val BASE_URL = "http://10.0.2.2:8080"
-
+    const val S3_URL = "https://simya-s3-bucket.s3.ap-northeast-2.amazonaws.com/"
     // TOKEN
     const val ACCESS_TOKEN = "ACCESS_TOKEN"
     const val REFRESH_TOKEN = "REFRESH_TOKEN"
@@ -65,6 +65,7 @@ object Constants {
     const val HOUSE_ID = "houseId"
     const val NICK_NAME = "nickname"
     const val COMMENT = "comment"
+    const val MASTER_ID = "masterId"
 
     // VALIDATION
     const val EMAIL_VALIDATION =

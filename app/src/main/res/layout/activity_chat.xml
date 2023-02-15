@@ -9,88 +9,6 @@
         android:id="@+id/included_default"
         layout="@layout/default_chat" />
 
-    <LinearLayout
-        android:id="@+id/ll_today_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/included_default"
-        tools:context=".src.main.chat.ChatActivity"
-        tools:ignore="MissingConstraints">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_today_menu_off"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            app:cardBackgroundColor="@color/Gray_05"
-            app:cardCornerRadius="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <TextView
-                android:id="@+id/tv_today_menu_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
-                android:text="오늘의 메뉴 : 심야식당"
-                android:textColor="@color/Gray_09"
-                android:textSize="12sp" />
-
-            <ImageButton
-                android:id="@+id/ib_today_menu_button"
-                android:layout_width="@dimen/icon_width"
-                android:layout_height="@dimen/icon_height"
-                android:layout_gravity="right"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
-                android:background="@android:color/transparent"
-                android:clickable="false"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_down" />
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_today_menu_on"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginBottom="16dp"
-            android:visibility="gone"
-            app:cardBackgroundColor="@color/Gray_05"
-            app:cardCornerRadius="4dp">
-
-
-            <TextView
-                android:id="@+id/tv_today_menu_text_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="가나다라마바"
-                android:textColor="@color/Gray_09"
-                android:textSize="12sp" />
-
-
-        </androidx.cardview.widget.CardView>
-
-
-    </LinearLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chat_list"
@@ -101,7 +19,7 @@
         app:layout_constraintBottom_toTopOf="@id/cl_chat_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_today_menu">
+        app:layout_constraintTop_toBottomOf="@+id/included_default">
 
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -184,5 +102,85 @@
         <!--            app:layout_constraintStart_toEndOf="@id/ib_chat_emoji"-->
         <!--            app:layout_constraintTop_toTopOf="parent" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/ll_today_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/included_default"
+        tools:context=".src.main.chat.ChatActivity"
+        tools:ignore="MissingConstraints">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_today_menu_off"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:cardBackgroundColor="@color/Gray_05"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/tv_today_menu_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:text="오늘의 메뉴 : UMC 데모데이"
+                android:textColor="@color/Gray_09"
+                android:textSize="12sp" />
+
+            <ImageButton
+                android:id="@+id/ib_today_menu_button"
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:layout_gravity="right"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_down" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_today_menu_on"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/Gray_05"
+            app:cardCornerRadius="4dp">
+
+
+            <TextView
+                android:id="@+id/tv_today_menu_text_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="심야식당 많이 사랑해주세요!"
+                android:textColor="@color/Gray_09"
+                android:textSize="12sp" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

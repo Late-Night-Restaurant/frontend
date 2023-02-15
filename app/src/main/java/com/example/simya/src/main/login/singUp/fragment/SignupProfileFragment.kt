@@ -45,6 +45,7 @@ import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.URI
 import java.util.regex.Pattern
 
 class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
@@ -56,6 +57,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     private lateinit var profile: SignUpProfileDTO
     private lateinit var textWatcher: TextWatcher
     private lateinit var getResult: ActivityResultLauncher<Intent>
+    private lateinit var getUri: URI
     var signupActivity: SignupActivity? = null
 
     override fun onAttach(context: Context) {
@@ -76,38 +78,32 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         }
         // email프래그먼트에서 email 받아오기
         signupActivity!!.increaseProgressbar()
-        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                result ->
-            if(result.resultCode == REQUEST_CODE_FOR_INTENT){
-                var getUri: Uri = Uri.parse(result.data?.getStringExtra("cropImage"))
-                Glide.with(this).load(getUri).into(binding.civSignupInputProfile)
-                Log.d("이미지크롭 성공","Success")
-            }else{
-                Log.d("RegisterForActivity","이미지를 가져오는데 실패했습니다.")
+        getResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == REQUEST_CODE_FOR_INTENT) {
+                    getUri = URI(result.data?.getStringExtra("cropImage"))
+                    Glide.with(this).load(getUri).into(binding.civSignupInputProfile)
+                    Log.d("이미지크롭 성공", "Success")
+                } else {
+                    SampleSnackBar.make(binding.root, "이미지를 가져오는데 실패했습니다.").show()
+                }
             }
-        }
         binding.tietNicknameSignupInput.addTextChangedListener(textWatcher)
         binding.tietCommentSignupInput.addTextChangedListener(textWatcher)
         binding.civSignupInputProfile.setOnClickListener {
-            val intent= Intent(requireContext(),GalleryActivity::class.java)
+            val intent = Intent(requireContext(), GalleryActivity::class.java)
             getResult.launch(intent)
         }
         binding.btnSignupNextProfile.setOnClickListener {
             if (nicknameCheck() && commentCheck()) {
                 val nicknameData = binding.tietNicknameSignupInput.text.toString()
                 val commentData = binding.tietCommentSignupInput.text.toString()
-                profile = SignUpProfileDTO(nicknameData, commentData, DEFAULT)
-                SignUpService(this).trySignUpSubmit(SignupDTO(emailData, pwData, profile))
+                profile = SignUpProfileDTO(nicknameData, commentData)
+                SignUpService(this).trySignUpSubmit(getUri, SignupDTO(emailData, pwData, profile))
             } else {
                 SampleSnackBar.make(binding.root, "올바른 형식에 맞게 작성해주세요.").show()
             }
         }
-
-
-
-
-
-
     }
 
     private fun nicknameCheck(): Boolean {
@@ -177,6 +173,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         binding.btnSignupNextProfile.setTextColor(resources.getColor(R.color.Gray_10))
 
     }
+
     override fun onBackPressed() {
         signupActivity!!.nextFragmentSignUp(3)
         signupActivity!!.decreaseProgressbar()
@@ -189,12 +186,12 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     override fun onPostSignUpSubmitFailure(response: SignupResponse) {
         if (response.code == REQUEST_ERROR) {
             when (response.message) {
-                ERROR_STRING_INPUT -> Log.d("@스낵바", ERROR_STRING_INPUT)
-                ERROR_STRING_DUPLICATE -> Log.d("@스낵바", ERROR_STRING_DUPLICATE)
+                ERROR_STRING_INPUT -> SampleSnackBar.make(binding.root, ERROR_STRING_INPUT).show()
+                ERROR_STRING_DUPLICATE -> SampleSnackBar.make(binding.root, ERROR_STRING_DUPLICATE).show()
             }
         }
         if (response.code == POST_FAIL_USER) {
-            Log.d("@스낵바", ERROR_STRING_FAILED_SIGN_UP)
+            SampleSnackBar.make(binding.root, ERROR_STRING_FAILED_SIGN_UP).show()
         }
     }
 

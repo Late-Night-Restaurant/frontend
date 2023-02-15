@@ -1,75 +1,42 @@
 package com.example.simya.src.main.story
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import com.example.simya.config.BaseActivity
+import com.example.simya.databinding.ActivityStoryCreateBinding
+import com.example.simya.databinding.ActivityStoryOpenBinding
+import com.example.simya.src.main.story.fragment.CreateMyStoryBorderFragment
+import com.example.simya.src.main.story.fragment.CreateMyStoryFragment
+import com.example.simya.src.main.story.fragment.CreateMyStoryMainMenuFragment
+import com.example.simya.src.main.story.fragment.OpenMyStoryFragment
+import com.example.simya.util.Constants
 import com.example.simya.util.Constants.BORDER_MAIN_MENU
 import com.example.simya.util.Constants.BORDER_TITLE
 import com.example.simya.util.Constants.HOUSE_ID
-import com.example.simya.databinding.ActivityDrawerMyStroyOpenBinding
-import com.example.simya.util.dialog.CloseDialog
 
-class OpenMyStoryActivity :
-    BaseActivity<ActivityDrawerMyStroyOpenBinding>(ActivityDrawerMyStroyOpenBinding::inflate) {
+class OpenMyStoryActivity:  BaseActivity<ActivityStoryOpenBinding>(ActivityStoryOpenBinding::inflate){
+    lateinit var category: String
+    lateinit var houseName: String
+    var houseId = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        category = intent.getStringExtra(BORDER_MAIN_MENU)!!
+        houseName= intent.getStringExtra(BORDER_TITLE)!!
+        houseId = intent.getLongExtra(HOUSE_ID,0L)
         init()
     }
-
-    private fun init() {
-        val drawerLayout = binding.dlMyStoryOpen
-        binding.includedMyStoryOpen.tvRvMainMenu.text = intent.getStringExtra(BORDER_MAIN_MENU)
-        binding.includedMyStoryOpen.tvRvTitle.text = intent.getStringExtra(BORDER_TITLE)
-        // 드로어 오픈
-        binding.includedMyStoryOpen.ibMyStoryOpenDrawer.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-            drawerInit()
-        }
-        // 찜 리스트
-        binding.includedMyStoryOpen.btnMyStoryOpenLike.setOnClickListener {
-            moveToLikeList()
-        }
-        // 리뷰 리스트
-        binding.includedMyStoryOpen.btnMyStoryOpenReview.setOnClickListener {
-            moveToReviewList()
-        }
-        // 오픈 준비하기기(test)
-        binding.includedMyStoryOpen.btnMyStoryOpenReady.setOnClickListener {
-            var test = intent.getLongExtra(HOUSE_ID, 0)
-            moveToOpen(test)
-        }
+    private fun init(){
+        nextFragmentSignUp(1)
     }
-
-    private fun moveToReviewList() {
-        val intent = Intent(this, StoryReviewActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun moveToLikeList() {
-        val intent = Intent(this, StoryLikeActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun moveToOpen(houseId: Long) {
-        val intent = Intent(this, OpenMyStoryInputActivity::class.java)
-        intent.putExtra(BORDER_MAIN_MENU, binding.includedMyStoryOpen.tvRvMainMenu.text)
-        intent.putExtra(BORDER_TITLE, binding.includedMyStoryOpen.tvRvTitle.text)
-        intent.putExtra(HOUSE_ID, houseId)
-        startActivity(intent)
-    }
-
-    private fun drawerInit() {
-        binding.btnMyStoryOpenBorder.setOnClickListener {
-            // 간판수정
+    fun nextFragmentSignUp(int: Int) {
+        val transaction = supportFragmentManager.beginTransaction()
+        when(int){
+            1 -> transaction.replace(binding.fmOpenStory.id, OpenMyStoryFragment())
+            2 -> transaction.replace(binding.fmOpenStory.id, CreateMyStoryMainMenuFragment())
         }
-        binding.btnMyStoryOpenMainMenu.setOnClickListener {
-            // 메인 메뉴 수정
-        }
-        binding.btnMyStoryClose.setOnClickListener {
-            var dialog = CloseDialog(this)
-            dialog.showDia()
-        }
+        transaction.commit()
     }
+//    fun resultFinish(){
+//        setResult(Constants.REQUEST_CODE_FOR_INTENT)
+//        finish()
+//    }
 }

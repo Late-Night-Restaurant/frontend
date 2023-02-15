@@ -13,8 +13,8 @@ import com.example.simya.src.main.login.singUp.fragment.*
 import com.example.simya.src.model.account.AccountResponse
 import com.example.simya.src.model.account.SignupResponse
 
-class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding::inflate),
-    SignUpInterface{
+class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding::inflate)
+    {
     private var fragmentAgree = SignupAgreeFragment()
     private var fragmentEmail = SignupEmailFragment()
     private var fragmentPw = SignupPwFragment()
@@ -37,10 +37,7 @@ class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding:
         super.onCreate(savedInstanceState)
         val view = binding.root
         setContentView(view)
-
         init()
-
-
     }
 
     // count == 0 약관동의 fragment 표시
@@ -70,9 +67,4 @@ class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding:
         transaction.commit()
     }
 
-    override fun onPostSignUpSubmitSuccess(response: SignupResponse) {
-    }
-
-    override fun onPostSignUpSubmitFailure(response: SignupResponse) {
-    }
 }

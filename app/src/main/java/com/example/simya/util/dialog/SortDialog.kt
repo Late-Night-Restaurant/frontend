@@ -79,7 +79,6 @@ class SortDialog(private val context: AppCompatActivity) : View.OnClickListener 
         binding.btnDialogOrderRecentCheck.setImageResource(R.drawable.ic_check_disabled)
         binding.btnDialogOrderLikeCheck.setImageResource(R.drawable.ic_check_disabled)
         binding.btnDialogOrderLongCheck.setImageResource(R.drawable.ic_check_enabled)
-
     }
 
     private fun orderCancel() {

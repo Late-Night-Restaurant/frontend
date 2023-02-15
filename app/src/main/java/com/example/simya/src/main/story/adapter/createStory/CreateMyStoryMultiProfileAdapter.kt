@@ -9,18 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.simya.R
 import com.example.simya.databinding.ItemMultiProfileBinding
+import com.example.simya.src.model.UserDTO
 import com.example.simya.src.testData.TestDataMultiProfile
 import com.example.simya.util.data.ProfileData
 
 class CreateMyStoryMultiProfileAdapter(
     private val context: Context,
-    private val dataList: ArrayList<ProfileData>
+    private val dataList: ArrayList<UserDTO>
 ) : RecyclerView.Adapter<CreateMyStoryMultiProfileAdapter.DataViewHolder>() {
     private var listener: OnItemClickListener? = null
 
     inner class DataViewHolder(private val binding: ItemMultiProfileBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: ProfileData) {
+        fun bind(data: UserDTO) {
             Glide.with(context).load(data.picture).placeholder(R.drawable.ic_base_profile).centerCrop()
                 .into(binding.civItemMultiProfile)
             binding.tvMultiNickname.text = data.nickname
@@ -51,8 +52,7 @@ class CreateMyStoryMultiProfileAdapter(
     }
 
     interface OnItemClickListener {
-        fun onItemClick(v: View, data: ProfileData, position: Int)
-        fun onLongClick(v: View, data: ProfileData, position: Int)
+        fun onItemClick(v: View, data: UserDTO, position: Int)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener){

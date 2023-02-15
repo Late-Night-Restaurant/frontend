@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.simya.databinding.ItemDrawerProfileBinding
+import com.example.simya.src.model.UserDTO
 import com.example.simya.src.testData.TestChatDrawerProfileData
 
-class ChatDrawerRVAdapter (private val context: Context, private val dataList:ArrayList<TestChatDrawerProfileData>): RecyclerView.Adapter<ChatDrawerRVAdapter.DataViewHolder>() {
+class ChatDrawerRVAdapter (private val context: Context, private val dataList:ArrayList<UserDTO>): RecyclerView.Adapter<ChatDrawerRVAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val binding: ItemDrawerProfileBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: TestChatDrawerProfileData) {
-            Glide.with(context).load(data.image).centerCrop().into(binding.civItemDrawerProfile)
-            binding.tvItemLikeNick.text = data.nick
+        fun bind(data: UserDTO) {
+            Glide.with(context).load(data.picture).centerCrop().into(binding.civItemDrawerProfile)
+            binding.tvItemLikeNick.text = data.nickname
         }
     }
     //ViewHolder 만들어 질때 실행할 동작
