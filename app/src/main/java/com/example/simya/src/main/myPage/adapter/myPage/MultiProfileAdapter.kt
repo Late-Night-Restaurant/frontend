@@ -23,8 +23,8 @@ class MultiProfileAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ProfileDTO) {
             binding.tvItemMyStoryMultiProfile.text = data.nickname
-            if(data.picture != DEFAULT){
-                Glide.with(context).load(data.picture).placeholder(R.drawable.bg_profile).placeholder(R.drawable.ic_base_profile)
+            if(data.pictureUrl != DEFAULT){
+                Glide.with(context).load(data.pictureUrl).placeholder(R.drawable.bg_profile).placeholder(R.drawable.ic_base_profile)
                     .into(binding.civItemMyStoryMultiProfile)
             }
         }

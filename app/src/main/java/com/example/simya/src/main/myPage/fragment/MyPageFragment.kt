@@ -111,7 +111,7 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     private fun tryChangeMyProfile(data: ProfileDTO) {
         binding.tvMyPageMainNick.text = data.nickname
         binding.tvMyPageMainComment.text = data.comment
-        Glide.with(this@MyPageFragment).load(data.picture).placeholder(R.drawable.ic_base_profile)
+        Glide.with(this@MyPageFragment).load(data.pictureUrl).placeholder(R.drawable.ic_base_profile)
             .into(binding.civMyPageProfile)
         UserData.setProfileId(data.profileId)
 
