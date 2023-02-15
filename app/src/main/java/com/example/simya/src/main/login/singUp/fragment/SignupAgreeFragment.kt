@@ -12,7 +12,6 @@ import com.example.simya.util.SampleSnackBar
 import com.example.simya.src.main.login.signIn.EmailLoginActivity
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupAgreeBinding
-import com.example.simya.util.onThrottleClick
 
 
 class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
@@ -37,7 +36,7 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         agreeCheck()
-        binding.btnSignupNextAgree.onThrottleClick {
+        binding.btnSignupNextAgree.setOnClickListener {
 
             if (agreeCheck()) {
                 signupActivity!!.nextFragmentSignUp(2)

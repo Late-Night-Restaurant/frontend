@@ -13,7 +13,6 @@ import com.example.simya.R
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupPwBinding
 import com.example.simya.util.Constants.PW_VALIDATION
-import com.example.simya.util.onThrottleClick
 import java.util.regex.Pattern
 
 class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
@@ -49,7 +48,7 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
         binding.tietRepwSignupInput.addTextChangedListener(textWatcher)
 
 
-        binding.btnSignupNextPw.onThrottleClick {
+        binding.btnSignupNextPw.setOnClickListener {
             if (pwCheck() && rePwCheck()) {
                 // profile 프래그먼트 데이터 전달
                 val pwData = binding.tietPwSignupInput.text.toString()

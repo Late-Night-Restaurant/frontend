@@ -26,7 +26,6 @@ import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
 import com.example.simya.util.Constants
 import com.example.simya.util.gallery.GalleryActivity
-import com.example.simya.util.onThrottleClick
 
 class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBinding>(
     FragmentStoryCreateBorderBinding::bind,
@@ -79,16 +78,16 @@ class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBindin
     private fun init() {
         UserData.printAllData()
         binding.included.tvDefaultLayoutTitle.text = "이야기집 간판 생성"
-        binding.ibMyStoryCreateBorderInfo.onThrottleClick {
+        binding.ibMyStoryCreateBorderInfo.setOnClickListener {
             binding.tvMyStoryCreateMainInfo.isInvisible = false
         }
         binding.etMyStoryCreateBorderTitle.addTextChangedListener(textWatcher)
         binding.etMyStoryCreateBorderIntro.addTextChangedListener(textWatcher)
-        binding.ibMyStoryCreateBorder.onThrottleClick {
+        binding.ibMyStoryCreateBorder.setOnClickListener {
             val intent = Intent(requireContext(), GalleryActivity::class.java)
             getResult.launch(intent)
         }
-        binding.btnMyStoryCreateBorderNext.onThrottleClick {
+        binding.btnMyStoryCreateBorderNext.setOnClickListener {
             CreateMyHouseService(this).tryOnCreateMyHouse(setBorderData())
             // 서버에 전송 데이터 전송해서 이야기집 생성
         }

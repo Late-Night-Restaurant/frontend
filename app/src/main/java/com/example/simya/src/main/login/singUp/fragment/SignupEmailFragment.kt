@@ -15,7 +15,6 @@ import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.util.Constants.EMAIL_VALIDATION
-import com.example.simya.util.onThrottleClick
 import java.util.regex.Pattern
 
 class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
@@ -54,7 +53,7 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
 
 
 
-        binding.btnSignupNextEmail.onThrottleClick {
+        binding.btnSignupNextEmail.setOnClickListener {
             if (emailCheck()) {
                 // pw프래그먼트로 데이터 전달
                 val email = binding.tietEmailSignupInput.text.toString()

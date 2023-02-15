@@ -15,7 +15,6 @@ import com.example.simya.src.main.story.StoryLikeActivity
 import com.example.simya.src.main.story.StoryReviewActivity
 import com.example.simya.util.dialog.DefaultDialog
 import com.example.simya.util.dialog.DefaultDialogInterface
-import com.example.simya.util.onThrottleClick
 
 class OpenMyStoryFragment :
     BaseFragment<FragmentDrawerMyStroyOpenBinding>(
@@ -31,20 +30,20 @@ class OpenMyStoryFragment :
         binding.includedMyStoryOpen.tvRvMainMenu.text = (activity as OpenMyStoryActivity).category
         binding.includedMyStoryOpen.tvRvTitle.text = (activity as OpenMyStoryActivity).houseName
         // 드로어 오픈
-        binding.includedMyStoryOpen.ibMyStoryOpenDrawer.onThrottleClick {
+        binding.includedMyStoryOpen.ibMyStoryOpenDrawer.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
             drawerInit()
         }
         // 찜 리스트
-        binding.includedMyStoryOpen.btnMyStoryOpenLike.onThrottleClick {
+        binding.includedMyStoryOpen.btnMyStoryOpenLike.setOnClickListener {
             movePrepare()
         }
         // 리뷰 리스트
-        binding.includedMyStoryOpen.btnMyStoryOpenReview.onThrottleClick {
+        binding.includedMyStoryOpen.btnMyStoryOpenReview.setOnClickListener {
             movePrepare()
         }
         // 오픈 준비하기기
-        binding.includedMyStoryOpen.btnMyStoryOpenReady.onThrottleClick {
+        binding.includedMyStoryOpen.btnMyStoryOpenReady.setOnClickListener {
             var houseId = (activity as OpenMyStoryActivity).houseId
             moveToOpen(houseId)
         }
@@ -72,13 +71,13 @@ class OpenMyStoryFragment :
     }
 
     private fun drawerInit() {
-        binding.btnMyStoryOpenBorder.onThrottleClick {
+        binding.btnMyStoryOpenBorder.setOnClickListener {
             // 간판수정
         }
-        binding.btnMyStoryOpenMainMenu.onThrottleClick {
+        binding.btnMyStoryOpenMainMenu.setOnClickListener {
             // 메인 메뉴 수정
         }
-        binding.btnMyStoryClose.onThrottleClick {
+        binding.btnMyStoryClose.setOnClickListener {
             DefaultDialog("페점하시겠습니까?",requireContext(),this).show()
         }
     }

@@ -17,7 +17,6 @@ import com.example.simya.src.main.story.CreateMyStoryActivity
 import com.example.simya.util.Constants.BORDER_MAIN_MENU
 import com.example.simya.util.Constants.PROFILE_ID
 import com.example.simya.util.data.UserData
-import com.example.simya.util.onThrottleClick
 
 class CreateMyStoryMainMenuFragment : BaseFragment<FragmentStoryMainMenuBinding>(
     FragmentStoryMainMenuBinding::bind,
@@ -37,10 +36,10 @@ class CreateMyStoryMainMenuFragment : BaseFragment<FragmentStoryMainMenuBinding>
         // 메인메뉴 UI 업데이트
         initMainMenu()
         // info 버튼 클릭시 메인메뉴가 무엇인지에 대한 설명 글 보이기/안보이기
-        binding.ibMyStoryCreateMainMenuInfo.onThrottleClick {
+        binding.ibMyStoryCreateMainMenuInfo.setOnClickListener {
             binding.tvMyStoryCreateMainInfo.isInvisible = !binding.tvMyStoryCreateMainInfo.isInvisible
         }
-        binding.btnMainMenuNext.onThrottleClick {
+        binding.btnMainMenuNext.setOnClickListener {
             moveToSetBorder()
         }
         clickMainMenu()

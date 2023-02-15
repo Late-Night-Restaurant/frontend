@@ -18,7 +18,6 @@ import com.example.simya.src.model.story.open.OpenStoryDTO
 import com.example.simya.src.model.story.open.OpenStoryResponse
 import com.example.simya.src.model.story.topic.TopicRequestDTO
 import com.example.simya.util.SampleSnackBar
-import com.example.simya.util.onThrottleClick
 
 class OpenMyStoryInputFragment :
     BaseFragment<FragmentMyStoryOpenInputBinding>(
@@ -40,7 +39,7 @@ class OpenMyStoryInputFragment :
         binding.etMyStoryOpenInputPerson.addTextChangedListener(textWatcher)
         binding.etMyStoryOpenInputMenu.addTextChangedListener(textWatcher)
         // test
-        binding.btnMyStoryOpen.onThrottleClick {
+        binding.btnMyStoryOpen.setOnClickListener {
             OpenMyHouseService(this).tryOpenMyHouse(
                 OpenStoryDTO(
                     (activity as OpenMyStoryActivity).houseId,

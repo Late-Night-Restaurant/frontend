@@ -15,7 +15,6 @@ import com.example.simya.databinding.FragmentHomeMainBinding
 import com.example.simya.databinding.SnackbarLayoutBinding
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.dialog.SortDialog
-import com.example.simya.util.onThrottleClick
 import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment: Fragment() {
@@ -43,7 +42,7 @@ class HomeFragment: Fragment() {
             .commit()
 
         // Sort type 바꾸기 -> 클린코드 필요
-        binding.ibHomeMainSortType.onThrottleClick {
+        binding.ibHomeMainSortType.setOnClickListener {
             val dialog = SortDialog(this.context as AppCompatActivity)
             dialog!!.showDia()
             dialog.setOnItemClickListener(object: SortDialog.SortDialogClickedListener{
@@ -67,7 +66,7 @@ class HomeFragment: Fragment() {
 
         // View type 바꾸기
         binding.ibHomeMainViewType.run{
-            onThrottleClick{
+            setOnClickListener{
                 viewTypeChange()
                 binding.ibHomeMainViewType.setImageResource(defaultViewType)
                 when (defaultViewType){

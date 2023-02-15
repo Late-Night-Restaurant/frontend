@@ -26,7 +26,6 @@ import com.example.simya.util.Constants.YES
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.dialog.DefaultDialog
 import com.example.simya.util.dialog.DefaultDialogInterface
-import com.example.simya.util.onThrottleClick
 
 class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     FragmentHomeMyPageBinding::bind,
@@ -39,19 +38,19 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        binding.btnMyPageProfile.onThrottleClick {
+        binding.btnMyPageProfile.setOnClickListener {
             val intent = Intent(activity, ProfileModifyActivity::class.java)
             startActivity(intent)
         }
 
         // 찜한 이야기 집으로
-        binding.ibMyPageLikeHouse.onThrottleClick {
+        binding.ibMyPageLikeHouse.setOnClickListener {
             val intent = Intent(activity, MyPageLikeActivity::class.java)
             startActivity(intent)
         }
 
         // 내가 쓴 리뷰로
-        binding.ibMyPageReview.onThrottleClick {
+        binding.ibMyPageReview.setOnClickListener {
             val intent = Intent(activity, MyPageReviewActivity::class.java)
             startActivity(intent)
         }
@@ -75,7 +74,7 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
                 false
             )
         // 로그아웃
-        binding.btnMyPageLogout.onThrottleClick {
+        binding.btnMyPageLogout.setOnClickListener {
             DefaultDialog("로그아웃 하시겠습니까?",requireContext(),this).show()
         }
         clickMultiProfile()

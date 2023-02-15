@@ -22,7 +22,6 @@ import com.example.simya.src.model.UserDTO
 import com.example.simya.src.model.profile.ProfileDTO
 import com.example.simya.src.model.profile.ProfileResponse
 import com.example.simya.util.data.ProfileData
-import com.example.simya.util.onThrottleClick
 
 class CreateMyStoryFragment : BaseFragment<FragmentMyStoryCreateBinding>(
     FragmentMyStoryCreateBinding::bind,
@@ -43,7 +42,7 @@ class CreateMyStoryFragment : BaseFragment<FragmentMyStoryCreateBinding>(
         UserData.printAllData()
         Log.d("UserData",UserData.toString())
         binding.includedTitle.tvDefaultLayoutTitle.text = "이야기집 생성"
-        binding.btnMyStoryCreateNext.onThrottleClick {
+        binding.btnMyStoryCreateNext.setOnClickListener {
             moveToSetMenu()
         }
         dataRVAdapter = CreateMyStoryMultiProfileAdapter(requireContext(), dataList)

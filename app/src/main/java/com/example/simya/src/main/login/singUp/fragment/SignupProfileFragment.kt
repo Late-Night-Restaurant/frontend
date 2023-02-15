@@ -41,7 +41,6 @@ import com.example.simya.util.Constants.REQUEST_CODE_PROFILE_IMAGE
 import com.example.simya.util.Constants.REQUEST_ERROR
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.gallery.GalleryActivity
-import com.example.simya.util.onThrottleClick
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
@@ -95,7 +94,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
             val intent = Intent(requireContext(), GalleryActivity::class.java)
             getResult.launch(intent)
         }
-        binding.btnSignupNextProfile.onThrottleClick {
+        binding.btnSignupNextProfile.setOnClickListener {
             if (nicknameCheck() && commentCheck()) {
                 val nicknameData = binding.tietNicknameSignupInput.text.toString()
                 val commentData = binding.tietCommentSignupInput.text.toString()
