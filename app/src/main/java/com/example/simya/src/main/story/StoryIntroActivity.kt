@@ -20,6 +20,7 @@ import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.story.inquiry.InquiryStoryDetailResponse
 import com.example.simya.util.Constants.MASTER_ID
 import com.example.simya.util.SampleSnackBar
+import com.example.simya.util.onThrottleClick
 import com.taufiqrahman.reviewratings.BarLabels
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,7 +57,7 @@ class StoryIntroActivity :
             0
         )
         ratingReviews.createRatingBars(100, BarLabels.STYPE1, colors, raters)
-        binding.btnStoryIntroEnterChat.setOnClickListener {
+        binding.btnStoryIntroEnterChat.onThrottleClick {
             moveToChat(
                 houseId,
                 masterId,

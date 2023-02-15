@@ -7,6 +7,7 @@ import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivityMyPageReviewBinding
 import com.example.simya.util.dialog.SortDialog
 import com.example.simya.src.main.myPage.fragment.MyPageReviewFragment
+import com.example.simya.util.onThrottleClick
 
 class MyPageReviewActivity : BaseActivity<ActivityMyPageReviewBinding>(ActivityMyPageReviewBinding::inflate)
 {
@@ -21,7 +22,7 @@ class MyPageReviewActivity : BaseActivity<ActivityMyPageReviewBinding>(ActivityM
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
         // 정렬 타입 바꾸기
-        binding.ibMyPageReviewType.setOnClickListener {
+        binding.ibMyPageReviewType.onThrottleClick {
             val dialog = SortDialog(this as AppCompatActivity)
             dialog!!.showDia()
         }

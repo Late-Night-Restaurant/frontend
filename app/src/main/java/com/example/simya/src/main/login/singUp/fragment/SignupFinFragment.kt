@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.simya.src.main.login.LoginActivity
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupFinBinding
+import com.example.simya.util.onThrottleClick
 
 class SignupFinFragment: Fragment(), SignupActivity.onBackPressedListener {
     private lateinit var binding: FragmentSignupFinBinding
@@ -35,7 +36,7 @@ class SignupFinFragment: Fragment(), SignupActivity.onBackPressedListener {
         super.onViewCreated(view, savedInstanceState)
         signupActivity!!.increaseProgressbar()
 
-        binding.btnSignupNext.setOnClickListener {
+        binding.btnSignupNext.onThrottleClick {
             requireActivity().finish()
         }
     }

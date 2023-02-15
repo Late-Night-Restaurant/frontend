@@ -8,6 +8,7 @@ import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivityProfileModifyBinding
 import com.example.simya.src.main.prepare.PrepareActivity
 import com.example.simya.util.data.UserData
+import com.example.simya.util.onThrottleClick
 
 class ProfileModifyActivity : BaseActivity<ActivityProfileModifyBinding>(ActivityProfileModifyBinding::inflate)
 {
@@ -19,14 +20,14 @@ class ProfileModifyActivity : BaseActivity<ActivityProfileModifyBinding>(Activit
     private fun init() {
         initMainProfile()
         binding.included.tvDefaultLayoutTitle.text = "나의 프로필"
-        binding.btnModifyProfileEdit.setOnClickListener {
+        binding.btnModifyProfileEdit.onThrottleClick {
 //            val intent = Intent(this,ProfileEditActivity::class.java)
 //            startActivity(intent)
             // 아직 준비중
             val intent = Intent(this, PrepareActivity::class.java)
             startActivity(intent)
         }
-        binding.btnModifyProfileDelete.setOnClickListener {
+        binding.btnModifyProfileDelete.onThrottleClick {
             // 아직 준비중
             val intent = Intent(this, PrepareActivity::class.java)
             startActivity(intent)

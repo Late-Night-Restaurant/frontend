@@ -20,6 +20,7 @@ import com.example.simya.src.model.RetrofitService
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.REQUEST_CODE_FOR_INTENT
 import com.example.simya.util.SampleSnackBar
+import com.example.simya.util.onThrottleClick
 import java.net.URI
 
 
@@ -53,7 +54,7 @@ class MyStoryFragment: Fragment() {
                     SampleSnackBar.make(binding.root, "이야기 집 생성 실패").show()
                 }
             }
-        binding.ibMyStoryAdd.setOnClickListener{
+        binding.ibMyStoryAdd.onThrottleClick{
             moveToCreateStory()
         }
         //초기 프래그먼트 설정
@@ -64,7 +65,7 @@ class MyStoryFragment: Fragment() {
 
         // View Type 설정
         binding.ibHomeMyStoryMainViewType.run{
-            setOnClickListener{
+            onThrottleClick{
                 viewTypeChange()
                 binding.ibHomeMyStoryMainViewType.setImageResource(defaultViewType)
                 when (defaultViewType){

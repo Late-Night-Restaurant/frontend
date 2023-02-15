@@ -27,6 +27,7 @@ import com.example.simya.util.Constants.EMAIL_VALIDATION
 import com.example.simya.util.Constants.REFRESH_TOKEN
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.UserData
+import com.example.simya.util.onThrottleClick
 import com.google.android.material.snackbar.Snackbar
 import java.util.regex.Pattern
 
@@ -39,11 +40,11 @@ class EmailLoginActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.btnSignInEmailFindEmail.setOnClickListener {
+        binding.btnSignInEmailFindEmail.onThrottleClick {
             val intent = Intent(this,PrepareActivity::class.java)
             startActivity(intent)
         }
-        binding.btnSignInEmailFindPassword.setOnClickListener {
+        binding.btnSignInEmailFindPassword.onThrottleClick {
             val intent = Intent(this,PrepareActivity::class.java)
             startActivity(intent)
         }
@@ -59,7 +60,7 @@ class EmailLoginActivity :
         binding.edtEmailSignInInputPassword.addTextChangedListener(textWatcher)
 
         //로그인 이벤트
-        binding.btnEmailSigninLogin.setOnClickListener {
+        binding.btnEmailSigninLogin.onThrottleClick {
             if (checkEmail() && checkPassword()) {
                 email = binding.edtEmailSignInInputEmail.text.toString()
                 password = binding.edtEmailSignInInputPassword.text.toString()
@@ -71,7 +72,7 @@ class EmailLoginActivity :
                 )
             }
         }
-        binding.btnSigninEmailSignup.setOnClickListener {
+        binding.btnSigninEmailSignup.onThrottleClick {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
