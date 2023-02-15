@@ -11,6 +11,7 @@ import com.example.simya.src.model.UserDTO
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.DEFAULT
 import com.example.simya.util.data.UserData
+import com.example.simya.util.onThrottleClick
 import java.util.regex.Pattern
 
 class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityProfileEditBinding::inflate), ProfileModifyInterface
@@ -22,7 +23,7 @@ class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityPro
 
     private fun init() {
         binding.included.tvDefaultLayoutTitle.text = "프로필 수정"
-        binding.btnEditProfileEdit.setOnClickListener {
+        binding.btnEditProfileEdit.onThrottleClick {
             if (nicknameCheck() && commentCheck()) {
                 showLoadingDialog(this)
                 // 사진부분 수정해야함

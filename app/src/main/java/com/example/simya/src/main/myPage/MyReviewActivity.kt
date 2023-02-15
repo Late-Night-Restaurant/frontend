@@ -10,6 +10,7 @@ import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.mypage.review.MyModifyReviewResponse
 import com.example.simya.util.Constants.OK
+import com.example.simya.util.onThrottleClick
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,7 +31,7 @@ class MyReviewActivity: BaseActivity<ActivityReviewBinding>(ActivityReviewBindin
     private fun init() {
         binding.included.tvDefaultLayoutTitle.text = "리뷰 수정하기"
         // 버튼을 누르면 리뷰 수정하기
-        binding.btnItemEditReview.setOnClickListener {
+        binding.btnItemEditReview.onThrottleClick {
             tryModifyMyWriteReview()
         }
     }

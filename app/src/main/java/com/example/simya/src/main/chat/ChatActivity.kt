@@ -43,6 +43,7 @@ import com.example.simya.src.testData.TestChatDrawerProfileData
 import com.example.simya.src.testData.TestUserData
 import com.example.simya.util.Constants.MASTER_ID
 import com.example.simya.util.SampleSnackBar
+import com.example.simya.util.onThrottleClick
 import com.gmail.bishoybasily.stomp.lib.Event
 import com.gmail.bishoybasily.stomp.lib.StompClient
 import com.google.android.material.snackbar.Snackbar
@@ -141,7 +142,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
 
         val drawerLayout = binding.dlChat
         binding.includedChat.includedDefault.tvDefaultChatTitle.text = "테스트용 이야기방"
-        binding.includedChat.includedDefault.ibDefaultChatDrawer.setOnClickListener {
+        binding.includedChat.includedDefault.ibDefaultChatDrawer.onThrottleClick {
             //채팅 내리기
             val imm: InputMethodManager =
                 getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -157,7 +158,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
             moveLastItem(this)
         }
 
-        binding.includedChat.ibChatSend.setOnClickListener {
+        binding.includedChat.ibChatSend.onThrottleClick {
             if (binding.includedChat.etChatInput.text.isNotEmpty()) {
                 Log.d("send message", binding.includedChat.etChatInput.text.toString())
                 sendTypeMessage("TALK", binding.includedChat.etChatInput.text.toString())
@@ -165,7 +166,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
 
             }
         }
-        binding.btnChatPause.setOnClickListener {
+        binding.btnChatPause.onThrottleClick {
             if(allChatStatus){
                 sendTypeMessage("FREEZE","얼리기")
                 sendTypeMessage("NOTIFY","얼리기")
@@ -178,7 +179,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
                 allChatStatus = !allChatStatus
             }
         }
-        binding.btnDrawerIntro.setOnClickListener {
+        binding.btnDrawerIntro.onThrottleClick {
             val intent = Intent(this, StoryIntroActivity::class.java)
             startActivity(intent)
         }
@@ -408,7 +409,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
 
     // 공지사항 버튼 애니이션
     private fun onNotify(view: View, message: String) {
-        binding.includedChat.ibTodayMenuButton.setOnClickListener {
+        binding.includedChat.ibTodayMenuButton.onThrottleClick {
             var snackBar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
 
             val snackBarView: View = layoutInflater.inflate(R.layout.snackbar_layout, null)

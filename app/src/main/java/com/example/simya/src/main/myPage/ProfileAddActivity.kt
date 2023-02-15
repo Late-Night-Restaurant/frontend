@@ -10,6 +10,7 @@ import com.example.simya.util.data.UserData
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.util.Constants
+import com.example.simya.util.onThrottleClick
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,7 +24,7 @@ class ProfileAddActivity : BaseActivity<ActivityProfileEditBinding>(ActivityProf
     }
     private fun init() {
         binding.included.tvDefaultLayoutTitle.text = "프로필 생성"
-        binding.btnEditProfileEdit.setOnClickListener {
+        binding.btnEditProfileEdit.onThrottleClick {
             if(nicknameCheck() && commentCheck()){
                 // 수정하기
             }else{
