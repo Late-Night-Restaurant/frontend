@@ -87,7 +87,7 @@ class CreateMyStoryFragment : BaseFragment<FragmentMyStoryCreateBinding>(
                             response.result[i].profileId,
                             response.result[i].nickname,
                             response.result[i].comment,
-                            response.result[i].picture
+                            response.result[i].pictureUrl
                         )
                     )
                 }

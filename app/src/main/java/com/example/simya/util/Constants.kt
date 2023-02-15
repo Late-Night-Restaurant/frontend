@@ -2,7 +2,8 @@ package com.example.simya.util
 
 object Constants {
     // URL
-    const val BASE_URL = "http://10.0.2.2:8080"
+    const val BASE_URL = "http://www.simya.kro.kr:8080/"
+//    const val BASE_URL = "http://10.0.2.2:8080"
     const val S3_URL = "https://simya-s3-bucket.s3.ap-northeast-2.amazonaws.com/"
     // TOKEN
     const val ACCESS_TOKEN = "ACCESS_TOKEN"

@@ -2,6 +2,7 @@ package com.example.simya.src.main.login.model
 
 import android.net.Uri
 import android.util.Log
+import androidx.core.net.toFile
 import com.example.simya.config.ApplicationClass
 import com.example.simya.src.model.account.SignupDTO
 import com.example.simya.src.model.account.SignupResponse
@@ -20,11 +21,14 @@ import java.net.URI
 
 class SignUpService(val signUpInterface: SignUpInterface) {
     private val signUpRetrofitInterface: SignUpRetrofitInterface = ApplicationClass.sRetrofit.create(SignUpRetrofitInterface::class.java)
-    fun trySignUpSubmit(image: URI,signUpDTO: SignupDTO){
-        val file = File(image)
-        val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-        val image = MultipartBody.Part.createFormData("images", file.name, requestBody)
-        signUpRetrofitInterface.onSignUpSubmit(image,signUpDTO).enqueue(object: Callback<SignupResponse>{
+    fun trySignUpSubmit(image: Uri?,signUpDTO: SignupDTO){
+        var multiPartBody: MultipartBody.Part? = null
+        if(image != null){
+            val file = image.path?.let { File(it) }
+            val requestBody = file!!.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            multiPartBody = MultipartBody.Part.createFormData("images", file.name, requestBody)
+        }
+        signUpRetrofitInterface.onSignUpSubmit(multiPartBody,signUpDTO).enqueue(object: Callback<SignupResponse>{
             override fun onResponse(
                 call: Call<SignupResponse>,
                 response: Response<SignupResponse>

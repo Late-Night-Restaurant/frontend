@@ -57,7 +57,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     private lateinit var profile: SignUpProfileDTO
     private lateinit var textWatcher: TextWatcher
     private lateinit var getResult: ActivityResultLauncher<Intent>
-    private lateinit var getUri: URI
+    private var getUri: Uri? = null
     var signupActivity: SignupActivity? = null
 
     override fun onAttach(context: Context) {
@@ -81,7 +81,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == REQUEST_CODE_FOR_INTENT) {
-                    getUri = URI(result.data?.getStringExtra("cropImage"))
+                    getUri = Uri.parse(result.data?.getStringExtra("cropImage"))
                     Glide.with(this).load(getUri).into(binding.civSignupInputProfile)
                     Log.d("이미지크롭 성공", "Success")
                 } else {
