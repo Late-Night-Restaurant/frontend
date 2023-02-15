@@ -13,4 +13,5 @@ import retrofit2.http.Headers
 interface ChatDrawerInterface {
     fun onGetChatProfileListSuccess(response: ChatProfileListResponse)
     fun onGetChatProfileListFailure(response: BaseResponse)
+    fun onGetChatProfileListDisconnect(message: String)
 }

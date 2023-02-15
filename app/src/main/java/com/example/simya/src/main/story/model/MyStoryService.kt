@@ -34,7 +34,7 @@ class MyStoryService(val myStoryInterface: MyStoryInterface) {
             }
 
             override fun onFailure(call: Call<LoadMyStoryResponse>, t: Throwable) {
-
+                myStoryInterface.onGetMyStoryDisconnect("서버가 원활하지 않습니다.")
             }
 
         })

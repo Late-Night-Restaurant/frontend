@@ -41,13 +41,11 @@ class CreateMyHouseService(val createMyHouseInterface: CreateMyHouseInterface){
                 if(response.code() == OK){
                     createMyHouseInterface.onPostCreateMyHouseSuccess(response.body() as CreateStoryResponse)
                 }else{
-                    Log.d("responseCode!!!!!!!!!!!!",response.code().toString())
-                    // 에러 생김
-//                    createMyHouseInterface.onPostCreateMyHouseFailure(response.body() as CreateStoryResponse)
+                    createMyHouseInterface.onPostCreateMyHouseFailure(response.body() as CreateStoryResponse)
                 }
             }
             override fun onFailure(call: Call<CreateStoryResponse>, t: Throwable) {
-                Log.d("Retrofit2",t.toString())
+                createMyHouseInterface.onPostCreateMyHouseDisconnect("서버가 원활하지 않습니다.")
             }
 
         })

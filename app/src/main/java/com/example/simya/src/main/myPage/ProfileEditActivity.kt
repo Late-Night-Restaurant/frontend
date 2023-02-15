@@ -10,6 +10,7 @@ import com.example.simya.src.main.myPage.model.ProfileModifyService
 import com.example.simya.src.model.UserDTO
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.DEFAULT
+import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.UserData
 import com.example.simya.util.onThrottleClick
 import java.util.regex.Pattern
@@ -71,9 +72,20 @@ class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityPro
     override fun onModifyMyProfileFailure(response: BaseResponse) {
         // 실패했다고 올려주기
     }
+
+    override fun onModifyMyProfileDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
+    }
+
     override fun onDeleteMyProfileSuccess(response: BaseResponse) {
     }
     override fun onDeleteMyProfileFailure(response: BaseResponse) {
+    }
+
+    override fun onDeleteMyProfileDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
     }
 
 }

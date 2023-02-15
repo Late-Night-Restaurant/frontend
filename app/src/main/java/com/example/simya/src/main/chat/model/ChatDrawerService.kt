@@ -39,7 +39,7 @@ class ChatDrawerService(val chatDrawerInterface: ChatDrawerInterface) {
             }
 
             override fun onFailure(call: Call<ChatProfileListResponse>, t: Throwable) {
-                Log.d("Retrofit2",t.toString())
+                chatDrawerInterface.onGetChatProfileListDisconnect("서버가 원할하지 않습니다.")
             }
 
         })

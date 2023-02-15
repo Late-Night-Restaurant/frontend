@@ -9,8 +9,10 @@ import com.example.simya.databinding.ItemDrawerProfileBinding
 import com.example.simya.src.model.UserDTO
 import com.example.simya.src.testData.TestChatDrawerProfileData
 import com.example.simya.util.Constants.S3_URL
+import com.example.simya.util.data.ChatRVData
 
 class ChatDrawerRVAdapter (private val context: Context, private val dataList:ArrayList<UserDTO>): RecyclerView.Adapter<ChatDrawerRVAdapter.DataViewHolder>() {
+    private var listener: ChatDrawerRVAdapter.OnItemClickListener? = null
     inner class DataViewHolder(private val binding: ItemDrawerProfileBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: UserDTO) {
             Glide.with(context).load(S3_URL+data.picture).centerCrop().into(binding.civItemDrawerProfile)
@@ -31,6 +33,13 @@ class ChatDrawerRVAdapter (private val context: Context, private val dataList:Ar
 
     override fun getItemViewType(position: Int): Int {
         return position
+    }
+    interface OnItemClickListener {
+        fun onItemClick(data: UserDTO, position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        this.listener = listener
     }
 
 }

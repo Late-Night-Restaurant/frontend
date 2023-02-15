@@ -7,4 +7,5 @@ import com.example.simya.src.model.story.open.OpenStoryResponse
 interface OpenMyHouseInterface {
     fun onPatchCreateMyHouseSuccess(response: OpenStoryResponse)
     fun onPatchCreateMyHouseFailure(response: OpenStoryResponse)
+    fun onPatchCreateMyHouseDisconnect(message: String)
 }

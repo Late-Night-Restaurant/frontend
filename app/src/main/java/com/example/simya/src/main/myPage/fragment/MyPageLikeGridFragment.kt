@@ -19,6 +19,7 @@ import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.mypage.like.MyLikeStoryResponse
 import com.example.simya.src.testData.TestDataBorder
+import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.BorderData
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,7 +65,13 @@ class MyPageLikeGridFragment : BaseFragment<FragmentMyPageLikeGridBinding>(
     }
 
     override fun onGetMyLikeHouseFailure(response: MyLikeStoryResponse) {
-        Log.d("@@@@@ CHECK @@@@@@", "찜한이야기집 가져오기 실패")
+        SampleSnackBar.make(binding.root,response.message!!)
+
+    }
+
+    override fun onGetMyLikeHouseDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
     }
 
 }

@@ -36,7 +36,7 @@ class SignUpService(val signUpInterface: SignUpInterface) {
                 }
             }
             override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-                Log.d("Retrofit2",t.toString())
+                signUpInterface.onPostSignUpSubmitDisconnect("서버가 원활하지 않습니다.")
             }
         })
     }

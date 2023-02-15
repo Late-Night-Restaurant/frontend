@@ -43,21 +43,11 @@ class StoryReviewActivity :
 
         dataList = arrayListOf()
         dataList.apply {
-            add(TestDataReview("푸", "재밌다 푸하하", 3))
-            add(TestDataReview("왁", "초이 성장에 이르렀는가..?", 4))
-            add(TestDataReview("채니", "렛츠고 페스티벌", 1))
-            add(TestDataReview("쭈니", "갓생사는중", 2))
-            add(TestDataReview("햇반", "디자인 ..완료..", 3))
-            add(TestDataReview("푸", "재밌다 푸하하", 3))
-            add(TestDataReview("왁", "초이 성장에 이르렀는가..?", 4))
-            add(TestDataReview("채니", "렛츠고 페스티벌", 1))
-            add(TestDataReview("쭈니", "갓생사는중", 2))
-            add(TestDataReview("햇반", "디자인 ..완료..", 3))
-            add(TestDataReview("푸", "재밌다 푸하하", 3))
-            add(TestDataReview("왁", "초이 성장에 이르렀는가..?", 4))
-            add(TestDataReview("채니", "렛츠고 페스티벌", 1))
-            add(TestDataReview("쭈니", "갓생사는중", 2))
-            add(TestDataReview("햇반", "디자인 ..완료..", 3))
+            add(TestDataReview("푸", "올인하고자 하는 마음...", 5))
+            add(TestDataReview("쭈니", "비약적인 성장을 위한 마음...", 5))
+            add(TestDataReview("햇반", "자식같은 마음...", 5))
+            add(TestDataReview("왁", "PM의 마음....", 5))
+            add(TestDataReview("초이", "중요한건 꺾이지 않는 마음...", 5))
         }
         val dataRVAdapter = StoryReviewRVAapter(dataList)
         binding.rvStroyReviewRecycler.adapter = dataRVAdapter

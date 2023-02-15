@@ -38,7 +38,7 @@ class MyPageLikeHouseService(val myPageLikeHouseInterface: MyPageLikeHouseInterf
             }
 
             override fun onFailure(call: Call<MyLikeStoryResponse>, t: Throwable) {
-                Log.d("Retrofit2",t.toString())
+                myPageLikeHouseInterface.onGetMyLikeHouseDisconnect("서버가 원활하지 않습니다.")
             }
         })
     }

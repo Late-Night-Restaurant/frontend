@@ -91,6 +91,12 @@ class OpenMyStoryInputFragment :
     }
 
     override fun onPatchCreateMyHouseFailure(response: OpenStoryResponse) {
-        SampleSnackBar.make(binding.root, response.message.toString()).show()
+        SampleSnackBar.make(binding.root,response.message!!)
+        dismissLoadingDialog()
+    }
+
+    override fun onPatchCreateMyHouseDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
     }
 }

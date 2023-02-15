@@ -25,6 +25,7 @@ import com.example.simya.src.main.story.model.CreateMyHouseService
 import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
 import com.example.simya.util.Constants
+import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.gallery.GalleryActivity
 
 class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBinding>(
@@ -137,7 +138,12 @@ class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBindin
     }
 
     override fun onPostCreateMyHouseFailure(response: BaseResponse) {
-        Log.d("@@@@@ CHECK @@@@@@", "찜한이야기집 가져오기 실패")
+        SampleSnackBar.make(binding.root,response.message!!)
+    }
+
+    override fun onPostCreateMyHouseDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
     }
 
 }

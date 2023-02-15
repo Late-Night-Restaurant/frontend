@@ -71,6 +71,11 @@ class MyStoryGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
     }
 
     override fun onGetMyStoryFailure(response: LoadMyStoryResponse) {
-        SampleSnackBar.make(binding.root,"")
+        SampleSnackBar.make(binding.root,response.message!!)
+    }
+
+    override fun onGetMyStoryDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
     }
 }

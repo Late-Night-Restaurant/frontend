@@ -56,6 +56,7 @@ object Constants {
     const val DEFAULT = "default"
     const val BORDER_TITLE = "title"
     const val BORDER_MAIN_MENU = "borderMainMenu"
+    const val BORDER_IMAGE_URL ="borderImageUrl"
     const val PROFILE_ID = "profileId"
     const val MAIN_MENU_LOVE = "사랑"
     const val MAIN_MENU_FAMILY = "가족"

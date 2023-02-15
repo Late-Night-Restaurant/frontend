@@ -21,6 +21,7 @@ import com.example.simya.src.main.story.CreateMyStoryActivity
 import com.example.simya.src.model.UserDTO
 import com.example.simya.src.model.profile.ProfileDTO
 import com.example.simya.src.model.profile.ProfileResponse
+import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.ProfileData
 
 class CreateMyStoryFragment : BaseFragment<FragmentMyStoryCreateBinding>(
@@ -97,7 +98,12 @@ class CreateMyStoryFragment : BaseFragment<FragmentMyStoryCreateBinding>(
     }
 
     override fun onGetUserProfileFailure(response: ProfileResponse) {
-        Log.d("@@@@@ CHECK @@@@@@", "멀티프로필 가져오기 실패")
+        SampleSnackBar.make(binding.root,response.message!!)
+    }
+
+    override fun onGetUserProfileDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
     }
 
     override fun onSetMyRepresentProfileSuccess(response: BaseResponse, data: ProfileDTO) {
@@ -106,10 +112,16 @@ class CreateMyStoryFragment : BaseFragment<FragmentMyStoryCreateBinding>(
     override fun onSetMyRepresentProfileFailure(response: BaseResponse) {
     }
 
+    override fun onSetMyRepresentDisconnect(message: String) {
+    }
+
     override fun onLogoutSuccess(response: BaseResponse) {
     }
 
     override fun onLogoutFailure(response: BaseResponse) {
+    }
+
+    override fun onLogoutDisconnect(message: String) {
     }
 
 }

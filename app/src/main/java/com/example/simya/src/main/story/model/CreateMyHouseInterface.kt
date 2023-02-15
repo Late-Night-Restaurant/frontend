@@ -6,4 +6,5 @@ import com.example.simya.src.model.story.create.CreateStoryResponse
 interface CreateMyHouseInterface {
     fun onPostCreateMyHouseSuccess(response: CreateStoryResponse)
     fun onPostCreateMyHouseFailure(response: BaseResponse)
+    fun onPostCreateMyHouseDisconnect(message: String)
 }

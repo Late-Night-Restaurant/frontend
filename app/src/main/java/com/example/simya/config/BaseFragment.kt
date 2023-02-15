@@ -36,12 +36,6 @@ abstract class BaseFragment<B : ViewBinding>(
         _binding = null
         super.onDestroyView()
     }
-//    override fun onTouchEvent(event: MotionEvent): Boolean {
-//        val imm: InputMethodManager =
-//            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-//        return true
-//    }
 
     fun showLoadingDialog(context: Context) {
         mLoadingDialog = LoadingDialog(context)
@@ -53,9 +47,7 @@ abstract class BaseFragment<B : ViewBinding>(
             mLoadingDialog.dismiss()
         }
     }
-//    override fun onBackPressed() {
-//        finish()
-//    }
+
     fun backApplicationExit(context: Context){
         ExitDialog("앱을 종료하시겠어요?",context).show()
     }

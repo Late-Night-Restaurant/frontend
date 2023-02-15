@@ -20,12 +20,11 @@ class TodayMenuActivity :
         binding.included.tvDefaultLayoutTitle.text = "이야기 집 오늘의 메뉴"
         dataList = arrayListOf()
         dataList.apply {
-            add(TestDataChip("심야식당이 좋다", "???"))
-            add(TestDataChip("심야식당이 좋을까?", "???"))
-            add(TestDataChip("심야식당이 이렇게 괜찮을까?", "???"))
-            add(TestDataChip("심야식당이 어렵다", "???"))
-            add(TestDataChip("심야식당이 바쁘다", "???"))
-            add(TestDataChip("심야식당 도망쳐", "???"))
+            add(TestDataChip("데모데이 파이팅!", "???"))
+            add(TestDataChip("심야식당을 만들었습니다.", "???"))
+            add(TestDataChip("어떻게 비슷한 사람들과 만나나요?", "???"))
+            add(TestDataChip("어떻게 솔직한 이야기를 하나요?", "???"))
+            add(TestDataChip("우리들의 이야기", "???"))
         }
         val dataRVAdapter = TodayMenuRVAdapter(this, dataList)
         binding.rvTodayMenu.adapter = dataRVAdapter

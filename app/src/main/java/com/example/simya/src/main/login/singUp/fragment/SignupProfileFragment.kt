@@ -202,4 +202,9 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         }
     }
 
+    override fun onPostSignUpSubmitDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
+    }
+
 }

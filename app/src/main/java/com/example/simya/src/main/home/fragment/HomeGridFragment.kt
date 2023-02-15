@@ -80,4 +80,9 @@ class HomeGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
     override fun onGetAllStoryFailure(response: LoadAllStoryResponse) {
         SampleSnackBar.make(binding.root,response.message!!)
     }
+
+    override fun onGetAllStoryDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
+    }
 }

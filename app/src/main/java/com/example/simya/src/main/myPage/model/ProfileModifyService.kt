@@ -34,7 +34,7 @@ class ProfileModifyService(val profileModifyInterface: ProfileModifyInterface) {
             }
 
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                Log.d("Retrofit2",t.toString())
+                profileModifyInterface.onModifyMyProfileDisconnect("서버가 원활하지 않습니다.")
             }
 
         })
@@ -51,7 +51,7 @@ class ProfileModifyService(val profileModifyInterface: ProfileModifyInterface) {
             }
 
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                Log.d("Retrofit2",t.toString())
+                profileModifyInterface.onDeleteMyProfileDisconnect("서버가 원활하지 않습니다.")
             }
 
         })

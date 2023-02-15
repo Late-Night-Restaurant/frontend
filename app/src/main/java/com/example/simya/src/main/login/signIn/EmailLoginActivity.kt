@@ -155,6 +155,11 @@ class EmailLoginActivity :
         SampleSnackBar.make(binding.root, response.message.toString()).show()
     }
 
+    override fun onPostLoginSubmitDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
+    }
+
     override fun onOKClicked() {}
 
     override fun onBackPressed() {

@@ -49,13 +49,13 @@ class HomeFragment: Fragment() {
                 override fun onClick(resultCode: Int) {
                    when(resultCode){
                        Constants.SORT_LIKE->{
-                           SampleSnackBar.make(binding.root,"최근 찜 순 정렬").show()
+                           SampleSnackBar.make(binding.root,"준비중입니다...").show()
                        }
                        Constants.SORT_LONG->{
-                           SampleSnackBar.make(binding.root,"오랫동안 들은 순 정렬").show()
+                           SampleSnackBar.make(binding.root,"준비중입니다...").show()
                        }
                        Constants.SORT_RECENT->{
-                           SampleSnackBar.make(binding.root,"즐겨 찾는 순 정렬").show()
+                           SampleSnackBar.make(binding.root,"준비중입니다...").show()
                        }
                    }
                 }
@@ -65,28 +65,28 @@ class HomeFragment: Fragment() {
         }
 
         // View type 바꾸기
-        binding.ibHomeMainViewType.run{
-            setOnClickListener{
-                viewTypeChange()
-                binding.ibHomeMainViewType.setImageResource(defaultViewType)
-                when (defaultViewType){
-                    R.drawable.ic_box_4 ->{
-                        childFragmentManager.beginTransaction()
-                            .replace(R.id.fm_home_main, HomeGridFragment())
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .commit()
-                    }
-                    R.drawable.ic_box_2 ->{
-                        childFragmentManager.beginTransaction()
-                            .replace(R.id.fm_home_main, HomeRecyclerFragment())
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .commit()
-                    }
-                }
-                true
-            }
-
-        }
+//        binding.ibHomeMainViewType.run{
+//            setOnClickListener{
+//                viewTypeChange()
+//                binding.ibHomeMainViewType.setImageResource(defaultViewType)
+//                when (defaultViewType){
+//                    R.drawable.ic_box_4 ->{
+//                        childFragmentManager.beginTransaction()
+//                            .replace(R.id.fm_home_main, HomeGridFragment())
+//                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                            .commit()
+//                    }
+//                    R.drawable.ic_box_2 ->{
+//                        childFragmentManager.beginTransaction()
+//                            .replace(R.id.fm_home_main, HomeRecyclerFragment())
+//                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                            .commit()
+//                    }
+//                }
+//                true
+//            }
+//
+//        }
     }
 //    보기방식 바꾸는 메소드
     private fun viewTypeChange(){

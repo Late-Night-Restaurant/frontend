@@ -35,7 +35,7 @@ class MyPageProfileService(val myPageProfileInterface: MyPageProfileInterface) {
                 }
 
                 override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                    Log.d("Retrofit2", t.toString())
+                    myPageProfileInterface.onGetUserProfileDisconnect("서버가 원활하지 않습니다.")
                 }
 
             })
@@ -52,7 +52,7 @@ class MyPageProfileService(val myPageProfileInterface: MyPageProfileInterface) {
             }
 
             override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                Log.d("Retrofit2", t.toString())
+                myPageProfileInterface.onSetMyRepresentDisconnect("서버가 원활하지 않습니다.")
             }
 
         })
@@ -74,7 +74,7 @@ class MyPageProfileService(val myPageProfileInterface: MyPageProfileInterface) {
                 }
 
                 override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                    Log.d("Retrofit2", t.toString())
+                    myPageProfileInterface.onLogoutDisconnect("서버가 원활하지 않습니다.")
                 }
 
             })

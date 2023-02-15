@@ -29,7 +29,7 @@ class LoginService(val loginInterface: LoginInterface) {
             }
             override fun onFailure(call: Call<AccountResponse>, t: Throwable) {
 //                loginInterface.onPostLoginSubmitFailure(t.message ?:"통신 오류")
-                Log.d("Retrofit2",t.toString())
+                loginInterface.onPostLoginSubmitDisconnect("서버가 원활하지 않습니다.")
                 // 통신 에러
             }
         })
