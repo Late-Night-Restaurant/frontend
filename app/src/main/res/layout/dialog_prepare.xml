@@ -16,7 +16,7 @@
             android:id="@+id/tv_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="테스트용 입니다"
+            android:text="준비중입니다.."
             android:textSize="15dp"
             android:textColor="@color/Gray_09"
             app:layout_constraintTop_toTopOf="parent"

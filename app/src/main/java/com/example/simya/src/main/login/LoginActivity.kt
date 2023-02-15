@@ -25,6 +25,7 @@ class LoginActivity : BaseActivity<ActivityLoginMainBinding>(ActivityLoginMainBi
         // 이메일 로그인 -> 현재 그냥 시작하기
         binding.ibLoginMainEmail.onThrottleClick {
             moveToEmail()
+            finish()
         }
 
     }

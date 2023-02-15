@@ -64,6 +64,7 @@ class EmailLoginActivity :
         //로그인 이벤트
         binding.btnEmailSigninLogin.onThrottleClick {
             if (checkEmail() && checkPassword()) {
+                showLoadingDialog(this)
                 email = binding.edtEmailSignInInputEmail.text.toString()
                 password = binding.edtEmailSignInInputPassword.text.toString()
                 LoginService(this).tryLoginSubmit(
@@ -153,6 +154,7 @@ class EmailLoginActivity :
     override fun onPostLoginSubmitFailure(response: BaseResponse) {
         dismissLoadingDialog()
         SampleSnackBar.make(binding.root, response.message.toString()).show()
+        finish()
     }
 
     override fun onPostLoginSubmitDisconnect(message: String) {
