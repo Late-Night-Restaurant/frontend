@@ -68,7 +68,7 @@ class HomeGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
                         dataList.add(response.result[i])
                     }
                     val gridLayoutManager = GridLayoutManager(activity, 2)
-                    dataGVAdapter = HomeGVAdapter(dataList)
+                    dataGVAdapter = HomeGVAdapter(requireContext(),dataList)
                     binding.gvHomeMainGrid.adapter = dataGVAdapter
                     binding.gvHomeMainGrid.layoutManager = gridLayoutManager
                     clickStory()

@@ -55,4 +55,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             selectedItemId = R.id.tab_home_main_home
         }
     }
+    override fun onBackPressed() {
+        backApplicationExit(this)
+    }
 }

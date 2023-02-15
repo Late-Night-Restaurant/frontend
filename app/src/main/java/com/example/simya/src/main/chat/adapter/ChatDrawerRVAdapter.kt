@@ -8,11 +8,12 @@ import com.bumptech.glide.Glide
 import com.example.simya.databinding.ItemDrawerProfileBinding
 import com.example.simya.src.model.UserDTO
 import com.example.simya.src.testData.TestChatDrawerProfileData
+import com.example.simya.util.Constants.S3_URL
 
 class ChatDrawerRVAdapter (private val context: Context, private val dataList:ArrayList<UserDTO>): RecyclerView.Adapter<ChatDrawerRVAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val binding: ItemDrawerProfileBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: UserDTO) {
-            Glide.with(context).load(data.picture).centerCrop().into(binding.civItemDrawerProfile)
+            Glide.with(context).load(S3_URL+data.picture).centerCrop().into(binding.civItemDrawerProfile)
             binding.tvItemLikeNick.text = data.nickname
         }
     }

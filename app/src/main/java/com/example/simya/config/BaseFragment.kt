@@ -21,7 +21,6 @@ abstract class BaseFragment<B : ViewBinding>(
 ) : Fragment(layoutResId) {
     private var _binding: B? = null
     lateinit var mLoadingDialog: LoadingDialog
-    private lateinit var callback: OnBackPressedCallback
     protected val binding get() = _binding!!
 
     override fun onCreateView(

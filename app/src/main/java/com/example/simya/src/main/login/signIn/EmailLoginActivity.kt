@@ -118,9 +118,7 @@ class EmailLoginActivity :
 
     private fun initTextWatcher() {
         textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-            }
-
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 val emailInput = binding.edtEmailSignInInputEmail!!.text.toString()
                 val passwordInput = binding.edtEmailSignInInputPassword!!.text.toString()
@@ -133,7 +131,6 @@ class EmailLoginActivity :
                     binding.btnEmailSigninLogin.isClickable = false
                 }
             }
-
             override fun afterTextChanged(s: Editable) {
             }
         }
@@ -146,11 +143,9 @@ class EmailLoginActivity :
         UserData.setProfileId(response.result!!.profileId)
         UserData.setProfileName(response.result!!.nickname)
         UserData.setProfileComment(response.result!!.comment)
-        // User Picture
-//        UserData.setProfileImage(response.result!!.pictureUrl)
+        UserData.setProfileImage(response.result!!.pictureUrl)
         UserData.setUserAccessToken(response.result!!.accessToken)
         UserData.setUserRefreshToken(response.result!!.refreshToken)
-//                    UserData.setProfileImage(response.result!!.profileImage)
         UserData.printAllData()
         moveToHome()
     }
@@ -162,4 +157,7 @@ class EmailLoginActivity :
 
     override fun onOKClicked() {}
 
+    override fun onBackPressed() {
+        backApplicationExit(this)
+    }
 }

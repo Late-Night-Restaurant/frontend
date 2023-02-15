@@ -4,6 +4,7 @@ import com.example.simya.config.ApplicationClass
 import com.example.simya.src.model.story.load.LoadMyStoryResponse
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.OK
+import com.example.simya.util.SampleSnackBar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +34,7 @@ class MyStoryService(val myStoryInterface: MyStoryInterface) {
             }
 
             override fun onFailure(call: Call<LoadMyStoryResponse>, t: Throwable) {
+
             }
 
         })

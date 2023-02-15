@@ -32,7 +32,7 @@ class CreateMyHouseService(val createMyHouseInterface: CreateMyHouseInterface){
             val requestBody = file!!.asRequestBody("image".toMediaTypeOrNull())
             multiPartBody = MultipartBody.Part.createFormData("image", file.name, requestBody)
         }
-        createMyHouseRetrofitInterface.onCreateMyHouse(accessToken!!,refreshToken!!,createStoryDTO).enqueue(object:
+        createMyHouseRetrofitInterface.onCreateMyHouse(accessToken!!,refreshToken!!,multiPartBody,createStoryDTO).enqueue(object:
             Callback<CreateStoryResponse> {
             override fun onResponse(
                 call: Call<CreateStoryResponse>,

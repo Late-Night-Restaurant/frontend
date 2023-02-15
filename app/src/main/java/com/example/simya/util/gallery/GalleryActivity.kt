@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -31,7 +32,11 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageB
     private val adapter = GalleryAdapter()
     private lateinit var cropLayout: CropLayout
     private val PERMISSIONS_REQUEST_CODE = 100
-    private var REQUIRED_PERMISSIONS = arrayOf<String>(android.Manifest.permission.READ_MEDIA_IMAGES)
+    private var REQUIRED_PERMISSIONS =if(Build.VERSION.SDK_INT <33){
+        arrayOf<String>(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+    }else{
+        arrayOf<String>(android.Manifest.permission.READ_MEDIA_IMAGES)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -61,13 +66,13 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageB
             // 갤러리 접근 권한이 있는 겨우
             ContextCompat.checkSelfPermission(
                 this,
-                android.Manifest.permission.READ_MEDIA_IMAGES
+                REQUIRED_PERMISSIONS[0]
             ) == PackageManager.PERMISSION_GRANTED -> {
                 showGallery()
                 Log.d("LOG", "갤러리 접근 권한이 있는 경우")
             }
             // 갤러리 접근 권한이 없는 경우 && 교육용 팝업을 보여줘야 하는 경우
-            shouldShowRequestPermissionRationale(android.Manifest.permission.READ_MEDIA_IMAGES)
+            shouldShowRequestPermissionRationale(REQUIRED_PERMISSIONS[0])
             -> {
                 requestPermission()
                 Log.d("LOG", "갤러리 접근 권한이 없는 경우 && 교육용 팝업을 보여줘야 하는 경우")
@@ -85,13 +90,13 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageB
     private fun requestPermission() {
         var permissionCheck = ContextCompat.checkSelfPermission(
             this,
-            android.Manifest.permission.READ_MEDIA_IMAGES
+            REQUIRED_PERMISSIONS[0]
         )
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             //설명이 필요한지
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     this,
-                    android.Manifest.permission.READ_MEDIA_IMAGES
+                    REQUIRED_PERMISSIONS[0]
                 )
             ) {
                 //설명 필요 (사용자가 요청을 거부한 적이 있음)
@@ -123,7 +128,7 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageB
         when (requestCode) {
             PERMISSIONS_REQUEST_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //권한 허용
+                    showGallery()
                 } else {
                     //권한 거부됨
                 }

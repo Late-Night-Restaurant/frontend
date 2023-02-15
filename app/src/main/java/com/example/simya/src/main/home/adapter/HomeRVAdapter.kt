@@ -1,12 +1,13 @@
 package com.example.simya.src.main.home.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simya.src.testData.TestDataBorder
 import com.example.simya.databinding.ItemBorderRv328156Binding
 
-class HomeRVAdapter (private val dataList:ArrayList<TestDataBorder>): RecyclerView.Adapter<HomeRVAdapter.DataViewHolder>() {
+class HomeRVAdapter (private val context: Context, private val dataList:ArrayList<TestDataBorder>): RecyclerView.Adapter<HomeRVAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val binding: ItemBorderRv328156Binding):RecyclerView.ViewHolder(binding.root){
         fun bind(data: TestDataBorder) {
 //            binding.tvRvTodayMenu.text = data.todayMenu

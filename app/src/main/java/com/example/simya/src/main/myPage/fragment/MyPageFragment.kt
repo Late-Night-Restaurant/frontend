@@ -131,7 +131,7 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     }
     // 프로필 가져오기 실패
     override fun onGetUserProfileFailure(response: ProfileResponse) {
-        Log.d("@@@@@ CHECK @@@@@@", "멀티 프로필 가져오기 실패")
+        SampleSnackBar.make(binding.root,"프로필을 가져오는데 실패했습니다.")
     }
 
     // 현재 메인 프로필 바꾸기 성공

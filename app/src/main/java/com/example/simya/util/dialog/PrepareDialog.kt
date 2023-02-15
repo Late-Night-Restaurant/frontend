@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.example.simya.databinding.DialogDefaultBinding
 import com.example.simya.databinding.DialogPrepareBinding
-import com.example.simya.util.onThrottleClick
 
 class PrepareDialog(context: Context,prepareDialogInterface: PrepareDialogInterface): Dialog(context){
     private var mBinding: DialogPrepareBinding? = null
@@ -21,9 +20,10 @@ class PrepareDialog(context: Context,prepareDialogInterface: PrepareDialogInterf
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable())
         window!!.setDimAmount(0.2f)
-        binding.btnOk.onThrottleClick {
+
+
+        binding.btnOk.setOnClickListener {
             this.prepareDialogInterface?.onOKClicked()
-            this.dismiss()
         }
     }
 }

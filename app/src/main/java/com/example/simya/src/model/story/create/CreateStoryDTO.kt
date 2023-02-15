@@ -7,8 +7,6 @@ data class CreateStoryDTO(
     var profileId: Long,
     @SerializedName("category")
     var category: String,
-    @SerializedName("signboardImageUrl")
-    var signboardImageUrl: String, // 빠질예정?
     @SerializedName("houseName")
     var houseName: String,
     @SerializedName("comment")

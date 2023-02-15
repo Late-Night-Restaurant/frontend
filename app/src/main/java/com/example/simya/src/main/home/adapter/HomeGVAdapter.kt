@@ -1,17 +1,20 @@
 package com.example.simya.src.main.home.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.simya.databinding.ItemBorderGv156156Binding
 import com.example.simya.src.model.story.load.LoadAllStoryResult
+import com.example.simya.util.Constants.S3_URL
 
-class HomeGVAdapter (private val dataList:ArrayList<LoadAllStoryResult>): RecyclerView.Adapter<HomeGVAdapter.DataViewHolder>() {
+class HomeGVAdapter (private val context: Context, private val dataList:ArrayList<LoadAllStoryResult>): RecyclerView.Adapter<HomeGVAdapter.DataViewHolder>() {
     private var listener: OnItemClickListener? = null
     inner class DataViewHolder(private val binding: ItemBorderGv156156Binding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: LoadAllStoryResult) {
-//            binding.tvGvTodayMenu.text = data.todayTopicTitle
+            Glide.with(context).load(S3_URL+data.signboardImageUrl).into(binding.ivGvBorder)
             binding.tvGvMainMenu.text = data.category
             binding.tvGvTitle.text = data.houseName
         }
