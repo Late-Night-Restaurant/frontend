@@ -2,23 +2,17 @@ package com.example.simya.util.dialog
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
-import androidx.fragment.app.DialogFragment
-import com.example.simya.databinding.DialogDefaultBinding
-import com.example.simya.databinding.DialogLoadingBinding
+import com.example.simya.databinding.DialogAgreeBinding
+import com.example.simya.src.main.login.singUp.fragment.SignupAgreeFragment
 
-class DefaultDialog(message: String,context: Context, myCustomDialogInterface: DefaultDialogInterface) : Dialog(context) {
+class AgreeDialog(message: String, context: Context, myCustomDialogInterface: SignupAgreeFragment) : Dialog(context) {
 
-    private var mBinding: DialogDefaultBinding? = null
+    private var mBinding: DialogAgreeBinding? = null
     private val binding get() = mBinding!!
 
-    private var myCustomDialogInterface: DefaultDialogInterface? = null
+    private var myCustomDialogInterface: AgreeDialogInterface? = null
 
     private var message: String? = null
 
@@ -31,7 +25,7 @@ class DefaultDialog(message: String,context: Context, myCustomDialogInterface: D
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        mBinding = DialogDefaultBinding.inflate(layoutInflater)
+        mBinding = DialogAgreeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable())
         window!!.setDimAmount(0.2f)
@@ -42,8 +36,8 @@ class DefaultDialog(message: String,context: Context, myCustomDialogInterface: D
 //      // setCanceledOnTouchOutside(false)
 //      // setCancelable(false)
 
-        binding.btnNo.setOnClickListener {
-            this.myCustomDialogInterface?.onNoButtonClicked()
+        binding.btnClose.setOnClickListener {
+            this.myCustomDialogInterface?.onCloseButtonClicked()
             this.dismiss()
         }
     }
