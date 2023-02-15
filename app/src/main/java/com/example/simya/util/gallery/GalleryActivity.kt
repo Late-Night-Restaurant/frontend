@@ -2,7 +2,6 @@ package com.example.simya.util.gallery
 
 import android.content.ContentUris
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Bitmap
@@ -17,15 +16,15 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivityCropImageBinding
-import com.example.simya.util.Constants
-import com.example.simya.util.Constants.REQUEST_CODE_BORDER_IMAGE
+import com.example.simya.util.Constants.IMAGE_PATH
+import com.example.simya.util.Constants.IMAGE_URI
 import com.example.simya.util.Constants.REQUEST_CODE_FOR_INTENT
-import com.example.simya.util.Constants.REQUEST_CODE_PROFILE_IMAGE
 import com.example.simya.util.onThrottleClick
 import com.takusemba.cropme.CropLayout
 import com.takusemba.cropme.OnCropListener
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
+
 
 class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageBinding::inflate) {
     private val imageList = arrayListOf<Uri>()
@@ -46,7 +45,9 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageB
             // 성공했을 때,
             override fun onSuccess(bitmap: Bitmap) {
                 val image = getImageUri(this@GalleryActivity,bitmap)
-                intent.putExtra("cropImage",image.toString())
+                val path = absolutelyPath(image!!)
+                intent.putExtra(IMAGE_URI,image.toString())
+                intent.putExtra(IMAGE_PATH,path)
                 setResult(REQUEST_CODE_FOR_INTENT,intent)
                 finish()
             }
@@ -234,4 +235,14 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageB
         )
         return Uri.parse(path)
     }
+    fun absolutelyPath(path: Uri): String {
+
+        var proj: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
+        var c: Cursor? = contentResolver.query(path, proj, null, null, null)
+        var index = c!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        c.moveToFirst()
+
+        return c.getString(index)
+    }
+
 }

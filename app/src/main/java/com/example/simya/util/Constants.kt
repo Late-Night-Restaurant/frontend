@@ -67,6 +67,8 @@ object Constants {
     const val NICK_NAME = "nickname"
     const val COMMENT = "comment"
     const val MASTER_ID = "masterId"
+    const val IMAGE_URI ="imageUri"
+    const val IMAGE_PATH="imagePath"
 
     // VALIDATION
     const val EMAIL_VALIDATION =

@@ -33,6 +33,8 @@ import com.example.simya.util.Constants.DEFAULT
 import com.example.simya.util.Constants.ERROR_STRING_DUPLICATE
 import com.example.simya.util.Constants.ERROR_STRING_FAILED_SIGN_UP
 import com.example.simya.util.Constants.ERROR_STRING_INPUT
+import com.example.simya.util.Constants.IMAGE_PATH
+import com.example.simya.util.Constants.IMAGE_URI
 import com.example.simya.util.Constants.NICKNAME_VALIDATION
 import com.example.simya.util.Constants.OK
 import com.example.simya.util.Constants.POST_FAIL_USER
@@ -58,6 +60,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     private lateinit var textWatcher: TextWatcher
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private var getUri: Uri? = null
+    private var getPath: String? = null
     var signupActivity: SignupActivity? = null
 
     override fun onAttach(context: Context) {
@@ -81,7 +84,8 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == REQUEST_CODE_FOR_INTENT) {
-                    getUri = Uri.parse(result.data?.getStringExtra("cropImage"))
+                    getUri = Uri.parse(result.data?.getStringExtra(IMAGE_URI))
+                    getPath = result.data?.getStringExtra(IMAGE_PATH)
                     Glide.with(this).load(getUri).into(binding.civSignupInputProfile)
                     Log.d("이미지크롭 성공", "Success")
                 } else {
@@ -99,7 +103,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
                 val nicknameData = binding.tietNicknameSignupInput.text.toString()
                 val commentData = binding.tietCommentSignupInput.text.toString()
                 profile = SignUpProfileDTO(nicknameData, commentData)
-                SignUpService(this).trySignUpSubmit(getUri, SignupDTO(emailData, pwData, profile))
+                SignUpService(this).trySignUpSubmit(getPath, SignupDTO(emailData, pwData, profile))
             } else {
                 SampleSnackBar.make(binding.root, "올바른 형식에 맞게 작성해주세요.").show()
             }

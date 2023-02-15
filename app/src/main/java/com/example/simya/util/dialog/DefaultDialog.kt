@@ -5,7 +5,11 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.Window
+import androidx.fragment.app.DialogFragment
 import com.example.simya.databinding.DialogDefaultBinding
 import com.example.simya.databinding.DialogLoadingBinding
 
@@ -16,9 +20,13 @@ class DefaultDialog(message: String,context: Context, myCustomDialogInterface: D
 
     private var myCustomDialogInterface: DefaultDialogInterface? = null
 
+    private var message: String? = null
+
     init {
+        this.message = message
         this.myCustomDialogInterface = myCustomDialogInterface
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -27,9 +35,12 @@ class DefaultDialog(message: String,context: Context, myCustomDialogInterface: D
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable())
         window!!.setDimAmount(0.2f)
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-//        setCanceledOnTouchOutside(false)
-//        setCancelable(false)
+
+        binding.tvQuestion.text = message
+
+        // requestWindowFeature(Window.FEATURE_NO_TITLE)
+//      // setCanceledOnTouchOutside(false)
+//      // setCancelable(false)
 
         binding.btnYes.setOnClickListener {
             this.myCustomDialogInterface?.onYesButtonClicked()
