@@ -10,6 +10,8 @@ data class AccountResult(
     var nickname: String,
     @SerializedName("comment")
     var comment: String,
+    @SerializedName("pictureUrl")
+    var pictureUrl: String,
     @SerializedName("accessToken")
     var accessToken: String,
     @SerializedName("refreshToken")

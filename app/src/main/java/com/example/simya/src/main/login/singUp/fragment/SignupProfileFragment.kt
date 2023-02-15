@@ -103,6 +103,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
                 val nicknameData = binding.tietNicknameSignupInput.text.toString()
                 val commentData = binding.tietCommentSignupInput.text.toString()
                 profile = SignUpProfileDTO(nicknameData, commentData)
+                showLoadingDialog(requireContext())
                 SignUpService(this).trySignUpSubmit(getPath, SignupDTO(emailData, pwData, profile))
             } else {
                 SampleSnackBar.make(binding.root, "올바른 형식에 맞게 작성해주세요.").show()
@@ -184,10 +185,12 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     }
 
     override fun onPostSignUpSubmitSuccess(response: SignupResponse) {
+        dismissLoadingDialog()
         moveToFin()
     }
 
     override fun onPostSignUpSubmitFailure(response: SignupResponse) {
+        dismissLoadingDialog()
         if (response.code == REQUEST_ERROR) {
             when (response.message) {
                 ERROR_STRING_INPUT -> SampleSnackBar.make(binding.root, ERROR_STRING_INPUT).show()

@@ -27,13 +27,15 @@ import com.example.simya.util.Constants.EMAIL_VALIDATION
 import com.example.simya.util.Constants.REFRESH_TOKEN
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.UserData
+import com.example.simya.util.dialog.PrepareDialog
+import com.example.simya.util.dialog.PrepareDialogInterface
 import com.example.simya.util.onThrottleClick
 import com.google.android.material.snackbar.Snackbar
 import java.util.regex.Pattern
 
 
 class EmailLoginActivity :
-    BaseActivity<ActivitySigninEmailBinding>(ActivitySigninEmailBinding::inflate), LoginInterface {
+    BaseActivity<ActivitySigninEmailBinding>(ActivitySigninEmailBinding::inflate), LoginInterface,PrepareDialogInterface {
     private lateinit var textWatcher: TextWatcher
     private lateinit var email: String
     private lateinit var password: String
@@ -71,6 +73,12 @@ class EmailLoginActivity :
                     )
                 )
             }
+        }
+        binding.btnSignInEmailFindEmail.onThrottleClick {
+            PrepareDialog(this,this).show()
+        }
+        binding.btnSignInEmailFindPassword.onThrottleClick {
+            PrepareDialog(this,this).show()
         }
         binding.btnSigninEmailSignup.onThrottleClick {
             val intent = Intent(this, SignupActivity::class.java)
@@ -132,11 +140,14 @@ class EmailLoginActivity :
     }
 
     override fun onPostLoginSubmitSuccess(response: AccountResponse) {
+        dismissLoadingDialog()
         LoginService(this).setAccessTokenSharedPreferences(response.result!!.accessToken)
         LoginService(this).setRefreshTokenSharedPreferences(response.result!!.refreshToken)
         UserData.setProfileId(response.result!!.profileId)
         UserData.setProfileName(response.result!!.nickname)
         UserData.setProfileComment(response.result!!.comment)
+        // User Picture
+//        UserData.setProfileImage(response.result!!.pictureUrl)
         UserData.setUserAccessToken(response.result!!.accessToken)
         UserData.setUserRefreshToken(response.result!!.refreshToken)
 //                    UserData.setProfileImage(response.result!!.profileImage)
@@ -145,7 +156,10 @@ class EmailLoginActivity :
     }
 
     override fun onPostLoginSubmitFailure(response: BaseResponse) {
+        dismissLoadingDialog()
         SampleSnackBar.make(binding.root, response.message.toString()).show()
     }
+
+    override fun onOKClicked() {}
 
 }

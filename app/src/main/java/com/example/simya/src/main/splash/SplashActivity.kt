@@ -133,9 +133,9 @@ class SplashActivity : AppCompatActivity() {
     // SharedPreferences
 
     // 테스트용 터치 이벤트
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        splashHandler.removeCallbacksAndMessages(null)
-        moveToHome()
-        return true
-    }
+//    override fun onTouchEvent(event: MotionEvent): Boolean {
+//        splashHandler.removeCallbacksAndMessages(null)
+//        moveToHome()
+//        return true
+//    }
 }

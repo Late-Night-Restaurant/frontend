@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/Gray_06"
-                android:hint="숫자, 영문 조합 최소 8자"
+                android:hint="숫자, 영문, 특수문자 조합 최소 8자"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout

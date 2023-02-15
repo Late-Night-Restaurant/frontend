@@ -1,14 +1,10 @@
 package com.example.simya.src.main.login.model
 
-import android.database.Cursor
-import android.net.Uri
-import android.provider.MediaStore
 import android.util.Log
 import com.example.simya.config.ApplicationClass
 import com.example.simya.src.model.account.SignupDTO
 import com.example.simya.src.model.account.SignupResponse
 import com.example.simya.util.Constants.OK
-import com.example.simya.util.Constants.S3_URL
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -23,11 +19,9 @@ class SignUpService(val signUpInterface: SignUpInterface) {
     fun trySignUpSubmit(image: String?,signUpDTO: SignupDTO){
         var multiPartBody: MultipartBody.Part? = null
         if(image != null){
-//            val file = image.path?.let { File("$it.jpg") }
             val file = File(image)
-            Log.d("filename is",file.name)
-            val requestBody = file!!.asRequestBody("image/jpg".toMediaTypeOrNull())
-            multiPartBody = MultipartBody.Part.createFormData("images", S3_URL+"testImage.jpg", requestBody)
+            val requestBody = file!!.asRequestBody("image".toMediaTypeOrNull())
+            multiPartBody = MultipartBody.Part.createFormData("image", file.name, requestBody)
         }
         signUpRetrofitInterface.onSignUpSubmit(multiPartBody,signUpDTO).enqueue(object: Callback<SignupResponse>{
             override fun onResponse(

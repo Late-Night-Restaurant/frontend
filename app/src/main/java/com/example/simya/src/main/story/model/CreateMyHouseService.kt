@@ -7,9 +7,13 @@ import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.OK
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class CreateMyHouseService(val createMyHouseInterface: CreateMyHouseInterface){
     private val createMyHouseRetrofitInterface: CreateMyHouseRetrofitInterface = ApplicationClass.sRetrofit.create(CreateMyHouseRetrofitInterface::class.java)
@@ -21,7 +25,13 @@ class CreateMyHouseService(val createMyHouseInterface: CreateMyHouseInterface){
         Constants.REFRESH_TOKEN,
         Constants.DEFAULT
     )
-    fun tryOnCreateMyHouse(createStoryDTO: CreateStoryDTO){
+    fun tryOnCreateMyHouse(image: String?,createStoryDTO: CreateStoryDTO){
+        var multiPartBody: MultipartBody.Part? = null
+        if(image != null){
+            val file = File(image)
+            val requestBody = file!!.asRequestBody("image".toMediaTypeOrNull())
+            multiPartBody = MultipartBody.Part.createFormData("image", file.name, requestBody)
+        }
         createMyHouseRetrofitInterface.onCreateMyHouse(accessToken!!,refreshToken!!,createStoryDTO).enqueue(object:
             Callback<CreateStoryResponse> {
             override fun onResponse(
