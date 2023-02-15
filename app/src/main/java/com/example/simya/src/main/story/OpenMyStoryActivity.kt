@@ -13,30 +13,48 @@ import com.example.simya.util.Constants.BORDER_MAIN_MENU
 import com.example.simya.util.Constants.BORDER_TITLE
 import com.example.simya.util.Constants.HOUSE_ID
 
-class OpenMyStoryActivity:  BaseActivity<ActivityStoryOpenBinding>(ActivityStoryOpenBinding::inflate){
+class OpenMyStoryActivity :
+    BaseActivity<ActivityStoryOpenBinding>(ActivityStoryOpenBinding::inflate) {
+    var fragmentStep: Int = 1
     lateinit var category: String
     lateinit var houseName: String
     var houseId = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         category = intent.getStringExtra(BORDER_MAIN_MENU)!!
-        houseName= intent.getStringExtra(BORDER_TITLE)!!
-        houseId = intent.getLongExtra(HOUSE_ID,0L)
+        houseName = intent.getStringExtra(BORDER_TITLE)!!
+        houseId = intent.getLongExtra(HOUSE_ID, 0L)
         init()
     }
-    private fun init(){
+
+    private fun init() {
         nextFragmentSignUp(1)
     }
+
     fun nextFragmentSignUp(int: Int) {
         val transaction = supportFragmentManager.beginTransaction()
-        when(int){
+        when (int) {
             1 -> transaction.replace(binding.fmOpenStory.id, OpenMyStoryFragment())
             2 -> transaction.replace(binding.fmOpenStory.id, CreateMyStoryMainMenuFragment())
         }
         transaction.commit()
     }
-//    fun resultFinish(){
+
+    //    fun resultFinish(){
 //        setResult(Constants.REQUEST_CODE_FOR_INTENT)
 //        finish()
 //    }
+    override fun onBackPressed() {
+        val transaction = supportFragmentManager.beginTransaction()
+        when (fragmentStep) {
+            1 -> {
+                finish()
+            }
+            2 -> {
+                transaction.replace(binding.fmOpenStory.id, CreateMyStoryFragment())
+                fragmentStep = 1
+            }
+        }
+        transaction.commit()
+    }
 }

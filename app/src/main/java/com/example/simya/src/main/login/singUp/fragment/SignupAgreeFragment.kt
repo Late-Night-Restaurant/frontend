@@ -12,9 +12,11 @@ import com.example.simya.util.SampleSnackBar
 import com.example.simya.src.main.login.signIn.EmailLoginActivity
 import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.databinding.FragmentSignupAgreeBinding
+import com.example.simya.util.dialog.AgreeDialog
+import com.example.simya.util.dialog.AgreeDialogInterface
 
 
-class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
+class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener, AgreeDialogInterface {
     private lateinit var binding: FragmentSignupAgreeBinding
 
     var signupActivity: SignupActivity? = null
@@ -36,6 +38,7 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         agreeCheck()
+        showAgreeDetail()
         binding.btnSignupNextAgree.setOnClickListener {
 
             if (agreeCheck()) {
@@ -145,4 +148,16 @@ class SignupAgreeFragment: Fragment(), SignupActivity.onBackPressedListener {
         startActivity(intent)
     }
 
+    private fun showAgreeDetail() {
+        binding.btnSignupService.setOnClickListener {
+            AgreeDialog("서비스", requireContext(), this).show()
+        }
+
+        binding.btnSignupInfo.setOnClickListener {
+            AgreeDialog("개인정보", requireContext(), this).show()
+        }
+    }
+
+    override fun onCloseButtonClicked() {
+    }
 }
