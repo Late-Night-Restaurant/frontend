@@ -6,6 +6,6 @@ data class ProfileDTO(
     @SerializedName("profileId") var profileId: Long,
     @SerializedName("nickname") var nickname: String,
     @SerializedName("comment") var comment: String,
-    @SerializedName("picture") var picture: String
+    @SerializedName("pictureUrl") var pictureUrl: String
 )
 
