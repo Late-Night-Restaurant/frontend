@@ -40,7 +40,6 @@ class HomeGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
     private fun init() {
         AllStoryService(this).tryGetAllStory()
     }
-
     private fun clickStory() {
         dataGVAdapter.setOnItemClickListener(object : HomeGVAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: LoadAllStoryResult, position: Int) {

@@ -54,11 +54,12 @@
             app:layout_constraintStart_toStartOf="@id/rab_dialog_my_review_rating"
             android:text="이것은 통닭인가 갈비인가 어서에요 심야식당입니다."/>
         <ImageButton
-            android:id="@+id/imgbtn_dialog_my_review_delete"
+            android:id="@+id/ib_dialog_my_review_delete"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_trash"
             android:background="#00ff0000"
+            android:scaleType="fitCenter"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
