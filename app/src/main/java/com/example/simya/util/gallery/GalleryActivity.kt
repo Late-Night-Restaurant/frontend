@@ -21,6 +21,7 @@ import com.example.simya.util.Constants
 import com.example.simya.util.Constants.REQUEST_CODE_BORDER_IMAGE
 import com.example.simya.util.Constants.REQUEST_CODE_FOR_INTENT
 import com.example.simya.util.Constants.REQUEST_CODE_PROFILE_IMAGE
+import com.example.simya.util.onThrottleClick
 import com.takusemba.cropme.CropLayout
 import com.takusemba.cropme.OnCropListener
 import kotlinx.coroutines.launch
@@ -38,7 +39,7 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(ActivityCropImageB
     }
     fun init() {
         cropLayout = binding.clCropper
-        binding.ibCropAble.setOnClickListener {
+        binding.ibCropAble.onThrottleClick {
             cropLayout.crop()
         }
         cropLayout.addOnCropListener(object : OnCropListener {

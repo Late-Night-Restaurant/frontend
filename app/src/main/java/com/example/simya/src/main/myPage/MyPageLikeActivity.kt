@@ -9,6 +9,7 @@ import com.example.simya.databinding.ActivityMyPageLikeBinding
 import com.example.simya.util.dialog.SortDialog
 import com.example.simya.src.main.myPage.fragment.MyPageLikeGridFragment
 import com.example.simya.src.main.myPage.fragment.MyPageLikeRecyclerFragment
+import com.example.simya.util.onThrottleClick
 
 class MyPageLikeActivity : BaseActivity<ActivityMyPageLikeBinding>(ActivityMyPageLikeBinding::inflate)
 {
@@ -27,13 +28,13 @@ class MyPageLikeActivity : BaseActivity<ActivityMyPageLikeBinding>(ActivityMyPag
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
 
-        binding.ibMyPageLikeViewType.setOnClickListener {
+        binding.ibMyPageLikeViewType.onThrottleClick {
             val dialog = SortDialog(this as AppCompatActivity)
             dialog!!.showDia()
         }
 
         binding.ibMyPageLikeViewType.run {
-            setOnClickListener {
+            onThrottleClick {
                 viewTypeChange()
                 binding.ibMyPageLikeViewType.setImageResource(defaultViewType)
 
