@@ -35,8 +35,8 @@ class OpenMyStoryActivity:  BaseActivity<ActivityStoryOpenBinding>(ActivityStory
         }
         transaction.commit()
     }
-    fun resultFinish(){
-        setResult(Constants.REQUEST_CODE_FOR_INTENT)
-        finish()
-    }
+//    fun resultFinish(){
+//        setResult(Constants.REQUEST_CODE_FOR_INTENT)
+//        finish()
+//    }
 }

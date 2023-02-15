@@ -2,23 +2,17 @@ package com.example.simya.util.dialog
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
 import com.example.simya.databinding.DialogDefaultBinding
-import com.example.simya.databinding.DialogLoadingBinding
+import kotlin.system.exitProcess
 
-class DefaultDialog(message: String,context: Context, myCustomDialogInterface: DefaultDialogInterface) : Dialog(context) {
+class ExitDialog(val message: String, context: Context) : Dialog(context) {
 
     private var mBinding: DialogDefaultBinding? = null
     private val binding get() = mBinding!!
 
-    private var myCustomDialogInterface: DefaultDialogInterface? = null
-
-    init {
-        this.myCustomDialogInterface = myCustomDialogInterface
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -27,15 +21,13 @@ class DefaultDialog(message: String,context: Context, myCustomDialogInterface: D
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable())
         window!!.setDimAmount(0.2f)
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
 //        setCanceledOnTouchOutside(false)
 //        setCancelable(false)
-
+        binding.tvQuestion.text = message
         binding.btnYes.setOnClickListener {
-            this.myCustomDialogInterface?.onYesButtonClicked()
+            exitProcess(0)
         }
         binding.btnNo.setOnClickListener {
-            this.myCustomDialogInterface?.onNoButtonClicked()
             this.dismiss()
         }
     }

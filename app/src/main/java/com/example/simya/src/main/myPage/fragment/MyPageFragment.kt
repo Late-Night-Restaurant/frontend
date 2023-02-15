@@ -12,6 +12,7 @@ import com.example.simya.R
 import com.example.simya.config.BaseFragment
 import com.example.simya.config.BaseResponse
 import com.example.simya.databinding.FragmentHomeMyPageBinding
+import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.src.main.login.signIn.EmailLoginActivity
 import com.example.simya.src.main.myPage.adapter.myPage.MultiProfileAdapter
 import com.example.simya.util.data.UserData
@@ -22,11 +23,14 @@ import com.example.simya.src.model.profile.ProfileDTO
 import com.example.simya.src.model.profile.ProfileResponse
 import com.example.simya.util.Constants.NO
 import com.example.simya.util.Constants.YES
+import com.example.simya.util.SampleSnackBar
+import com.example.simya.util.dialog.DefaultDialog
+import com.example.simya.util.dialog.DefaultDialogInterface
 
 class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     FragmentHomeMyPageBinding::bind,
     R.layout.fragment_home_my_page
-), MyPageProfileInterface {
+), MyPageProfileInterface,DefaultDialogInterface {
 
     private var dataList: ArrayList<ProfileDTO> = arrayListOf()
     private lateinit var dataRVAdapter: MultiProfileAdapter
@@ -69,22 +73,9 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
                 RecyclerView.HORIZONTAL,
                 false
             )
-
         // 로그아웃
         binding.btnMyPageLogout.setOnClickListener {
-            showBasicDialog(this@MyPageFragment.requireContext(), "로그아웃 하시겠습니까?")
-            mBasicDialog.setOnItemClickListener(object : BasicDialog.DefaultDialogClickedListener {
-                override fun onClick(resultCode: Int) {
-                    if (resultCode == YES) {
-                        dismissBasicDialog()
-                        Log.d("로그아웃", "YES")
-                        MyPageProfileService(this@MyPageFragment).tryOnLogout()
-                    } else if (resultCode == NO) {
-                        dismissBasicDialog()
-                        Log.d("로그아웃", "NO")
-                    }
-                }
-            })
+            DefaultDialog("로그아웃 하시겠습니까?",requireContext(),this).show()
         }
         clickMultiProfile()
         MyPageProfileService(this).tryGetUserProfile()
@@ -160,11 +151,20 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
             EmailLoginActivity::class.java
         )
         startActivity(intent)
+        (activity as HomeActivity).finish()
     }
 
     // 로그아웃 실패
     override fun onLogoutFailure(response: BaseResponse) {
-        Log.d("@@@@@ CHECK @@@@@@", "로그아웃 실패")
+        SampleSnackBar.make(binding.root,"로그아웃에 실패했습니다.")
+    }
+    // 다이얼로그 예스
+    override fun onYesButtonClicked() {
+        MyPageProfileService(this@MyPageFragment).tryOnLogout()
+    }
+    // 다이얼로그 노
+    override fun onNoButtonClicked() {
+
     }
 
 

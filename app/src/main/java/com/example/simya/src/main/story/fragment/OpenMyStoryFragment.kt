@@ -13,11 +13,13 @@ import com.example.simya.src.main.prepare.PrepareActivity
 import com.example.simya.src.main.story.OpenMyStoryActivity
 import com.example.simya.src.main.story.StoryLikeActivity
 import com.example.simya.src.main.story.StoryReviewActivity
+import com.example.simya.util.dialog.DefaultDialog
+import com.example.simya.util.dialog.DefaultDialogInterface
 
 class OpenMyStoryFragment :
     BaseFragment<FragmentDrawerMyStroyOpenBinding>(
         FragmentDrawerMyStroyOpenBinding::bind,
-        R.layout.fragment_drawer_my_stroy_open) {
+        R.layout.fragment_drawer_my_stroy_open),DefaultDialogInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -76,8 +78,15 @@ class OpenMyStoryFragment :
             // 메인 메뉴 수정
         }
         binding.btnMyStoryClose.setOnClickListener {
-            var dialog = CloseDialog(requireContext())
-            dialog.showDia()
+            DefaultDialog("페점하시겠습니까?",requireContext(),this).show()
         }
+    }
+
+    override fun onYesButtonClicked() {
+        // 폐점 처리
+    }
+
+    override fun onNoButtonClicked() {
+       // 그냥 dismiss
     }
 }
