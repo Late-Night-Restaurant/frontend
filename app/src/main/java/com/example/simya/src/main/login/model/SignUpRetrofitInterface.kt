@@ -12,6 +12,6 @@ interface SignUpRetrofitInterface {
     @POST("/simya/form-signup")
     fun onSignUpSubmit(
         @Part imageFile : MultipartBody.Part?,
-        @Part signup: SignupDTO
+        @Part("formSignupRequestDto") signup: SignupDTO
     ): Call<SignupResponse>
 }
