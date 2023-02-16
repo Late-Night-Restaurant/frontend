@@ -12,7 +12,7 @@ import retrofit2.http.Path
 interface ChatDrawerRetrofitInterface {
     // 내가 찜한 집들 모두 조회
     @Headers("Content-Type: application/json")
-    @GET("/simya/house/:houseId/guest")
+    @GET("/simya/house/{houseId}/guest")
     fun getHouseProfileList(
         @Header("Access-Token") accessToken: String,
         @Header("Refresh-Token") refreshToken: String,

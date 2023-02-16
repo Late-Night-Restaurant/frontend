@@ -42,6 +42,7 @@ import com.example.simya.src.model.UserDTO
 import com.example.simya.util.Constants.BORDER_IMAGE_URL
 import com.example.simya.util.Constants.BORDER_TITLE
 import com.example.simya.util.Constants.MASTER_ID
+import com.example.simya.util.Constants.SOCKET_URL
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.onThrottleClick
 import com.gmail.bishoybasily.stomp.lib.Event
@@ -66,7 +67,6 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
     private var thisHouseId: Long = 0
     private var thisHouseMasterId: Long = 0
     private var allChatStatus = true
-    private lateinit var thisHouseUrl: String
     private lateinit var thisHouseName: String
 
     private val client = OkHttpClient.Builder()
@@ -88,11 +88,9 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        onNotify(binding.root, "안녕")
         thisHouseId = intent.getLongExtra(HOUSE_ID, 0)
         thisHouseMasterId = intent.getLongExtra(MASTER_ID,0)
         thisHouseName = intent.getStringExtra(BORDER_TITLE)!!
-        thisHouseUrl = intent.getStringExtra(BORDER_IMAGE_URL)!!
         checkHouseAndMasterId(thisHouseId,thisHouseMasterId)
         checkUserTypeSwapUI(UserData.getProfileId())
         init()
@@ -107,10 +105,8 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
     }
     private fun init() {
         binding.tvDrawerChat.text = thisHouseName
-        Glide.with(this).load(thisHouseUrl).into(binding.civDrawerChat)
-        getGuestProfileList()
         Log.d("Status", "CHAT ACTIVITY")
-        stomp.url = "ws://10.0.2.2:8080/simya/ws-stomp/websocket"
+        stomp.url = SOCKET_URL
         stompConnection = stomp.connect().subscribe {
             when (it.type) {
                 Event.Type.OPENED -> {
@@ -172,25 +168,25 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
         }
         binding.btnChatPause.onThrottleClick {
             if(allChatStatus){
-                sendTypeMessage("FREEZE","얼리기")
-                sendTypeMessage("NOTIFY","얼리기")
+                sendTypeMessage("FREEZE","채팅방 얼리기")
+                sendTypeMessage("NOTIFY","채팅방 얼리기")
                 binding.btnChatPause.text = "채팅방 녹이기"
                 allChatStatus = !allChatStatus
             }else{
-                sendTypeMessage("RELEASE-FREEZE","녹이기")
-                sendTypeMessage("NOTIFY","녹이기")
+                sendTypeMessage("RELEASE-FREEZE","채팅방 녹이기")
+                sendTypeMessage("NOTIFY","채팅방 녹이기")
                 binding.btnChatPause.text ="채팅방 얼리기"
                 allChatStatus = !allChatStatus
             }
         }
     }
-    private fun getGuestProfileList(){
-        ChatDrawerService(this).tryGetChatProfileList(thisHouseId)
-    }
-    private fun reloadGetGuestProfileList(){
-        listDataRVAdapter.notifyItemRangeRemoved(0,profileList.size-1)
-        getGuestProfileList()
-    }
+//    private fun getGuestProfileList(){
+//        ChatDrawerService(this).tryGetChatProfileList(thisHouseId)
+//    }
+//    private fun reloadGetGuestProfileList(){
+//        listDataRVAdapter.notifyItemRangeRemoved(0,profileList.size-1)
+//        getGuestProfileList()
+//    }
     // 공통
     private fun sendTypeMessage(type: String, message: String) {
         jsonObject.put("type", type)
@@ -209,11 +205,9 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
     }
     private fun enterNotify() {
         sendTypeMessage("ENTER", "입장")
-        reloadGetGuestProfileList()
     }
     private fun aWayNotify(){
         sendTypeMessage("QUIT", "입장")
-        reloadGetGuestProfileList()
     }
     private fun chatBen() {
         binding.includedChat.ibChatSend.isEnabled = false
@@ -253,7 +247,7 @@ class ChatActivity : BaseActivity<ActivityDrawerChatBinding>(ActivityDrawerChatB
     private fun receiveMessage(chat: JSONObject) {
         Log.d("Receive Message is", chat.toString())
         val profileId = chat.getLong("profileId")
-        val picture = chat.getString("picture")
+        val picture = chat.getString("pictureUrl")
         val sender = chat.getString("sender")
         val message = chat.getString("message")
         val type = chat.getString("type")

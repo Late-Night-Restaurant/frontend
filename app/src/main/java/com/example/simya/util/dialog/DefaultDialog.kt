@@ -41,7 +41,9 @@ class DefaultDialog(message: String,context: Context, myCustomDialogInterface: D
         // requestWindowFeature(Window.FEATURE_NO_TITLE)
 //      // setCanceledOnTouchOutside(false)
 //      // setCancelable(false)
-
+        binding.btnYes.setOnClickListener {
+            this.myCustomDialogInterface?.onYesButtonClicked()
+        }
         binding.btnNo.setOnClickListener {
             this.myCustomDialogInterface?.onNoButtonClicked()
             this.dismiss()

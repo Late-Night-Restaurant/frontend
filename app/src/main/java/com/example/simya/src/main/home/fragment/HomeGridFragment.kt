@@ -17,6 +17,7 @@ import com.example.simya.src.main.home.model.AllStoryService
 import com.example.simya.util.data.UserData
 import com.example.simya.src.model.story.load.LoadAllStoryResponse
 import com.example.simya.src.model.story.load.LoadAllStoryResult
+import com.example.simya.util.Constants.BORDER_IMAGE_URL
 import com.example.simya.util.Constants.ERROR_STRING_NULL_ALL_STORY
 import com.example.simya.util.Constants.ERROR_STRING_NULL_STORY
 import com.example.simya.util.SampleSnackBar
@@ -45,6 +46,7 @@ class HomeGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
             override fun onItemClick(v: View, data: LoadAllStoryResult, position: Int) {
                 val intent = Intent(this@HomeGridFragment.context, StoryIntroActivity::class.java)
                 intent.putExtra(HOUSE_ID, data.houseId)
+                intent.putExtra(BORDER_IMAGE_URL,data.signboardImageUrl)
                 startActivity(intent)
             }
             override fun onLongClick(v: View, data: LoadAllStoryResult, position: Int) {

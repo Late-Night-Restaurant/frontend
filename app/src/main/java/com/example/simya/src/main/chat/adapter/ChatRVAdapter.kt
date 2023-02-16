@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.simya.R
 import com.example.simya.util.Constants.CHAT_NOTIFY
 import com.example.simya.util.Constants.CHAT_OTHERS
 import com.example.simya.util.Constants.CHAT_SELF
@@ -23,7 +24,7 @@ class ChatRVAdapter (private val context: Context, private val dataList:ArrayLis
         fun bind(data: ChatRVData,position: Int) {
             binding.tvChatReceiveContent.text = data.message
             binding.tvChatReceiveNick.text = data.sender
-            Glide.with(context).load(S3_URL+data.picture).centerCrop().into(binding.civChatReceiveProfile)
+            Glide.with(context).load(S3_URL+data.picture).placeholder(R.drawable.ic_base_profile).centerCrop().into(binding.civChatReceiveProfile)
 
             if(position != RecyclerView.NO_POSITION){
                 binding.civChatReceiveProfile.setOnClickListener {
@@ -37,13 +38,13 @@ class ChatRVAdapter (private val context: Context, private val dataList:ArrayLis
         fun bind(data: ChatRVData,position: Int) {
             binding.tvChatSendContent.text = data.message
             binding.tvChatSendNick.text = data.sender
-            Glide.with(context).load(S3_URL+data.picture).centerCrop().into(binding.civChatSendProfile)
+            Glide.with(context).load(S3_URL+data.picture).placeholder(R.drawable.ic_base_profile).centerCrop().into(binding.civChatSendProfile)
         }
     }
     inner class NotifyDataViewHolder(private val binding: ItemChatNotifyBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: ChatRVData,position: Int) {
             binding.tvChatNotifyEnter.text = data.message
-//            Glide.with(context).load(data.user.image).centerCrop().into(binding.civChatSendProfile)
+//            Glide.with(context).load(data.user.image).placeholder(R.drawable.ic_base_profile).centerCrop().into(binding.civChatSendProfile)
         }
     }
     // test return if를 3개로 나누어서 CHAT_SELF , CHAT_OTHERS , ERROR

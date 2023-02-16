@@ -1,19 +1,12 @@
 package com.example.simya.src.main.login.signIn
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.os.Message
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.View
-import com.example.simya.R
-import com.example.simya.config.ApplicationClass
 import com.example.simya.config.BaseActivity
 import com.example.simya.config.BaseResponse
 import com.example.simya.databinding.ActivitySigninEmailBinding
-import com.example.simya.databinding.SnackbarLayoutBinding
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.src.main.login.model.LoginInterface
 import com.example.simya.src.main.login.model.LoginService
@@ -21,16 +14,12 @@ import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.src.main.prepare.PrepareActivity
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.src.model.account.AccountResponse
-import com.example.simya.util.Constants.ACCESS_TOKEN
-import com.example.simya.util.Constants.DEFAULT
 import com.example.simya.util.Constants.EMAIL_VALIDATION
-import com.example.simya.util.Constants.REFRESH_TOKEN
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.UserData
 import com.example.simya.util.dialog.PrepareDialog
 import com.example.simya.util.dialog.PrepareDialogInterface
 import com.example.simya.util.onThrottleClick
-import com.google.android.material.snackbar.Snackbar
 import java.util.regex.Pattern
 
 
@@ -91,6 +80,7 @@ class EmailLoginActivity :
         val intent = Intent(this, HomeActivity::class.java)
         // 메인,로그인 액티비티 스택 제거
 //        intent.flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK
+        finish()
         startActivity(intent)
     }
 
@@ -154,15 +144,16 @@ class EmailLoginActivity :
     override fun onPostLoginSubmitFailure(response: BaseResponse) {
         dismissLoadingDialog()
         SampleSnackBar.make(binding.root, response.message.toString()).show()
-        finish()
     }
 
     override fun onPostLoginSubmitDisconnect(message: String) {
-        SampleSnackBar.make(binding.root,message)
+        SampleSnackBar.make(binding.root,message).show()
         dismissLoadingDialog()
     }
 
-    override fun onOKClicked() {}
+    override fun onOKClicked() {
+
+    }
 
     override fun onBackPressed() {
         backApplicationExit(this)

@@ -12,6 +12,7 @@ import com.example.simya.src.main.home.adapter.HomeGVAdapter
 import com.example.simya.src.model.profile.ProfileDTO
 import com.example.simya.src.model.story.load.LoadAllStoryResult
 import com.example.simya.util.Constants.DEFAULT
+import com.example.simya.util.Constants.S3_URL
 
 class MultiProfileAdapter(
     private val context: Fragment,
@@ -24,7 +25,7 @@ class MultiProfileAdapter(
         fun bind(data: ProfileDTO) {
             binding.tvItemMyStoryMultiProfile.text = data.nickname
             if(data.pictureUrl != DEFAULT){
-                Glide.with(context).load(data.pictureUrl).placeholder(R.drawable.bg_profile).placeholder(R.drawable.ic_base_profile)
+                Glide.with(context).load(S3_URL+data.pictureUrl).placeholder(R.drawable.bg_profile).placeholder(R.drawable.ic_base_profile)
                     .into(binding.civItemMyStoryMultiProfile)
             }
         }

@@ -112,7 +112,7 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     private fun tryChangeMyProfile(data: ProfileDTO) {
         binding.tvMyPageMainNick.text = data.nickname
         binding.tvMyPageMainComment.text = data.comment
-        Glide.with(this@MyPageFragment).load(data.pictureUrl).placeholder(R.drawable.ic_base_profile)
+        Glide.with(this@MyPageFragment).load(S3_URL+data.pictureUrl).placeholder(R.drawable.ic_base_profile)
             .into(binding.civMyPageProfile)
         UserData.setProfileId(data.profileId)
 
@@ -157,12 +157,13 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
 
     // 로그아웃 성공
     override fun onLogoutSuccess(response: BaseResponse) {
+        SampleSnackBar.make(binding.root,"로그아웃되었습니다")
         val intent = Intent(
-            this@MyPageFragment.requireContext(),
+            requireContext(),
             EmailLoginActivity::class.java
         )
-        startActivity(intent)
         (activity as HomeActivity).finish()
+        startActivity(intent)
     }
 
     // 로그아웃 실패

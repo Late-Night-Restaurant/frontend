@@ -21,6 +21,7 @@ import com.example.simya.src.main.story.CreateMyStoryActivity
 import com.example.simya.src.model.UserDTO
 import com.example.simya.src.model.profile.ProfileDTO
 import com.example.simya.src.model.profile.ProfileResponse
+import com.example.simya.util.Constants.S3_URL
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.ProfileData
 
@@ -66,7 +67,7 @@ class CreateMyStoryFragment : BaseFragment<FragmentMyStoryCreateBinding>(
         dataRVAdapter.setOnItemClickListener(object :
             CreateMyStoryMultiProfileAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: UserDTO, position: Int) {
-                Glide.with(this@CreateMyStoryFragment).load(data.picture).placeholder(R.drawable.ic_base_profile).centerCrop()
+                Glide.with(this@CreateMyStoryFragment).load(S3_URL+data.picture).placeholder(R.drawable.ic_base_profile).centerCrop()
                     .into(binding.civMyStoryCreateSelectProfileImage)
                 binding.tvMyStoryCreateNick.text = data.nickname
                 binding.tvMyStoryCreateIntro.text = data.comment

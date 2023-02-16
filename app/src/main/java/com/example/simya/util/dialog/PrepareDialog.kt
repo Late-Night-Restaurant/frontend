@@ -24,6 +24,7 @@ class PrepareDialog(context: Context,prepareDialogInterface: PrepareDialogInterf
 
         binding.btnOk.setOnClickListener {
             this.prepareDialogInterface?.onOKClicked()
+            this.dismiss()
         }
     }
 }
