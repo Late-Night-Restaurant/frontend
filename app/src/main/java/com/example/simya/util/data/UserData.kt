@@ -17,7 +17,7 @@ object UserData {
         return profileName
     }
 
-    fun setProfileImage(profileString: String) {
+    fun setProfileImage(profileImage: String) {
         UserData.profileImage = profileImage
     }
 

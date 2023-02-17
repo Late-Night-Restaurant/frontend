@@ -13,6 +13,7 @@ import com.example.simya.util.data.UserData
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate)
 {
+    private var checkStatus = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -22,14 +23,18 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     private fun init() {
         UserData.printAllData()
 //        fragment 전환
+
         binding.bnvHomeNavi.run {
             setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.tab_home_main_home -> {
-                        supportFragmentManager
-                            .beginTransaction()
-                            .replace(binding.fmHome.id, HomeFragment())
-                            .commitAllowingStateLoss()
+                        if(checkStatus){
+                            supportFragmentManager
+                                .beginTransaction()
+                                .replace(binding.fmHome.id, HomeFragment())
+                                .commitAllowingStateLoss()
+                        }
+
                     }
                     R.id.tab_home_main_my_chat -> {
                         supportFragmentManager
@@ -54,5 +59,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             }
             selectedItemId = R.id.tab_home_main_home
         }
+    }
+    override fun onBackPressed() {
+        backApplicationExit(this)
     }
 }

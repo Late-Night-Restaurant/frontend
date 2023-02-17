@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.simya.config.BaseActivity
 import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.util.Constants.OK
@@ -18,7 +19,10 @@ import com.example.simya.src.main.story.model.StoryIntroService
 import com.example.simya.src.model.RetrofitBuilder
 import com.example.simya.src.model.RetrofitService
 import com.example.simya.src.model.story.inquiry.InquiryStoryDetailResponse
+import com.example.simya.util.Constants.BORDER_IMAGE_URL
+import com.example.simya.util.Constants.BORDER_TITLE
 import com.example.simya.util.Constants.MASTER_ID
+import com.example.simya.util.Constants.S3_URL
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.onThrottleClick
 import com.taufiqrahman.reviewratings.BarLabels
@@ -32,6 +36,8 @@ class StoryIntroActivity :
     StoryIntroInterface {
     private var houseId: Long = 0
     private var masterId: Long = 0
+    private var houseName = "이야기 집"
+    private var houseBorder = "defatult"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +79,9 @@ class StoryIntroActivity :
         intent.putExtra(HOUSE_ID, houseId)
         intent.putExtra(PROFILE_ID, profileId)
         intent.putExtra(MASTER_ID,masterId)
+        intent.putExtra(BORDER_TITLE,houseName)
+        intent.putExtra(BORDER_IMAGE_URL,houseBorder)
+
         startActivity(intent)
     }
 
@@ -85,14 +94,18 @@ class StoryIntroActivity :
                 response.result!!.masterProfile.nickname
             binding.tvStoryProfileIntro.text =
                 response.result!!.masterProfile.comment
+            Glide.with(this).load(S3_URL+response.result!!.masterProfile.pictureUrl).into(binding.civStoryProfileImage)
             //Glide binding.civStoryProfileImage 프로필 이미지 추가
             // 이야기집 정보
             binding.tvIntroMainMenu.text =
                 response.result!!.houseInfo.category
             binding.tvIntroTitle.text =
                 response.result!!.houseInfo.houseName
+            houseName = response.result!!.houseInfo.houseName
             binding.tvStoryProfileStoryIntro.text =
                 response.result!!.houseInfo.comment
+            Glide.with(this).load(S3_URL+response.result!!.houseInfo.signboardImageUrl).into(binding.ivRvBorderImage)
+            houseBorder = response.result!!.houseInfo.signboardImageUrl
         }
         dismissLoadingDialog()
     }
@@ -100,5 +113,10 @@ class StoryIntroActivity :
     override fun onGetStoryDetailFailure(response: InquiryStoryDetailResponse) {
         SampleSnackBar.make(binding.root,response.message!!)
         finish()
+    }
+
+    override fun onGetStoryDetailDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
     }
 }

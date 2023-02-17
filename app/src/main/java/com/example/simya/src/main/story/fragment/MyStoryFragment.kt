@@ -63,28 +63,28 @@ class MyStoryFragment: Fragment() {
             .commit()
 
         // View Type 설정
-        binding.ibHomeMyStoryMainViewType.run{
-            setOnClickListener{
-                viewTypeChange()
-                binding.ibHomeMyStoryMainViewType.setImageResource(defaultViewType)
-                when (defaultViewType){
-                    R.drawable.ic_box_4 ->{
-                        childFragmentManager.beginTransaction()
-                            .replace(R.id.fl_my_story_main, MyStoryGridFragment())
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .commit()
-                    }
-                    R.drawable.ic_box_2 ->{
-                        childFragmentManager.beginTransaction()
-                            .replace(R.id.fl_my_story_main, MyStoryRecyclerFragment())
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .commit()
-                    }
-                }
-                true
-            }
-
-        }
+//        binding.ibHomeMyStoryMainViewType.run{
+//            setOnClickListener{
+//                viewTypeChange()
+//                binding.ibHomeMyStoryMainViewType.setImageResource(defaultViewType)
+//                when (defaultViewType){
+//                    R.drawable.ic_box_4 ->{
+//                        childFragmentManager.beginTransaction()
+//                            .replace(R.id.fl_my_story_main, MyStoryGridFragment())
+//                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                            .commit()
+//                    }
+//                    R.drawable.ic_box_2 ->{
+//                        childFragmentManager.beginTransaction()
+//                            .replace(R.id.fl_my_story_main, MyStoryRecyclerFragment())
+//                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                            .commit()
+//                    }
+//                }
+//                true
+//            }
+//
+//        }
     }
     private fun moveToCreateStory(){
         val intent = Intent(this.context, CreateMyStoryActivity::class.java)

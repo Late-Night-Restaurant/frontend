@@ -35,7 +35,7 @@ class StoryIntroService(val storyIntroInterface:StoryIntroInterface) {
             }
 
             override fun onFailure(call: Call<InquiryStoryDetailResponse>, t: Throwable) {
-                Log.d("Retrofit2",t.toString())
+                storyIntroInterface.onGetStoryDetailDisconnect("서버가 원활하지 않습니다.")
             }
 
         })

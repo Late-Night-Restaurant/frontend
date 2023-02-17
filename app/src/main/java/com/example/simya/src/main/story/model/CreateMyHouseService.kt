@@ -7,9 +7,13 @@ import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.OK
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class CreateMyHouseService(val createMyHouseInterface: CreateMyHouseInterface){
     private val createMyHouseRetrofitInterface: CreateMyHouseRetrofitInterface = ApplicationClass.sRetrofit.create(CreateMyHouseRetrofitInterface::class.java)
@@ -21,8 +25,14 @@ class CreateMyHouseService(val createMyHouseInterface: CreateMyHouseInterface){
         Constants.REFRESH_TOKEN,
         Constants.DEFAULT
     )
-    fun tryOnCreateMyHouse(createStoryDTO: CreateStoryDTO){
-        createMyHouseRetrofitInterface.onCreateMyHouse(accessToken!!,refreshToken!!,createStoryDTO).enqueue(object:
+    fun tryOnCreateMyHouse(image: String?,createStoryDTO: CreateStoryDTO){
+        var multiPartBody: MultipartBody.Part? = null
+        if(image != null){
+            val file = File(image)
+            val requestBody = file!!.asRequestBody("image".toMediaTypeOrNull())
+            multiPartBody = MultipartBody.Part.createFormData("image", file.name, requestBody)
+        }
+        createMyHouseRetrofitInterface.onCreateMyHouse(accessToken!!,refreshToken!!,multiPartBody,createStoryDTO).enqueue(object:
             Callback<CreateStoryResponse> {
             override fun onResponse(
                 call: Call<CreateStoryResponse>,
@@ -31,13 +41,11 @@ class CreateMyHouseService(val createMyHouseInterface: CreateMyHouseInterface){
                 if(response.code() == OK){
                     createMyHouseInterface.onPostCreateMyHouseSuccess(response.body() as CreateStoryResponse)
                 }else{
-                    Log.d("responseCode!!!!!!!!!!!!",response.code().toString())
-                    // 에러 생김
-//                    createMyHouseInterface.onPostCreateMyHouseFailure(response.body() as CreateStoryResponse)
+                    createMyHouseInterface.onPostCreateMyHouseFailure(response.body() as CreateStoryResponse)
                 }
             }
             override fun onFailure(call: Call<CreateStoryResponse>, t: Throwable) {
-                Log.d("Retrofit2",t.toString())
+                createMyHouseInterface.onPostCreateMyHouseDisconnect("서버가 원활하지 않습니다.")
             }
 
         })

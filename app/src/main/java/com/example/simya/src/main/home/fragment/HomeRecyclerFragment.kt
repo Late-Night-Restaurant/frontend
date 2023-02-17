@@ -41,7 +41,7 @@ class HomeRecyclerFragment: Fragment() {
             add(TestDataBorder(2,"코딩","안드로이드","코딩은 힘들어"))
             add(TestDataBorder(4,"코딩","서버","코딩은 힘들어"))
         }
-        val dataRVAdapter = HomeRVAdapter(dataList)
+        val dataRVAdapter = HomeRVAdapter(requireContext(),dataList)
         binding.rvHomeMainRecycler.adapter = dataRVAdapter
         binding.rvHomeMainRecycler.layoutManager = LinearLayoutManager(this.context)
     }

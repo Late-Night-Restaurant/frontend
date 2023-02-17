@@ -5,6 +5,7 @@ object Constants {
     const val BASE_URL = "http://www.simya.kro.kr:8080/"
 //    const val BASE_URL = "http://10.0.2.2:8080"
     const val S3_URL = "https://simya-s3-bucket.s3.ap-northeast-2.amazonaws.com/"
+    const val SOCKET_URL = "ws://www.simya.kro.kr:8080/simya/ws-stomp/websocket"
     // TOKEN
     const val ACCESS_TOKEN = "ACCESS_TOKEN"
     const val REFRESH_TOKEN = "REFRESH_TOKEN"
@@ -56,6 +57,7 @@ object Constants {
     const val DEFAULT = "default"
     const val BORDER_TITLE = "title"
     const val BORDER_MAIN_MENU = "borderMainMenu"
+    const val BORDER_IMAGE_URL ="borderImageUrl"
     const val PROFILE_ID = "profileId"
     const val MAIN_MENU_LOVE = "사랑"
     const val MAIN_MENU_FAMILY = "가족"
@@ -67,6 +69,8 @@ object Constants {
     const val NICK_NAME = "nickname"
     const val COMMENT = "comment"
     const val MASTER_ID = "masterId"
+    const val IMAGE_URI ="imageUri"
+    const val IMAGE_PATH="imagePath"
 
     // VALIDATION
     const val EMAIL_VALIDATION =

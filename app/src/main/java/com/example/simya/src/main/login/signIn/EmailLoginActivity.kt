@@ -1,19 +1,12 @@
 package com.example.simya.src.main.login.signIn
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.os.Message
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.View
-import com.example.simya.R
-import com.example.simya.config.ApplicationClass
 import com.example.simya.config.BaseActivity
 import com.example.simya.config.BaseResponse
 import com.example.simya.databinding.ActivitySigninEmailBinding
-import com.example.simya.databinding.SnackbarLayoutBinding
 import com.example.simya.src.main.home.HomeActivity
 import com.example.simya.src.main.login.model.LoginInterface
 import com.example.simya.src.main.login.model.LoginService
@@ -21,19 +14,17 @@ import com.example.simya.src.main.login.singUp.SignupActivity
 import com.example.simya.src.main.prepare.PrepareActivity
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.src.model.account.AccountResponse
-import com.example.simya.util.Constants.ACCESS_TOKEN
-import com.example.simya.util.Constants.DEFAULT
 import com.example.simya.util.Constants.EMAIL_VALIDATION
-import com.example.simya.util.Constants.REFRESH_TOKEN
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.UserData
+import com.example.simya.util.dialog.PrepareDialog
+import com.example.simya.util.dialog.PrepareDialogInterface
 import com.example.simya.util.onThrottleClick
-import com.google.android.material.snackbar.Snackbar
 import java.util.regex.Pattern
 
 
 class EmailLoginActivity :
-    BaseActivity<ActivitySigninEmailBinding>(ActivitySigninEmailBinding::inflate), LoginInterface {
+    BaseActivity<ActivitySigninEmailBinding>(ActivitySigninEmailBinding::inflate), LoginInterface,PrepareDialogInterface {
     private lateinit var textWatcher: TextWatcher
     private lateinit var email: String
     private lateinit var password: String
@@ -62,6 +53,7 @@ class EmailLoginActivity :
         //로그인 이벤트
         binding.btnEmailSigninLogin.onThrottleClick {
             if (checkEmail() && checkPassword()) {
+                showLoadingDialog(this)
                 email = binding.edtEmailSignInInputEmail.text.toString()
                 password = binding.edtEmailSignInInputPassword.text.toString()
                 LoginService(this).tryLoginSubmit(
@@ -71,6 +63,12 @@ class EmailLoginActivity :
                     )
                 )
             }
+        }
+        binding.btnSignInEmailFindEmail.onThrottleClick {
+            PrepareDialog(this,this).show()
+        }
+        binding.btnSignInEmailFindPassword.onThrottleClick {
+            PrepareDialog(this,this).show()
         }
         binding.btnSigninEmailSignup.onThrottleClick {
             val intent = Intent(this, SignupActivity::class.java)
@@ -82,6 +80,7 @@ class EmailLoginActivity :
         val intent = Intent(this, HomeActivity::class.java)
         // 메인,로그인 액티비티 스택 제거
 //        intent.flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK
+        finish()
         startActivity(intent)
     }
 
@@ -110,9 +109,7 @@ class EmailLoginActivity :
 
     private fun initTextWatcher() {
         textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-            }
-
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 val emailInput = binding.edtEmailSignInInputEmail!!.text.toString()
                 val passwordInput = binding.edtEmailSignInInputPassword!!.text.toString()
@@ -125,27 +122,40 @@ class EmailLoginActivity :
                     binding.btnEmailSigninLogin.isClickable = false
                 }
             }
-
             override fun afterTextChanged(s: Editable) {
             }
         }
     }
 
     override fun onPostLoginSubmitSuccess(response: AccountResponse) {
+        dismissLoadingDialog()
         LoginService(this).setAccessTokenSharedPreferences(response.result!!.accessToken)
         LoginService(this).setRefreshTokenSharedPreferences(response.result!!.refreshToken)
         UserData.setProfileId(response.result!!.profileId)
         UserData.setProfileName(response.result!!.nickname)
         UserData.setProfileComment(response.result!!.comment)
+        UserData.setProfileImage(response.result!!.pictureUrl)
         UserData.setUserAccessToken(response.result!!.accessToken)
         UserData.setUserRefreshToken(response.result!!.refreshToken)
-//                    UserData.setProfileImage(response.result!!.profileImage)
         UserData.printAllData()
         moveToHome()
     }
 
     override fun onPostLoginSubmitFailure(response: BaseResponse) {
+        dismissLoadingDialog()
         SampleSnackBar.make(binding.root, response.message.toString()).show()
     }
 
+    override fun onPostLoginSubmitDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message).show()
+        dismissLoadingDialog()
+    }
+
+    override fun onOKClicked() {
+
+    }
+
+    override fun onBackPressed() {
+        backApplicationExit(this)
+    }
 }

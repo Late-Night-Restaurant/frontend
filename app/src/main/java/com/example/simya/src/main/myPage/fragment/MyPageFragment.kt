@@ -22,6 +22,7 @@ import com.example.simya.src.main.myPage.model.MyPageProfileService
 import com.example.simya.src.model.profile.ProfileDTO
 import com.example.simya.src.model.profile.ProfileResponse
 import com.example.simya.util.Constants.NO
+import com.example.simya.util.Constants.S3_URL
 import com.example.simya.util.Constants.YES
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.dialog.DefaultDialog
@@ -82,7 +83,7 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     }
 
     private fun initMainProfile() {
-        Glide.with(this).load(UserData.getProfileImage()).placeholder(R.drawable.ic_base_profile)
+        Glide.with(this).load(S3_URL+UserData.getProfileImage()).placeholder(R.drawable.ic_base_profile)
             .into(binding.civMyPageProfile)
         binding.tvMyPageMainNick.text = UserData.getProfileName()
         binding.tvMyPageMainComment.text = UserData.getProfileComment()
@@ -111,7 +112,7 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     private fun tryChangeMyProfile(data: ProfileDTO) {
         binding.tvMyPageMainNick.text = data.nickname
         binding.tvMyPageMainComment.text = data.comment
-        Glide.with(this@MyPageFragment).load(data.pictureUrl).placeholder(R.drawable.ic_base_profile)
+        Glide.with(this@MyPageFragment).load(S3_URL+data.pictureUrl).placeholder(R.drawable.ic_base_profile)
             .into(binding.civMyPageProfile)
         UserData.setProfileId(data.profileId)
 
@@ -131,7 +132,12 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     }
     // 프로필 가져오기 실패
     override fun onGetUserProfileFailure(response: ProfileResponse) {
-        Log.d("@@@@@ CHECK @@@@@@", "멀티 프로필 가져오기 실패")
+        SampleSnackBar.make(binding.root,"프로필을 가져오는데 실패했습니다.")
+    }
+
+    override fun onGetUserProfileDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
     }
 
     // 현재 메인 프로필 바꾸기 성공
@@ -144,20 +150,32 @@ class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
     override fun onSetMyRepresentProfileFailure(response: BaseResponse) {
     }
 
+    override fun onSetMyRepresentDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
+    }
+
     // 로그아웃 성공
     override fun onLogoutSuccess(response: BaseResponse) {
+        SampleSnackBar.make(binding.root,"로그아웃되었습니다")
         val intent = Intent(
-            this@MyPageFragment.requireContext(),
+            requireContext(),
             EmailLoginActivity::class.java
         )
-        startActivity(intent)
         (activity as HomeActivity).finish()
+        startActivity(intent)
     }
 
     // 로그아웃 실패
     override fun onLogoutFailure(response: BaseResponse) {
         SampleSnackBar.make(binding.root,"로그아웃에 실패했습니다.")
     }
+
+    override fun onLogoutDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
+    }
+
     // 다이얼로그 예스
     override fun onYesButtonClicked() {
         MyPageProfileService(this@MyPageFragment).tryOnLogout()

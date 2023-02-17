@@ -18,6 +18,7 @@ import com.example.simya.src.main.story.model.MyStoryInterface
 import com.example.simya.src.main.story.model.MyStoryService
 import com.example.simya.src.model.story.load.LoadMyStoryResponse
 import com.example.simya.src.model.story.load.LoadMyStoryResult
+import com.example.simya.util.Constants.BORDER_IMAGE_URL
 import com.example.simya.util.SampleSnackBar
 
 class MyStoryGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
@@ -43,6 +44,7 @@ class MyStoryGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
                 intent.putExtra(BORDER_MAIN_MENU, data.category)
                 intent.putExtra(BORDER_TITLE, data.houseName)
                 intent.putExtra(HOUSE_ID, data.houseId)
+                intent.putExtra(BORDER_IMAGE_URL,data.signboardImageUrl)
                 startActivity(intent)
             }
 
@@ -62,7 +64,7 @@ class MyStoryGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
                     dataList.add(response.result[i])
                 }
                 val gridLayoutManager = GridLayoutManager(activity, 2)
-                dataGVAdapter = MyStoryGVAdapter(dataList)
+                dataGVAdapter = MyStoryGVAdapter(requireContext(),dataList)
                 binding.gvHomeMainGrid.adapter = dataGVAdapter
                 binding.gvHomeMainGrid.layoutManager = gridLayoutManager
                 clickMyStory()
@@ -71,6 +73,11 @@ class MyStoryGridFragment : BaseFragment<FragmentHomeMainGridBinding>(
     }
 
     override fun onGetMyStoryFailure(response: LoadMyStoryResponse) {
-        SampleSnackBar.make(binding.root,"")
+        SampleSnackBar.make(binding.root,response.message!!)
+    }
+
+    override fun onGetMyStoryDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
     }
 }

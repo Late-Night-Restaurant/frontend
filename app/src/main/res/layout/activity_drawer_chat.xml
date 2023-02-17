@@ -36,20 +36,20 @@
                 app:layout_constraintStart_toStartOf="@id/civ_drawer_chat"
                 app:layout_constraintTop_toBottomOf="@id/civ_drawer_chat" />
 
-            <Button
-                android:id="@+id/btn_drawer_intro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="#00ff0000"
-                android:drawableEnd="@drawable/ic_right_small"
-                android:gravity="center_vertical"
-                android:text="이야기집 소개"
-                android:textColor="@color/Gray_05"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_drawer_chat" />
+<!--            <Button-->
+<!--                android:id="@+id/btn_drawer_intro"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:background="#00ff0000"-->
+<!--                android:drawableEnd="@drawable/ic_right_small"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="이야기집 소개"-->
+<!--                android:textColor="@color/Gray_05"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tv_drawer_chat" />-->
             <Button
                 android:id="@+id/btn_drawer_today"
                 android:layout_width="match_parent"
@@ -63,36 +63,36 @@
                 android:textColor="@color/Gray_05"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_drawer_intro" />
-            <Button
-                android:id="@+id/btn_drawer_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="#00ff0000"
-                android:drawableEnd="@drawable/ic_right_small"
-                android:gravity="center_vertical"
-                android:text="사진"
-                android:textColor="@color/Gray_05"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_drawer_today" />
+                app:layout_constraintTop_toBottomOf="@id/tv_drawer_chat" />
+<!--            <Button-->
+<!--                android:id="@+id/btn_drawer_image"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:background="#00ff0000"-->
+<!--                android:drawableEnd="@drawable/ic_right_small"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="사진"-->
+<!--                android:textColor="@color/Gray_05"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/btn_drawer_today" />-->
 
-            <Button
-                android:id="@+id/btn_drawer_link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="#00ff0000"
-                android:drawableEnd="@drawable/ic_right_small"
-                android:gravity="center_vertical"
-                android:text="링크"
-                android:textColor="@color/Gray_05"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_drawer_image" />
+<!--            <Button-->
+<!--                android:id="@+id/btn_drawer_link"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:background="#00ff0000"-->
+<!--                android:drawableEnd="@drawable/ic_right_small"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="링크"-->
+<!--                android:textColor="@color/Gray_05"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/btn_drawer_image" />-->
 
             <View
                 android:id="@+id/line1"
@@ -104,7 +104,7 @@
                 android:background="@color/Gray_08"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_drawer_link" />
+                app:layout_constraintTop_toBottomOf="@id/btn_drawer_today" />
 
             <TextView
                 android:id="@+id/tv_chat_profile_headline"

@@ -2,7 +2,11 @@ package com.example.simya.src.main.story.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.setFragmentResult
+import com.bumptech.glide.Glide
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
 import com.example.simya.databinding.FragmentDrawerMyStroyOpenBinding
@@ -10,9 +14,11 @@ import com.example.simya.util.Constants.BORDER_MAIN_MENU
 import com.example.simya.util.Constants.BORDER_TITLE
 import com.example.simya.util.Constants.HOUSE_ID
 import com.example.simya.src.main.prepare.PrepareActivity
+import com.example.simya.src.main.story.CreateMyStoryActivity
 import com.example.simya.src.main.story.OpenMyStoryActivity
 import com.example.simya.src.main.story.StoryLikeActivity
 import com.example.simya.src.main.story.StoryReviewActivity
+import com.example.simya.util.Constants.S3_URL
 import com.example.simya.util.dialog.DefaultDialog
 import com.example.simya.util.dialog.DefaultDialogInterface
 
@@ -20,8 +26,8 @@ class OpenMyStoryFragment :
     BaseFragment<FragmentDrawerMyStroyOpenBinding>(
         FragmentDrawerMyStroyOpenBinding::bind,
         R.layout.fragment_drawer_my_stroy_open),DefaultDialogInterface {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         init()
     }
 
@@ -34,6 +40,7 @@ class OpenMyStoryFragment :
             drawerLayout.openDrawer(GravityCompat.START)
             drawerInit()
         }
+        Glide.with(this).load(S3_URL+ (activity as OpenMyStoryActivity).houseImageUrl).into(binding.includedMyStoryOpen.ivRvBorderImage)
         // 찜 리스트
         binding.includedMyStoryOpen.btnMyStoryOpenLike.setOnClickListener {
             movePrepare()
@@ -63,11 +70,9 @@ class OpenMyStoryFragment :
     }
 
     private fun moveToOpen(houseId: Long) {
-        val intent = Intent(requireContext(), OpenMyStoryInputFragment::class.java)
-        intent.putExtra(BORDER_MAIN_MENU, binding.includedMyStoryOpen.tvRvMainMenu.text)
-        intent.putExtra(BORDER_TITLE, binding.includedMyStoryOpen.tvRvTitle.text)
-        intent.putExtra(HOUSE_ID, houseId)
-        startActivity(intent)
+        (activity as OpenMyStoryActivity).category = binding.includedMyStoryOpen.tvRvMainMenu.text.toString()
+        (activity as OpenMyStoryActivity).houseName = binding.includedMyStoryOpen.tvRvTitle.text.toString()
+        (activity as OpenMyStoryActivity).nextFragmentSignUp(2)
     }
 
     private fun drawerInit() {

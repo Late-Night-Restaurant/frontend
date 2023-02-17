@@ -22,9 +22,10 @@ class LoginActivity : BaseActivity<ActivityLoginMainBinding>(ActivityLoginMainBi
         // 카카오 로그인(현재 테스트용으로 홈화면으로 이동으로 바꿈)
         binding.ibLoginMainKakao.onThrottleClick {
         }
-        // 이메일 로그인
+        // 이메일 로그인 -> 현재 그냥 시작하기
         binding.ibLoginMainEmail.onThrottleClick {
             moveToEmail()
+            finish()
         }
 
     }

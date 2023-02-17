@@ -6,4 +6,5 @@ import com.example.simya.src.model.account.AccountResponse
 interface LoginInterface {
     fun onPostLoginSubmitSuccess(response: AccountResponse)
     fun onPostLoginSubmitFailure(response: BaseResponse)
+    fun onPostLoginSubmitDisconnect(message: String)
 }

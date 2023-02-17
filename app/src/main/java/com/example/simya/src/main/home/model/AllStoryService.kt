@@ -32,6 +32,7 @@ class AllStoryService(val allStoryInterface: AllStoryInterface) {
                 }
             }
             override fun onFailure(call: Call<LoadAllStoryResponse>, t: Throwable) {
+                allStoryInterface.onGetAllStoryDisconnect("서버가 원활하지 않습니다.")
             }
 
         })

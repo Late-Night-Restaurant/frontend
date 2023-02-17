@@ -25,6 +25,7 @@ import com.example.simya.src.main.story.model.CreateMyHouseService
 import com.example.simya.src.model.story.create.CreateStoryDTO
 import com.example.simya.src.model.story.create.CreateStoryResponse
 import com.example.simya.util.Constants
+import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.gallery.GalleryActivity
 
 class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBinding>(
@@ -35,13 +36,16 @@ class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBindin
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private var selectId = 0L
     private lateinit var mainMenu: String
+    private var getUri: Uri? = null
+    private var getPath: String? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTextWatcher()
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Constants.REQUEST_CODE_FOR_INTENT) {
-                    var getUri: Uri = Uri.parse(result.data?.getStringExtra("cropImage"))
+                    getUri = Uri.parse(result.data?.getStringExtra(Constants.IMAGE_URI))
+                    getPath = result.data?.getStringExtra(Constants.IMAGE_PATH)
                     Glide.with(this).load(getUri).into(binding.ibMyStoryCreateBorder)
                     binding.ivMyStoryCreateBorderEx.isInvisible = true
                     Log.d("이미지크롭 성공", "Success")
@@ -88,7 +92,7 @@ class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBindin
             getResult.launch(intent)
         }
         binding.btnMyStoryCreateBorderNext.setOnClickListener {
-            CreateMyHouseService(this).tryOnCreateMyHouse(setBorderData())
+            CreateMyHouseService(this).tryOnCreateMyHouse(getPath,setBorderData())
             // 서버에 전송 데이터 전송해서 이야기집 생성
         }
 
@@ -97,13 +101,12 @@ class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBindin
     private fun setBorderData(): CreateStoryDTO {
         var profileId = selectId
         var mainMenu = mainMenu
-        var imageUrl = "default"
+        var imageUrl = getPath
         var houseName = binding.etMyStoryCreateBorderTitle.text.toString()
         var comment = binding.etMyStoryCreateBorderIntro.text.toString()
         return CreateStoryDTO(
             profileId,
             mainMenu,
-            imageUrl,
             houseName,
             comment
         )
@@ -126,7 +129,6 @@ class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBindin
                     binding.btnMyStoryCreateBorderNext.isClickable = false
                 }
             }
-
             override fun afterTextChanged(s: Editable) {}
         }
     }
@@ -136,7 +138,12 @@ class CreateMyStoryBorderFragment : BaseFragment<FragmentStoryCreateBorderBindin
     }
 
     override fun onPostCreateMyHouseFailure(response: BaseResponse) {
-        Log.d("@@@@@ CHECK @@@@@@", "찜한이야기집 가져오기 실패")
+        SampleSnackBar.make(binding.root,response.message!!)
+    }
+
+    override fun onPostCreateMyHouseDisconnect(message: String) {
+        SampleSnackBar.make(binding.root,message)
+        dismissLoadingDialog()
     }
 
 }

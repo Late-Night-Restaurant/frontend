@@ -36,7 +36,7 @@ class OpenMyHouseService(val openMyHouseInterface: OpenMyHouseInterface) {
             }
 
             override fun onFailure(call: Call<OpenStoryResponse>, t: Throwable) {
-                Log.d("Retrofit2",t.toString())
+                openMyHouseInterface.onPatchCreateMyHouseDisconnect("서버가 원활하지 않습니다.")
             }
 
         })

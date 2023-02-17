@@ -4,10 +4,10 @@ import com.example.simya.config.ApplicationClass
 import com.example.simya.src.model.story.load.LoadMyStoryResponse
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.OK
+import com.example.simya.util.SampleSnackBar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.create
 
 class MyStoryService(val myStoryInterface: MyStoryInterface) {
     private val myStoryRetrofitInterface: MyStoryRetrofitInterface = ApplicationClass.sRetrofit.create(MyStoryRetrofitInterface::class.java)
@@ -34,6 +34,7 @@ class MyStoryService(val myStoryInterface: MyStoryInterface) {
             }
 
             override fun onFailure(call: Call<LoadMyStoryResponse>, t: Throwable) {
+                myStoryInterface.onGetMyStoryDisconnect("서버가 원활하지 않습니다.")
             }
 
         })

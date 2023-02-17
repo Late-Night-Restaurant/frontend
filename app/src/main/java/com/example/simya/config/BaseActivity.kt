@@ -24,7 +24,6 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
     protected lateinit var binding: B
         private set
     lateinit var mLoadingDialog: LoadingDialog
-    private lateinit var callback: OnBackPressedCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

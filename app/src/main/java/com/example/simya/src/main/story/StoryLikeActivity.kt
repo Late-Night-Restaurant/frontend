@@ -20,12 +20,11 @@ class StoryLikeActivity : BaseActivity<ActivityStoryLikeListBinding>(ActivitySto
         binding.included.tvDefaultLayoutTitle.text = "내 이야기 집의 찜한 손님"
         dataList = arrayListOf()
         dataList.apply{
-            add(TestDataLike("wak",R.drawable.test_wak))
-            add(TestDataLike("chani",R.drawable.test_chani))
-            add(TestDataLike("choi",R.drawable.test_choi))
-            add(TestDataLike("hatban",R.drawable.test_hatban))
-            add(TestDataLike("poo",R.drawable.test_poo))
-            add(TestDataLike("jooni",R.drawable.test_jooni))
+            add(TestDataLike("왁",R.drawable.test_wak))
+            add(TestDataLike("초이",R.drawable.test_choi))
+            add(TestDataLike("햇반",R.drawable.test_hatban))
+            add(TestDataLike("푸",R.drawable.test_poo))
+            add(TestDataLike("쭈니",R.drawable.test_jooni))
         }
         val dataGVAdapter = StoryLikeGVAdapter(this,dataList)
         val gridLayoutManager = GridLayoutManager(this,4)
