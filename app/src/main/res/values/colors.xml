@@ -10,6 +10,7 @@
 <!--    <color name="black">#000000</color>-->
 <!--    <color name="white">#FFFFFF</color>-->
 
+<!--    SIMYA Color-->
     <color name="Primary_01">#72431D</color>
     <color name="Primary_02">#C96D11</color>
     <color name="Primary_03">#593110</color>
@@ -25,4 +26,7 @@
     <color name="Gray_10">#362F2B</color>
     <color name="Gray_11">#201A17</color>
     <color name="Error">#FF3257</color>
+
+<!--    Default Color-->
+    <color name="Colorless">#00ff0000</color>
 </resources>
