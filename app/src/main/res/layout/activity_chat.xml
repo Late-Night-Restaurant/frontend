@@ -111,7 +111,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/included_default"
-        tools:context=".src.main.chat.ChatActivity"
+        tools:context=".src.ui.view.chat.ChatActivity"
         tools:ignore="MissingConstraints">
 
         <androidx.cardview.widget.CardView

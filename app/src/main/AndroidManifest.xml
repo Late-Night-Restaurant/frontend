@@ -25,7 +25,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".src.main.splash.SplashActivity"
+            android:name=".src.ui.view.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +36,7 @@
                 android:value=""/>
         </activity>
         <activity
-            android:name=".src.main.login.LoginActivity"
+            android:name=".src.ui.view.login.LoginActivity"
             android:exported="true">
 
 
@@ -44,58 +44,58 @@
 
         </activity>
         <activity
-            android:name=".src.main.login.signIn.EmailLoginActivity"
+            android:name=".src.ui.view.login.signIn.EmailLoginActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".src.main.home.HomeActivity"
+            android:name=".src.ui.view.home.HomeActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".src.main.myPage.MyReviewActivity"
+        <activity android:name=".src.ui.view.mypage.MyReviewActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".src.main.story.StoryReviewActivity"
+            android:name=".src.ui.view.story.StoryReviewActivity"
             android:exported="true" >
 
         </activity>
         <activity
-            android:name=".src.main.story.StoryIntroActivity"
+            android:name=".src.ui.view.story.StoryIntroActivity"
             android:exported="true" />
         <activity
-            android:name=".src.main.login.singUp.SignupActivity"
+            android:name=".src.ui.view.login.singUp.SignupActivity"
             android:exported="true">
 
         </activity>
-        <activity android:name=".src.main.story.CreateMyStoryActivity"
+        <activity android:name=".src.ui.view.story.CreateMyStoryActivity"
             android:exported="true">
 
 
         </activity>
         <activity
-            android:name=".src.main.story.fragment.OpenMyStoryFragment"
+            android:name=".src.ui.view.story.OpenMyStoryFragment"
             android:exported="true" >
 
 
         </activity>
         <activity
-            android:name=".src.main.myPage.ProfileEditActivity"
+            android:name=".src.ui.view.mypage.ProfileEditActivity"
             android:exported="true" >
 
         </activity>
         <activity
-            android:name=".src.main.myPage.MyPageLikeActivity"
+            android:name=".src.ui.view.mypage.MyPageLikeActivity"
             android:exported="true" />
         <activity
-            android:name=".src.main.myPage.MyPageReviewActivity"
+            android:name=".src.ui.view.mypage.MyPageReviewActivity"
             android:exported="true" />
         <activity
-            android:name=".src.main.story.StoryLikeActivity"
+            android:name=".src.ui.view.story.StoryLikeActivity"
             android:exported="true" />
         <activity
-            android:name=".src.main.story.OpenMyStoryActivity"
+            android:name=".src.ui.view.story.OpenMyStoryActivity"
             android:exported="true" >
 
         </activity>
@@ -103,19 +103,19 @@
 <!--            android:name=".src.main.story.EditMyStoryMenuActivity"-->
 <!--            android:exported="true" />-->
         <activity
-            android:name=".src.main.chat.ChatActivity"
+            android:name=".src.ui.view.chat.ChatActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".src.main.story.TodayMenuActivity"
+            android:name=".src.ui.view.story.TodayMenuActivity"
             android:exported="true" />
-        <activity android:name=".src.main.myPage.ProfileAddActivity"
+        <activity android:name=".src.ui.view.mypage.ProfileAddActivity"
             android:exported="true"/>
-        <activity android:name=".src.main.myPage.ProfileModifyActivity"
+        <activity android:name=".src.ui.view.mypage.ProfileModifyActivity"
             android:exported="true"/>
-        <activity android:name=".src.main.prepare.PrepareActivity"
+        <activity android:name=".src.ui.view.prepare.PrepareActivity"
             android:exported="true"/>
-        <activity android:name=".util.gallery.GalleryActivity"
+        <activity android:name=".src.ui.view.gallery.GalleryActivity"
             android:exported="true">
 
         </activity>
