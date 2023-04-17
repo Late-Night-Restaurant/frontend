@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:animateLayoutChanges="true"
-    tools:context=".src.main.chat.ChatActivity">
+    tools:context=".src.ui.view.chat.ChatActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/layout01"
