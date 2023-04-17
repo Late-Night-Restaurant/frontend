@@ -19,8 +19,12 @@
     <dimen name="vertical_line">2dp</dimen>
 
 <!--    Default Margin-->
+    <dimen name="default_margin">8dp</dimen>
     <dimen name="default_side_margin">8dp</dimen>
     <dimen name="default_bottom_margin">16dp</dimen>
     <dimen name="default_resource_distance">16dp</dimen>
 
+<!--    Phrase Size-->
+    <dimen name="representative_phrase_big">44sp</dimen>
+    <dimen name="representative_phrase_small">40sp</dimen>
 </resources>

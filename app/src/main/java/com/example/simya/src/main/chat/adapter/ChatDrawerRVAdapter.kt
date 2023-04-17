@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.simya.databinding.ItemDrawerProfileBinding
 import com.example.simya.src.model.UserDTO
-import com.example.simya.src.testData.TestChatDrawerProfileData
 import com.example.simya.util.Constants.S3_URL
-import com.example.simya.util.data.ChatRVData
 
 class ChatDrawerRVAdapter (private val context: Context, private val dataList:ArrayList<UserDTO>): RecyclerView.Adapter<ChatDrawerRVAdapter.DataViewHolder>() {
     private var listener: ChatDrawerRVAdapter.OnItemClickListener? = null
