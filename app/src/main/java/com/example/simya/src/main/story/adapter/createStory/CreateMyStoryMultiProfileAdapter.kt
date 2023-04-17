@@ -1,7 +1,6 @@
 package com.example.simya.src.main.story.adapter.createStory
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,6 @@ import com.bumptech.glide.Glide
 import com.example.simya.R
 import com.example.simya.databinding.ItemMultiProfileBinding
 import com.example.simya.src.model.UserDTO
-import com.example.simya.src.testData.TestDataMultiProfile
-import com.example.simya.util.data.ProfileData
 
 class CreateMyStoryMultiProfileAdapter(
     private val context: Context,
