@@ -2,24 +2,17 @@ package com.example.simya.config
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewbinding.ViewBinding
-import com.example.simya.util.SampleSnackBar
-import com.example.simya.util.dialog.DefaultDialog
-import com.example.simya.util.dialog.DefaultDialogInterface
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.example.simya.util.dialog.ExitDialog
 import com.example.simya.util.dialog.LoadingDialog
-import kotlin.system.exitProcess
 
-abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflater) -> B) :
+abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes val layoutRes: Int) :
     AppCompatActivity(){
     protected lateinit var binding: B
         private set
@@ -27,10 +20,12 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = inflate(layoutInflater)
-
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this,layoutRes)
+        binding.lifecycleOwner = this
+        init()
     }
+    protected abstract fun init()
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val imm: InputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

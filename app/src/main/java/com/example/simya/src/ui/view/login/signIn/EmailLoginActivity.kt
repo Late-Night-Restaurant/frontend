@@ -4,16 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.example.simya.R
 import com.example.simya.config.BaseActivity
 import com.example.simya.config.BaseResponse
+import com.example.simya.databinding.ActivityLoginMainBinding
 import com.example.simya.databinding.ActivitySigninEmailBinding
-import com.example.simya.src.ui.view.home.HomeActivity
+//import com.example.simya.src.ui.view.home.HomeActivity
 import com.example.simya.src.main.login.model.LoginInterface
 import com.example.simya.src.main.login.model.LoginService
-import com.example.simya.src.ui.view.login.singUp.SignupActivity
-import com.example.simya.src.ui.view.prepare.PrepareActivity
+//import com.example.simya.src.ui.view.login.singup.SignupActivity
+//import com.example.simya.src.ui.view.prepare.PrepareActivity
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.src.ui.viewmodel.login.signin.EmailLoginViewModel
 import com.example.simya.util.Constants.EMAIL_VALIDATION
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.UserData
@@ -24,26 +29,24 @@ import java.util.regex.Pattern
 
 
 class EmailLoginActivity :
-    BaseActivity<ActivitySigninEmailBinding>(ActivitySigninEmailBinding::inflate), LoginInterface,PrepareDialogInterface {
+    BaseActivity<ActivitySigninEmailBinding>(R.layout.activity_signin_email), LoginInterface,PrepareDialogInterface {
+    private lateinit  var viewModel: EmailLoginViewModel
     private lateinit var textWatcher: TextWatcher
     private lateinit var email: String
     private lateinit var password: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding.btnSignInEmailFindEmail.onThrottleClick {
-            val intent = Intent(this, PrepareActivity::class.java)
-            startActivity(intent)
-        }
-        binding.btnSignInEmailFindPassword.onThrottleClick {
-            val intent = Intent(this, PrepareActivity::class.java)
-            startActivity(intent)
-        }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//
+//    }
+    override fun init() {
+        viewModel = ViewModelProvider(this)[EmailLoginViewModel::class.java]
         initTextWatcher()
-        init()
+        prePareServiceFindIdAndPassword()
     }
 
-    private fun init() {
+    private fun init2() {
         binding.btnEmailSigninLogin.isEnabled = false
 
         //EditText 입력확인
@@ -64,20 +67,24 @@ class EmailLoginActivity :
                 )
             }
         }
+
+        binding.btnSigninEmailSignup.onThrottleClick {
+//            val intent = Intent(this, SignupActivity::class.java)
+//            startActivity(intent)
+        }
+    }
+    // 아직 준비중인 서비스
+    private fun prePareServiceFindIdAndPassword(){
         binding.btnSignInEmailFindEmail.onThrottleClick {
             PrepareDialog(this,this).show()
         }
         binding.btnSignInEmailFindPassword.onThrottleClick {
             PrepareDialog(this,this).show()
         }
-        binding.btnSigninEmailSignup.onThrottleClick {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     private fun moveToHome() {
-        val intent = Intent(this, HomeActivity::class.java)
+//        val intent = Intent(this, HomeActivity::class.java)
         // 메인,로그인 액티비티 스택 제거
 //        intent.flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK
         finish()
@@ -158,4 +165,6 @@ class EmailLoginActivity :
     override fun onBackPressed() {
         backApplicationExit(this)
     }
+
+
 }

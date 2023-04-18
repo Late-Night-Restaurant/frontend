@@ -29,6 +29,9 @@ android {
             )
         }
     }
+    configurations {
+        implementation.get().exclude(mapOf("group" to "org.jetbrains", "module" to "annotations"))
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -37,7 +40,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
-        viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -62,9 +65,8 @@ dependencies {
 
     // CircleImageView
     implementation ("de.hdodenhof:circleimageview:3.1.0")
-//    // Rating Review
-//    implementation ("com.github.Inconnu08:android-ratingreviews:1.2.0") {
-//        exclude group: 'org.jetbrains', module: 'annotations-java5' }
+    // Rating Review
+    implementation ("com.github.Inconnu08:android-ratingreviews:1.2.0")
     // Glide
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
@@ -90,8 +92,8 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
 
     // coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
 
     // Image cropper
     implementation ("com.github.takusemba:cropme:2.0.8")
@@ -99,4 +101,6 @@ dependencies {
     // Swipe Refresh
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
 }

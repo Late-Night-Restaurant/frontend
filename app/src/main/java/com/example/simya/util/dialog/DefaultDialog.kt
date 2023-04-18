@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.example.simya.databinding.DialogDefaultBinding
-import com.example.simya.databinding.DialogLoadingBinding
 
 class DefaultDialog(message: String,context: Context, myCustomDialogInterface: DefaultDialogInterface) : Dialog(context) {
 
