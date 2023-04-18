@@ -3,6 +3,8 @@ package com.example.simya.util
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import com.example.simya.R
 import com.example.simya.databinding.SnackbarLayoutBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -17,6 +19,7 @@ class SampleSnackBar(view: View, private val message: String) {
 
     private val inflater = LayoutInflater.from(context)
     private val snackBarBinding = SnackbarLayoutBinding.inflate(inflater)
+//    private val snackBarBinding = DataBindingUtil.setContentView(, R.layout.snackbar_layout)
 
     init {
         initView()
