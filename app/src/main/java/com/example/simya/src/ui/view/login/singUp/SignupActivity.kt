@@ -1,17 +1,8 @@
 package com.example.simya.src.ui.view.login.singUp
 
 import android.os.Bundle
-import android.text.TextWatcher
-import androidx.appcompat.app.AppCompatActivity
 import com.example.simya.config.BaseActivity
-import com.example.simya.config.BaseResponse
-import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.databinding.ActivitySignupBinding
-import com.example.simya.src.main.login.model.LoginInterface
-import com.example.simya.src.main.login.model.SignUpInterface
-import com.example.simya.src.main.login.singUp.fragment.*
-import com.example.simya.src.model.account.AccountResponse
-import com.example.simya.src.model.account.SignupResponse
 import com.example.simya.src.ui.view.login.singUp.fragment.*
 
 class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding::inflate)
