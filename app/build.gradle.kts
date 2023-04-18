@@ -99,4 +99,6 @@ dependencies {
     // Swipe Refresh
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
 }

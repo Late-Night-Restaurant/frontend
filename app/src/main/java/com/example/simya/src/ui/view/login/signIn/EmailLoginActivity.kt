@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.simya.config.BaseActivity
 import com.example.simya.config.BaseResponse
 import com.example.simya.databinding.ActivitySigninEmailBinding
@@ -14,6 +16,7 @@ import com.example.simya.src.ui.view.login.singup.SignupActivity
 import com.example.simya.src.ui.view.prepare.PrepareActivity
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.src.ui.viewmodel.login.signin.EmailLoginViewModel
 import com.example.simya.util.Constants.EMAIL_VALIDATION
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.UserData
@@ -25,22 +28,18 @@ import java.util.regex.Pattern
 
 class EmailLoginActivity :
     BaseActivity<ActivitySigninEmailBinding>(ActivitySigninEmailBinding::inflate), LoginInterface,PrepareDialogInterface {
+    private lateinit  var viewModel: EmailLoginViewModel
     private lateinit var textWatcher: TextWatcher
     private lateinit var email: String
     private lateinit var password: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.btnSignInEmailFindEmail.onThrottleClick {
-            val intent = Intent(this, PrepareActivity::class.java)
-            startActivity(intent)
-        }
-        binding.btnSignInEmailFindPassword.onThrottleClick {
-            val intent = Intent(this, PrepareActivity::class.java)
-            startActivity(intent)
-        }
+        viewModel = ViewModelProvider(this)[EmailLoginViewModel::class.java]
+
         initTextWatcher()
         init()
+        prePareServiceFindIdAndPassword()
     }
 
     private fun init() {
@@ -64,15 +63,19 @@ class EmailLoginActivity :
                 )
             }
         }
+
+        binding.btnSigninEmailSignup.onThrottleClick {
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
+    }
+    // 아직 준비중인 서비스
+    private fun prePareServiceFindIdAndPassword(){
         binding.btnSignInEmailFindEmail.onThrottleClick {
             PrepareDialog(this,this).show()
         }
         binding.btnSignInEmailFindPassword.onThrottleClick {
             PrepareDialog(this,this).show()
-        }
-        binding.btnSigninEmailSignup.onThrottleClick {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
         }
     }
 
