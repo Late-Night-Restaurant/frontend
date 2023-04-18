@@ -1,4 +1,4 @@
-package com.example.simya.src.ui.view.login.singUp.fragment
+package com.example.simya.src.ui.view.login.singup.fragment
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.simya.R
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.src.ui.view.login.signIn.EmailLoginActivity
-import com.example.simya.src.ui.view.login.singUp.SignupActivity
+import com.example.simya.src.ui.view.login.singup.SignupActivity
 import com.example.simya.databinding.FragmentSignupAgreeBinding
 import com.example.simya.util.dialog.AgreeDialog
 import com.example.simya.util.dialog.AgreeDialogInterface

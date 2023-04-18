@@ -1,9 +1,9 @@
-package com.example.simya.src.ui.view.login.singUp
+package com.example.simya.src.ui.view.login.singup
 
 import android.os.Bundle
 import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivitySignupBinding
-import com.example.simya.src.ui.view.login.singUp.fragment.*
+import com.example.simya.src.ui.view.login.singup.fragment.*
 
 class SignupActivity: BaseActivity<ActivitySignupBinding>(ActivitySignupBinding::inflate)
     {

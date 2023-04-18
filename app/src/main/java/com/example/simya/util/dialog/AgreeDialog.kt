@@ -5,7 +5,7 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.example.simya.databinding.DialogAgreeBinding
-import com.example.simya.src.ui.view.login.singUp.fragment.SignupAgreeFragment
+import com.example.simya.src.ui.view.login.singup.fragment.SignupAgreeFragment
 
 class AgreeDialog(message: String, context: Context, myCustomDialogInterface: SignupAgreeFragment) : Dialog(context) {
 

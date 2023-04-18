@@ -1,4 +1,4 @@
-package com.example.simya.src.ui.view.login.singUp.fragment
+package com.example.simya.src.ui.view.login.singup.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.*
 import com.example.simya.R
-import com.example.simya.src.ui.view.login.singUp.SignupActivity
+import com.example.simya.src.ui.view.login.singup.SignupActivity
 import com.example.simya.databinding.FragmentSignupPwBinding
 import com.example.simya.util.Constants.PW_VALIDATION
 import java.util.regex.Pattern

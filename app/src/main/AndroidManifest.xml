@@ -65,7 +65,7 @@
             android:name=".src.ui.view.story.StoryIntroActivity"
             android:exported="true" />
         <activity
-            android:name=".src.ui.view.login.singUp.SignupActivity"
+            android:name=".src.ui.view.login.singup.SignupActivity"
             android:exported="true">
 
         </activity>

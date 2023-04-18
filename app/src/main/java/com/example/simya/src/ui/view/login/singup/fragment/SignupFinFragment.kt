@@ -1,4 +1,4 @@
-package com.example.simya.src.ui.view.login.singUp.fragment
+package com.example.simya.src.ui.view.login.singup.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.simya.src.ui.view.login.singUp.SignupActivity
+import com.example.simya.src.ui.view.login.singup.SignupActivity
 import com.example.simya.databinding.FragmentSignupFinBinding
 
 class SignupFinFragment: Fragment(), SignupActivity.onBackPressedListener {

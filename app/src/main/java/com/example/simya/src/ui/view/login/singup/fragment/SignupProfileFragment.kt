@@ -1,4 +1,4 @@
-package com.example.simya.src.ui.view.login.singUp.fragment
+package com.example.simya.src.ui.view.login.singup.fragment
 
 import android.content.Context
 import android.content.Intent
@@ -14,7 +14,7 @@ import androidx.fragment.app.setFragmentResultListener
 import com.bumptech.glide.Glide
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
-import com.example.simya.src.ui.view.login.singUp.SignupActivity
+import com.example.simya.src.ui.view.login.singup.SignupActivity
 import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.src.main.login.model.SignUpInterface
 import com.example.simya.src.main.login.model.SignUpService

@@ -10,7 +10,7 @@ import com.example.simya.databinding.ActivitySigninEmailBinding
 import com.example.simya.src.ui.view.home.HomeActivity
 import com.example.simya.src.main.login.model.LoginInterface
 import com.example.simya.src.main.login.model.LoginService
-import com.example.simya.src.ui.view.login.singUp.SignupActivity
+import com.example.simya.src.ui.view.login.singup.SignupActivity
 import com.example.simya.src.ui.view.prepare.PrepareActivity
 import com.example.simya.src.model.account.AccountDTO
 import com.example.simya.src.model.account.AccountResponse
