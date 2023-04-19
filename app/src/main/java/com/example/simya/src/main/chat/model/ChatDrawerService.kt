@@ -3,7 +3,6 @@ package com.example.simya.src.main.chat.model
 import android.util.Log
 import com.example.simya.config.ApplicationClass
 import com.example.simya.config.BaseResponse
-import com.example.simya.src.main.login.model.LoginRetrofitInterface
 import com.example.simya.src.model.ChatProfileListResponse
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.OK

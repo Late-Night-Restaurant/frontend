@@ -3,8 +3,9 @@ package com.example.simya.src.main.login.model
 import android.util.Log
 import com.example.simya.config.ApplicationClass
 import com.example.simya.config.BaseResponse
-import com.example.simya.src.model.account.AccountDTO
-import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.src.data.network.api.login.LoginRetrofitInterface
+import com.example.simya.src.data.network.model.login.AccountDTO
+import com.example.simya.src.data.network.model.login.AccountResponse
 import com.example.simya.util.Constants
 import com.example.simya.util.Constants.OK
 import retrofit2.Call
@@ -12,7 +13,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginService(val loginInterface: LoginInterface) {
-    private val loginRetrofitInterface: LoginRetrofitInterface = ApplicationClass.sRetrofit.create(LoginRetrofitInterface::class.java)
+    private val loginRetrofitInterface: LoginRetrofitInterface = ApplicationClass.sRetrofit.create(
+        LoginRetrofitInterface::class.java)
 
     fun tryLoginSubmit(accountDTO: AccountDTO){
         loginRetrofitInterface.onLoginSubmit(accountDTO).enqueue(object: Callback<AccountResponse>{

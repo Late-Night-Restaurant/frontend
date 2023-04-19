@@ -1,32 +1,19 @@
 package com.example.simya.src.ui.view.login.signIn
 
-import android.content.Intent
-import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
 import com.example.simya.config.BaseResponse
-import com.example.simya.databinding.ActivityLoginMainBinding
 import com.example.simya.databinding.ActivitySigninEmailBinding
-//import com.example.simya.src.ui.view.home.HomeActivity
 import com.example.simya.src.main.login.model.LoginInterface
 import com.example.simya.src.main.login.model.LoginService
-//import com.example.simya.src.ui.view.login.singup.SignupActivity
-//import com.example.simya.src.ui.view.prepare.PrepareActivity
-import com.example.simya.src.model.account.AccountDTO
-import com.example.simya.src.model.account.AccountResponse
+import com.example.simya.src.data.network.model.login.AccountResponse
 import com.example.simya.src.ui.viewmodel.login.signin.EmailLoginViewModel
-import com.example.simya.util.Constants.EMAIL_VALIDATION
 import com.example.simya.util.SampleSnackBar
 import com.example.simya.util.data.UserData
 import com.example.simya.util.dialog.PrepareDialog
 import com.example.simya.util.dialog.PrepareDialogInterface
 import com.example.simya.util.onThrottleClick
-import java.util.regex.Pattern
 
 
 class EmailLoginActivity :
@@ -146,6 +133,4 @@ class EmailLoginActivity :
             PrepareDialog(this, this).show()
         }
     }
-
-
 }
