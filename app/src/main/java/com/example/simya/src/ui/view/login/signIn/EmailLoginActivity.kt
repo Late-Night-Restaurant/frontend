@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
@@ -29,58 +30,29 @@ import java.util.regex.Pattern
 
 
 class EmailLoginActivity :
-    BaseActivity<ActivitySigninEmailBinding>(R.layout.activity_signin_email), LoginInterface,PrepareDialogInterface {
-    private lateinit  var viewModel: EmailLoginViewModel
-    private lateinit var textWatcher: TextWatcher
-    private lateinit var email: String
-    private lateinit var password: String
+    BaseActivity<ActivitySigninEmailBinding>(R.layout.activity_signin_email), LoginInterface,
+    PrepareDialogInterface {
+    private lateinit var viewModel: EmailLoginViewModel
+//    private lateinit var textWatcher: TextWatcher
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//
-//    }
     override fun init() {
+
         viewModel = ViewModelProvider(this)[EmailLoginViewModel::class.java]
-        initTextWatcher()
-        prePareServiceFindIdAndPassword()
-    }
 
-    private fun init2() {
-        binding.btnEmailSigninLogin.isEnabled = false
-
-        //EditText 입력확인
-        binding.edtEmailSignInInputEmail.addTextChangedListener(textWatcher)
-        binding.edtEmailSignInInputPassword.addTextChangedListener(textWatcher)
-
-        //로그인 이벤트
         binding.btnEmailSigninLogin.onThrottleClick {
-            if (checkEmail() && checkPassword()) {
+            viewModel.setEmailAndPassword(binding.edtEmailSignInInputEmail.text.toString(),binding.edtEmailSignInInputPassword.text.toString())
+            if (checkValidationEmail() && checkValidationPassword()) {
                 showLoadingDialog(this)
-                email = binding.edtEmailSignInInputEmail.text.toString()
-                password = binding.edtEmailSignInInputPassword.text.toString()
-                LoginService(this).tryLoginSubmit(
-                    AccountDTO(
-                        email,
-                        password
-                    )
-                )
+                // 로그인 서비스
             }
         }
 
-        binding.btnSigninEmailSignup.onThrottleClick {
-//            val intent = Intent(this, SignupActivity::class.java)
-//            startActivity(intent)
-        }
-    }
-    // 아직 준비중인 서비스
-    private fun prePareServiceFindIdAndPassword(){
-        binding.btnSignInEmailFindEmail.onThrottleClick {
-            PrepareDialog(this,this).show()
-        }
-        binding.btnSignInEmailFindPassword.onThrottleClick {
-            PrepareDialog(this,this).show()
-        }
+//        Text Watcher 보류
+//        initTextWatcher()
+//                binding.edtEmailSignInInputEmail.addTextChangedListener(textWatcher)
+//        binding.edtEmailSignInInputPassword.addTextChangedListener(textWatcher)
+//        준비중인 서비스
+//        prePareServiceFindIdAndPassword()
     }
 
     private fun moveToHome() {
@@ -91,10 +63,9 @@ class EmailLoginActivity :
         startActivity(intent)
     }
 
-    private fun checkEmail(): Boolean {
-        var email = binding.edtEmailSignInInputEmail.text.toString().trim() // 공백제거
-        val pattern = Pattern.matches(EMAIL_VALIDATION, email) // 패턴확인
-        return if (pattern) {
+    // 아이디 폼에 따른 Error 출력
+    private fun checkValidationEmail(): Boolean {
+        return if (viewModel.checkEmail()) {
             binding.tilEmailSignInInputEmail.error = null
             true
         } else {
@@ -102,10 +73,9 @@ class EmailLoginActivity :
             false
         }
     }
-
-    private fun checkPassword(): Boolean {
-        var password = binding.edtEmailSignInInputPassword.text!!.length
-        return if (password in 8..12) {
+    // 비밀번호 폼에 따른 Error 출력
+    private fun checkValidationPassword(): Boolean {
+        return if (viewModel.checkPassword()) {
             binding.tilEmailSignInInputPassword.error = null
             true
         } else {
@@ -114,25 +84,26 @@ class EmailLoginActivity :
         }
     }
 
-    private fun initTextWatcher() {
-        textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val emailInput = binding.edtEmailSignInInputEmail!!.text.toString()
-                val passwordInput = binding.edtEmailSignInInputPassword!!.text.toString()
-                if (emailInput.isNotEmpty() && passwordInput.isNotEmpty()) {
-                    binding.btnEmailSigninLogin.isEnabled = true
-                    binding.btnEmailSigninLogin.isClickable = true
-                }
-                if (emailInput.isEmpty() || passwordInput.isEmpty()) {
-                    binding.btnEmailSigninLogin.isEnabled = false
-                    binding.btnEmailSigninLogin.isClickable = false
-                }
-            }
-            override fun afterTextChanged(s: Editable) {
-            }
-        }
-    }
+//    private fun initTextWatcher() {
+//        textWatcher = object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+//                val emailInput = binding.edtEmailSignInInputEmail!!.text.toString()
+//                val passwordInput = binding.edtEmailSignInInputPassword!!.text.toString()
+//                if (emailInput.isNotEmpty() && passwordInput.isNotEmpty()) {
+//                    binding.btnEmailSigninLogin.isEnabled = true
+//                    binding.btnEmailSigninLogin.isClickable = true
+//                }
+//                if (emailInput.isEmpty() || passwordInput.isEmpty()) {
+//                    binding.btnEmailSigninLogin.isEnabled = false
+//                    binding.btnEmailSigninLogin.isClickable = false
+//                }
+//            }
+//
+//            override fun afterTextChanged(s: Editable) {
+//            }
+//        }
+//    }
 
     override fun onPostLoginSubmitSuccess(response: AccountResponse) {
         dismissLoadingDialog()
@@ -154,7 +125,7 @@ class EmailLoginActivity :
     }
 
     override fun onPostLoginSubmitDisconnect(message: String) {
-        SampleSnackBar.make(binding.root,message).show()
+        SampleSnackBar.make(binding.root, message).show()
         dismissLoadingDialog()
     }
 
@@ -164,6 +135,16 @@ class EmailLoginActivity :
 
     override fun onBackPressed() {
         backApplicationExit(this)
+    }
+
+    // 아직 준비중인 서비스
+    private fun prePareServiceFindIdAndPassword() {
+        binding.btnSignInEmailFindEmail.onThrottleClick {
+            PrepareDialog(this, this).show()
+        }
+        binding.btnSignInEmailFindPassword.onThrottleClick {
+            PrepareDialog(this, this).show()
+        }
     }
 
 
