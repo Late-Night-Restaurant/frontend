@@ -4,13 +4,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.simya.src.data.repository.login.LoginRepository
+import com.example.simya.src.data.repository.login.LoginRepositoryImpl
 import com.example.simya.util.Constants
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
 class EmailLoginViewModel: ViewModel() {
 
-     // email
+    private val loginRepository: LoginRepositoryImpl
+        get() {
+            TODO()
+        }
+
+    // email
     private val _inputEmail = MutableLiveData<String>()
     val inputEmail: LiveData<String>
         get() = _inputEmail
@@ -30,4 +38,5 @@ class EmailLoginViewModel: ViewModel() {
     fun checkPassword(): Boolean{
         return inputPassword.value!!.length in 8..12
     }
+
 }

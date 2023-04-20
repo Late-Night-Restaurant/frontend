@@ -3,21 +3,15 @@ package com.example.simya.src.ui.view.login.signIn
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
-import com.example.simya.config.BaseResponse
 import com.example.simya.databinding.ActivitySigninEmailBinding
-import com.example.simya.src.main.login.model.LoginInterface
-import com.example.simya.src.main.login.model.LoginService
-import com.example.simya.src.data.network.model.login.AccountResponse
 import com.example.simya.src.ui.viewmodel.login.signin.EmailLoginViewModel
-import com.example.simya.util.SampleSnackBar
-import com.example.simya.util.data.UserData
 import com.example.simya.util.dialog.PrepareDialog
 import com.example.simya.util.dialog.PrepareDialogInterface
 import com.example.simya.util.onThrottleClick
 
 
 class EmailLoginActivity :
-    BaseActivity<ActivitySigninEmailBinding>(R.layout.activity_signin_email), LoginInterface,
+    BaseActivity<ActivitySigninEmailBinding>(R.layout.activity_signin_email),
     PrepareDialogInterface {
     private lateinit var viewModel: EmailLoginViewModel
 //    private lateinit var textWatcher: TextWatcher
@@ -92,29 +86,29 @@ class EmailLoginActivity :
 //        }
 //    }
 
-    override fun onPostLoginSubmitSuccess(response: AccountResponse) {
-        dismissLoadingDialog()
-        LoginService(this).setAccessTokenSharedPreferences(response.result!!.accessToken)
-        LoginService(this).setRefreshTokenSharedPreferences(response.result!!.refreshToken)
-        UserData.setProfileId(response.result!!.profileId)
-        UserData.setProfileName(response.result!!.nickname)
-        UserData.setProfileComment(response.result!!.comment)
-        UserData.setProfileImage(response.result!!.pictureUrl)
-        UserData.setUserAccessToken(response.result!!.accessToken)
-        UserData.setUserRefreshToken(response.result!!.refreshToken)
-        UserData.printAllData()
-        moveToHome()
-    }
-
-    override fun onPostLoginSubmitFailure(response: BaseResponse) {
-        dismissLoadingDialog()
-        SampleSnackBar.make(binding.root, response.message.toString()).show()
-    }
-
-    override fun onPostLoginSubmitDisconnect(message: String) {
-        SampleSnackBar.make(binding.root, message).show()
-        dismissLoadingDialog()
-    }
+//    override fun onPostLoginSubmitSuccess(response: AccountResponse) {
+//        dismissLoadingDialog()
+//        LoginService(this).setAccessTokenSharedPreferences(response.result!!.accessToken)
+//        LoginService(this).setRefreshTokenSharedPreferences(response.result!!.refreshToken)
+//        UserData.setProfileId(response.result!!.profileId)
+//        UserData.setProfileName(response.result!!.nickname)
+//        UserData.setProfileComment(response.result!!.comment)
+//        UserData.setProfileImage(response.result!!.pictureUrl)
+//        UserData.setUserAccessToken(response.result!!.accessToken)
+//        UserData.setUserRefreshToken(response.result!!.refreshToken)
+//        UserData.printAllData()
+//        moveToHome()
+//    }
+//
+//    override fun onPostLoginSubmitFailure(response: BaseResponse) {
+//        dismissLoadingDialog()
+//        SampleSnackBar.make(binding.root, response.message.toString()).show()
+//    }
+//
+//    override fun onPostLoginSubmitDisconnect(message: String) {
+//        SampleSnackBar.make(binding.root, message).show()
+//        dismissLoadingDialog()
+//    }
 
     override fun onOKClicked() {
 
