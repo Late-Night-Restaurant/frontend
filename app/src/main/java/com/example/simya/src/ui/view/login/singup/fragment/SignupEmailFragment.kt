@@ -11,14 +11,14 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.*
 import com.example.simya.R
+import com.example.simya.config.BaseFragment
 import com.example.simya.src.ui.view.login.singup.SignupActivity
 import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.util.Constants.EMAIL_VALIDATION
 import java.util.regex.Pattern
 
-class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
-    private lateinit var binding: FragmentSignupEmailBinding
+class SignupEmailFragment: BaseFragment<FragmentSignupEmailBinding>(R.layout.fragment_signup_email), SignupActivity.onBackPressedListener {
     private lateinit var textWatcher: TextWatcher
     private lateinit var bindingMain: ActivitySignupBinding
 
@@ -29,18 +29,6 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
         signupActivity = context as SignupActivity
 
     }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSignupEmailBinding.inflate(layoutInflater)
-
-        return binding.root
-
-    }
-
-
     // 다시 상속받는
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,18 +38,6 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
         initTW()
 
         binding.tietEmailSignupInput.addTextChangedListener(textWatcher)
-
-
-
-        binding.btnSignupNextEmail.setOnClickListener {
-            if (emailCheck()) {
-                // pw프래그먼트로 데이터 전달
-                val email = binding.tietEmailSignupInput.text.toString()
-                setFragmentResult("email", bundleOf("bundleKeyEmail" to email))
-
-                signupActivity!!.nextFragmentSignUp(3)
-            }
-        }
     }
 
 
@@ -118,8 +94,6 @@ class SignupEmailFragment: Fragment(), SignupActivity.onBackPressedListener {
     }
 
     override fun onBackPressed() {
-        signupActivity!!.nextFragmentSignUp(1)
-        signupActivity!!.decreaseProgressbar()
     }
 
 }

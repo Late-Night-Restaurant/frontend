@@ -47,18 +47,6 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
         binding.tietPwSignupInput.addTextChangedListener(textWatcher)
         binding.tietRepwSignupInput.addTextChangedListener(textWatcher)
 
-
-        binding.btnSignupNextPw.setOnClickListener {
-            if (pwCheck() && rePwCheck()) {
-                // profile 프래그먼트 데이터 전달
-                val pwData = binding.tietPwSignupInput.text.toString()
-
-                setFragmentResult("pw", bundleOf("bundleKeyPw" to pwData))
-
-                signupActivity!!.nextFragmentSignUp(4)
-            }
-        }
-
     }
 
 
@@ -129,7 +117,7 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
     }
 
     override fun onBackPressed() {
-        signupActivity!!.nextFragmentSignUp(2)
+//        signupActivity!!.nextFragmentSignUp(2)
     }
 
 

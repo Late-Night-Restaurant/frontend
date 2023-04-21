@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.simya.R
+import com.example.simya.config.BaseFragment
 import com.example.simya.src.ui.view.login.singup.SignupActivity
 import com.example.simya.databinding.FragmentSignupFinBinding
 
-class SignupFinFragment: Fragment(), SignupActivity.onBackPressedListener {
-    private lateinit var binding: FragmentSignupFinBinding
-
+class SignupFinFragment: BaseFragment<FragmentSignupFinBinding>(R.layout.fragment_signup_fin),
+    SignupActivity.onBackPressedListener {
     var signupActivity: SignupActivity? = null
 
     override fun onAttach(context: Context) {
@@ -20,27 +21,18 @@ class SignupFinFragment: Fragment(), SignupActivity.onBackPressedListener {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSignupFinBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         signupActivity!!.increaseProgressbar()
 
-        binding.btnSignupNext.setOnClickListener {
-            requireActivity().finish()
-        }
+//        binding.btnSignupNext.setOnClickListener {
+//            requireActivity().finish()
+//        }
     }
 
     override fun onBackPressed() {
-        signupActivity!!.nextFragmentSignUp(4)
-        signupActivity!!.decreaseProgressbar()
+//        signupActivity!!.nextFragmentSignUp(4)
+//        signupActivity!!.decreaseProgressbar()
     }
 
 

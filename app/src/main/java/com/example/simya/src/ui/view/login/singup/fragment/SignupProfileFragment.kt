@@ -34,7 +34,6 @@ import com.example.simya.src.ui.view.gallery.GalleryActivity
 import java.util.regex.Pattern
 
 class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
-    FragmentSignupProfileBinding::bind,
     R.layout.fragment_signup_profile
 ), SignupActivity.onBackPressedListener, SignUpInterface {
     private lateinit var emailData: String
@@ -78,8 +77,8 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         binding.tietNicknameSignupInput.addTextChangedListener(textWatcher)
         binding.tietCommentSignupInput.addTextChangedListener(textWatcher)
         binding.civSignupInputProfile.setOnClickListener {
-            val intent = Intent(requireContext(), GalleryActivity::class.java)
-            getResult.launch(intent)
+//            val intent = Intent(requireContext(), GalleryActivity::class.java)
+//            getResult.launch(intent)
         }
         binding.btnSignupNextProfile.setOnClickListener {
             if (nicknameCheck() && commentCheck()) {
@@ -121,9 +120,9 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         }
     }
 
-    private fun moveToFin() {
-        signupActivity!!.nextFragmentSignUp(5)
-    }
+//    private fun moveToFin() {
+//        signupActivity!!.nextFragmentSignUp(5)
+//    }
 
     private fun initTW() {
         textWatcher = object : TextWatcher {
@@ -163,13 +162,13 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     }
 
     override fun onBackPressed() {
-        signupActivity!!.nextFragmentSignUp(3)
-        signupActivity!!.decreaseProgressbar()
+//        signupActivity!!.nextFragmentSignUp(3)
+//        signupActivity!!.decreaseProgressbar()
     }
 
     override fun onPostSignUpSubmitSuccess(response: SignupResponse) {
         dismissLoadingDialog()
-        moveToFin()
+//        moveToFin()
     }
 
     override fun onPostSignUpSubmitFailure(response: SignupResponse) {
