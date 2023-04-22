@@ -1,104 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!--    안내 멘트-->
-    <TextView
-        android:id="@+id/tv_signup_pw_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="로그인에 사용될"
-        android:textColor="@color/Gray_06"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_signup_pw_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:text="비밀번호를 입력해주세요."
-        android:textColor="@color/Gray_06"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw_1" />
-
-    <!--    비밀번호 입력 창-->
-    <LinearLayout
-        android:id="@+id/ll_signup_input"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw_2">
-        <!--        비밀번호 입력창-->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_pw_signup_input"
+        android:layout_height="match_parent">
+
+        <!--    안내 멘트-->
+        <TextView
+            android:id="@+id/tv_signup_pw_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="로그인에 사용될"
+            android:textColor="@color/Gray_06"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_signup_pw_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="비밀번호를 입력해주세요."
+            android:textColor="@color/Gray_06"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw_1" />
+
+        <!--    비밀번호 입력 창-->
+        <LinearLayout
+            android:id="@+id/ll_signup_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw_2">
+            <!--        비밀번호 입력창-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_pw_signup_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:errorEnabled="true"
+                app:hintEnabled="false"
+                tools:ignore="MissingConstraints">
+
+                <EditText
+                    android:id="@+id/tiet_pw_signup_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/Gray_06"
+                    android:hint="숫자, 영문, 특수문자 조합 최소 8자"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_repw_signup_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:errorEnabled="true"
+                app:hintEnabled="false">
+
+                <EditText
+                    android:id="@+id/tiet_repw_signup_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/Gray_06"
+                    android:hint="비밀번호 재입력"
+                    android:inputType="textPassword" >
+                </EditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <!--    다음 버튼-->
+        <Button
+            android:id="@+id/btn_signup_next_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false"
-            tools:ignore="MissingConstraints">
+            android:background="@drawable/low_radius_button_on"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/Gray_03"
+            android:textSize="15dp"
+            android:text="다음으로"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="DuplicateIds">
 
-            <EditText
-                android:id="@+id/tiet_pw_signup_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/Gray_06"
-                android:hint="숫자, 영문, 특수문자 조합 최소 8자"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_repw_signup_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false">
-
-            <EditText
-                android:id="@+id/tiet_repw_signup_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/Gray_06"
-                android:hint="비밀번호 재입력"
-                android:inputType="textPassword" >
-            </EditText>
-
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
-
-    <!--    다음 버튼-->
-    <Button
-        android:id="@+id/btn_signup_next_pw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/low_radius_button_on"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:textColor="@color/Gray_03"
-        android:textSize="15dp"
-        android:text="다음으로"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="DuplicateIds">
-
-    </Button>
+        </Button>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
