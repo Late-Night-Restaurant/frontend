@@ -1,12 +1,13 @@
-package com.example.simya.src.ui.view.login.singup.fragment
+package com.example.simya.src.ui.view.login.signup.fragment
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.Navigation
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
 import com.example.simya.src.ui.view.login.signIn.EmailLoginActivity
-import com.example.simya.src.ui.view.login.singup.SignupActivity
+import com.example.simya.src.ui.view.login.signup.SignupActivity
 import com.example.simya.databinding.FragmentSignupAgreeBinding
 import com.example.simya.util.dialog.AgreeDialogInterface
 
@@ -19,6 +20,7 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
         agreeCheck()
 //        showAgreeDetail()
         binding.btnSignupNextAgree.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_signupAgreeFragment_to_signupEmailFragment)
         }
 
     }

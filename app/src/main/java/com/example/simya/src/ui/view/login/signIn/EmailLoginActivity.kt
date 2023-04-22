@@ -1,11 +1,12 @@
 package com.example.simya.src.ui.view.login.signIn
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivitySigninEmailBinding
+import com.example.simya.src.ui.view.login.signup.SignupActivity
 import com.example.simya.src.ui.viewmodel.login.signin.EmailLoginViewModel
-import com.example.simya.util.dialog.PrepareDialog
 import com.example.simya.util.dialog.PrepareDialogInterface
 import com.example.simya.util.onThrottleClick
 
@@ -20,6 +21,7 @@ class EmailLoginActivity :
 
         viewModel = ViewModelProvider(this)[EmailLoginViewModel::class.java]
 
+        // 로그인 버튼 클릭시
         binding.btnEmailSigninLogin.onThrottleClick {
             viewModel.setEmailAndPassword(
                 binding.edtEmailSignInInputEmail.text.toString(),
@@ -30,6 +32,13 @@ class EmailLoginActivity :
                 // 로그인 서비스
             }
         }
+        binding.btnSigninEmailSignup.onThrottleClick {
+            moveToSignup()
+        }
+    }
+    private fun moveToSignup(){
+        val intent = Intent(this, SignupActivity::class.java)
+        startActivity(intent)
     }
 
     // 아이디 폼에 따른 Error 출력

@@ -1,18 +1,14 @@
-package com.example.simya.src.ui.view.login.singup.fragment
+package com.example.simya.src.ui.view.login.signup.fragment
 
 
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.*
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
-import com.example.simya.src.ui.view.login.singup.SignupActivity
+import com.example.simya.src.ui.view.login.signup.SignupActivity
 import com.example.simya.databinding.ActivitySignupBinding
 import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.util.Constants.EMAIL_VALIDATION
@@ -32,7 +28,6 @@ class SignupEmailFragment: BaseFragment<FragmentSignupEmailBinding>(R.layout.fra
     // 다시 상속받는
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signupActivity!!.increaseProgressbar()
         FalseButton()
 
         initTW()

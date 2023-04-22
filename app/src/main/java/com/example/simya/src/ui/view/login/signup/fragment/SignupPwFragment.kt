@@ -1,4 +1,4 @@
-package com.example.simya.src.ui.view.login.singup.fragment
+package com.example.simya.src.ui.view.login.signup.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -7,10 +7,9 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.*
 import com.example.simya.R
-import com.example.simya.src.ui.view.login.singup.SignupActivity
+import com.example.simya.src.ui.view.login.signup.SignupActivity
 import com.example.simya.databinding.FragmentSignupPwBinding
 import com.example.simya.util.Constants.PW_VALIDATION
 import java.util.regex.Pattern
@@ -42,7 +41,6 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
         super.onViewCreated(view, savedInstanceState)
         FalseButton()
         initTW()
-        signupActivity!!.increaseProgressbar()
 
         binding.tietPwSignupInput.addTextChangedListener(textWatcher)
         binding.tietRepwSignupInput.addTextChangedListener(textWatcher)

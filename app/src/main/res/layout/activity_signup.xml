@@ -2,11 +2,13 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/Gray_11">
+        android:background="@color/Gray_11"
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_signup_toolbar"
@@ -40,26 +42,22 @@
             android:layout_height="2dp"
             android:background="@color/Gray_05"
             android:progressTint="@color/Primary_01"
-            app:layout_constraintBottom_toTopOf="@+id/fm_signup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_signup_toolbar" />
 
-        <!--    프래그먼트 창-->
-        <FrameLayout
-            android:id="@+id/fm_signup"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_signup"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_sign_graph"
+            app:layout_constraintTop_toBottomOf="@+id/pb_signup"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tb_signup_toolbar"
-            app:navGraph="@navigation/nav_sign_graph" />
-
-
-
-
-
+            android:orientation="vertical"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

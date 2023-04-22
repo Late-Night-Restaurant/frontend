@@ -4,40 +4,49 @@
     android:id="@+id/nav_sign_graph"
     app:startDestination="@id/signupAgreeFragment">
 
+<!--    회원가입 동의 Fragment-->
     <fragment
         android:id="@+id/signupAgreeFragment"
-        android:name="com.example.simya.src.ui.view.login.singup.fragment.SignupAgreeFragment"
+        android:name="com.example.simya.src.ui.view.login.signup.fragment.SignupAgreeFragment"
         android:label="SignupAgreeFragment" >
         <action
-            android:id="@+id/action_signupAgreeFragment_to_signupPwFragment"
-            app:destination="@id/signupPwFragment" />
+            android:id="@+id/action_signupAgreeFragment_to_signupEmailFragment"
+            app:destination="@id/signupEmailFragment" />
     </fragment>
+
+<!--    아이디 입력 Fragment-->
     <fragment
         android:id="@+id/signupEmailFragment"
-        android:name="com.example.simya.src.ui.view.login.singup.fragment.SignupEmailFragment"
+        android:name="com.example.simya.src.ui.view.login.signup.fragment.SignupPwFragment"
         android:label="SignupEmailFragment" >
         <action
-            android:id="@+id/action_signupEmailFragment_to_signupAgreeFragment"
-            app:destination="@id/signupAgreeFragment" />
+            android:id="@+id/action_signupEmailFragment_to_signupPWFragment"
+            app:destination="@id/signupPwFragment" />
     </fragment>
+
+<!--    비밀번호 입력 Fragment-->
     <fragment
         android:id="@+id/signupPwFragment"
-        android:name="com.example.simya.src.ui.view.login.singup.fragment.SignupPwFragment"
+        android:name="com.example.simya.src.ui.view.login.signup.fragment.SignupPwFragment"
         android:label="SignupPwFragment" >
         <action
             android:id="@+id/action_signupPwFragment_to_signupProfileFragment"
             app:destination="@id/signupProfileFragment" />
     </fragment>
+
+<!--    프로필 정보 입력 Fragment-->
     <fragment
         android:id="@+id/signupProfileFragment"
-        android:name="com.example.simya.src.ui.view.login.singup.fragment.SignupProfileFragment"
+        android:name="com.example.simya.src.ui.view.login.signup.fragment.SignupProfileFragment"
         android:label="SignupProfileFragment" >
         <action
             android:id="@+id/action_signupProfileFragment_to_signupFinFragment"
             app:destination="@id/signupFinFragment" />
     </fragment>
+
+<!--    최종 확인 Fragment-->
     <fragment
         android:id="@+id/signupFinFragment"
-        android:name="com.example.simya.src.ui.view.login.singup.fragment.SignupFinFragment"
+        android:name="com.example.simya.src.ui.view.login.signup.fragment.SignupFinFragment"
         android:label="SignupFinFragment" />
 </navigation>

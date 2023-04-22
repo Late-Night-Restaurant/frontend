@@ -1,4 +1,4 @@
-package com.example.simya.src.ui.view.login.singup.fragment
+package com.example.simya.src.ui.view.login.signup.fragment
 
 import android.content.Context
 import android.content.Intent
@@ -14,7 +14,7 @@ import androidx.fragment.app.setFragmentResultListener
 import com.bumptech.glide.Glide
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
-import com.example.simya.src.ui.view.login.singup.SignupActivity
+import com.example.simya.src.ui.view.login.signup.SignupActivity
 import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.src.main.login.model.SignUpInterface
 import com.example.simya.src.main.login.model.SignUpService
@@ -30,7 +30,6 @@ import com.example.simya.util.Constants.POST_FAIL_USER
 import com.example.simya.util.Constants.REQUEST_CODE_FOR_INTENT
 import com.example.simya.util.Constants.REQUEST_ERROR
 import com.example.simya.util.SampleSnackBar
-import com.example.simya.src.ui.view.gallery.GalleryActivity
 import java.util.regex.Pattern
 
 class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
@@ -62,7 +61,6 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
             pwData = bundle.getString("bundleKeyPw").toString()
         }
         // email프래그먼트에서 email 받아오기
-        signupActivity!!.increaseProgressbar()
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == REQUEST_CODE_FOR_INTENT) {

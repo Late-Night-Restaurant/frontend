@@ -1,6 +1,5 @@
-package com.example.simya.src.ui.view.login.singup
+package com.example.simya.src.ui.view.login.signup
 
-import android.os.Bundle
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
 import com.example.simya.databinding.ActivitySignupBinding
@@ -23,13 +22,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
                 return
             }
         }
-    }
-    fun increaseProgressbar() {
-        binding.pbSignup.progress += 25
-    }
-
-    fun decreaseProgressbar() {
-        binding.pbSignup.progress -= 25
     }
 
 }
