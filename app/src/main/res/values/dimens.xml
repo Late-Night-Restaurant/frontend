@@ -35,4 +35,13 @@
 <!--    Phrase Size-->
     <dimen name="representative_phrase_big">44sp</dimen>
     <dimen name="representative_phrase_small">40sp</dimen>
+
+<!--    text Size(sp)-->
+    <dimen name="text_8">8sp</dimen>
+    <dimen name="text_12">12sp</dimen>
+    <dimen name="text_15">15sp</dimen>
+    <dimen name="text_18">18sp</dimen>
+    <dimen name="text_24">24sp</dimen>
+    <dimen name="text_28">28sp</dimen>
+    <dimen name="text_32">32sp</dimen>
 </resources>

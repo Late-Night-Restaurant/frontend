@@ -21,9 +21,9 @@
                 android:layout_height="@dimen/margin_32"
                 android:layout_marginStart="@dimen/margin_32"
                 android:layout_marginTop="@dimen/margin_32"
-                android:text="심야식당"
+                android:text="@string/app_name"
                 android:textColor="@color/Primary_01"
-                android:textSize="24sp"
+                android:textSize="@dimen/text_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,9 +33,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginTop="@dimen/margin_40"
-                android:text="서비스 이용약관에"
+                android:text="@string/signup_title1"
                 android:textColor="@color/Gray_06"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_18"
                 app:layout_constraintStart_toEndOf="@+id/tv_signup_main_headline1"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,9 +45,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_32"
                 android:layout_marginTop="@dimen/margin_8"
-                android:text="동의해주세요."
+                android:text="@string/signup_title2"
                 android:textColor="@color/Gray_06"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_18"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_signup_main_headline1" />
 
@@ -96,7 +96,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_8"
-                    android:text="전체 약관에 동의합니다"
+                    android:text="@string/signup_agree1"
+                    android:textSize="@dimen/text_15"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/cb_signup_agree_all"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -133,7 +134,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_layout_margin"
-                    android:text="서비스 이용약관"
+                    android:text="@string/signup_agree2"
+                    android:textSize="@dimen/text_15"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/cb_signup_agree_service"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -143,7 +145,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_layout_margin"
-                    android:text="(필수)"
+                    android:text="@string/signup_essential"
+                    android:textSize="@dimen/text_15"
                     android:textColor="@color/Primary_01"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_signup_tv_service"
@@ -153,9 +156,10 @@
                     android:id="@+id/btn_signup_service"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:background="@android:color/transparent"
-                    android:text="보기"
+                    android:text="@string/signup_watch"
+                    android:textSize="@dimen/text_15"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -192,10 +196,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/margin_8"
-                    android:text="개인정보 처리방침"
+                    android:text="@string/signup_agree3"
+                    android:textSize="@dimen/text_15"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/cb_signup_agree_info"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:id="@+id/tv_signup_tv_info2"
@@ -203,19 +208,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/margin_8"
-                    android:text="(필수)"
+                    android:text="@string/signup_essential"
+                    android:textSize="@dimen/text_15"
                     android:textColor="@color/Primary_01"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_signup_tv_info"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <Button
                     android:id="@+id/btn_signup_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:background="@android:color/transparent"
-                    android:text="보기"
+                    android:text="@string/signup_watch"
+                    android:textSize="@dimen/text_15"
                     app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -229,11 +236,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/low_radius_button_on"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
             android:textColor="@color/Gray_03"
-            android:textSize="15dp"
-            android:text="다음으로"
+            android:textSize="@dimen/text_15"
+            android:text="@string/signup_button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
