@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.navigation.Navigation
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
 import com.example.simya.src.ui.view.login.signup.SignupActivity
@@ -32,14 +33,17 @@ class SignupEmailFragment: BaseFragment<FragmentSignupEmailBinding>(R.layout.fra
 
         initTW()
 
-        binding.tietEmailSignupInput.addTextChangedListener(textWatcher)
+        binding.etEmailSignupInput.addTextChangedListener(textWatcher)
+        binding.btnSignupNextEmail.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_signupEmailFragment_to_signupPWFragment)
+        }
     }
 
 
 
 
     private fun emailCheck() : Boolean {
-        var email = binding.tietEmailSignupInput.text.toString().trim()
+        var email = binding.etEmailSignupInput.text.toString().trim()
         val pattern = Pattern.matches(EMAIL_VALIDATION, email)
 
         return if (pattern){
@@ -57,7 +61,7 @@ class SignupEmailFragment: BaseFragment<FragmentSignupEmailBinding>(R.layout.fra
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val emailInput = binding.tietEmailSignupInput!!.text.toString()
+                val emailInput = binding.etEmailSignupInput!!.text.toString()
 
                 if (emailInput.isNotEmpty()) {
                     TrueButton()

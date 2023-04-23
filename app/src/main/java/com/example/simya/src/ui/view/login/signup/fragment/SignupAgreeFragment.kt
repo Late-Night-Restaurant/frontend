@@ -19,7 +19,7 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
         super.onViewCreated(view, savedInstanceState)
         agreeCheck()
 //        showAgreeDetail()
-        binding.btnSignupNextAgree.setOnClickListener {
+        binding.btnSignupAgreeNext.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_signupAgreeFragment_to_signupEmailFragment)
         }
 
@@ -92,18 +92,18 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
     }
 
     private fun TrueButton() {
-        binding.btnSignupNextAgree.isEnabled = true
-        binding.btnSignupNextAgree.isClickable = true
-        binding.btnSignupNextAgree.setBackgroundResource(R.drawable.low_radius_button_on)
-        binding.btnSignupNextAgree.setTextColor(resources.getColor(R.color.Gray_03))
+        binding.btnSignupAgreeNext.isEnabled = true
+        binding.btnSignupAgreeNext.isClickable = true
+        binding.btnSignupAgreeNext.setBackgroundResource(R.drawable.low_radius_button_on)
+        binding.btnSignupAgreeNext.setTextColor(resources.getColor(R.color.Gray_03))
 
     }
 
     private fun FalseButton() {
-        binding.btnSignupNextAgree.isEnabled = false
-        binding.btnSignupNextAgree.isClickable = false
-        binding.btnSignupNextAgree.setBackgroundResource(R.drawable.low_radius_button_off)
-        binding.btnSignupNextAgree.setTextColor(resources.getColor(R.color.Gray_10))
+        binding.btnSignupAgreeNext.isEnabled = false
+        binding.btnSignupAgreeNext.isClickable = false
+        binding.btnSignupAgreeNext.setBackgroundResource(R.drawable.low_radius_button_off)
+        binding.btnSignupAgreeNext.setTextColor(resources.getColor(R.color.Gray_10))
 
     }
 

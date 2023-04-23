@@ -12,11 +12,11 @@
             android:id="@+id/tv_signup_email_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:text="로그인에 사용될"
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginTop="@dimen/margin_32"
+            android:text="@string/signup_email_title1"
             android:textColor="@color/Gray_06"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_18"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,11 +24,11 @@
             android:id="@+id/tv_signup_email_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:text="이메일을 입력해주세요."
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="@string/signup_email_title2"
             android:textColor="@color/Gray_06"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_18"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_signup_email_1" />
 
@@ -37,7 +37,7 @@
             android:id="@+id/ll_signup_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/margin_32"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,20 +47,21 @@
                 android:id="@+id/til_email_signup_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
                 app:errorEnabled="true"
                 app:hintEnabled="false"
-                tools:ignore="MissingConstraints">
+                >
 
                 <EditText
-                    android:id="@+id/tiet_email_signup_input"
+                    android:id="@+id/et_email_signup_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/Gray_06"
-                    android:hint="이메일을 입력하세요"
-                    android:inputType="textEmailAddress" />
+                    android:hint="@string/signup_email_input_hint"
+                    android:inputType="textEmailAddress"
+                    android:autofillHints="username" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -70,13 +71,13 @@
             android:id="@+id/btn_signup_next_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/low_radius_button_on"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginBottom="@dimen/button_margin"
+            android:layout_marginLeft="@dimen/button_margin"
+            android:layout_marginRight="@dimen/button_margin"
             android:textColor="@color/Gray_03"
-            android:textSize="15dp"
-            android:text="다음으로"
+            android:textSize="@dimen/text_15"
+            android:text="@string/signup_button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

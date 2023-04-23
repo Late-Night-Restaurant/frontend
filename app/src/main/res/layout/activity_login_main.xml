@@ -47,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_view_margin"
             android:scaleType="centerCrop"/>
         <ImageButton
             android:id="@+id/ib_login_main_email"
@@ -58,7 +58,7 @@
             app:layout_constraintBottom_toTopOf="@id/v_login_main_question"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_view_margin"
             android:scaleType="fitCenter"/>
         <TextView
             android:id="@+id/v_login_main_question"

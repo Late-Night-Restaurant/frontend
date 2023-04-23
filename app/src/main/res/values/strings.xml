@@ -1,8 +1,37 @@
 <resources>
+
     <string name="app_name">심야식당</string>
+<!--    로그인 화면-->
     <string name="review_hint">내 이야기 집을 찜한 사람들에게 보낼 소식을 작성합니다.\nex ) 오픈 시간 변경, 오늘의 메뉴 공지</string>
     <string name="representative_phrase_big">비슷한 사람들과</string>
     <string name="representative_phrase_small">솔직한 이야기</string>
     <string name="inquiry">문의하기</string>
+<!--    회원가입 화면-->
+    <string name="signup_button_text">다음으로</string>
+    <!--동의화면-->
+    <string name="signup_title1">서비스 이용약관에</string>
+    <string name="signup_title2">동의해주세요.</string>
+    <string name="signup_agree1">전체 약관에 동의합니다</string>
+    <string name="signup_agree2">서비스 이용약관</string>
+    <string name="signup_agree3">개인정보 처리방침</string>
+    <string name="signup_essential">(필수)</string>
+    <string name="signup_watch">보기</string>
+    <!--이메일 폼-->
+    <string name="signup_email_title1">로그인에 사용될</string>
+    <string name="signup_email_title2">이메일을 입력해주세요.</string>
+    <string name="signup_email_input_hint">이메일을 입력하세요.</string>
+<!--    비밀번호 폼-->
+    <string name="signup_pw_title1">로그인에 사용될</string>
+    <string name="signup_pw_title2">비밀번호를 입력해주세요.</string>
+    <string name="signup_pw_input_hint">숫자, 영문, 특수문자 조합 최소 8자</string>
+    <string name="signup_pw_input_re_hint">비밀번호 재입력</string>
+<!--    프로필 폼-->
+    <string name="signup_profile_title1">다른 사람들이 볼</string>
+    <string name="signup_profile_title2">프로필을 만들어주세요</string>
+    <string name="signup_profile_nick">닉네임</string>
+    <string name="signup_profile_nick_hint">영문, 특수 문자 제외 8자 이내</string>
+    <string name="signup_profile_intro_hint">24자 이내로 입력해주세요</string>
+    <string name="signup_profile_intro">한줄 소개</string>
+
 
 </resources>

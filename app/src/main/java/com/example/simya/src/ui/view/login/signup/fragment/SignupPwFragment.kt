@@ -8,14 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.*
+import androidx.navigation.Navigation
 import com.example.simya.R
+import com.example.simya.config.BaseFragment
 import com.example.simya.src.ui.view.login.signup.SignupActivity
 import com.example.simya.databinding.FragmentSignupPwBinding
 import com.example.simya.util.Constants.PW_VALIDATION
 import java.util.regex.Pattern
 
-class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
-    private lateinit var binding: FragmentSignupPwBinding
+class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_signup_pw),
+    SignupActivity.onBackPressedListener {
     private lateinit var textWatcher: TextWatcher
     private lateinit var emailData: String
 
@@ -26,25 +28,12 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
         signupActivity = context as SignupActivity
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSignupPwBinding.inflate(layoutInflater)
-        return binding.root
-
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         FalseButton()
-        initTW()
-
-        binding.tietPwSignupInput.addTextChangedListener(textWatcher)
-        binding.tietRepwSignupInput.addTextChangedListener(textWatcher)
-
+        binding.btnSignupNextPw.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_signupPwFragment_to_signupProfileFragment)
+        }
     }
 
 
@@ -63,40 +52,18 @@ class SignupPwFragment: Fragment(), SignupActivity.onBackPressedListener {
     }
 
     private fun rePwCheck(): Boolean {
-        var rePw = binding.tietRepwSignupInput.text.toString().trim()
+        var rePw = binding.etRePwSignupInput.text.toString().trim()
         val pw = binding.tietPwSignupInput.text.toString().trim()
 
         return if (rePw == pw) {
-            binding.tilRepwSignupInput.error = null
+            binding.etRePwSignupInput.error = null
             true
         } else {
-            binding.tilRepwSignupInput.error = "입력하신 비밀번호와 일치하지 않습니다."
+            binding.etRePwSignupInput.error = "입력하신 비밀번호와 일치하지 않습니다."
             false
         }
 
     }
-
-    private fun initTW() {
-        textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-            }
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val pwInput = binding.tietPwSignupInput!!.text.toString()
-                val rePwInput = binding.tietRepwSignupInput!!.text.toString()
-
-                if (pwInput.isNotEmpty() && rePwInput.isNotEmpty()) {
-                    TrueButton()
-                }
-                if (pwInput.isEmpty() || rePwInput.isEmpty()) {
-                    FalseButton()
-                }
-            }
-
-            override fun afterTextChanged(s: Editable) {
-            }
-        }
-    }
-
 
     private fun TrueButton() {
         binding.btnSignupNextPw.isEnabled = true
