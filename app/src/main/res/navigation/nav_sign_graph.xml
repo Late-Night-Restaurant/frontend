@@ -17,7 +17,7 @@
 <!--    아이디 입력 Fragment-->
     <fragment
         android:id="@+id/signupEmailFragment"
-        android:name="com.example.simya.src.ui.view.login.signup.fragment.SignupPwFragment"
+        android:name="com.example.simya.src.ui.view.login.signup.fragment.SignupEmailFragment"
         android:label="SignupEmailFragment" >
         <action
             android:id="@+id/action_signupEmailFragment_to_signupPWFragment"

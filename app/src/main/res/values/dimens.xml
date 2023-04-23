@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    Icon Size-->
+    <!--    Icon Size-->
     <dimen name="icon_height">24dp</dimen>
     <dimen name="icon_width">24dp</dimen>
     <dimen name="icon_small_height">16dp</dimen>
@@ -8,35 +8,40 @@
     <dimen name="icon_big_height">72dp</dimen>
     <dimen name="icon_big_width">72dp</dimen>
 
-<!--    Button Size-->
+    <!--Button-->
+    <!--    Button Size-->
     <dimen name="button_width">328dp</dimen>
     <dimen name="button_height">48dp</dimen>
-<!--    Border Size-->
+    <!--    Button-->
+    <dimen name="button_margin">16dp</dimen>
+
+    <!--    Border Size-->
     <dimen name="border_width">328dp</dimen>
     <dimen name="border_height">208dp</dimen>
 
-<!--    Vertical Line-->
+    <!--    Vertical Line-->
     <dimen name="vertical_line">2dp</dimen>
 
-<!--    Default Margin-->
+    <!--    Default Margin-->
     <dimen name="default_zero">0dp</dimen>
     <dimen name="default_layout_margin">8dp</dimen>
     <dimen name="default_view_margin">16dp</dimen>
     <dimen name="default_bottom_margin">16dp</dimen>
     <dimen name="default_resource_distance">16dp</dimen>
 
-<!--    Dp Margin-->
+
+    <!--    Dp Margin-->
     <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_16">16dp</dimen>
     <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_32">32dp</dimen>
     <dimen name="margin_40">40dp</dimen>
 
-<!--    Phrase Size-->
+    <!--    Phrase Size-->
     <dimen name="representative_phrase_big">44sp</dimen>
     <dimen name="representative_phrase_small">40sp</dimen>
 
-<!--    text Size(sp)-->
+    <!--    text Size(sp)-->
     <dimen name="text_8">8sp</dimen>
     <dimen name="text_12">12sp</dimen>
     <dimen name="text_15">15sp</dimen>
