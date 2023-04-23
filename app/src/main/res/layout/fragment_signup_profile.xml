@@ -13,11 +13,11 @@
             android:id="@+id/tv_signup_profile_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:text="다른 사람들이 볼"
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginTop="@dimen/margin_32"
+            android:text="@string/signup_profile_title1"
             android:textColor="@color/Gray_06"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_18"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"  />
 
@@ -25,11 +25,11 @@
             android:id="@+id/tv_signup_profile_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:text="프로필을 만들어주세요"
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="@string/signup_profile_title2"
             android:textColor="@color/Gray_06"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_18"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_signup_profile_1" />
         <!--    프로필 설정-->
@@ -37,7 +37,7 @@
             android:id="@+id/ll_signup_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/margin_32"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +47,9 @@
                 android:id="@+id/til_profile_signup_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
                 app:errorEnabled="true"
                 app:hintEnabled="false"
                 tools:ignore="MissingConstraints">
@@ -60,20 +60,20 @@
                     >
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/civ_signup_input_profile"
-                        android:layout_width="160dp"
-                        android:layout_height="160dp"
+                        android:layout_width="@dimen/signup_profile_size"
+                        android:layout_height="@dimen/signup_profile_size"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_base_profile"
                         android:background="@drawable/bg_profile"
                         />
                     <ImageButton
-                        android:layout_width="55dp"
-                        android:layout_height="55dp"
+                        android:layout_width="@dimen/signup_profile_edit_button_size"
+                        android:layout_height="@dimen/signup_profile_edit_button_size"
                         android:src="@drawable/ic_edit_on_l"
                         android:scaleType="fitCenter"
-                        android:background="#00ff0000"
+                        android:background="@color/Colorless"
                         android:layout_alignBottom="@+id/civ_signup_input_profile"
-                        android:layout_alignRight="@+id/civ_signup_input_profile"/>
+                        android:layout_alignEnd="@+id/civ_signup_input_profile"/>
                 </RelativeLayout>
             </com.google.android.material.textfield.TextInputLayout>
             <!--        닉네임 입력창-->
@@ -81,29 +81,29 @@
                 android:id="@+id/til_signup_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
                 app:errorEnabled="true"
                 app:hintEnabled="false">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="닉네임"
+                    android:text="@string/signup_profile_nick"
                     android:textColor="@color/Gray_04"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_nickname_signup_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
                 app:errorEnabled="true"
                 app:hintEnabled="false">
                 <EditText
-                    android:id="@+id/tiet_nickname_signup_input"
+                    android:id="@+id/et_nickname_signup_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="영문, 특수 문자 제외 8자 이내"
+                    android:hint="@string/signup_profile_nick_hint"
                     android:inputType="text"
                     android:backgroundTint="@color/Gray_06"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -112,29 +112,29 @@
                 android:id="@+id/til_signup_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
                 app:errorEnabled="true"
                 app:hintEnabled="false">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="한줄 소개"
+                    android:text="@string/signup_profile_intro"
                     android:textColor="@color/Gray_04"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_comment_signup_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
                 app:errorEnabled="true"
                 app:hintEnabled="false">
                 <EditText
-                    android:id="@+id/tiet_comment_signup_input"
+                    android:id="@+id/et_comment_signup_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="24자 이내로 입력해주세요"
+                    android:hint="@string/signup_profile_intro_hint"
                     android:inputType="text"
                     android:backgroundTint="@color/Gray_06"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -144,7 +144,7 @@
 
         <!--    다음 버튼-->
         <Button
-            android:id="@+id/btn_signup_next_profile"
+            android:id="@+id/btn_signup_profile_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/low_radius_button_on"

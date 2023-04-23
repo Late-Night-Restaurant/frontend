@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.*
+import androidx.navigation.Navigation
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
 import com.example.simya.src.ui.view.login.signup.SignupActivity
@@ -30,7 +31,9 @@ class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         FalseButton()
-        binding.btnSignupNextPw
+        binding.btnSignupNextPw.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_signupPwFragment_to_signupProfileFragment)
+        }
     }
 
 
@@ -49,14 +52,14 @@ class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_
     }
 
     private fun rePwCheck(): Boolean {
-        var rePw = binding.tietRepwSignupInput.text.toString().trim()
+        var rePw = binding.etRePwSignupInput.text.toString().trim()
         val pw = binding.tietPwSignupInput.text.toString().trim()
 
         return if (rePw == pw) {
-            binding.tilRepwSignupInput.error = null
+            binding.etRePwSignupInput.error = null
             true
         } else {
-            binding.tilRepwSignupInput.error = "입력하신 비밀번호와 일치하지 않습니다."
+            binding.etRePwSignupInput.error = "입력하신 비밀번호와 일치하지 않습니다."
             false
         }
 

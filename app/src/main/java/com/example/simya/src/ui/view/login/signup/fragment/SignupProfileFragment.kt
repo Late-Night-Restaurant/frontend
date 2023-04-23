@@ -11,6 +11,7 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
@@ -72,19 +73,21 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
                     SampleSnackBar.make(binding.root, "이미지를 가져오는데 실패했습니다.").show()
                 }
             }
-        binding.tietNicknameSignupInput.addTextChangedListener(textWatcher)
-        binding.tietCommentSignupInput.addTextChangedListener(textWatcher)
+        binding.etCommentSignupInput.addTextChangedListener(textWatcher)
+        binding.etCommentSignupInput.addTextChangedListener(textWatcher)
         binding.civSignupInputProfile.setOnClickListener {
 //            val intent = Intent(requireContext(), GalleryActivity::class.java)
 //            getResult.launch(intent)
         }
-        binding.btnSignupNextProfile.setOnClickListener {
+        binding.btnSignupProfileNext.setOnClickListener {
             if (nicknameCheck() && commentCheck()) {
-                val nicknameData = binding.tietNicknameSignupInput.text.toString()
-                val commentData = binding.tietCommentSignupInput.text.toString()
+                val nicknameData = binding.etCommentSignupInput.text.toString()
+                val commentData = binding.etCommentSignupInput.text.toString()
                 profile = SignUpProfileDTO(nicknameData, commentData)
                 showLoadingDialog(requireContext())
                 SignUpService(this).trySignUpSubmit(getPath, SignupDTO(emailData, pwData, profile))
+                // 회원가입 완료되면 네비게이션을 통해 이동
+//                Navigation.findNavController(view).navigate(R.id.action_signupProfileFragment_to_signupFinFragment)
             } else {
                 SampleSnackBar.make(binding.root, "올바른 형식에 맞게 작성해주세요.").show()
             }
@@ -92,7 +95,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     }
 
     private fun nicknameCheck(): Boolean {
-        var nickname = binding.tietNicknameSignupInput.text.toString().trim()
+        var nickname = binding.etCommentSignupInput.text.toString().trim()
         val pattern = Pattern.matches(NICKNAME_VALIDATION, nickname)
 
         return if (pattern) {
@@ -105,9 +108,9 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     }
 
     private fun commentCheck(): Boolean {
-        var comment = binding.tietCommentSignupInput.text.toString().trim()
+        var comment = binding.etCommentSignupInput.text.toString().trim()
         val pattern = Pattern.matches(COMMENT_VALIDATION, comment)
-        var commentLength = binding.tietCommentSignupInput.text!!.length
+        var commentLength = binding.etCommentSignupInput.text!!.length
 
         return if (pattern && commentLength in 1..24) {
             binding.tilCommentSignupInput.error = null
@@ -128,8 +131,8 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val nicknameInput = binding.tietNicknameSignupInput!!.text.toString()
-                val commentInput = binding.tietCommentSignupInput!!.text.toString()
+                val nicknameInput = binding.etCommentSignupInput!!.text.toString()
+                val commentInput = binding.etCommentSignupInput!!.text.toString()
 
                 if (nicknameInput.isNotEmpty() && commentInput.isNotEmpty()) {
                     trueButton()
@@ -145,17 +148,17 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     }
 
     private fun trueButton() {
-        binding.btnSignupNextProfile.isEnabled = true
-        binding.btnSignupNextProfile.isClickable = true
-        binding.btnSignupNextProfile.setBackgroundResource(R.drawable.low_radius_button_on)
-        binding.btnSignupNextProfile.setTextColor(resources.getColor(R.color.Gray_03))
+        binding.btnSignupProfileNext.isEnabled = true
+        binding.btnSignupProfileNext.isClickable = true
+        binding.btnSignupProfileNext.setBackgroundResource(R.drawable.low_radius_button_on)
+        binding.btnSignupProfileNext.setTextColor(resources.getColor(R.color.Gray_03))
     }
 
     private fun falseButton() {
-        binding.btnSignupNextProfile.isEnabled = false
-        binding.btnSignupNextProfile.isClickable = false
-        binding.btnSignupNextProfile.setBackgroundResource(R.drawable.low_radius_button_off)
-        binding.btnSignupNextProfile.setTextColor(resources.getColor(R.color.Gray_10))
+        binding.btnSignupProfileNext.isEnabled = false
+        binding.btnSignupProfileNext.isClickable = false
+        binding.btnSignupProfileNext.setBackgroundResource(R.drawable.low_radius_button_off)
+        binding.btnSignupProfileNext.setTextColor(resources.getColor(R.color.Gray_10))
 
     }
 

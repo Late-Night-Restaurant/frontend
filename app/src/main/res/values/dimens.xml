@@ -8,6 +8,8 @@
     <dimen name="icon_big_height">72dp</dimen>
     <dimen name="icon_big_width">72dp</dimen>
 
+    <dimen name="signup_profile_edit_button_size">55dp</dimen>
+
     <!--Button-->
     <!--    Button Size-->
     <dimen name="button_width">328dp</dimen>
@@ -41,7 +43,7 @@
     <dimen name="representative_phrase_big">44sp</dimen>
     <dimen name="representative_phrase_small">40sp</dimen>
 
-    <!--    text Size(sp)-->
+    <!--    Text Size(sp)-->
     <dimen name="text_8">8sp</dimen>
     <dimen name="text_12">12sp</dimen>
     <dimen name="text_15">15sp</dimen>
@@ -49,4 +51,7 @@
     <dimen name="text_24">24sp</dimen>
     <dimen name="text_28">28sp</dimen>
     <dimen name="text_32">32sp</dimen>
+
+<!--    Profile Size-->
+    <dimen name="signup_profile_size">160dp</dimen>
 </resources>

@@ -12,11 +12,11 @@
             android:id="@+id/tv_signup_pw_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:text="로그인에 사용될"
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginTop="@dimen/margin_32"
+            android:text="@string/signup_pw_title1"
             android:textColor="@color/Gray_06"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_18"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,11 +24,11 @@
             android:id="@+id/tv_signup_pw_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:text="비밀번호를 입력해주세요."
+            android:layout_marginStart="@dimen/margin_32"
+            android:layout_marginTop="@dimen/margin_8"
+            android:text="@string/signup_pw_title2"
             android:textColor="@color/Gray_06"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_18"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_signup_pw_1" />
 
@@ -37,7 +37,7 @@
             android:id="@+id/ll_signup_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/margin_32"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +47,9 @@
                 android:id="@+id/til_pw_signup_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
                 app:errorEnabled="true"
                 app:hintEnabled="false"
                 tools:ignore="MissingConstraints">
@@ -59,24 +59,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/Gray_06"
-                    android:hint="숫자, 영문, 특수문자 조합 최소 8자"
-                    android:inputType="textPassword" />
+                    android:hint="@string/signup_pw_input_hint"
+                    android:inputType="textPassword"
+                    android:autofillHints=""/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_repw_signup_input"
+                android:id="@+id/til_re_pw_signup_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
                 app:errorEnabled="true"
                 app:hintEnabled="false">
 
                 <EditText
-                    android:id="@+id/tiet_repw_signup_input"
+                    android:id="@+id/et_re_pw_signup_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/Gray_06"
-                    android:hint="비밀번호 재입력"
+                    android:hint="@string/signup_pw_input_re_hint"
                     android:inputType="textPassword" >
                 </EditText>
 
