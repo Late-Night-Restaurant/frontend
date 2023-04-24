@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16"
-            android:text="이제 이야기들을 들으러 가볼까요?"
+            android:text="@string/signup_final_title"
             android:textColor="@color/Gray_05"
             android:textSize="@dimen/text_24"
             android:textStyle="bold"
@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-        </Button>
+        </Button>q
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
