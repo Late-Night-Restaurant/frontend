@@ -10,20 +10,12 @@ import com.example.simya.databinding.FragmentSignupFinBinding
 
 class SignupFinFragment: BaseFragment<FragmentSignupFinBinding>(R.layout.fragment_signup_fin),
     SignupActivity.onBackPressedListener {
-    var signupActivity: SignupActivity? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        signupActivity = context as SignupActivity
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        binding.btnSignupNext.setOnClickListener {
-//            requireActivity().finish()
-//        }
+        binding.btnSignupNext.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 
     override fun onBackPressed() {
