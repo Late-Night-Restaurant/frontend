@@ -43,12 +43,6 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private var getUri: Uri? = null
     private var getPath: String? = null
-    var signupActivity: SignupActivity? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        signupActivity = context as SignupActivity
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -18,8 +18,6 @@ import java.util.regex.Pattern
 
 class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_signup_pw),
     SignupActivity.onBackPressedListener {
-    private lateinit var textWatcher: TextWatcher
-    private lateinit var emailData: String
 
     var signupActivity: SignupActivity? = null
 
@@ -52,7 +50,7 @@ class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_
     }
 
     private fun rePwCheck(): Boolean {
-        var rePw = binding.etRePwSignupInput.text.toString().trim()
+        val rePw = binding.etRePwSignupInput.text.toString().trim()
         val pw = binding.tietPwSignupInput.text.toString().trim()
 
         return if (rePw == pw) {

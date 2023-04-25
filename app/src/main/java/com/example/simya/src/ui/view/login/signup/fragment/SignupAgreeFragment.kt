@@ -34,38 +34,37 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
         if (agreeAll.isChecked) {
             agreeService.isChecked = true
             agreeInfo.isChecked = true
-            TrueButton()
+            trueButton()
         } else {
             agreeService.isChecked = false
             agreeInfo.isChecked = false
-            FalseButton()
+            falseButton()
         }
 
         agreeAll.setOnClickListener {
             if (agreeAll.isChecked) {
                 agreeService.isChecked = true
                 agreeInfo.isChecked = true
-                TrueButton()
+                trueButton()
             } else {
                 agreeService.isChecked = false
                 agreeInfo.isChecked = false
-                FalseButton()
+                falseButton()
             }
         }
-
         agreeInfo.setOnClickListener {
             if (agreeInfo.isChecked) {
                 if (agreeService.isChecked) {
                     agreeAll.isChecked = true
-                    TrueButton()
+                    trueButton()
                 } else {
                     agreeAll.isChecked = false
-                    FalseButton()
+                    falseButton()
                 }
             }
             if (!agreeInfo.isChecked) {
                 agreeAll.isChecked = false
-                FalseButton()
+                falseButton()
             }
         }
 
@@ -73,25 +72,21 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
             if (agreeService.isChecked) {
                 if (agreeInfo.isChecked) {
                     agreeAll.isChecked = true
-                    TrueButton()
+                    trueButton()
                 } else {
                     agreeAll.isChecked = false
-                    FalseButton()
+                    falseButton()
                 }
             }
             if (!agreeService.isChecked) {
                 agreeAll.isChecked = false
-                FalseButton()
+                falseButton()
             }
         }
-
-
-
         return agreeAll.isChecked
-
     }
 
-    private fun TrueButton() {
+    private fun trueButton() {
         binding.btnSignupAgreeNext.isEnabled = true
         binding.btnSignupAgreeNext.isClickable = true
         binding.btnSignupAgreeNext.setBackgroundResource(R.drawable.low_radius_button_on)
@@ -99,7 +94,7 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
 
     }
 
-    private fun FalseButton() {
+    private fun falseButton() {
         binding.btnSignupAgreeNext.isEnabled = false
         binding.btnSignupAgreeNext.isClickable = false
         binding.btnSignupAgreeNext.setBackgroundResource(R.drawable.low_radius_button_off)

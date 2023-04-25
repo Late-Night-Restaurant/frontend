@@ -17,19 +17,11 @@ import java.util.regex.Pattern
 
 class SignupEmailFragment: BaseFragment<FragmentSignupEmailBinding>(R.layout.fragment_signup_email), SignupActivity.onBackPressedListener {
     private lateinit var textWatcher: TextWatcher
-    private lateinit var bindingMain: ActivitySignupBinding
 
-    var signupActivity: SignupActivity? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        signupActivity = context as SignupActivity
-
-    }
     // 다시 상속받는
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        FalseButton()
+        falseButton()
 
         initTW()
 
@@ -43,7 +35,7 @@ class SignupEmailFragment: BaseFragment<FragmentSignupEmailBinding>(R.layout.fra
 
 
     private fun emailCheck() : Boolean {
-        var email = binding.etEmailSignupInput.text.toString().trim()
+        val email = binding.etEmailSignupInput.text.toString().trim()
         val pattern = Pattern.matches(EMAIL_VALIDATION, email)
 
         return if (pattern){
@@ -64,10 +56,10 @@ class SignupEmailFragment: BaseFragment<FragmentSignupEmailBinding>(R.layout.fra
                 val emailInput = binding.etEmailSignupInput!!.text.toString()
 
                 if (emailInput.isNotEmpty()) {
-                    TrueButton()
+                    trueButton()
                 }
                 if (emailInput.isEmpty()) {
-                    FalseButton()
+                    falseButton()
                 }
             }
 
@@ -76,7 +68,7 @@ class SignupEmailFragment: BaseFragment<FragmentSignupEmailBinding>(R.layout.fra
         }
     }
 
-    private fun TrueButton() {
+    private fun trueButton() {
         binding.btnSignupNextEmail.isEnabled = true
         binding.btnSignupNextEmail.isClickable = true
         binding.btnSignupNextEmail.setBackgroundResource(R.drawable.low_radius_button_on)
@@ -84,7 +76,7 @@ class SignupEmailFragment: BaseFragment<FragmentSignupEmailBinding>(R.layout.fra
 
     }
 
-    private fun FalseButton() {
+    private fun falseButton() {
         binding.btnSignupNextEmail.isEnabled = false
         binding.btnSignupNextEmail.isClickable = false
         binding.btnSignupNextEmail.setBackgroundResource(R.drawable.low_radius_button_off)
