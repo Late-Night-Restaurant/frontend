@@ -37,6 +37,7 @@ class EmailLoginActivity :
         binding.btnSigninEmailSignup.onThrottleClick {
             moveToSignup()
         }
+        viewModel.inputEmail.value
     }
 
     private fun initTextWatcher() {
