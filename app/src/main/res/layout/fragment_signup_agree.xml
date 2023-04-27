@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="signupAgreeViewModel"
+            type="com.example.simya.src.ui.viewmodel.login.signup.SignupAgreeViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -89,8 +94,9 @@
                     android:layout_marginBottom="@dimen/margin_8"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:checked="@={signupAgreeViewModel.agreeAll}"
+                    />
                 <TextView
                     android:id="@+id/tv_signup_tv_all"
                     android:layout_width="wrap_content"
@@ -127,7 +133,8 @@
                     android:layout_marginStart="@dimen/margin_16"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:checked="@={signupAgreeViewModel.agreeService}"/>
 
                 <TextView
                     android:id="@+id/tv_signup_tv_service"
@@ -187,7 +194,8 @@
                     android:layout_marginStart="@dimen/margin_16"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:checked="@={signupAgreeViewModel.agreeInfo}" />
 
 
                 <TextView
@@ -234,7 +242,7 @@
             android:id="@+id/btn_signup_agree_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/low_radius_button_on"
+            android:background="@drawable/low_radius_button"
             android:layout_marginBottom="@dimen/button_margin"
             android:layout_marginLeft="@dimen/button_margin"
             android:layout_marginRight="@dimen/button_margin"
@@ -243,7 +251,9 @@
             android:text="@string/signup_button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:enabled="false"
+            android:clickable="false">
 
         </Button>
 
