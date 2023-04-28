@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="signupViewModel"
+            type="com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -61,7 +66,8 @@
                     android:backgroundTint="@color/Gray_06"
                     android:hint="@string/signup_email_input_hint"
                     android:inputType="textEmailAddress"
-                    android:autofillHints="username" />
+                    android:autofillHints="username"
+                    android:text="@={signupViewModel.email}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
@@ -71,7 +77,7 @@
             android:id="@+id/btn_signup_next_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/low_radius_button_on"
+            android:background="@drawable/low_radius_button"
             android:layout_marginBottom="@dimen/button_margin"
             android:layout_marginLeft="@dimen/button_margin"
             android:layout_marginRight="@dimen/button_margin"
@@ -80,7 +86,9 @@
             android:text="@string/signup_button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:enabled="false"
+            android:clickable="false">
 
         </Button>
 
