@@ -13,19 +13,19 @@ import com.example.simya.config.BaseFragment
 import com.example.simya.src.ui.view.login.signIn.EmailLoginActivity
 import com.example.simya.src.ui.view.login.signup.SignupActivity
 import com.example.simya.databinding.FragmentSignupAgreeBinding
-import com.example.simya.src.ui.viewmodel.login.signup.SignupAgreeViewModel
+import com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel
 import com.example.simya.util.dialog.AgreeDialogInterface
 
 
 class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fragment_signup_agree),
     SignupActivity.onBackPressedListener, AgreeDialogInterface {
 
-    private lateinit var signupAgreeViewModel: SignupAgreeViewModel
+    private lateinit var signupAgreeViewModel: SignupViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        signupAgreeViewModel = ViewModelProvider(this)[SignupAgreeViewModel::class.java]
+        signupAgreeViewModel = ViewModelProvider(this)[SignupViewModel::class.java]
         binding.signupAgreeViewModel = signupAgreeViewModel
 
         binding.btnSignupAgreeNext.setOnClickListener {

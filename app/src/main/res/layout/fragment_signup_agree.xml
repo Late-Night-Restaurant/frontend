@@ -6,7 +6,7 @@
     <data>
         <variable
             name="signupAgreeViewModel"
-            type="com.example.simya.src.ui.viewmodel.login.signup.SignupAgreeViewModel" />
+            type="com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
