@@ -9,7 +9,7 @@ import com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel
 class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_signup) {
     private lateinit var signupViewModel: SignupViewModel
     override fun init() {
-        signupViewModel = ViewModelProvider(this).get(SignupViewModel::class.java)
+        signupViewModel = ViewModelProvider(this)[SignupViewModel::class.java]
     }
 
     interface onBackPressedListener {

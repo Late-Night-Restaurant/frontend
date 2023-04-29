@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class SignupViewModel: ViewModel() {
+class SignupViewModel : ViewModel() {
 
+    // 진행률
+    var progressStatus = MutableLiveData<Int>()
 
     // 전체 약관 동의
     var agreeAll = MutableLiveData<Boolean>()
@@ -21,22 +23,31 @@ class SignupViewModel: ViewModel() {
 
     val pw = MutableLiveData<String>()
 
-    fun emailEmptyCheck():Boolean{
+    fun emailEmptyCheck(): Boolean {
         return email.value.toString().isNotEmpty()
     }
 
-
     init{
+        progressStatus.value = 0
         agreeAll.value = false
         agreeInfo.value = false
         agreeService.value = false
     }
+    fun increaseProgress() {
+        progressStatus.value?.plus(25)
+    }
 
-    fun isAgreeStatus(): Boolean{
+    fun decreaseProgress() {
+        progressStatus.value?.minus(25)
+    }
+
+    fun isAgreeStatus(): Boolean {
         return agreeInfo.value!! && agreeService.value!!
     }
+
     fun checkAgreeAllStatus() = viewModelScope.launch {
         agreeService.value = agreeAll.value
         agreeInfo.value = agreeAll.value
     }
+
 }

@@ -31,6 +31,7 @@ class SignupEmailFragment :
         binding.btnSignupNextEmail.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_signupEmailFragment_to_signupPWFragment)
+            signupViewModel.increaseProgress()
         }
     }
     private fun emailEmpty(){

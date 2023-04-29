@@ -20,35 +20,36 @@ import com.example.simya.util.dialog.AgreeDialogInterface
 class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fragment_signup_agree),
     SignupActivity.onBackPressedListener, AgreeDialogInterface {
 
-    private lateinit var signupAgreeViewModel: SignupViewModel
+    private lateinit var signupViewModel: SignupViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        signupAgreeViewModel = ViewModelProvider(this)[SignupViewModel::class.java]
-        binding.signupAgreeViewModel = signupAgreeViewModel
+        signupViewModel = ViewModelProvider(this)[SignupViewModel::class.java]
+        binding.signupAgreeViewModel = signupViewModel
 
         binding.btnSignupAgreeNext.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_signupAgreeFragment_to_signupEmailFragment)
+            signupViewModel.increaseProgress()
         }
 
         // 동의 체크 버튼 viewModel
-        signupAgreeViewModel.agreeAll.observe(viewLifecycleOwner,Observer{
-            signupAgreeViewModel.checkAgreeAllStatus()
+        signupViewModel.agreeAll.observe(viewLifecycleOwner,Observer{
+            signupViewModel.checkAgreeAllStatus()
             isAgreeCheck()
         })
-        signupAgreeViewModel.agreeService.observe(viewLifecycleOwner,Observer{
-            binding.cbSignupAgreeService.isChecked = signupAgreeViewModel.agreeService.value!!
+        signupViewModel.agreeService.observe(viewLifecycleOwner,Observer{
+            binding.cbSignupAgreeService.isChecked = signupViewModel.agreeService.value!!
             isAgreeCheck()
         })
-        signupAgreeViewModel.agreeInfo.observe(viewLifecycleOwner,Observer{
-            binding.cbSignupAgreeInfo.isChecked = signupAgreeViewModel.agreeInfo.value!!
+        signupViewModel.agreeInfo.observe(viewLifecycleOwner,Observer{
+            binding.cbSignupAgreeInfo.isChecked = signupViewModel.agreeInfo.value!!
             isAgreeCheck()
         })
     }
     private fun isAgreeCheck(){
-        binding.btnSignupAgreeNext.isEnabled = signupAgreeViewModel.isAgreeStatus()
-        binding.btnSignupAgreeNext.isClickable = signupAgreeViewModel.isAgreeStatus()
+        binding.btnSignupAgreeNext.isEnabled = signupViewModel.isAgreeStatus()
+        binding.btnSignupAgreeNext.isClickable = signupViewModel.isAgreeStatus()
     }
 
     override fun onBackPressed() {
