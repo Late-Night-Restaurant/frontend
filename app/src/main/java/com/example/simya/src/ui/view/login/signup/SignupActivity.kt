@@ -11,22 +11,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
     private lateinit var signupViewModel: SignupViewModel
     override fun init() {
         signupViewModel = ViewModelProvider(this)[SignupViewModel::class.java]
-        Log.d("activity progressbar status",binding.pbSignup.progress.toString())
-        Log.d("livedata progress status",signupViewModel.progressStatus.value.toString())
+        binding.signupViewModel = signupViewModel
     }
-
-    interface onBackPressedListener {
-        fun onBackPressed()
-    }
-
-    override fun onBackPressed() {
-        val fragmentList = supportFragmentManager.fragments
-        for (fragment in fragmentList) {
-            if (fragment is onBackPressedListener) {
-                (fragment as onBackPressedListener).onBackPressed()
-                return
-            }
-        }
-    }
-
 }

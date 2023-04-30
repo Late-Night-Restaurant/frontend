@@ -8,8 +8,7 @@ import com.example.simya.config.BaseFragment
 import com.example.simya.src.ui.view.login.signup.SignupActivity
 import com.example.simya.databinding.FragmentSignupFinBinding
 
-class SignupFinFragment: BaseFragment<FragmentSignupFinBinding>(R.layout.fragment_signup_fin),
-    SignupActivity.onBackPressedListener {
+class SignupFinFragment: BaseFragment<FragmentSignupFinBinding>(R.layout.fragment_signup_fin){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -18,10 +17,6 @@ class SignupFinFragment: BaseFragment<FragmentSignupFinBinding>(R.layout.fragmen
         }
     }
 
-    override fun onBackPressed() {
-//        signupActivity!!.nextFragmentSignUp(4)
-//        signupActivity!!.decreaseProgressbar()
-    }
 
 
 }

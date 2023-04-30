@@ -14,8 +14,7 @@ import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel
 
 class SignupEmailFragment :
-    BaseFragment<FragmentSignupEmailBinding>(R.layout.fragment_signup_email),
-    SignupActivity.onBackPressedListener {
+    BaseFragment<FragmentSignupEmailBinding>(R.layout.fragment_signup_email){
 
     private lateinit var signupViewModel: SignupViewModel
 
@@ -38,9 +37,6 @@ class SignupEmailFragment :
     private fun emailEmpty(){
         binding.btnSignupNextEmail.isEnabled = signupViewModel.emailEmptyCheck()
         binding.btnSignupNextEmail.isClickable = signupViewModel.emailEmptyCheck()
-    }
-
-    override fun onBackPressed() {
     }
 
 }

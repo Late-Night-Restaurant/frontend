@@ -35,8 +35,6 @@
                 android:layout_gravity="center"
                 android:textColor="@color/Gray_07"
                 android:textSize="16sp" />
-
-
         </androidx.appcompat.widget.Toolbar>
 
         <!--    진행 바-->
@@ -50,8 +48,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_signup_toolbar"
-            android:max="100"
-
+            android:max="@{100}"
+            app:progressScaled="@{signupViewModel.progressStatus}"
             />
 
         <androidx.fragment.app.FragmentContainerView

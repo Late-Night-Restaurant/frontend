@@ -1,6 +1,7 @@
 package com.example.simya.src.ui.viewmodel.login.signup
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,16 +10,17 @@ import kotlinx.coroutines.launch
 class SignupViewModel : ViewModel() {
 
     // 진행률
-    var progressStatus = MutableLiveData<Int>()
+    private val _progressStatus = MutableLiveData(0)
+    val progressStatus: LiveData<Int> = _progressStatus
 
     // 전체 약관 동의
-    var agreeAll = MutableLiveData<Boolean>()
+    val agreeAll = MutableLiveData<Boolean>()
 
     // 개인정보 처리방침
-    var agreeInfo = MutableLiveData<Boolean>()
+    val agreeInfo = MutableLiveData<Boolean>()
 
     // 서비스 이용약관
-    var agreeService = MutableLiveData<Boolean>()
+    val agreeService = MutableLiveData<Boolean>()
 
     val email = MutableLiveData<String>()
 
@@ -29,19 +31,18 @@ class SignupViewModel : ViewModel() {
     }
 
     init{
-        progressStatus.value = 20
         agreeAll.value = false
         agreeInfo.value = false
         agreeService.value = false
     }
     fun increaseProgress() {
-        progressStatus.value = progressStatus.value?.plus(25)
+        _progressStatus.value = _progressStatus.value?.plus(25)
         Log.d("increaseProgress","Progressbar is + 25")
         Log.d("progress value",progressStatus.value.toString())
     }
 
     fun decreaseProgress() {
-        progressStatus.value = progressStatus.value?.minus(25)
+        _progressStatus.value = _progressStatus.value?.minus(25)
     }
 
     fun isAgreeStatus(): Boolean {

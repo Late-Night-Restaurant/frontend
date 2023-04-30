@@ -17,8 +17,8 @@ import com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel
 import com.example.simya.util.dialog.AgreeDialogInterface
 
 
-class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fragment_signup_agree),
-    SignupActivity.onBackPressedListener, AgreeDialogInterface {
+class SignupAgreeFragment :
+    BaseFragment<FragmentSignupAgreeBinding>(R.layout.fragment_signup_agree) {
 
     private lateinit var signupViewModel: SignupViewModel
 
@@ -31,34 +31,29 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
         binding.signupAgreeViewModel = signupViewModel
 
         binding.btnSignupAgreeNext.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_signupAgreeFragment_to_signupEmailFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_signupAgreeFragment_to_signupEmailFragment)
             signupViewModel.increaseProgress()
         }
 
         // 동의 체크 버튼 viewModel
-        signupViewModel.agreeAll.observe(viewLifecycleOwner,Observer{
+        signupViewModel.agreeAll.observe(viewLifecycleOwner, Observer {
             signupViewModel.checkAgreeAllStatus()
             isAgreeCheck()
         })
-        signupViewModel.agreeService.observe(viewLifecycleOwner,Observer{
+        signupViewModel.agreeService.observe(viewLifecycleOwner, Observer {
             binding.cbSignupAgreeService.isChecked = signupViewModel.agreeService.value!!
             isAgreeCheck()
         })
-        signupViewModel.agreeInfo.observe(viewLifecycleOwner,Observer{
+        signupViewModel.agreeInfo.observe(viewLifecycleOwner, Observer {
             binding.cbSignupAgreeInfo.isChecked = signupViewModel.agreeInfo.value!!
             isAgreeCheck()
         })
     }
-    private fun isAgreeCheck(){
+
+    private fun isAgreeCheck() {
         binding.btnSignupAgreeNext.isEnabled = signupViewModel.isAgreeStatus()
         binding.btnSignupAgreeNext.isClickable = signupViewModel.isAgreeStatus()
     }
 
-    override fun onBackPressed() {
-        val intent = Intent(this.context, EmailLoginActivity::class.java)
-        startActivity(intent)
-    }
-
-    override fun onCloseButtonClicked() {
-    }
 }
