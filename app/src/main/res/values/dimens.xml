@@ -10,6 +10,9 @@
 
     <dimen name="signup_profile_edit_button_size">55dp</dimen>
 
+<!--    Progress bar-->
+    <dimen name="signup_progressbar_width">328dp</dimen>
+    <dimen name="signup_progressbar_height">2dp</dimen>
     <!--Button-->
     <!--    Button Size-->
     <dimen name="button_width">328dp</dimen>

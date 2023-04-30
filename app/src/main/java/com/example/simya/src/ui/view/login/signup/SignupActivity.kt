@@ -1,5 +1,6 @@
 package com.example.simya.src.ui.view.login.signup
 
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
@@ -10,6 +11,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>(R.layout.activity_sig
     private lateinit var signupViewModel: SignupViewModel
     override fun init() {
         signupViewModel = ViewModelProvider(this)[SignupViewModel::class.java]
+        Log.d("activity progressbar status",binding.pbSignup.progress.toString())
+        Log.d("livedata progress status",signupViewModel.progressStatus.value.toString())
     }
 
     interface onBackPressedListener {

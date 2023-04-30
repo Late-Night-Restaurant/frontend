@@ -1,5 +1,6 @@
 package com.example.simya.src.ui.viewmodel.login.signup
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -28,17 +29,19 @@ class SignupViewModel : ViewModel() {
     }
 
     init{
-        progressStatus.value = 0
+        progressStatus.value = 20
         agreeAll.value = false
         agreeInfo.value = false
         agreeService.value = false
     }
     fun increaseProgress() {
-        progressStatus.value?.plus(25)
+        progressStatus.value = progressStatus.value?.plus(25)
+        Log.d("increaseProgress","Progressbar is + 25")
+        Log.d("progress value",progressStatus.value.toString())
     }
 
     fun decreaseProgress() {
-        progressStatus.value?.minus(25)
+        progressStatus.value = progressStatus.value?.minus(25)
     }
 
     fun isAgreeStatus(): Boolean {

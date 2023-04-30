@@ -21,7 +21,8 @@ class SignupEmailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signupViewModel = ViewModelProvider(this)[SignupViewModel::class.java]
+        //        signupViewModel = ViewModelProvider(requireActivity())[SignupViewModel::class.java]
+        signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
         binding.signupViewModel = signupViewModel
 
         signupViewModel.email.observe(viewLifecycleOwner, Observer {
