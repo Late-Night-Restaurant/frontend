@@ -14,14 +14,14 @@ import com.example.simya.databinding.FragmentSignupEmailBinding
 import com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel
 
 class SignupEmailFragment :
-    BaseFragment<FragmentSignupEmailBinding>(R.layout.fragment_signup_email),
-    SignupActivity.onBackPressedListener {
+    BaseFragment<FragmentSignupEmailBinding>(R.layout.fragment_signup_email){
 
     private lateinit var signupViewModel: SignupViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signupViewModel = ViewModelProvider(this)[SignupViewModel::class.java]
+        //        signupViewModel = ViewModelProvider(requireActivity())[SignupViewModel::class.java]
+        signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
         binding.signupViewModel = signupViewModel
 
         signupViewModel.email.observe(viewLifecycleOwner, Observer {
@@ -31,14 +31,12 @@ class SignupEmailFragment :
         binding.btnSignupNextEmail.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_signupEmailFragment_to_signupPWFragment)
+            signupViewModel.increaseProgress()
         }
     }
     private fun emailEmpty(){
         binding.btnSignupNextEmail.isEnabled = signupViewModel.emailEmptyCheck()
         binding.btnSignupNextEmail.isClickable = signupViewModel.emailEmptyCheck()
-    }
-
-    override fun onBackPressed() {
     }
 
 }

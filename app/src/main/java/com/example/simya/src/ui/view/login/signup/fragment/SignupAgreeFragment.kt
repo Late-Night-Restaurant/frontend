@@ -13,49 +13,47 @@ import com.example.simya.config.BaseFragment
 import com.example.simya.src.ui.view.login.signIn.EmailLoginActivity
 import com.example.simya.src.ui.view.login.signup.SignupActivity
 import com.example.simya.databinding.FragmentSignupAgreeBinding
-import com.example.simya.src.ui.viewmodel.login.signup.SignupAgreeViewModel
+import com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel
 import com.example.simya.util.dialog.AgreeDialogInterface
 
 
-class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fragment_signup_agree),
-    SignupActivity.onBackPressedListener, AgreeDialogInterface {
+class SignupAgreeFragment :
+    BaseFragment<FragmentSignupAgreeBinding>(R.layout.fragment_signup_agree) {
 
-    private lateinit var signupAgreeViewModel: SignupAgreeViewModel
+    private lateinit var signupViewModel: SignupViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        signupAgreeViewModel = ViewModelProvider(this)[SignupAgreeViewModel::class.java]
-        binding.signupAgreeViewModel = signupAgreeViewModel
+
+//        signupViewModel = ViewModelProvider(requireActivity())[SignupViewModel::class.java]
+        signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
+        binding.signupAgreeViewModel = signupViewModel
 
         binding.btnSignupAgreeNext.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_signupAgreeFragment_to_signupEmailFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_signupAgreeFragment_to_signupEmailFragment)
+            signupViewModel.increaseProgress()
         }
 
         // 동의 체크 버튼 viewModel
-        signupAgreeViewModel.agreeAll.observe(viewLifecycleOwner,Observer{
-            signupAgreeViewModel.checkAgreeAllStatus()
+        signupViewModel.agreeAll.observe(viewLifecycleOwner, Observer {
+            signupViewModel.checkAgreeAllStatus()
             isAgreeCheck()
         })
-        signupAgreeViewModel.agreeService.observe(viewLifecycleOwner,Observer{
-            binding.cbSignupAgreeService.isChecked = signupAgreeViewModel.agreeService.value!!
+        signupViewModel.agreeService.observe(viewLifecycleOwner, Observer {
+            binding.cbSignupAgreeService.isChecked = signupViewModel.agreeService.value!!
             isAgreeCheck()
         })
-        signupAgreeViewModel.agreeInfo.observe(viewLifecycleOwner,Observer{
-            binding.cbSignupAgreeInfo.isChecked = signupAgreeViewModel.agreeInfo.value!!
+        signupViewModel.agreeInfo.observe(viewLifecycleOwner, Observer {
+            binding.cbSignupAgreeInfo.isChecked = signupViewModel.agreeInfo.value!!
             isAgreeCheck()
         })
-    }
-    private fun isAgreeCheck(){
-        binding.btnSignupAgreeNext.isEnabled = signupAgreeViewModel.isAgreeStatus()
-        binding.btnSignupAgreeNext.isClickable = signupAgreeViewModel.isAgreeStatus()
     }
 
-    override fun onBackPressed() {
-        val intent = Intent(this.context, EmailLoginActivity::class.java)
-        startActivity(intent)
+    private fun isAgreeCheck() {
+        binding.btnSignupAgreeNext.isEnabled = signupViewModel.isAgreeStatus()
+        binding.btnSignupAgreeNext.isClickable = signupViewModel.isAgreeStatus()
     }
 
-    override fun onCloseButtonClicked() {
-    }
 }

@@ -16,8 +16,7 @@ import com.example.simya.databinding.FragmentSignupPwBinding
 import com.example.simya.util.Constants.PW_VALIDATION
 import java.util.regex.Pattern
 
-class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_signup_pw),
-    SignupActivity.onBackPressedListener {
+class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_signup_pw){
 
     var signupActivity: SignupActivity? = null
 
@@ -79,9 +78,6 @@ class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_
 
     }
 
-    override fun onBackPressed() {
-//        signupActivity!!.nextFragmentSignUp(2)
-    }
 
 
 }

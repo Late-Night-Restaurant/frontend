@@ -35,7 +35,7 @@ import java.util.regex.Pattern
 
 class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     R.layout.fragment_signup_profile
-), SignupActivity.onBackPressedListener, SignUpInterface {
+){
     private lateinit var emailData: String
     private lateinit var pwData: String
     private lateinit var profile: SignUpProfileDTO
@@ -73,19 +73,19 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
 //            val intent = Intent(requireContext(), GalleryActivity::class.java)
 //            getResult.launch(intent)
         }
-        binding.btnSignupProfileNext.setOnClickListener {
-            if (nicknameCheck() && commentCheck()) {
-                val nicknameData = binding.etCommentSignupInput.text.toString()
-                val commentData = binding.etCommentSignupInput.text.toString()
-                profile = SignUpProfileDTO(nicknameData, commentData)
-                showLoadingDialog(requireContext())
-                SignUpService(this).trySignUpSubmit(getPath, SignupDTO(emailData, pwData, profile))
-                // 회원가입 완료되면 네비게이션을 통해 이동
-//                Navigation.findNavController(view).navigate(R.id.action_signupProfileFragment_to_signupFinFragment)
-            } else {
-                SampleSnackBar.make(binding.root, "올바른 형식에 맞게 작성해주세요.").show()
-            }
-        }
+//        binding.btnSignupProfileNext.setOnClickListener {
+//            if (nicknameCheck() && commentCheck()) {
+//                val nicknameData = binding.etCommentSignupInput.text.toString()
+//                val commentData = binding.etCommentSignupInput.text.toString()
+//                profile = SignUpProfileDTO(nicknameData, commentData)
+//                showLoadingDialog(requireContext())
+//                SignUpService(this).trySignUpSubmit(getPath, SignupDTO(emailData, pwData, profile))
+//                // 회원가입 완료되면 네비게이션을 통해 이동
+////                Navigation.findNavController(view).navigate(R.id.action_signupProfileFragment_to_signupFinFragment)
+//            } else {
+//                SampleSnackBar.make(binding.root, "올바른 형식에 맞게 작성해주세요.").show()
+//            }
+//        }
     }
 
     private fun nicknameCheck(): Boolean {
@@ -155,33 +155,33 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         binding.btnSignupProfileNext.setTextColor(resources.getColor(R.color.Gray_10))
 
     }
-
-    override fun onBackPressed() {
-//        signupActivity!!.nextFragmentSignUp(3)
-//        signupActivity!!.decreaseProgressbar()
-    }
-
-    override fun onPostSignUpSubmitSuccess(response: SignupResponse) {
-        dismissLoadingDialog()
-//        moveToFin()
-    }
-
-    override fun onPostSignUpSubmitFailure(response: SignupResponse) {
-        dismissLoadingDialog()
-        if (response.code == REQUEST_ERROR) {
-            when (response.message) {
-                ERROR_STRING_INPUT -> SampleSnackBar.make(binding.root, ERROR_STRING_INPUT).show()
-                ERROR_STRING_DUPLICATE -> SampleSnackBar.make(binding.root, ERROR_STRING_DUPLICATE).show()
-            }
-        }
-        if (response.code == POST_FAIL_USER) {
-            SampleSnackBar.make(binding.root, ERROR_STRING_FAILED_SIGN_UP).show()
-        }
-    }
-
-    override fun onPostSignUpSubmitDisconnect(message: String) {
-        SampleSnackBar.make(binding.root,message)
-        dismissLoadingDialog()
-    }
+//
+//    override fun onBackPressed() {
+////        signupActivity!!.nextFragmentSignUp(3)
+////        signupActivity!!.decreaseProgressbar()
+//    }
+//
+//    override fun onPostSignUpSubmitSuccess(response: SignupResponse) {
+//        dismissLoadingDialog()
+////        moveToFin()
+//    }
+//
+//    override fun onPostSignUpSubmitFailure(response: SignupResponse) {
+//        dismissLoadingDialog()
+//        if (response.code == REQUEST_ERROR) {
+//            when (response.message) {
+//                ERROR_STRING_INPUT -> SampleSnackBar.make(binding.root, ERROR_STRING_INPUT).show()
+//                ERROR_STRING_DUPLICATE -> SampleSnackBar.make(binding.root, ERROR_STRING_DUPLICATE).show()
+//            }
+//        }
+//        if (response.code == POST_FAIL_USER) {
+//            SampleSnackBar.make(binding.root, ERROR_STRING_FAILED_SIGN_UP).show()
+//        }
+//    }
+//
+//    override fun onPostSignUpSubmitDisconnect(message: String) {
+//        SampleSnackBar.make(binding.root,message)
+//        dismissLoadingDialog()
+//    }
 
 }
