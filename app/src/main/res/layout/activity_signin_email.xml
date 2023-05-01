@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="model"
+            name="signinViewmodel"
             type="com.example.simya.src.ui.viewmodel.login.signin.EmailLoginViewModel" />
     </data>
 
@@ -23,20 +23,20 @@
             android:id="@+id/tv_email_signin_headline1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="어서오세요!"
+            android:text="@string/signin_title1"
             android:textColor="@color/Primary_01"
-            android:textSize="40dp"
+            android:textSize="@dimen/text_40"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/default_toolbar"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="16dp"/>
+            android:layout_marginEnd="@dimen/margin_16"/>
         <TextView
             android:id="@+id/tv_email_signin_headline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="심야식당입니다"
+            android:text="@string/signin_title2"
             android:textColor="@color/Gray_06"
-            android:textSize="24dp"
+            android:textSize="@dimen/text_24"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/tv_email_signin_headline1"
             app:layout_constraintStart_toStartOf="@id/tv_email_signin_headline1" />
@@ -47,44 +47,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/btn_email_signin_login"
-            android:layout_marginBottom="56dp"
+            android:layout_marginBottom="@dimen/margin_56"
             android:orientation="vertical">
             <!--        이메일 입력창-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_email_sign_in_input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
                 app:errorEnabled="true"
                 app:hintEnabled="false">
                 <EditText
                     android:id="@+id/edt_email_sign_in_input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="이메일을 입력하세요"
-                    android:textSize="15dp"
+                    android:hint="@string/signin_email_input_hint"
+                    android:textSize="@dimen/text_15"
                     android:inputType="textEmailAddress"
-                    android:backgroundTint="@color/Gray_06"/>
+                    android:backgroundTint="@color/Gray_06"
+                    android:text="@={signinViewmodel.inputEmail}"/>
             </com.google.android.material.textfield.TextInputLayout>
             <!--        비밀번호 입력창-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_email_sign_in_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16"
                 app:errorEnabled="true"
                 app:hintEnabled="false">
                 <EditText
                     android:id="@+id/edt_email_sign_in_input_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="비밀번호를 입력하세요"
-                    android:textSize="15dp"
+                    android:hint="@string/signin_pw_input_hint"
+                    android:textSize="@dimen/text_15"
                     android:inputType="textPassword"
                     android:backgroundTint="@color/Gray_06"
+                    android:text="@={signinViewmodel.inputPassword}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -93,12 +95,12 @@
             android:id="@+id/btn_email_signin_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="로그인"
+            android:text="@string/signin_login"
             android:background="@drawable/low_radius_button"
             app:layout_constraintBottom_toTopOf="@id/ll_signup_email_find"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_16"
             android:enabled="false"
             android:clickable="false"
             />
@@ -112,40 +114,40 @@
             app:layout_constraintBottom_toTopOf="@id/ll_signup_email_signup"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="@dimen/margin_16">
             <TextView
                 android:id="@+id/tv_signup_email_find"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="계정을 잊으셨나요?"
+                android:text="@string/signin_forget"
                 android:textColor="@color/Gray_07" />
             <Button
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                android:layout_marginLeft="4dp"
+                android:minHeight="@dimen/default_zero"
+                android:minWidth="@dimen/default_zero"
+                android:layout_marginEnd="@dimen/margin_4"
                 android:id="@+id/btn_sign_in_email_find_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="이메일 찾기"
+                android:text="@string/signin_find_email"
                 android:textColor="@color/Primary_02"
-                android:background="#00ff0000"/>
+                android:background="@color/Colorless"/>
             <TextView
                 android:id="@+id/tv_signup_email_or"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="또는"
+                android:text="@string/signin_or"
                 android:textColor="@color/Gray_07"
-                android:layout_marginLeft="4dp"/>
+                android:layout_marginEnd="@dimen/margin_4"/>
             <Button
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                android:layout_marginLeft="4dp"
+                android:minHeight="@dimen/default_zero"
+                android:minWidth="@dimen/default_zero"
+                android:layout_marginEnd="@dimen/margin_4"
                 android:id="@+id/btn_sign_in_email_find_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호 변경"
+                android:text="@string/signin_find_pw"
                 android:textColor="@color/Primary_02"
-                android:background="#00ff0000"/>
+                android:background="@color/Colorless"/>
         </LinearLayout>
         <!--    회원가입 버튼 레이아웃-->
         <LinearLayout
@@ -155,26 +157,26 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="56dp"
+            android:layout_marginBottom="@dimen/margin_56"
             android:orientation="horizontal"
             android:gravity="center">
             <TextView
                 android:id="@+id/tv_signup_email_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="심야식당이 처음이신가요?"
+                android:text="@string/signin_first_visit"
                 android:textColor="@color/Gray_07"
                 />
             <Button
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                android:layout_marginLeft="4dp"
+                android:minHeight="@dimen/default_zero"
+                android:minWidth="@dimen/default_zero"
+                android:layout_marginEnd="@dimen/margin_4"
                 android:id="@+id/btn_signin_email_signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="회원가입"
+                android:text="@string/signin_signup"
                 android:textColor="@color/Primary_02"
-                android:background="#00ff0000"/>
+                android:background="@color/Colorless"/>
         </LinearLayout>
 
 

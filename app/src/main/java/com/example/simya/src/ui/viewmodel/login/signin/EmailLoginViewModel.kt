@@ -1,5 +1,6 @@
 package com.example.simya.src.ui.viewmodel.login.signin
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,22 +14,14 @@ import java.util.regex.Pattern
 
 class EmailLoginViewModel: ViewModel() {
 
-    private val loginRepository: LoginRepositoryImpl
-        get() {
-            TODO()
-        }
+    // 이메일
+    val inputEmail = MutableLiveData<String>()
+    // 비밀번호
+    val inputPassword = MutableLiveData<String>()
 
-    // email
-    private val _inputEmail = MutableLiveData<String>()
-    val inputEmail: LiveData<String>
-        get() = _inputEmail
-    // password
-    private val _inputPassword = MutableLiveData<String>()
-    val inputPassword: LiveData<String>
-        get() = _inputPassword
-    fun setEmailAndPassword(email: String,password: String) = viewModelScope.launch{
-        _inputEmail.value = email
-        _inputPassword.value = password
+    fun checkEmailPwCheck():Boolean{
+        Log.d("input check",(inputEmail.value.toString().isNotEmpty() && inputPassword.toString().isNotEmpty()).toString())
+        return inputEmail.value.toString().isNotEmpty() && inputPassword.toString().isNotEmpty()
     }
     // email 검증
     fun checkEmail(): Boolean{

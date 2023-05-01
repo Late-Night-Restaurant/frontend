@@ -24,10 +24,18 @@ class SignupViewModel : ViewModel() {
 
     // 이메일
     val email = MutableLiveData<String>()
+
     // 패스워드
     val pw = MutableLiveData<String>()
 
+    // 재입력
     val rePw = MutableLiveData<String>()
+
+    init{
+        agreeAll.value = false
+        agreeInfo.value = false
+        agreeService.value = false
+    }
 
     // 이메일 공백체크
     fun emailEmptyCheck(): Boolean {
@@ -42,21 +50,19 @@ class SignupViewModel : ViewModel() {
         return pw.value.equals(rePw.value)
     }
 
-    init{
-        agreeAll.value = false
-        agreeInfo.value = false
-        agreeService.value = false
-    }
+    // 진행바 증가
     fun increaseProgress() {
         _progressStatus.value = _progressStatus.value?.plus(25)
         Log.d("increaseProgress","Progressbar is + 25")
         Log.d("progress value",progressStatus.value.toString())
     }
 
+    // 진행바 감소
     fun decreaseProgress() {
         _progressStatus.value = _progressStatus.value?.minus(25)
     }
 
+    // 동의화면 "모두 동의합니다" 클릭시
     fun isAgreeStatus(): Boolean {
         return agreeInfo.value!! && agreeService.value!!
     }
