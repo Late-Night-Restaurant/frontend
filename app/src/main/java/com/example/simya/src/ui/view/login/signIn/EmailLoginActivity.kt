@@ -2,6 +2,7 @@ package com.example.simya.src.ui.view.login.signIn
 
 import android.content.Intent
 import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.simya.R
 import com.example.simya.config.BaseActivity
@@ -14,65 +15,35 @@ import com.example.simya.util.textwatcher.CommonTextWatcher
 
 
 class EmailLoginActivity :
-    BaseActivity<ActivitySigninEmailBinding>(R.layout.activity_signin_email),
-    PrepareDialogInterface {
-    private lateinit var viewModel: EmailLoginViewModel
-//    private lateinit var textWatcher: TextWatcher
+    BaseActivity<ActivitySigninEmailBinding>(R.layout.activity_signin_email){
+    private lateinit var signInViewModel: EmailLoginViewModel
 
     override fun init() {
-        viewModel = ViewModelProvider(this)[EmailLoginViewModel::class.java]
-        initTextWatcher()
+        signInViewModel = ViewModelProvider(this)[EmailLoginViewModel::class.java]
+        binding.signinViewmodel = signInViewModel
 
+
+        signInViewModel.inputEmail.observe(this, Observer {
+            checkInputFrom()
+        })
+        signInViewModel.inputPassword.observe(this, Observer {
+            checkInputFrom()
+        })
         // 로그인 버튼 클릭시
         binding.btnEmailSigninLogin.onThrottleClick {
-            viewModel.setEmailAndPassword(
-                binding.edtEmailSignInInputEmail.text.toString(),
-                binding.edtEmailSignInInputPassword.text.toString()
-            )
             if (checkValidationEmail() && checkValidationPassword()) {
                 showLoadingDialog(this)
                 // 로그인 서비스
             }
         }
+        // 회원가입 서비스로 이동
         binding.btnSigninEmailSignup.onThrottleClick {
             moveToSignup()
         }
-        viewModel.inputEmail.value
     }
-
-    private fun initTextWatcher() {
-        var emailStatus = false
-        var pwStatus = false
-        binding.edtEmailSignInInputEmail.addTextChangedListener(CommonTextWatcher(
-            afterChanged = { email->
-                if (email!!.isEmpty()) {
-                    Log.d("TextWatcher", "email is null")
-                    emailStatus = false
-                    checkInputStatus(emailStatus,pwStatus)
-                } else {
-                    Log.d("TextWatcher", "email is not null")
-                    emailStatus = true
-                    checkInputStatus(emailStatus,pwStatus)
-                }
-            }
-        ))
-        binding.edtEmailSignInInputPassword.addTextChangedListener(CommonTextWatcher(
-            afterChanged = { pw ->
-                if (pw!!.isEmpty()) {
-                    Log.d("TextWatcher", "pw is null")
-                    pwStatus = false
-                    checkInputStatus(emailStatus,pwStatus)
-                } else {
-                    Log.d("TextWatcher", "pw is not null")
-                    pwStatus = true
-                    checkInputStatus(emailStatus,pwStatus)
-                }
-            }
-        ))
-    }
-    private fun checkInputStatus(emailStatus: Boolean,pwStatus:Boolean){
-        binding.btnEmailSigninLogin.isEnabled = emailStatus&&pwStatus
-        binding.btnEmailSigninLogin.isClickable = emailStatus&&pwStatus
+    private fun checkInputFrom(){
+        binding.btnEmailSigninLogin.isEnabled = signInViewModel.checkEmailPwCheck()
+        binding.btnEmailSigninLogin.isClickable = signInViewModel.checkEmailPwCheck()
     }
 
     private fun moveToSignup() {
@@ -82,7 +53,7 @@ class EmailLoginActivity :
 
     // 아이디 폼에 따른 Error 출력
     private fun checkValidationEmail(): Boolean {
-        return if (viewModel.checkEmail()) {
+        return if (signInViewModel.checkEmail()) {
             binding.tilEmailSignInInputEmail.error = null
             true
         } else {
@@ -93,21 +64,12 @@ class EmailLoginActivity :
 
     // 비밀번호 폼에 따른 Error 출력
     private fun checkValidationPassword(): Boolean {
-        return if (viewModel.checkPassword()) {
+        return if (signInViewModel.checkPassword()) {
             binding.tilEmailSignInInputPassword.error = null
             true
         } else {
             binding.tilEmailSignInInputPassword.error = "영문과 숫자를 조합해서 입력해주세요.(8-12자)"
             false
         }
-    }
-
-
-    override fun onOKClicked() {
-
-    }
-
-    override fun onBackPressed() {
-        backApplicationExit(this)
     }
 }

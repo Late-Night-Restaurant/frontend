@@ -6,6 +6,17 @@
     <string name="representative_phrase_big">비슷한 사람들과</string>
     <string name="representative_phrase_small">솔직한 이야기</string>
     <string name="inquiry">문의하기</string>
+    <string name="signin_title1">어서오세요!</string>
+    <string name="signin_title2">심야식당입니다</string>
+    <string name="signin_email_input_hint">이메일을 입력하세요.</string>
+    <string name="signin_pw_input_hint">비밀번호를 입력하세요.</string>
+    <string name="signin_login">로그인</string>
+    <string name="signin_forget">계정을 잊으셨나요?</string>
+    <string name="signin_find_email">이메일 찾기</string>
+    <string name="signin_or">또는</string>
+    <string name="signin_find_pw">비밀번호 찾기</string>
+    <string name="signin_first_visit">심야식당이 처음이신가요?</string>
+    <string name="signin_signup">회원가입</string>
 <!--    회원가입 화면-->
     <string name="signup_title">회원가입</string>
     <string name="signup_button_text">다음으로</string>
