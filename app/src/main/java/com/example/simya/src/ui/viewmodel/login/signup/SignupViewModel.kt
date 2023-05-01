@@ -22,12 +22,24 @@ class SignupViewModel : ViewModel() {
     // 서비스 이용약관
     val agreeService = MutableLiveData<Boolean>()
 
+    // 이메일
     val email = MutableLiveData<String>()
-
+    // 패스워드
     val pw = MutableLiveData<String>()
 
+    val rePw = MutableLiveData<String>()
+
+    // 이메일 공백체크
     fun emailEmptyCheck(): Boolean {
         return email.value.toString().isNotEmpty()
+    }
+    // 비밀번호, 재입력 공백체크
+    fun pwEmptyCheck(): Boolean{
+        return pw.value.toString().isNotEmpty() && rePw.value.toString().isNotEmpty()
+    }
+    // 비밀번호, 재입력 일치체크
+    fun matchPwCheck():Boolean{
+        return pw.value.equals(rePw.value)
     }
 
     init{

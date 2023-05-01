@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="signupViewModel"
+            type="com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -61,7 +66,8 @@
                     android:backgroundTint="@color/Gray_06"
                     android:hint="@string/signup_pw_input_hint"
                     android:inputType="textPassword"
-                    android:autofillHints=""/>
+                    android:autofillHints=""
+                    android:text="@={signupViewModel.pw}"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_re_pw_signup_input"
@@ -78,7 +84,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/Gray_06"
                     android:hint="@string/signup_pw_input_re_hint"
-                    android:inputType="textPassword" >
+                    android:inputType="textPassword"
+                    android:text="@={signupViewModel.rePw}">
                 </EditText>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +96,7 @@
             android:id="@+id/btn_signup_next_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/low_radius_button_on"
+            android:background="@drawable/low_radius_button"
             android:layout_marginBottom="@dimen/button_margin"
             android:layout_marginLeft="@dimen/button_margin"
             android:layout_marginRight="@dimen/button_margin"
@@ -99,7 +106,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="DuplicateIds">
+            android:enabled="false"
+            android:clickable="false">
 
         </Button>
 
