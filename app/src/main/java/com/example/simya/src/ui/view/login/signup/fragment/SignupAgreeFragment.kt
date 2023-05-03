@@ -25,7 +25,6 @@ class SignupAgreeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
 //        signupViewModel = ViewModelProvider(requireActivity())[SignupViewModel::class.java]
         signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
         binding.signupAgreeViewModel = signupViewModel

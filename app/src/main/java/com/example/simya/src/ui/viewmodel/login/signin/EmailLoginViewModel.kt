@@ -15,13 +15,12 @@ import java.util.regex.Pattern
 class EmailLoginViewModel: ViewModel() {
 
     // 이메일
-    val inputEmail = MutableLiveData<String>()
+    val inputEmail = MutableLiveData<String>("")
     // 비밀번호
-    val inputPassword = MutableLiveData<String>()
+    val inputPassword = MutableLiveData<String>("")
 
     fun checkEmailPwCheck():Boolean{
-        Log.d("input check",(inputEmail.value.toString().isNotEmpty() && inputPassword.toString().isNotEmpty()).toString())
-        return inputEmail.value.toString().isNotEmpty() && inputPassword.toString().isNotEmpty()
+        return (inputEmail.value.toString().isNotEmpty() && inputPassword.value.toString().isNotEmpty())
     }
     // email 검증
     fun checkEmail(): Boolean{
