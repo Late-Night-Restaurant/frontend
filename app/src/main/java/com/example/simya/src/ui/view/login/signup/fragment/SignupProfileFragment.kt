@@ -11,6 +11,8 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.simya.R
@@ -20,6 +22,7 @@ import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.src.main.login.model.SignUpInterface
 import com.example.simya.src.main.login.model.SignUpService
 import com.example.simya.src.model.account.*
+import com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel
 import com.example.simya.util.Constants.COMMENT_VALIDATION
 import com.example.simya.util.Constants.ERROR_STRING_DUPLICATE
 import com.example.simya.util.Constants.ERROR_STRING_FAILED_SIGN_UP
@@ -35,19 +38,25 @@ import java.util.regex.Pattern
 
 class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     R.layout.fragment_signup_profile
-){
-    private lateinit var emailData: String
-    private lateinit var pwData: String
-    private lateinit var profile: SignUpProfileDTO
-    private lateinit var textWatcher: TextWatcher
+) {
+    private lateinit var signupViewModel: SignupViewModel
+
+
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private var getUri: Uri? = null
     private var getPath: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
+        binding.signupViewModel = signupViewModel
 
-        
+        signupViewModel.nickname.observe(viewLifecycleOwner, Observer {
+            checkEmpty()
+        })
+        signupViewModel.comment.observe(viewLifecycleOwner, Observer {
+            checkEmpty()
+        })
 
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -60,5 +69,9 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
                     SampleSnackBar.make(binding.root, "이미지를 가져오는데 실패했습니다.").show()
                 }
             }
-        }
+    }
+    private fun checkEmpty(){
+        binding.btnSignupProfileNext.isEnabled = signupViewModel.profileEmptyCheck()
+        binding.btnSignupProfileNext.isClickable = signupViewModel.profileEmptyCheck()
+    }
 }

@@ -31,6 +31,11 @@ class SignupViewModel : ViewModel() {
     // 재입력
     val rePw = MutableLiveData<String>()
 
+    // 닉네임
+    val nickname = MutableLiveData<String>()
+    // 한줄 소개
+    val comment = MutableLiveData<String>()
+
     init{
         agreeAll.value = false
         agreeInfo.value = false
@@ -48,6 +53,9 @@ class SignupViewModel : ViewModel() {
     // 비밀번호, 재입력 일치체크
     fun matchPwCheck():Boolean{
         return pw.value.equals(rePw.value)
+    }
+    fun profileEmptyCheck(): Boolean{
+        return nickname.value.toString().isNotEmpty() && comment.value.toString().isNotEmpty()
     }
 
     // 진행바 증가
