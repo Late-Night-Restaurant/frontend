@@ -2,7 +2,6 @@ package com.example.simya.src.ui.view.login.signup.fragment
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,7 +22,7 @@ class SignupEmailFragment :
         //        signupViewModel = ViewModelProvider(requireActivity())[SignupViewModel::class.java]
         signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
         binding.signupViewModel = signupViewModel
-
+        signupViewModel.setSignupProgress(50)
         signupViewModel.email.observe(viewLifecycleOwner, Observer {
             emailEmpty()
         })
@@ -31,7 +30,6 @@ class SignupEmailFragment :
         binding.btnSignupNextEmail.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_signupEmailFragment_to_signupPWFragment)
-            signupViewModel.increaseProgress()
         }
     }
     private fun emailEmpty(){

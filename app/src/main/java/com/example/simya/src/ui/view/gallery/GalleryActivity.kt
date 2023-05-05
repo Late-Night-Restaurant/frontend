@@ -33,11 +33,13 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_
 //    private val adapter = GalleryAdapter()
     private lateinit var cropLayout: CropLayout
     private val PERMISSIONS_REQUEST_CODE = 100
+
     private var REQUIRED_PERMISSIONS =if(Build.VERSION.SDK_INT <33){
         arrayOf<String>(android.Manifest.permission.READ_EXTERNAL_STORAGE)
     }else{
         arrayOf<String>(android.Manifest.permission.READ_MEDIA_IMAGES)
     }
+
     override fun init() {
         cropLayout = binding.clCropper
         binding.ibCropAble.onThrottleClick {

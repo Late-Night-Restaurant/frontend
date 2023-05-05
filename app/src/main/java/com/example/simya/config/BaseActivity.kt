@@ -45,9 +45,6 @@ abstract class BaseActivity<B : ViewDataBinding>(@LayoutRes val layoutRes: Int) 
             mLoadingDialog.dismiss()
         }
     }
-    override fun onBackPressed() {
-        finish()
-    }
     fun backApplicationExit(context: Context){
         ExitDialog("앱을 종료하시겠어요?",context).show()
     }

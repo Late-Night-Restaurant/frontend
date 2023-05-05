@@ -2,8 +2,6 @@ package com.example.simya.config
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.simya.src.ui.view.login.signup.fragment.SignupEmailFragment
 import com.example.simya.util.dialog.ExitDialog
 import com.example.simya.util.dialog.LoadingDialog
 
@@ -23,6 +22,11 @@ abstract class BaseFragment<B : ViewDataBinding>(
     private var _binding: B? = null
     protected val binding get() = _binding!!
 
+//    val callback = object: OnBackPressedCallback(true){
+//        override fun handleOnBackPressed() {
+//
+//        }
+//    }
     lateinit var mLoadingDialog: LoadingDialog
 
     override fun onCreateView(
@@ -39,8 +43,8 @@ abstract class BaseFragment<B : ViewDataBinding>(
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 
     fun showLoadingDialog(context: Context) {
@@ -54,8 +58,8 @@ abstract class BaseFragment<B : ViewDataBinding>(
         }
     }
 
-    fun backApplicationExit(context: Context){
-        ExitDialog("앱을 종료하시겠어요?",context).show()
-    }
+//    fun backApplicationExit(context: Context){
+//        ExitDialog("앱을 종료하시겠어요?",context).show()
+//    }
 
 }
