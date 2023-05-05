@@ -29,11 +29,10 @@ class SignupAgreeFragment :
 //        signupViewModel = ViewModelProvider(requireActivity())[SignupViewModel::class.java]
         signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
         binding.signupAgreeViewModel = signupViewModel
-
+        signupViewModel.setSignupProgress(25)
         binding.btnSignupAgreeNext.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_signupAgreeFragment_to_signupEmailFragment)
-            signupViewModel.increaseProgress()
         }
 
         // 동의 체크 버튼 viewModel

@@ -59,15 +59,8 @@ class SignupViewModel : ViewModel() {
     }
 
     // 진행바 증가
-    fun increaseProgress() {
-        _progressStatus.value = _progressStatus.value?.plus(25)
-        Log.d("increaseProgress","Progressbar is + 25")
-        Log.d("progress value",progressStatus.value.toString())
-    }
-
-    // 진행바 감소
-    fun decreaseProgress() {
-        _progressStatus.value = _progressStatus.value?.minus(25)
+    fun setSignupProgress(statusValue: Int) {
+        _progressStatus.value = statusValue
     }
 
     // 동의화면 "모두 동의합니다" 클릭시

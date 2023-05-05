@@ -50,7 +50,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         super.onViewCreated(view, savedInstanceState)
         signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
         binding.signupViewModel = signupViewModel
-
+        signupViewModel.setSignupProgress(100)
         signupViewModel.nickname.observe(viewLifecycleOwner, Observer {
             checkEmpty()
         })
