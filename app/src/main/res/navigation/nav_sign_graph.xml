@@ -11,7 +11,9 @@
         android:label="SignupAgreeFragment" >
         <action
             android:id="@+id/action_signupAgreeFragment_to_signupEmailFragment"
-            app:destination="@id/signupEmailFragment" />
+            app:destination="@id/signupEmailFragment"
+            app:popUpTo="@id/signupAgreeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
 <!--    아이디 입력 Fragment-->
@@ -21,7 +23,8 @@
         android:label="SignupEmailFragment" >
         <action
             android:id="@+id/action_signupEmailFragment_to_signupPWFragment"
-            app:destination="@id/signupPwFragment" />
+            app:destination="@id/signupPwFragment"
+            app:popUpTo="@id/signupEmailFragment" />
     </fragment>
 
 <!--    비밀번호 입력 Fragment-->
@@ -31,7 +34,9 @@
         android:label="SignupPwFragment" >
         <action
             android:id="@+id/action_signupPwFragment_to_signupProfileFragment"
-            app:destination="@id/signupProfileFragment" />
+            app:destination="@id/signupProfileFragment"
+            app:popUpTo="@id/signupPwFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
 <!--    프로필 정보 입력 Fragment-->
@@ -41,7 +46,8 @@
         android:label="SignupProfileFragment" >
         <action
             android:id="@+id/action_signupProfileFragment_to_signupFinFragment"
-            app:destination="@id/signupFinFragment" />
+            app:destination="@id/signupFinFragment"
+            app:popUpTo="@id/signupProfileFragment" />
     </fragment>
 
 <!--    최종 확인 Fragment-->

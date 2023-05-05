@@ -1,5 +1,6 @@
 package com.example.simya.src.ui.view.login.signup.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log

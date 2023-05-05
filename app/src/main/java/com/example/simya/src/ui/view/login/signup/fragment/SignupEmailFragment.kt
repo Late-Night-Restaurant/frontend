@@ -2,7 +2,6 @@ package com.example.simya.src.ui.view.login.signup.fragment
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
