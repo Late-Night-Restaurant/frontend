@@ -12,6 +12,10 @@
         <action
             android:id="@+id/action_signupAgreeFragment_to_signupEmailFragment"
             app:destination="@id/signupEmailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/signupAgreeFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -24,6 +28,10 @@
         <action
             android:id="@+id/action_signupEmailFragment_to_signupPWFragment"
             app:destination="@id/signupPwFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/signupEmailFragment" />
     </fragment>
 
@@ -35,6 +43,10 @@
         <action
             android:id="@+id/action_signupPwFragment_to_signupProfileFragment"
             app:destination="@id/signupProfileFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/signupPwFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -47,6 +59,10 @@
         <action
             android:id="@+id/action_signupProfileFragment_to_signupFinFragment"
             app:destination="@id/signupFinFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/signupProfileFragment" />
     </fragment>
 
