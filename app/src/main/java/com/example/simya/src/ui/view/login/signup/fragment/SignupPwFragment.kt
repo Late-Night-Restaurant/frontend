@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,10 +30,12 @@ class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_
         binding.signupViewModel = signupViewModel
         signupViewModel.setSignupProgress(75)
         signupViewModel.pw.observe(viewLifecycleOwner,Observer{
+            Log.d("pw","Observe")
             pwEmpty()
         })
         signupViewModel.rePw.observe(viewLifecycleOwner,Observer{
             pwEmpty()
+            Log.d("repw","Observe")
         })
         binding.btnSignupNextPw.setOnClickListener {
             Navigation.findNavController(view)

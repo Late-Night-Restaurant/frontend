@@ -41,7 +41,6 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
 ) {
     private lateinit var signupViewModel: SignupViewModel
 
-
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private var getUri: Uri? = null
     private var getPath: String? = null
@@ -53,9 +52,11 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         signupViewModel.setSignupProgress(100)
         signupViewModel.nickname.observe(viewLifecycleOwner, Observer {
             checkEmpty()
+            Log.d("nick","Observe")
         })
         signupViewModel.comment.observe(viewLifecycleOwner, Observer {
             checkEmpty()
+            Log.d("comment","Observe")
         })
 
         getResult =
@@ -73,5 +74,8 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     private fun checkEmpty(){
         binding.btnSignupProfileNext.isEnabled = signupViewModel.profileEmptyCheck()
         binding.btnSignupProfileNext.isClickable = signupViewModel.profileEmptyCheck()
+
+        Log.d("next Enabled", binding.btnSignupProfileNext.isEnabled.toString())
+        Log.d("next Enabled", binding.btnSignupProfileNext.isClickable.toString())
     }
 }
