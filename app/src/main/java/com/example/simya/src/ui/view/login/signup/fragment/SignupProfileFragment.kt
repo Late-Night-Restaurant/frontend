@@ -41,7 +41,6 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
 ) {
     private lateinit var signupViewModel: SignupViewModel
 
-
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private var getUri: Uri? = null
     private var getPath: String? = null
@@ -58,6 +57,10 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
             checkEmpty()
         })
 
+        binding.btnSignupProfileNext.setOnClickListener{
+            Navigation.findNavController(view)
+                .navigate(R.id.action_signupProfileFragment_to_signupFinFragment)
+        }
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == REQUEST_CODE_FOR_INTENT) {

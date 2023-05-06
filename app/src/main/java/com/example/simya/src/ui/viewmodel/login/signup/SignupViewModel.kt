@@ -23,18 +23,18 @@ class SignupViewModel : ViewModel() {
     val agreeService = MutableLiveData<Boolean>()
 
     // 이메일
-    val email = MutableLiveData<String>()
+    val email = MutableLiveData<String>("")
 
     // 패스워드
-    val pw = MutableLiveData<String>()
+    val pw = MutableLiveData<String>("")
 
     // 재입력
-    val rePw = MutableLiveData<String>()
+    val rePw = MutableLiveData<String>("")
 
     // 닉네임
-    val nickname = MutableLiveData<String>()
+    val nickname = MutableLiveData<String>("")
     // 한줄 소개
-    val comment = MutableLiveData<String>()
+    val comment = MutableLiveData<String>("")
 
     init{
         agreeAll.value = false
