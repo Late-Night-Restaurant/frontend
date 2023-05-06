@@ -30,18 +30,24 @@ class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_
         binding.signupViewModel = signupViewModel
         signupViewModel.setSignupProgress(75)
         signupViewModel.pw.observe(viewLifecycleOwner,Observer{
-            Log.d("pw","Observe")
             pwEmpty()
         })
         signupViewModel.rePw.observe(viewLifecycleOwner,Observer{
             pwEmpty()
-            Log.d("repw","Observe")
         })
         binding.btnSignupNextPw.setOnClickListener {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_signupPwFragment_to_signupProfileFragment)
+            if(checkEqualPassword()){
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_signupPwFragment_to_signupProfileFragment)
+            }else{
+                binding.tilRePwSignupInput.error = "입력하신 비밀번호와 일치하지 않습니다."
+            }
         }
     }
+    private fun checkEqualPassword(): Boolean {
+        return signupViewModel.matchPwCheck()
+    }
+
     private fun pwEmpty(){
         binding.btnSignupNextPw.isEnabled = signupViewModel.pwEmptyCheck()
         binding.btnSignupNextPw.isClickable = signupViewModel.pwEmptyCheck()

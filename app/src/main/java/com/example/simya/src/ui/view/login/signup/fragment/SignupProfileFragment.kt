@@ -52,13 +52,15 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         signupViewModel.setSignupProgress(100)
         signupViewModel.nickname.observe(viewLifecycleOwner, Observer {
             checkEmpty()
-            Log.d("nick","Observe")
         })
         signupViewModel.comment.observe(viewLifecycleOwner, Observer {
             checkEmpty()
-            Log.d("comment","Observe")
         })
 
+        binding.btnSignupProfileNext.setOnClickListener{
+            Navigation.findNavController(view)
+                .navigate(R.id.action_signupProfileFragment_to_signupFinFragment)
+        }
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == REQUEST_CODE_FOR_INTENT) {
@@ -74,8 +76,5 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
     private fun checkEmpty(){
         binding.btnSignupProfileNext.isEnabled = signupViewModel.profileEmptyCheck()
         binding.btnSignupProfileNext.isClickable = signupViewModel.profileEmptyCheck()
-
-        Log.d("next Enabled", binding.btnSignupProfileNext.isEnabled.toString())
-        Log.d("next Enabled", binding.btnSignupProfileNext.isClickable.toString())
     }
 }
