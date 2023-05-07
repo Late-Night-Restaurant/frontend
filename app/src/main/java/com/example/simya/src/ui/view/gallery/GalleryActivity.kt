@@ -21,6 +21,7 @@ import com.example.simya.databinding.ActivityCropImageBinding
 import com.example.simya.util.Constants.IMAGE_PATH
 import com.example.simya.util.Constants.IMAGE_URI
 import com.example.simya.util.Constants.REQUEST_CODE_FOR_INTENT
+import com.example.simya.util.Constants.REQUEST_CODE_PERMISSIONS
 import com.example.simya.util.onThrottleClick
 import com.takusemba.cropme.CropLayout
 import com.takusemba.cropme.OnCropListener
@@ -30,16 +31,13 @@ import java.io.ByteArrayOutputStream
 
 class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_crop_image) {
     private val imageList = arrayListOf<Uri>()
-//    private val adapter = GalleryAdapter()
     private lateinit var cropLayout: CropLayout
-    private val PERMISSIONS_REQUEST_CODE = 100
 
     private var REQUIRED_PERMISSIONS =if(Build.VERSION.SDK_INT <33){
-        arrayOf<String>(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
     }else{
-        arrayOf<String>(android.Manifest.permission.READ_MEDIA_IMAGES)
+        arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES)
     }
-
     override fun init() {
         cropLayout = binding.clCropper
         binding.ibCropAble.onThrottleClick {
@@ -55,7 +53,7 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_
                 setResult(REQUEST_CODE_FOR_INTENT,intent)
                 finish()
             }
-            // 실패했을 때,
+            // 실패 했을때,
             override fun onFailure(e: Exception) {
                 Log.e("Failure", "$e")
                 Log.d("Failure", "failed")
@@ -70,11 +68,11 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_
                 showGallery()
                 Log.d("LOG", "갤러리 접근 권한이 있는 경우")
             }
-            // 갤러리 접근 권한이 없는 경우 && 교육용 팝업을 보여줘야 하는 경우
+            // 갤러리 접근 권한이 없는 경우 && 교육용 팝업
             shouldShowRequestPermissionRationale(REQUIRED_PERMISSIONS[0])
             -> {
                 requestPermission()
-                Log.d("LOG", "갤러리 접근 권한이 없는 경우 && 교육용 팝업을 보여줘야 하는 경우")
+                Log.d("LOG", "갤러리 접근 권한이 없는 경우 && 교육용 팝업")
             }
             // 권한 요청 하기
             else -> {
@@ -103,7 +101,7 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_
                 ActivityCompat.requestPermissions(
                     this,
                     REQUIRED_PERMISSIONS,
-                    PERMISSIONS_REQUEST_CODE
+                    REQUEST_CODE_PERMISSIONS
                 )
             } else {
                 //설명 필요하지 않음
@@ -111,11 +109,10 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_
                 ActivityCompat.requestPermissions(
                     this,
                     REQUIRED_PERMISSIONS,
-                    PERMISSIONS_REQUEST_CODE
+                    REQUEST_CODE_PERMISSIONS
                 )
             }
         } else {
-            Log.d("허용..?", "사용자가 요청을 거부 한적이 있다.")
             //권한 허용
         }
     }
@@ -125,7 +122,7 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            PERMISSIONS_REQUEST_CODE -> {
+            REQUEST_CODE_PERMISSIONS -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     showGallery()
                 } else {
@@ -212,22 +209,7 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_
             }
 
         }
-//        binding.rvGallery.adapter = adapter
-//        adapter.setImageList(imageList)
     }
-
-//    private fun clickImage() {
-//        adapter.setOnItemClickListener(object : GalleryAdapter.OnItemClickListener {
-//            override fun onItemClick(v: View, data: Uri, position: Int) {
-//                cropLayout.setUri(data)
-//            }
-//
-//            override fun onLongClick(v: View, data: Uri, position: Int) {
-//                Log.d("click", "길게 누르지마")
-//            }
-//
-//        })
-//    }
     private fun getImageUri(context: Context, inImage: Bitmap): Uri? {
         val bytes = ByteArrayOutputStream()
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
@@ -241,11 +223,10 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_
     }
     fun absolutelyPath(path: Uri): String {
 
-        var proj: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
-        var c: Cursor? = contentResolver.query(path, proj, null, null, null)
-        var index = c!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        val proj: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
+        val c: Cursor? = contentResolver.query(path, proj, null, null, null)
+        val index = c!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         c.moveToFirst()
-
         return c.getString(index)
     }
 

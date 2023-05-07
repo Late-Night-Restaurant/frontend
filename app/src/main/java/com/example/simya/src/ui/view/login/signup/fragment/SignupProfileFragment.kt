@@ -22,6 +22,7 @@ import com.example.simya.databinding.FragmentSignupProfileBinding
 import com.example.simya.src.main.login.model.SignUpInterface
 import com.example.simya.src.main.login.model.SignUpService
 import com.example.simya.src.model.account.*
+import com.example.simya.src.ui.view.gallery.GalleryActivity
 import com.example.simya.src.ui.viewmodel.login.signup.SignupViewModel
 import com.example.simya.util.Constants.COMMENT_VALIDATION
 import com.example.simya.util.Constants.ERROR_STRING_DUPLICATE
@@ -60,6 +61,10 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         binding.btnSignupProfileNext.setOnClickListener{
             Navigation.findNavController(view)
                 .navigate(R.id.action_signupProfileFragment_to_signupFinFragment)
+        }
+        binding.ibSignupProfileEdit.setOnClickListener{
+            val intent = Intent(requireContext(), GalleryActivity::class.java)
+            startActivity(intent)
         }
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

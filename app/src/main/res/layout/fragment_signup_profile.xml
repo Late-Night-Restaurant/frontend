@@ -71,6 +71,7 @@
                         android:background="@drawable/bg_profile"
                         />
                     <ImageButton
+                        android:id="@+id/ib_signup_profile_edit"
                         android:layout_width="@dimen/signup_profile_edit_button_size"
                         android:layout_height="@dimen/signup_profile_edit_button_size"
                         android:src="@drawable/ic_edit_on_l"
