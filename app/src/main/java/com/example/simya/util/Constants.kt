@@ -98,4 +98,5 @@ object Constants {
     const val REQUEST_CODE_FOR_INTENT = 1002
     const val REQUEST_CODE_PROFILE_IMAGE = 2001
     const val REQUEST_CODE_BORDER_IMAGE = 2002
+    const val REQUEST_CODE_PERMISSIONS = 2000
 }
