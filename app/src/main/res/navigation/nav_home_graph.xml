@@ -19,5 +19,10 @@
         android:name="com.example.simya.src.ui.view.mypage.MyPageFragment"
         android:label="MyPageFragment"
         tools:layout="@layout/fragment_home_my_page"/>
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.example.simya.src.ui.view.location.LocationFragment"
+        android:label="LocationFragment"
+        tools:layout="@layout/fragment_home_location"/>
 
 </navigation>

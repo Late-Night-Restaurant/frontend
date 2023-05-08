@@ -18,7 +18,7 @@
             <ImageButton
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
-                android:background="#00ff0000"
+                android:background="@color/Colorless"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_bell_no" />
 
@@ -26,17 +26,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="심야식당"
+                android:text="@string/app_name"
                 android:textColor="@color/Primary_01"
-                android:textSize="28dp"
+                android:textSize="@dimen/text_28"
                 android:textStyle="bold" />
 
             <ImageButton
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
                 android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                android:background="#00ff0000"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:background="@color/Colorless"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_search" />
         </androidx.appcompat.widget.Toolbar>
@@ -45,7 +45,7 @@
             android:id="@+id/ll_home_main_sort"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
+            android:layout_marginStart="@dimen/margin_8"
             android:gravity="end"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,13 +56,13 @@
                 android:id="@+id/tv_home_main_sort_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="현재 손님순" />
+                android:text="@string/home_main_customer_order" />
 
             <ImageButton
                 android:id="@+id/ib_home_main_sort_type"
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
-                android:background="#00ff0000"
+                android:background="@color/Colorless"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_down" />
 
@@ -70,7 +70,7 @@
                 android:id="@+id/ib_home_main_view_type"
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
-                android:background="#00ff0000"
+                android:background="@color/Colorless"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_box_4" />
         </LinearLayout>
@@ -78,7 +78,7 @@
         <FrameLayout
             android:id="@+id/fm_home_main"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/default_zero"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -15,15 +15,14 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
-
+            app:layout_constraintTop_toTopOf="parent" />
         <!--    프로필-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_profile_main_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +30,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civ_my_page_profile"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="@dimen/margin_72"
+                android:layout_height="@dimen/margin_72"
                 android:background="@drawable/bg_profile"
                 android:src="@drawable/ic_base_profile"
                 tools:ignore="MissingConstraints" />
@@ -41,7 +40,7 @@
                 android:id="@+id/ll_my_page_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/margin_16"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -52,8 +51,8 @@
                     android:id="@+id/tv_my_page_main_nick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="닉네임"
-                    android:textSize="14dp"
+                    android:text="@string/my_page_nick"
+                    android:textSize="@dimen/text_12"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -63,8 +62,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="한줄소개"
-                    android:textSize="12dp"
+                    android:text="@string/my_page_comment"
+                    android:textSize="@dimen/text_12"
                     app:layout_constraintStart_toStartOf="@id/tv_my_page_main_nick"
                     app:layout_constraintTop_toBottomOf="@id/tv_my_page_main_nick" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -73,8 +72,8 @@
                 android:id="@+id/btn_my_page_profile"
                 android:layout_width="@dimen/icon_width"
                 android:layout_height="@dimen/icon_height"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_16"
                 android:background="@color/Gray_11"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_right"
@@ -86,8 +85,8 @@
         <View
             android:id="@+id/line_1"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="@dimen/vertical_line"
+            android:layout_marginTop="@dimen/margin_16"
             android:background="@color/Gray_09"
             app:layout_constraintTop_toBottomOf="@+id/cl_profile_main_tab" />
 
@@ -95,26 +94,25 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_my_page_multi_profile"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="@dimen/default_zero"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/line_1"></androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintTop_toBottomOf="@+id/line_1" />
 
         <View
             android:id="@+id/line_2"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="@dimen/vertical_line"
             android:background="@color/Gray_09"
-            app:layout_constraintTop_toBottomOf="@+id/rv_my_page_multi_profile"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_my_page_multi_profile" />
 
         <!--    마이페이지 메뉴-->
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_8"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/line_2">
 
@@ -130,9 +128,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="찜한 이야기 집"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:text="@string/my_page_like"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -143,8 +141,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="end"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_8"
                     android:background="@color/Gray_11"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_right"
@@ -167,9 +165,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="내가 쓴 리뷰"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:text="@string/my_page_write_review"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -180,8 +178,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="end"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_8"
                     android:background="@color/Gray_11"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_right"
@@ -204,9 +202,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="계정 설정"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:text="@string/my_page_account_setting"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -217,8 +215,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="end"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_8"
                     android:background="@color/Gray_11"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_right"
@@ -241,9 +239,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="어플 설정"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:text="@string/my_page_app_setting"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -254,8 +252,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="end"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_8"
                     android:background="@color/Gray_11"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_right"
@@ -278,9 +276,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="고객 센터"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:text="@string/my_page_service"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -291,8 +289,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="end"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_8"
                     android:background="@color/Gray_11"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_right"
@@ -328,7 +326,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/Gray_11"
-                android:text="로그아웃"
+                android:text="@string/my_page_logout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_my_page_version"
                 tools:ignore="MissingConstraints" />
