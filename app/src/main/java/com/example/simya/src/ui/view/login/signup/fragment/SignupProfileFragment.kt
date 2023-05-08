@@ -50,7 +50,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         super.onViewCreated(view, savedInstanceState)
         signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
         binding.signupViewModel = signupViewModel
-        signupViewModel.setSignupProgress(100)
+        signupViewModel.setSignupProgress(75)
         signupViewModel.nickname.observe(viewLifecycleOwner, Observer {
             checkEmpty()
         })
@@ -64,7 +64,7 @@ class SignupProfileFragment : BaseFragment<FragmentSignupProfileBinding>(
         }
         binding.ibSignupProfileEdit.setOnClickListener{
             val intent = Intent(requireContext(), GalleryActivity::class.java)
-            startActivity(intent)
+            getResult.launch(intent)
         }
         getResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

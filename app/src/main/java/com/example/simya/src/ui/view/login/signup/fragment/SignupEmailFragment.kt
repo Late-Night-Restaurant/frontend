@@ -22,7 +22,7 @@ class SignupEmailFragment :
         //        signupViewModel = ViewModelProvider(requireActivity())[SignupViewModel::class.java]
         signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
         binding.signupViewModel = signupViewModel
-        signupViewModel.setSignupProgress(50)
+        signupViewModel.setSignupProgress(25)
         signupViewModel.email.observe(viewLifecycleOwner, Observer {
             emailEmpty()
         })

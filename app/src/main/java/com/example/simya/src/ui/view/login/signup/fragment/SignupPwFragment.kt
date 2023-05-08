@@ -28,7 +28,7 @@ class SignupPwFragment: BaseFragment<FragmentSignupPwBinding>(R.layout.fragment_
         super.onViewCreated(view, savedInstanceState)
         signupViewModel = ViewModelProvider(activity as SignupActivity)[SignupViewModel::class.java]
         binding.signupViewModel = signupViewModel
-        signupViewModel.setSignupProgress(75)
+        signupViewModel.setSignupProgress(50)
         signupViewModel.pw.observe(viewLifecycleOwner,Observer{
             pwEmpty()
         })
