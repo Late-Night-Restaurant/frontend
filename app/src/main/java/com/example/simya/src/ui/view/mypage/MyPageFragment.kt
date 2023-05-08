@@ -1,59 +1,56 @@
-//package com.example.simya.src.ui.view.mypage
-//
-//import android.content.Intent
-//import android.os.Bundle
-//import android.util.Log
-//import android.view.View
-//import androidx.recyclerview.widget.LinearLayoutManager
-//import androidx.recyclerview.widget.RecyclerView
-//import com.bumptech.glide.Glide
-//import com.example.simya.BuildConfig
-//import com.example.simya.R
-//import com.example.simya.config.BaseFragment
-//import com.example.simya.config.BaseResponse
-//import com.example.simya.databinding.FragmentHomeMyPageBinding
-//import com.example.simya.src.ui.view.home.HomeActivity
-//import com.example.simya.src.ui.view.login.signIn.EmailLoginActivity
-//import com.example.simya.src.ui.adapter.mypage.MultiProfileAdapter
-//import com.example.simya.util.data.UserData
-//import com.example.simya.src.main.myPage.model.MyPageProfileInterface
-//import com.example.simya.src.main.myPage.model.MyPageProfileService
-//import com.example.simya.src.model.profile.ProfileDTO
-//import com.example.simya.src.model.profile.ProfileResponse
-//import com.example.simya.util.Constants.S3_URL
-//import com.example.simya.util.SampleSnackBar
-//import com.example.simya.util.dialog.DefaultDialog
-//import com.example.simya.util.dialog.DefaultDialogInterface
-//
-//class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
-//    FragmentHomeMyPageBinding::bind,
-//    R.layout.fragment_home_my_page
-//), MyPageProfileInterface,DefaultDialogInterface {
-//
-//    private var dataList: ArrayList<ProfileDTO> = arrayListOf()
+package com.example.simya.src.ui.view.mypage
+
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.simya.BuildConfig
+import com.example.simya.R
+import com.example.simya.config.BaseFragment
+import com.example.simya.config.BaseResponse
+import com.example.simya.databinding.FragmentHomeMyPageBinding
+import com.example.simya.src.ui.view.home.HomeActivity
+import com.example.simya.src.ui.view.login.signIn.EmailLoginActivity
+import com.example.simya.util.data.UserData
+import com.example.simya.src.main.myPage.model.MyPageProfileInterface
+import com.example.simya.src.main.myPage.model.MyPageProfileService
+import com.example.simya.src.model.profile.ProfileDTO
+import com.example.simya.src.model.profile.ProfileResponse
+import com.example.simya.util.Constants.S3_URL
+import com.example.simya.util.SampleSnackBar
+import com.example.simya.util.dialog.DefaultDialog
+import com.example.simya.util.dialog.DefaultDialogInterface
+
+class MyPageFragment : BaseFragment<FragmentHomeMyPageBinding>(
+    R.layout.fragment_home_my_page
+){
+
+    private var dataList: ArrayList<ProfileDTO> = arrayListOf()
 //    private lateinit var dataRVAdapter: MultiProfileAdapter
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        init()
-//        binding.btnMyPageProfile.setOnClickListener {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnMyPageProfile.setOnClickListener {
 //            val intent = Intent(activity, ProfileModifyActivity::class.java)
 //            startActivity(intent)
-//        }
-//
-//        // 찜한 이야기 집으로
-//        binding.ibMyPageLikeHouse.setOnClickListener {
+        }
+
+        // 찜한 이야기 집으로
+        binding.ibMyPageLikeHouse.setOnClickListener {
 //            val intent = Intent(activity, MyPageLikeActivity::class.java)
 //            startActivity(intent)
-//        }
-//
-//        // 내가 쓴 리뷰로
-//        binding.ibMyPageReview.setOnClickListener {
+        }
+
+        // 내가 쓴 리뷰로
+        binding.ibMyPageReview.setOnClickListener {
 //            val intent = Intent(activity, MyPageReviewActivity::class.java)
 //            startActivity(intent)
-//        }
-//    }
-//
+        }
+    }
+
 //    private fun init() {
 //        // 메인 프로필 init
 //        initMainProfile()
@@ -181,6 +178,6 @@
 //    override fun onNoButtonClicked() {
 //
 //    }
-//
-//
-//}
+
+
+}

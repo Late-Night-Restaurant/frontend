@@ -9,7 +9,7 @@
 //import com.example.simya.util.dialog.SortDialog
 //import com.example.simya.util.onThrottleClick
 //
-//class MyPageLikeActivity : BaseActivity<ActivityMyPageLikeBinding>(ActivityMyPageLikeBinding::inflate)
+//class MyPageLikeActivity : BaseActivity<>(ActivityMyPageLikeBinding::inflate)
 //{
 //    // 보기 방식 설정
 //    private var defaultViewType = R.drawable.ic_box_4

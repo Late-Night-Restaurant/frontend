@@ -1,38 +1,30 @@
-//package com.example.simya.src.ui.view.story
-//
-//import android.content.Intent
-//import android.os.Bundle
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import androidx.activity.result.ActivityResultLauncher
-//import androidx.activity.result.contract.ActivityResultContracts
-//import androidx.fragment.app.Fragment
-//import androidx.fragment.app.FragmentTransaction
-//import com.example.simya.R
-//import com.example.simya.databinding.FragmentHomeMyStoryMainBinding
-//import com.example.simya.util.Constants.REQUEST_CODE_FOR_INTENT
-//import com.example.simya.util.SampleSnackBar
-//
-//
-//class MyStoryFragment: Fragment() {
-//    private lateinit var binding: FragmentHomeMyStoryMainBinding
-//    private var defaultViewType = R.drawable.ic_box_4
-//    private lateinit var getResult: ActivityResultLauncher<Intent>
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        binding = FragmentHomeMyStoryMainBinding.inflate(layoutInflater)
-//        return binding.root
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        init()
-//    }
-//
+
+package com.example.simya.src.ui.view.story
+
+import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import com.example.simya.R
+import com.example.simya.config.BaseFragment
+import com.example.simya.databinding.FragmentHomeMyStoryMainBinding
+import com.example.simya.util.Constants.REQUEST_CODE_FOR_INTENT
+import com.example.simya.util.SampleSnackBar
+
+
+class MyStoryFragment: BaseFragment<FragmentHomeMyStoryMainBinding>(R.layout.fragment_home_my_story_main) {
+    private var defaultViewType = R.drawable.ic_box_4
+    private lateinit var getResult: ActivityResultLauncher<Intent>
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
 //    private fun init(){
 //        getResult =
 //            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -82,13 +74,13 @@
 //        val intent = Intent(this.context, CreateMyStoryActivity::class.java)
 //        getResult.launch(intent)
 //    }
-//    // View Type icon switch
-//    private fun viewTypeChange(){
-//        if (defaultViewType == R.drawable.ic_box_4){
-//            defaultViewType = R.drawable.ic_box_2
-//        }else{
-//            defaultViewType = R.drawable.ic_box_4
-//        }
-//    }
-//
-//}
+    // View Type icon switch
+    private fun viewTypeChange(){
+        if (defaultViewType == R.drawable.ic_box_4){
+            defaultViewType = R.drawable.ic_box_2
+        }else{
+            defaultViewType = R.drawable.ic_box_4
+        }
+    }
+
+}

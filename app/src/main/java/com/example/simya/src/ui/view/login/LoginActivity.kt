@@ -12,6 +12,7 @@ class LoginActivity : BaseActivity<ActivityLoginMainBinding>(R.layout.activity_l
 
     override fun init() {
         binding.ibLoginMainKakao.onThrottleClick {
+            moveToMain()
         }
         // 이메일 로그인 -> 현재 그냥 시작하기
         binding.ibLoginMainEmail.onThrottleClick {
@@ -28,6 +29,11 @@ class LoginActivity : BaseActivity<ActivityLoginMainBinding>(R.layout.activity_l
     private fun moveToKaKao() {
 //        val intent = Intent(this, HomeActivity::class.java)
 //        startActivity(intent)
+    }
+    // Test code
+    private fun moveToMain() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
     }
 
     private fun moveToEmail() {
