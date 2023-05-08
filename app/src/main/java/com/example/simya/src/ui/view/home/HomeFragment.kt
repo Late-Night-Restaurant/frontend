@@ -20,7 +20,6 @@ import com.google.android.material.snackbar.Snackbar
 class HomeFragment: BaseFragment<FragmentHomeMainBinding>(R.layout.fragment_home_main) {
     private var defaultViewType = R.drawable.ic_box_4
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        init()
