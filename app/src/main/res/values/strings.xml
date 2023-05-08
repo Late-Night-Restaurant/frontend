@@ -47,4 +47,20 @@
 <!--    회원가입 완료-->
     <string name="signup_final_title">이제 이야기를 들으러 가볼까요?</string>
 
+<!--    홈 화면-->
+    <string name="home_main_customer_order">현재 손님순</string>
+
+<!--    나의 이야기집-->
+    <string name="my_story_title_my_story">나의 이야기집</string>
+    <string name="my_story_title_temp_save">임시저장</string>
+
+<!--    마이 페이지-->
+    <string name="my_page_nick">닉네임</string>
+    <string name="my_page_comment">한줄소개</string>
+    <string name="my_page_like">찜한 이야기 집</string>
+    <string name="my_page_write_review">내가 쓴 리뷰</string>
+    <string name="my_page_account_setting">계정 설정</string>
+    <string name="my_page_app_setting">어플 설정</string>
+    <string name="my_page_service">고객 센터</string>
+    <string name="my_page_logout">로그아웃</string>
 </resources>
