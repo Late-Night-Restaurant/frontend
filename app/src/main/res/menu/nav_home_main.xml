@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/tab_home_main_home"
+    <item android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
         android:enabled="true"
         android:title=""
         />
-    <item android:id="@+id/tab_home_main_my_chat"
+    <item android:id="@+id/myStoryFragment"
         android:icon="@drawable/ic_chat"
         android:title=""
         android:enabled="true"
         />
-    <item android:id="@+id/tab_home_main_location"
+    <item android:id="@+id/locationFragment"
         android:icon="@drawable/ic_location"
         android:title=""
         android:enabled="true"
         />
-    <item android:id="@+id/tab_home_main_my"
+    <item android:id="@+id/myPageFragment"
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title=""
         android:enabled="true"
