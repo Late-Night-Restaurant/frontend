@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_home_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_home_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.simya.src.ui.view.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home_main"/>
+    <fragment
+        android:id="@+id/myStoryFragment"
+        android:name="com.example.simya.src.ui.view.story.MyStoryFragment"
+        android:label="MyStoryFragment"
+        tools:layout="@layout/fragment_home_my_story_main"/>
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.example.simya.src.ui.view.mypage.MyPageFragment"
+        android:label="MyPageFragment"
+        tools:layout="@layout/fragment_home_my_page"/>
 
 </navigation>

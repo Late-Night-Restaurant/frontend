@@ -6,6 +6,7 @@ import com.example.simya.R
 import com.example.simya.config.BaseActivity
 import com.example.simya.src.ui.view.login.signIn.EmailLoginActivity
 import com.example.simya.databinding.ActivityLoginMainBinding
+import com.example.simya.src.ui.view.home.HomeActivity
 import com.example.simya.util.onThrottleClick
 
 class LoginActivity : BaseActivity<ActivityLoginMainBinding>(R.layout.activity_login_main) {

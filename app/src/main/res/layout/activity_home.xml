@@ -9,14 +9,16 @@
 
 
         <!--    프래그먼트 창-->
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fm_home"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/line_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/nav_home_graph" />
 
         <!--    네비게이션-->
         <View
