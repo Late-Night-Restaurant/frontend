@@ -1,23 +1,12 @@
 package com.example.simya.src.ui.view.home
 
-import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.example.simya.util.Constants
 import com.example.simya.R
 import com.example.simya.config.BaseFragment
 import com.example.simya.databinding.FragmentHomeMainBinding
-import com.example.simya.databinding.SnackbarLayoutBinding
-import com.example.simya.util.SampleSnackBar
-import com.example.simya.util.dialog.SortDialog
-import com.google.android.material.snackbar.Snackbar
 
-class HomeFragment: BaseFragment<FragmentHomeMainBinding>(R.layout.fragment_home_main) {
+class HomeMainFragment: BaseFragment<FragmentHomeMainBinding>(R.layout.fragment_home_main) {
     private var defaultViewType = R.drawable.ic_box_4
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

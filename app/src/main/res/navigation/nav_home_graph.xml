@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.simya.src.ui.view.home.HomeFragment"
+        android:name="com.example.simya.src.ui.view.home.HomeMainFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home_main"/>
     <fragment
