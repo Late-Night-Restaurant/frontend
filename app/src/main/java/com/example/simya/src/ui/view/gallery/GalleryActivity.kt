@@ -31,7 +31,7 @@ import java.io.ByteArrayOutputStream
 
 class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_crop_image) {
     private val imageList = arrayListOf<Uri>()
-    private lateinit var cropLayout: CropLayout
+//    private lateinit var cropLayout: CropLayout
 
     private var REQUIRED_PERMISSIONS =if(Build.VERSION.SDK_INT <33){
         arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -39,11 +39,11 @@ class GalleryActivity: BaseActivity<ActivityCropImageBinding>(R.layout.activity_
         arrayOf(android.Manifest.permission.READ_MEDIA_IMAGES)
     }
     override fun init() {
-        cropLayout = binding.clCropper
+//        cropLayout = binding.clCropper
         binding.ibCropAble.onThrottleClick {
-            cropLayout.crop()
+            binding.clCropper.crop()
         }
-        cropLayout.addOnCropListener(object : OnCropListener {
+        binding.clCropper.addOnCropListener(object : OnCropListener {
             // 성공했을 때,
             override fun onSuccess(bitmap: Bitmap) {
                 val image = getImageUri(this@GalleryActivity,bitmap)
